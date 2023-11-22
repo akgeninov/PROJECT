@@ -14,10 +14,14 @@ const dataImg = [
 function ClientCarousel() {
   return (
     <>
-      <Marquee gradient>
+      <Marquee gradient gradientColor="#F4F4F4">
         {dataImg?.map((pic) => (
           <div>
-            <img src={pic} className="w-[240px] h-[180px]" alt="client1" />
+            <img
+              src={pic}
+              className="w-[120px] h-[90px] sm:w-[240px] sm:h-[180px]"
+              alt="client1"
+            />
           </div>
         ))}
       </Marquee>

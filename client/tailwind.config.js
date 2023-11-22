@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         whiteSmoke500: "#F4F4F4",
+        whiteSmoke600: "#DEDEDE",
         black50: "#E7E7E7",
         black400: "#3F4041",
         black500: "#0F1011",
@@ -18,6 +19,9 @@ module.exports = {
       },
       boxShadow: {
         customSm: "2px 2px 12px 0px rgba(1, 1, 1, 0.10)",
+      },
+      backgroundImage: {
+        aboutSection: "url('./assets/images/Rectangle_104.png')",
       },
     },
   },
