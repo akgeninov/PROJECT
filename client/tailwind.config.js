@@ -22,6 +22,8 @@ module.exports = {
       },
       backgroundImage: {
         aboutSection: "url('./assets/images/Rectangle_104.png')",
+        "service-section":
+          "url('./assets/images/wave_accent_atas.png'), url('./assets/images/wave_accent_bawah.png')",
       },
     },
   },
