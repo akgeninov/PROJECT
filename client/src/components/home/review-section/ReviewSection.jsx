@@ -56,7 +56,7 @@ function ReviewSection() {
   }, [currentIndex, dataMessenger]);
 
   return (
-    <div className=" flex flex-col items-center mt-[160px] max-w-[952px] gap-[52px]">
+    <div className=" hidden xl:flex flex-col items-center mt-[160px] max-w-[952px] gap-[52px]">
       <p className="max-w-[564px] text-black500 text-[40px] font-bold leading-[60px] text-center">
         Pendapat Mereka Tentang Growlab
       </p>
@@ -90,6 +90,7 @@ function ReviewSection() {
         <div className="flex flex-col w-fit gap-[16px]">
           {dataMessenger.map((data, index) => (
             <div
+              key={index}
               onClick={() => setCurrentIndex(index)}
               className="relative w-[60px] h-[60px] cursor-pointer"
             >

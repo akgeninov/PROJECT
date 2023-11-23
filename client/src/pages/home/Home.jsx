@@ -4,6 +4,7 @@ import ClientSection from "../../components/home/client-section/ClientSection";
 import AboutSection from "../../components/home/about-section/AboutSection";
 import ServiceSection from "../../components/home/service-section/ServiceSection";
 import ReviewSection from "../../components/home/review-section/ReviewSection";
+import NewsSection from "../../components/home/news-section/NewsSection";
 
 function Home() {
   return (
@@ -13,6 +14,7 @@ function Home() {
       <AboutSection />
       <ServiceSection />
       <ReviewSection />
+      <NewsSection />
     </div>
   );
 }

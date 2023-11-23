@@ -13,7 +13,7 @@ function ServiceCard({ setOnHover, service, onHover }) {
             onHover === service.title
               ? "bg-black bg-opacity-50"
               : "bg-black bg-opacity-0"
-          } absolute top-0 left-0 w-full h-full  z-20`}
+          } absolute top-0 left-0 w-full h-full rounded-[10px] z-20`}
         ></div>
         <img src={service.pic} alt="service" className={` relative`} />
         <div className="absolute -translate-y-full w-[340px] h-[136px] rounded-b-[10px] z-30 overflow-hidden">
