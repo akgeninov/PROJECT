@@ -6,6 +6,7 @@ module.exports = {
       colors: {
         whiteSmoke500: "#F4F4F4",
         whiteSmoke600: "#DEDEDE",
+        whiteSmoke700: "#ADADAD",
         black50: "#E7E7E7",
         black400: "#3F4041",
         black500: "#0F1011",

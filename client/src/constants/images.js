@@ -6,6 +6,7 @@ import konsultasiBisnis from "../assets/images/konsultasi_bisnis.png";
 import kelasBisnis from "../assets/images/kelas_bisnis.png";
 import desainLogo from "../assets/images/desain_logo.png";
 import buatWebsiteDanAplikasi from "../assets/images/buat_website_dan_aplikasi.png";
+import ellipse9 from "../assets/images/ellipse_9.png";
 
 const images = {
   vector2,
@@ -16,6 +17,7 @@ const images = {
   kelasBisnis,
   desainLogo,
   buatWebsiteDanAplikasi,
+  ellipse9,
 };
 
 export default images;

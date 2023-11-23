@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "../components/global-component/navbar/Navbar";
+import Footer from "../components/global-component/footer/Footer";
 
 function Protection({
   children,
@@ -11,6 +12,7 @@ function Protection({
     <>
       <Navbar />
       {children}
+      <Footer />
     </>
   ) : (
     children
