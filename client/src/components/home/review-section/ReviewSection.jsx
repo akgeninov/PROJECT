@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { icon, images, reviewPic } from "../../../constants";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function ReviewSection() {
   const [dataMessenger, setDataMessenger] = useState([
     {
@@ -8,32 +9,32 @@ function ReviewSection() {
       perushaaan: "Founder Coffee Corner",
       deskripsi:
         "Norem ipsum dolor sit amet, consectetur adipiscing elit. Etiam eu turpis molestie, dictum est a, mattis tellus. Sed dignissim, metus nec fringilla accumsan, risus sem sollicitudin lacus, ut interdum tellus elit sed risus. Maecenas eget condimentum velit, sit amet feugiat lectus.",
-      bigPic: reviewPic.rectangle44,
-      smallPic: reviewPic.rectangle105,
+      bigPic: reviewPic.profil1,
+      smallPic: reviewPic.profil1,
     },
     {
       nama: "Lorem ipsum",
       perushaaan: "amet consectetur adipisicing elit",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam aliquam, excepturi doloremque corporis dolore sed nesciunt, illo esse sequi, libero labore fugiat optio blanditiis delectus! Voluptates, nihil? Illum, enim delectus?",
-      bigPic: reviewPic.rectangle44,
-      smallPic: reviewPic.rectangle104,
+      bigPic: reviewPic.profil2,
+      smallPic: reviewPic.profil2,
     },
     {
       nama: "Lorem ipsum",
       perushaaan: "amet consectetur adipisicing elit",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam aliquam, excepturi doloremque corporis dolore sed nesciunt, illo esse sequi, libero labore fugiat optio blanditiis delectus! Voluptates, nihil? Illum, enim delectus?",
-      bigPic: reviewPic.rectangle44,
-      smallPic: reviewPic.rectangle103,
+      bigPic: reviewPic.profil3,
+      smallPic: reviewPic.profil3,
     },
     {
       nama: "Lorem ipsum",
       perushaaan: "amet consectetur adipisicing elit",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam aliquam, excepturi doloremque corporis dolore sed nesciunt, illo esse sequi, libero labore fugiat optio blanditiis delectus! Voluptates, nihil? Illum, enim delectus?",
-      bigPic: reviewPic.rectangle44,
-      smallPic: reviewPic.rectangle102,
+      bigPic: reviewPic.profil4,
+      smallPic: reviewPic.profil4,
     },
   ]);
 
@@ -54,18 +55,24 @@ function ReviewSection() {
 
     return () => clearInterval(intervalId);
   }, [currentIndex, dataMessenger]);
-
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <div className=" hidden xl:flex flex-col items-center mt-[160px] max-w-[952px] gap-[52px]">
-      <p className="max-w-[564px] text-black500 text-[40px] font-bold leading-[60px] text-center">
+      <p
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        className="max-w-[564px] text-black500 text-[40px] font-bold leading-[60px] text-center"
+      >
         Pendapat Mereka Tentang Growlab
       </p>
       <div className="w-full gap-[24px] flex">
-        <div className="w-full gap-[24px] p-[24px] flex shadow-customSm">
+        <div className="w-full gap-[24px] p-[24px] flex shadow-customSm rounded-[10px]">
           <img
             src={dataMessenger[currentIndex].bigPic}
             alt="mesengger"
-            className="w-[384px] h-[288px] rounded-[10px]"
+            className=" w-[384px] h-[288px] rounded-[10px] "
           />
 
           <div className="w-full ">
@@ -105,7 +112,7 @@ function ReviewSection() {
                 <img
                   src={data.smallPic}
                   alt="small-messenger"
-                  className="w-[44px]"
+                  className="w-[44px] h-[44px] rounded-[4px]"
                 />
               </div>
             </div>

@@ -5,5 +5,17 @@ import images from "./images";
 import clientPic from "./clientPic";
 import reviewPic from "./reviewPic";
 import newsPic from "./newsPic";
+import komunitasPic from "./komunitasPic";
+import partnerLogo from "./partnerLogo";
 
-export { logo, icon, data, images, clientPic, reviewPic, newsPic };
+export {
+  logo,
+  icon,
+  data,
+  images,
+  clientPic,
+  reviewPic,
+  newsPic,
+  komunitasPic,
+  partnerLogo,
+};

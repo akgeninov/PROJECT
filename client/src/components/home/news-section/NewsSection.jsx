@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { newsPic } from "../../../constants";
 import NewsCard from "./news-card/NewsCard";
-
+import AOS from "aos";
+import "aos/dist/aos.css";
 function NewsSection() {
   const [dataNesws, setDataNews] = useState([
     {
@@ -27,10 +28,16 @@ function NewsSection() {
     },
   ]);
   const [onHover, setOnHover] = useState("");
-
+  useEffect(() => {
+    AOS.init();
+  }, []);
   return (
     <div className="mt-[160px] mb-[160px] w-fit  flex flex-col items-center gap-[52px]">
-      <div className="flex flex-col gap-[16px]">
+      <div
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        className="flex flex-col gap-[16px]"
+      >
         <p className="text-[40px] font-bold leading-[60px] max-w-[700px] text-center">
           Artikel Menarik Untuk Kembangkan Bisnismu
         </p>

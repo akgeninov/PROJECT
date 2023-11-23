@@ -12,7 +12,7 @@ function ServiceSection() {
   }, []);
 
   return (
-    <div className="flex flex-col  bg-service-section  bg-contain h-[1448px] items-center relative  w-full overflow-y-scroll xl:overflow-y-visible">
+    <div className="flex flex-col  bg-serviceSection w-full 2xl:max-w-[1280px]  bg-cover h-[1448px] items-center relative   overflow-y-scroll xl:overflow-y-visible">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
