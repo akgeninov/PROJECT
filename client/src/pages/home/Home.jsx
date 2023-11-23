@@ -3,6 +3,7 @@ import HeroSection from "../../components/home/hero-section/HeroSection";
 import ClientSection from "../../components/home/client-section/ClientSection";
 import AboutSection from "../../components/home/about-section/AboutSection";
 import ServiceSection from "../../components/home/service-section/ServiceSection";
+import ReviewSection from "../../components/home/review-section/ReviewSection";
 
 function Home() {
   return (
@@ -11,6 +12,7 @@ function Home() {
       <ClientSection />
       <AboutSection />
       <ServiceSection />
+      <ReviewSection />
     </div>
   );
 }
