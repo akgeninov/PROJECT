@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { data, images } from "../../../constants";
+import { data } from "../../../constants";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ServiceCard from "./service-card/ServiceCard";
@@ -28,8 +28,9 @@ function ServiceSection() {
       </div>
       <div className="w-fit flex justify-center">
         <div className="w-full xl:w-[1080px]  mb-[100px]  grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 gap-y-[52px] gap-x-[24px]">
-          {data?.dataService?.map((service) => (
+          {data?.dataService?.map((service, index) => (
             <ServiceCard
+              key={index}
               service={service}
               onHover={onHover}
               setOnHover={setOnHover}

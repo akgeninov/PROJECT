@@ -1,4 +1,5 @@
 const { default: images } = require("./images");
+const { default: komunitasPic } = require("./komunitasPic");
 
 const dataLayanan = [
   {
@@ -24,9 +25,11 @@ const dataLayanan = [
 const dataKomunitas = [
   {
     title: "Komunitas Bisnis",
+    pic: komunitasPic.rectangle74,
   },
   {
     title: "Komunitas Content Creator",
+    pic: komunitasPic.rectangle74,
   },
 ];
 
@@ -69,4 +72,4 @@ const dataService = [
   },
 ];
 
-module.exports = { dataLayanan, dataKomunitas, dataService };
+module.exports = { dataLayanan, dataService, dataKomunitas };

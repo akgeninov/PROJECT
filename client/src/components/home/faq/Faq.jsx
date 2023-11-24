@@ -42,8 +42,8 @@ function Faq() {
         Pertanyaan Seputar Growlab
       </h1>
       <Accordion defaultIndex={[0]} allowMultiple className="w-full">
-        {dataFaq.map((faq) => (
-          <AccordionItem>
+        {dataFaq.map((faq, index) => (
+          <AccordionItem key={index}>
             <h2>
               <AccordionButton>
                 <Box

@@ -50,6 +50,7 @@ function NewsSection() {
       <div className="w-screen xl:w-fit flex overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
         {dataNesws.map((news, index) => (
           <NewsCard
+            key={index}
             news={news}
             onHover={onHover}
             setOnHover={setOnHover}

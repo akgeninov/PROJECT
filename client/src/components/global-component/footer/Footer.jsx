@@ -62,8 +62,11 @@ function Footer() {
                 Layanan
               </h1>
               <div className="flex flex-col items-start">
-                {dataLayanan.map((ROUTE) => (
-                  <button className="py-[8px] lg:py-[12px] flex justify-center items-center">
+                {dataLayanan.map((ROUTE, index) => (
+                  <button
+                    key={index}
+                    className="py-[8px] lg:py-[12px] flex justify-center items-center"
+                  >
                     <p className="shrink-0 text-[14px] lg:text-[19px] font-normal leading-[20px] lg:leading-[28px] text-whiteSmoke600">
                       {ROUTE.title}
                     </p>

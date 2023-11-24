@@ -15,8 +15,8 @@ function ClientCarousel() {
   return (
     <>
       <Marquee gradient gradientColor="#F4F4F4">
-        {dataImg?.map((pic) => (
-          <div>
+        {dataImg?.map((pic, index) => (
+          <div key={index}>
             <img
               src={pic}
               className="w-[120px] h-[90px] sm:w-[240px] sm:h-[180px]"
