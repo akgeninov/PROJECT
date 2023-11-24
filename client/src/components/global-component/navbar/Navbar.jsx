@@ -10,7 +10,7 @@ function Navbar() {
 
   return (
     <div className=" flex  justify-center  items-center h-[120px] bg-whiteSmoke500">
-      <div className=" flex p-[10px] max-w-[1080px] flex-1 justify-between  items-center shrink-0 ">
+      <div className=" flex p-[16px] max-w-[1080px] w-[356px] sm:w-auto  flex-1 justify-between  items-center shrink-0 ">
         <img
           className=" w-[80px] h-[60px] shrink-0"
           src={logo.growlab}
@@ -141,8 +141,9 @@ function Navbar() {
             </p>
           </button>
         </div>
-        <button className="flex lg:hidden  px-[10px] py-[10px] justify-center items-center rounded-[10px] border-[1px] border-black500 bg-whiteSmoke500">
-          <HiMenu />
+        <button className="flex lg:hidden  p-[4px]  justify-center items-center  bg-whiteSmoke500">
+          {/* <HiMenu /> */}
+          <img src={icon.line3solid} alt="line3" />
         </button>
       </div>
     </div>

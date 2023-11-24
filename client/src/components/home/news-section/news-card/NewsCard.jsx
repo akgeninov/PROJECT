@@ -16,7 +16,7 @@ function NewsCard({ news, onHover, setOnHover, index }) {
         } absolute top-0 left-0 w-full h-full rounded-[10px] z-20`}
       ></div>
       <img src={news.pic} alt="news" className={` relative`} />
-      <div className="absolute -translate-y-full w-[344px] h-[244px] rounded-b-[10px] z-30 overflow-hidden">
+      <div className="absolute bottom-0 w-[344px] h-[244px] rounded-b-[10px] z-30 overflow-hidden">
         <div
           className={`${
             onHover === news.title ? "translate-y-5" : "translate-y-[100px]"

@@ -6,17 +6,21 @@ function ServiceCard({ setOnHover, service, onHover }) {
       <div
         onMouseEnter={() => setOnHover(service.title)}
         onMouseLeave={() => setOnHover("")}
-        className="relative w-[340px] h-[516px] shrink-0 rounded-[10px] cursor-pointer"
+        className="relative max-w-[358px] sm:w-[358px] lg:w-[344px] h-[268px] lg:h-[516px] shrink-0 rounded-[10px] bg-red-300 overflow-hidden cursor-pointer"
       >
         <div
           className={`${
             onHover === service.title
               ? "bg-black bg-opacity-50"
               : "bg-black bg-opacity-0"
-          } absolute top-0 left-0 w-full h-full rounded-[10px] z-20`}
+          } absolute top-0 left-0 w-full h-[268px] lg:h-full rounded-[10px] z-20`}
         ></div>
-        <img src={service.pic} alt="service" className={` relative`} />
-        <div className="absolute -translate-y-full w-[340px] h-[136px] rounded-b-[10px] z-30 overflow-hidden">
+        <img
+          src={service.pic}
+          alt="service"
+          className={` relative w-full  rounded-[10px]`}
+        />
+        <div className="absolute bottom-0  w-[358px] lg:w-[344px] h-[136px] rounded-b-[10px] z-30 overflow-hidden">
           <div
             className={`${
               onHover === service.title ? "translate-y-0" : "translate-y-[64px]"

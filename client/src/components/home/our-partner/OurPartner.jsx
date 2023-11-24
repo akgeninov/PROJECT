@@ -12,7 +12,7 @@ function OurPartner() {
   ]);
 
   return (
-    <div className="mt-[160px] flex flex-col justify-center items-center gap-[52px]">
+    <div className="hidden mt-[160px] flex flex-col justify-center items-center gap-[52px]">
       <h1 className="text-[40px] font-bold leading-[60px]">Partner Kami</h1>
       <div className="flex gap-[24px] ">
         {partner.map((logo) => (

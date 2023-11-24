@@ -8,6 +8,7 @@ import tiktok from "../assets/icon/tiktok.png";
 import youtube from "../assets/icon/youtube.png";
 import whatsapp from "../assets/icon/whatsapp.png";
 import copyright from "../assets/icon/bx-copyright.png";
+import line3solid from "../assets/icon/line-3-solid.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -20,6 +21,7 @@ const icon = {
   youtube,
   whatsapp,
   copyright,
+  line3solid,
 };
 
 export default icon;

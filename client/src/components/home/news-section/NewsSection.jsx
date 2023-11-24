@@ -32,22 +32,22 @@ function NewsSection() {
     AOS.init();
   }, []);
   return (
-    <div className="mt-[160px] mb-[160px] w-fit  flex flex-col items-center gap-[52px]">
+    <div className=" mt-[60px] lg:mt-[160px]  w-fit flex flex-col items-center gap-[52px]">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
-        className="flex flex-col gap-[16px]"
+        className="flex flex-col gap-[8px] lg:gap-[16px]"
       >
-        <p className="text-[40px] font-bold leading-[60px] max-w-[700px] text-center">
+        <h1 className="text-[24px] lg:text-[40px] font-bold leading-[36px] lg:leading-[60px] max-w-[700px] text-center">
           Artikel Menarik Untuk Kembangkan Bisnismu
-        </p>
-        <p className="text-[18px] font-light leading-[28px] max-w-[700px] text-center">
+        </h1>
+        <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] max-w-[700px] text-center">
           Temukan wawasan mendalam, strategi terkini, dan tips praktis yang
           dapat langsung diterapkan untuk mengembangkan bisnismu ke level
           berikutnya
         </p>
       </div>
-      <div className="w-fit grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 gap-y-[52px] gap-x-[24px]">
+      <div className="w-screen xl:w-fit flex overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
         {dataNesws.map((news, index) => (
           <NewsCard
             news={news}

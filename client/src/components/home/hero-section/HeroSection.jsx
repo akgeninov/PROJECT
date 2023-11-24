@@ -3,14 +3,14 @@ import { images } from "../../../constants";
 
 function HeroSection() {
   return (
-    <div className="flex  gap-[52px] h-[504px] justify-center items-center shrink-0 mt-[80px] mb-[80px]">
-      <div className="flex px-[5px] sm:px-[100px] lg:px-0 lg:w-[628px] flex-initial flex-col w-screen items-start gap-[52px] ">
-        <div className="flex  flex-col items-start gap-[16px] w-full md:w-[628px]">
-          <p className="text-[40px] sm:text-[50px] font-bold uppercase leading-[64px]">
+    <div className="flex flex-col lg:flex-row px-[5px] lg:px-[100px]  gap-[52px]  justify-start items-center xl:justify-center shrink-0 mt-[23px] sm:mt-[80px] mb-[60px] lg:mb-[80px]">
+      <div className="flex  lg:px-0 lg:max-w-[628px] flex-initial flex-col w-full items-center lg:items-start gap-[52px] ">
+        <div className="flex  flex-col items-center lg:items-start gap-[16px] w-full xl:w-[628px]">
+          <h1 className="text-[24px]  text-center lg:text-start xl:text-[50px] font-bold uppercase leading-[36px] xl:leading-[64px]">
             Raih <span className="text-indigoDye500">Peluang</span> Tingkatkan{" "}
             <span className="text-indigoDye500">Bisnismu</span>
-          </p>
-          <p className="text-[18px] leading-[28px] font-light max-w-[536px]">
+          </h1>
+          <p className=" text-center lg:text-start text-[18px] leading-[28px] font-light max-w-[536px]">
             Temukan informasi, kesempatan dan koneksi yang bisnis kamu butuhkan
             untuk berkembang dan bertumbuh disini
           </p>
@@ -23,7 +23,7 @@ function HeroSection() {
       </div>
 
       <img
-        className="hidden  lg:flex flex-initial w-[320px] xl:w-[400px] "
+        className=" flex-initial w-[358px] xl:w-[400px] "
         src={images.vector2}
         alt="vector2"
       />

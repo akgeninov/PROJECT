@@ -12,16 +12,16 @@ function ServiceSection() {
   }, []);
 
   return (
-    <div className="flex flex-col  bg-serviceSection w-full 2xl:max-w-[1280px]  bg-cover h-[1448px] items-center relative   overflow-y-scroll xl:overflow-y-visible">
+    <div className=" flex flex-col  bg-serviceSection w-full 2xl:max-w-[1280px]  bg-cover h-full xl:h-[1448px] items-center relative    xl:overflow-y-visible">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
-        className="flex flex-col items-center justify-center  mt-[80px] gap-[16px] w-[564px] mb-[52px]"
+        className="flex flex-col items-center justify-center  mt-[80px] gap-[16px] w-full lg:w-[564px] mb-[52px]"
       >
-        <p className="text-[40px] font-bold  text-center leading-[60px] text-whiteSmoke500">
+        <h1 className="text-[22px] lg:text-[40px] font-bold  text-center leading-[32px] lg:leading-[60px] text-whiteSmoke500">
           Layanan Kami
-        </p>
-        <p className="text-[20px] font-normal text-center leading-[28px] text-whiteSmoke600">
+        </h1>
+        <p className="text-[14px] lg:text-[20px] font-light text-center leading-[20px] lg:leading-[28px] text-whiteSmoke600">
           Kami memiliki beragam layanan yang tepat untuk membantu mewujudkan
           kesuksesan dalam bisnis kamu
         </p>

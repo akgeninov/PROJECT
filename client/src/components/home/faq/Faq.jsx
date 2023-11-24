@@ -37,8 +37,8 @@ function Faq() {
   ]);
 
   return (
-    <div className="flex flex-col justify-start items-center mt-[160px] px-[10px] lg:px-0 w-full lg:w-[900px] gap-[52px]">
-      <h1 className="text-[40px] font-bold leading-[60px] text-black500 text-center">
+    <div className=" flex flex-col justify-start items-center mt-[60px] lg:mt-[160px] px-[10px] lg:px-0 w-full lg:w-[900px] gap-[52px]">
+      <h1 className="text-[22px] lg:text-[40px] w-[208px] lg:w-auto  font-bold leading-[32px] lg:leading-[60px] text-black500 text-center">
         Pertanyaan Seputar Growlab
       </h1>
       <Accordion defaultIndex={[0]} allowMultiple className="w-full">
@@ -50,7 +50,7 @@ function Faq() {
                   as="span"
                   flex="1"
                   textAlign="left"
-                  className="text-[22px] font-medium leading-[32px] p-[24px]"
+                  className=" text-[16px] lg:text-[22px] font-medium leading-[24px] lg:leading-[32px] text-black400 p-[24px]"
                 >
                   {faq.title}
                 </Box>
@@ -58,7 +58,9 @@ function Faq() {
               </AccordionButton>
             </h2>
             <AccordionPanel pb={4}>
-              <p className="px-[24px]">{faq.answer}</p>
+              <p className="p-[24px] text-[14px] lg:text-[16px] font-light leading-[24px] text-black400">
+                {faq.answer}
+              </p>
             </AccordionPanel>
           </AccordionItem>
         ))}

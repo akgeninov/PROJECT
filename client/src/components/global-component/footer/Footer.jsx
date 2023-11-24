@@ -42,9 +42,9 @@ function Footer() {
   ]);
 
   return (
-    <div className="w-full h-[588px] bg-black500">
-      <div className="flex flex-col items-center mt-[80px]  w-full 2xl:max-w-[1280px] px-[10px] sm:px-[100px] gap-[52px]">
-        <div className="w-full flex justify-between items-center">
+    <div className=" z-50 w-full h-full lg:h-[588px] bg-black500 px-[16px] sm:px-[100px]">
+      <div className="flex flex-col items-center mt-[80px]  w-full 2xl:max-w-[1280px]  gap-[52px]">
+        <div className="w-full flex flex-col lg:flex-row justify-between items-center">
           <div className="flex flex-col items-start gap-[24px]">
             <img
               src={logo.growlabWhite}
@@ -56,15 +56,15 @@ function Footer() {
               Malang, Jawa Timur 65142.
             </p>
           </div>
-          <div className="w-[619px] h-[328px] flex gap-[100px]">
+          <div className="mt-[32px] lg:mt-0 lg:w-[619px] lg:h-[328px] flex flex-col lg:flex-row gap-[32px] lg:gap-[100px]">
             <div className="flex flex-col gap-[12px]">
-              <h1 className="text-[20px] font-bold leading-[28px] text-whiteSmoke500">
+              <h1 className="text-[18px] lg:text-[20px] font-bold leading-[28px] text-whiteSmoke500">
                 Layanan
               </h1>
               <div className="flex flex-col items-start">
                 {dataLayanan.map((ROUTE) => (
-                  <button className="py-[12px] flex justify-center items-center">
-                    <p className="shrink-0 text-[19px] font-normal leading-[28px] text-whiteSmoke600">
+                  <button className="py-[8px] lg:py-[12px] flex justify-center items-center">
+                    <p className="shrink-0 text-[14px] lg:text-[19px] font-normal leading-[20px] lg:leading-[28px] text-whiteSmoke600">
                       {ROUTE.title}
                     </p>
                   </button>
@@ -72,8 +72,8 @@ function Footer() {
               </div>
             </div>
             <div className="w-[304px] flex flex-col items-start justify-start gap-[52px]">
-              <div className="flex flex-col gap-[24px] items-start">
-                <h1 className="text-[20px] font-bold leading-[28px] text-whiteSmoke500">
+              <div className="flex flex-col gap-[16px] lg:gap-[24px] items-start">
+                <h1 className="text-[16px] lg:text-[20px] font-bold leading-[28px] text-whiteSmoke500">
                   Hubungi Growlab
                 </h1>
                 <div className="flex justify-start items-center gap-[8px]">
@@ -82,7 +82,7 @@ function Footer() {
                     alt="mail"
                     className="w-[20px] h-[20px]"
                   />
-                  <p className="text-[19px] font-normal leading-[28px] text-whiteSmoke600">
+                  <p className="text-[14px] lg:text-[19px] font-normal leading-[28px] text-whiteSmoke600">
                     cs@youngtrepreneur.id
                   </p>
                 </div>
@@ -115,15 +115,17 @@ function Footer() {
             </div>
           </div>
         </div>
-        <div className="flex justify-center items-center w-full 2xl:max-w-[1280px] py-[24px] sm:px-[100px] border-t-[1px] border-whiteSmoke700">
+        <div className="flex  items-start justify-start lg:justify-center lg:items-center max-w-[358px] lg:max-w-none  lg:w-full 2xl:max-w-[1280px] py-[24px] lg:px-[100px] border-t-[1px] border-whiteSmoke700">
           <img
             src={icon.copyright}
             alt="copyright"
-            className="w-[16px] h-[16px]"
+            className="w-[16px] h-[16px] mt-[1px] lg:mt-0"
           />
-          <h1 className="text-[16px] font-medium leading-[24px] text-whiteSmoke600">
-            2023 Growlab | PT. Digital Bisnis Kreatif. All right reserved
-          </h1>
+          <div className="max-w-[388px] lg:max-w-none ">
+            <h1 className="text-[14px] lg:text-[16px] flex flex-col lg:flex-row  font-medium leading-[20px] lg:leading-[24px] text-whiteSmoke600">
+              2023 Growlab | PT. Digital Bisnis Kreatif. All right reserved
+            </h1>
+          </div>
         </div>
       </div>
     </div>
