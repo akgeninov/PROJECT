@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Accordion,
   AccordionItem,
@@ -7,6 +7,8 @@ import {
   AccordionIcon,
   Box,
 } from "@chakra-ui/react";
+import AOS from "aos";
+import "aos/dist/aos";
 
 function Faq() {
   const [dataFaq, setDataFaq] = useState([
@@ -36,9 +38,17 @@ function Faq() {
     },
   ]);
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div className=" flex flex-col justify-start items-center mt-[60px] lg:mt-[160px] px-[10px] lg:px-0 w-full lg:w-[900px] gap-[52px]">
-      <h1 className="text-[22px] lg:text-[40px] w-[208px] lg:w-auto  font-bold leading-[32px] lg:leading-[60px] text-black500 text-center">
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        className="text-[22px] lg:text-[40px] w-[208px] lg:w-auto  font-bold leading-[32px] lg:leading-[60px] text-black500 text-center"
+      >
         Pertanyaan Seputar Growlab
       </h1>
       <Accordion defaultIndex={[0]} allowMultiple className="w-full">

@@ -126,7 +126,8 @@ function Footer() {
           />
           <div className="max-w-[388px] lg:max-w-none ">
             <h1 className="text-[14px] lg:text-[16px] flex flex-col lg:flex-row  font-medium leading-[20px] lg:leading-[24px] text-whiteSmoke600">
-              2023 Growlab | PT. Digital Bisnis Kreatif. All right reserved
+              2023 Growlab | PT. Digital Bisnis Kreatif.{" "}
+              <span> All right reserved</span>
             </h1>
           </div>
         </div>

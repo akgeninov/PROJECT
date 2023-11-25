@@ -23,8 +23,8 @@ function JoinSection() {
                 </p>
               </div>
               <div className="flex w-full items-start gap-[24px] ">
-                <button className="px-[64px] py-[16px] w-[200px] flex justify-center items-center rounded-[10px] border-[1px] border-whiteSmoke500">
-                  <p className="shrink-0 text-[16px] font-medium leading-[24px] text-whiteSmoke500">
+                <button className="px-[64px] py-[16px] w-[200px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500 border-whiteSmoke500">
+                  <p className="shrink-0 text-[16px] font-medium leading-[24px] ">
                     Hubungi Kami
                   </p>
                 </button>
@@ -38,13 +38,13 @@ function JoinSection() {
           </div>
         </div>
       </div>
-      <div className=" relative flex flex-col md:hidden justify-center items-center mt-[160px] w-full 2xl:max-w-[1280px] h-[484px] ">
+      <div className=" relative flex flex-col md:hidden justify-center items-center mt-[160px] w-full 2xl:max-w-[1280px] min-h-[484px] ">
         <img
           src={images.rectangleJoin}
           alt="ellipse"
           className=" w-full top-0 "
         />
-        <div className="relative flex justify-center bg-black400  w-full 2xl:max-w-[1280px] h-[484px]  pt-[80px]  pb-[32px]">
+        <div className="relative flex justify-center bg-black400  w-full 2xl:max-w-[1280px] min-h-[484px]  pt-[80px]  pb-[32px]">
           <div className="mt-[32px] flex flex-col  items-center ">
             <div className="space-y-[52px]  flex flex-col items-center">
               <div className="flex flex-col items-start gap-[16px] px-[16px]">
@@ -57,8 +57,8 @@ function JoinSection() {
                 </p>
               </div>
               <div className="flex w-screen items-start justify-center overflow-y-scroll gap-[16px] ">
-                <button className="px-[64px] py-[16px] max-w-[152px] flex justify-center items-center rounded-[10px] border-[1px] border-whiteSmoke500">
-                  <p className="shrink-0 text-[16px] font-medium leading-[24px] text-whiteSmoke500">
+                <button className="px-[64px] py-[16px] max-w-[152px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 border-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500">
+                  <p className="shrink-0 text-[16px] font-medium leading-[24px] ">
                     Hubungi Kami
                   </p>
                 </button>

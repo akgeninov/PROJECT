@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { partnerLogo } from "../../../constants";
-
+import AOS from "aos";
+import "aos/dist/aos";
 function OurPartner() {
   const [partner, setPartner] = useState([
     {
@@ -11,9 +12,19 @@ function OurPartner() {
     },
   ]);
 
+  useEffect(() => {
+    AOS.init();
+  }, []);
+
   return (
     <div className=" mt-[160px] hidden lg:flex flex-col justify-center items-center gap-[52px]">
-      <h1 className="text-[40px] font-bold leading-[60px]">Partner Kami</h1>
+      <h1
+        data-aos="fade-up"
+        data-aos-duration="1000"
+        className="text-[40px] font-bold leading-[60px]"
+      >
+        Partner Kami
+      </h1>
       <div className="flex gap-[24px] ">
         {partner.map((logo, index) => (
           <div

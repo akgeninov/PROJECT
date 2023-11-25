@@ -135,14 +135,13 @@ function Navbar() {
               Hubungi Kami
             </p>
           </button>
-          <button className="flex flex-auto w-[160px] px-[32px] py-[16px] justify-center items-center rounded-[10px] bg-black500">
+          <button className="flex flex-auto w-[160px] px-[32px] py-[16px] justify-center items-center rounded-[10px] bg-black500 hover:bg-whiteSmoke800">
             <p className="w-[116px] shrink-0 text-whiteSmoke500 leading-[24px] font-medium text-[16px]">
               Login/Daftar
             </p>
           </button>
         </div>
         <button className="flex lg:hidden  p-[4px]  justify-center items-center  bg-whiteSmoke500">
-          {/* <HiMenu /> */}
           <img src={icon.line3solid} alt="line3" />
         </button>
       </div>
