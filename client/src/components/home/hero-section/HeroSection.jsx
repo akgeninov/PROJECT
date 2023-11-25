@@ -15,7 +15,7 @@ function HeroSection() {
             untuk berkembang dan bertumbuh disini
           </p>
         </div>
-        <button className="flex mx-[5px] sm:mx-0 w-[260px] px-[64px] py-[18px] justify-center items-center bg-black500 rounded-[10px]">
+        <button className="flex mx-[5px] sm:mx-0 w-[260px] px-[64px] py-[18px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]">
           <p className="text-whiteSmoke500 font-medium text-[16px]">
             Gabung Sekarang
           </p>

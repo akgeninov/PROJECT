@@ -3,10 +3,12 @@ import { data } from "../../../constants";
 
 function ComunitySection() {
   const title = useRef();
+  const [isScroll, setIsScroll] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [prevScrollPos, setPrevScrollPos] = useState(0);
 
   const handleScroll = (e) => {
+    if (isScroll) return;
     const currentWheelPos = e.deltaY;
 
     if (currentWheelPos > prevScrollPos) {
@@ -16,19 +18,25 @@ function ComunitySection() {
     }
 
     setPrevScrollPos(currentWheelPos);
+
+    setIsScroll(true);
+
+    setTimeout(() => {
+      setIsScroll(false);
+    }, 500);
   };
 
   return (
     <div
       onWheel={handleScroll}
       onClick={() => setScrolled((prev) => !prev)}
-      className=" relative gap-[100px] flex flex-col overflow-y-scroll justify-start items-center  py-[80px] bg-komunitySection bg-no-repeat px-[5px] sm:px-[100px]  w-full 2xl:max-w-[1280px]  h-[836px] xl:h-[832px] bg-cover mt-[160px]  "
+      className=" relative gap-[100px] flex flex-col  justify-start items-center  py-[80px] bg-komunitySection bg-no-repeat px-[5px] sm:px-[100px]  w-full 2xl:max-w-[1280px]  h-[836px] xl:h-[832px] bg-cover mt-[160px]  "
     >
       <div
         ref={title}
-        className=" w-full  top-0 flex flex-col lg:flex-row gap-[50px] lg:gap-0 items-center lg:items-start justify-between  z-10"
+        className=" w-full  top-0 flex flex-col lg:flex-row gap-[32px] lg:gap-0 items-center lg:items-start justify-between  z-10"
       >
-        <div className="flex flex-col h-[200px] lg:h-[340px]  overflow-hidden">
+        <div className="flex flex-col h-[250px] lg:h-[340px]  overflow-hidden">
           {data.dataKomunitas.map((el, index) => (
             <div
               key={index}
@@ -36,7 +44,7 @@ function ComunitySection() {
                 scrolled ? "-translate-y-full" : " translate-y-0"
               } gap-[52px] flex flex-col  items-center lg:items-start duration-300 min-h-[340px] `}
             >
-              <div className="flex flex-col w-[472px] gap-[8px] lg:gap-[16px]">
+              <div className="flex flex-col max-w-[472px] gap-[8px] lg:gap-[16px]">
                 <h1 className=" text-whiteSmoke500 text-[22px] lg:text-[40px] text-center lg:text-start font-bold leading-[32px] lg:leading-[60px]">
                   {el.title}
                 </h1>
@@ -56,7 +64,7 @@ function ComunitySection() {
           ))}
         </div>
 
-        <div className="flex flex-col h-[432px] lg:h-[672px] overflow-hidden rounded-[10px]">
+        <div className="flex flex-col h-[432px] xl:h-[672px] overflow-hidden rounded-[10px]">
           {data.dataKomunitas.map((el, index) => (
             <img
               key={index}
@@ -65,10 +73,12 @@ function ComunitySection() {
               className={`${
                 index !== 0
                   ? scrolled
-                    ? "-translate-y-full"
-                    : " translate-y-0"
-                  : "translate-y-0"
-              } gap-[52px] flex flex-col duration-300 w-[358px] h-[488px] xl:w-[556px] xl:h-[672px] `}
+                    ? "-translate-y-full opacity-100"
+                    : " translate-y-0 opacity-0"
+                  : scrolled
+                  ? "translate-y-0 scale-95 opacity-50"
+                  : "translate-y-0 scale-100 opacity-100"
+              } gap-[52px] flex flex-col duration-500 w-[358px] h-[488px] xl:w-[556px] xl:h-[672px] `}
             />
           ))}
         </div>

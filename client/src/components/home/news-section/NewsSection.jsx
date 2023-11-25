@@ -58,7 +58,7 @@ function NewsSection() {
           />
         ))}
       </div>
-      <button className="flex bg-black500 px-[64px] py-[16px] justify-center items-center rounded-[10px] w-[260px]">
+      <button className="flex bg-black500 hover:bg-whiteSmoke800 px-[64px] py-[16px] justify-center items-center rounded-[10px] w-[260px]">
         <p className="shrink-0 text-whiteSmoke500 text-[16px] font-medium leading-[24px]">
           Lihat Semua Artikel
         </p>
