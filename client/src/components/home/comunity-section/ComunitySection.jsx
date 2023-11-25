@@ -64,7 +64,7 @@ function ComunitySection() {
           ))}
         </div>
 
-        <div className="flex flex-col h-[432px] xl:h-[672px] overflow-hidden rounded-[10px]">
+        <div className="flex flex-col items-center w-[358px] xl:w-[558px]  h-[432px] xl:h-[672px] overflow-hidden rounded-[10px]">
           {data.dataKomunitas.map((el, index) => (
             <img
               key={index}
@@ -76,9 +76,9 @@ function ComunitySection() {
                     ? "-translate-y-full opacity-100"
                     : " translate-y-0 opacity-0"
                   : scrolled
-                  ? "translate-y-0 scale-95 opacity-50"
-                  : "translate-y-0 scale-100 opacity-100"
-              } gap-[52px] flex flex-col duration-500 w-[358px] h-[488px] xl:w-[556px] xl:h-[672px] `}
+                  ? "translate-y-0 scale-95 opacity-50 "
+                  : "translate-y-0 scale-100 opacity-100 "
+              } gap-[52px] flex flex-col duration-500 w-auto min-h-[488px]  min-w-max  xl:min-h-[672px] rounded-[10px]`}
             />
           ))}
         </div>

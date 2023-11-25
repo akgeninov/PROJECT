@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { icon, images, reviewPic } from "../../../constants";
+import { icon, reviewPic } from "../../../constants";
 import AOS from "aos";
 import "aos/dist/aos.css";
 function ReviewSection() {

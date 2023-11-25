@@ -25,11 +25,11 @@ const dataLayanan = [
 const dataKomunitas = [
   {
     title: "Komunitas Bisnis",
-    pic: komunitasPic.rectangle74,
+    pic: komunitasPic.komunitasBisnis,
   },
   {
     title: "Komunitas Content Creator",
-    pic: komunitasPic.rectangle74,
+    pic: komunitasPic.komunitasKontenCreator,
   },
 ];
 
