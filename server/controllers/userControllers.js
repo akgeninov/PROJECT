@@ -81,7 +81,7 @@ module.exports = {
       res.status(500).json({ error: error.message });
     }
   },
-
+//awldkjalmwkdmawkmdlakw
   usernameCheck : async (req, res) => {
     const { 
       nama_user, 
