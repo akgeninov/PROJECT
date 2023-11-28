@@ -56,16 +56,16 @@ function Footer() {
               Malang, Jawa Timur 65142.
             </p>
           </div>
-          <div className="mt-[32px] lg:mt-0 lg:w-[619px] lg:h-[328px] flex flex-col lg:flex-row gap-[32px] lg:gap-[100px]">
+          <div className="mt-[32px] lg:mt-0 lg:w-[630px] lg:h-[328px] flex flex-col lg:flex-row gap-[32px] lg:gap-[100px]">
             <div className="flex flex-col gap-[12px]">
               <h1 className="text-[18px] lg:text-[20px] font-bold leading-[28px] text-whiteSmoke500">
                 Layanan
               </h1>
-              <div className="flex flex-col items-start">
+              <div className="flex flex-col items-start ">
                 {dataLayanan.map((ROUTE, index) => (
                   <button
                     key={index}
-                    className="py-[8px] lg:py-[12px] flex justify-center items-center"
+                    className="py-[8px] lg:py-[12px]  flex justify-center items-start"
                   >
                     <p className="shrink-0 text-[14px] lg:text-[19px] font-normal leading-[20px] lg:leading-[28px] text-whiteSmoke600">
                       {ROUTE.title}

@@ -1,5 +1,6 @@
 import React from "react";
 import { images } from "../../../constants";
+import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 
 function HeroSection() {
   return (
@@ -15,11 +16,12 @@ function HeroSection() {
             untuk berkembang dan bertumbuh disini
           </p>
         </div>
-        <button className="flex mx-[5px] sm:mx-0 w-[260px] px-[64px] py-[18px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]">
+        {/* <button className="flex mx-[5px] sm:mx-0 w-[260px] px-[64px] py-[18px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]">
           <p className="text-whiteSmoke500 font-medium text-[16px]">
             Gabung Sekarang
           </p>
-        </button>
+        </button> */}
+        <ButtonBlack500 WIDTH={"w-[260px]"} TEXT_BUTTON={"Gabung Sekarang"} />
       </div>
 
       <img

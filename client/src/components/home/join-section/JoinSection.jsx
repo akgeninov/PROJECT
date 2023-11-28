@@ -1,5 +1,7 @@
 import React from "react";
 import { images } from "../../../constants";
+import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
+import ButtonBorderWhitesmoke500 from "../../global-component/button/button-borderwhitesmoke500/ButtonBorderWhitesmoke500";
 
 function JoinSection() {
   return (
@@ -23,11 +25,16 @@ function JoinSection() {
                 </p>
               </div>
               <div className="flex w-full items-start gap-[24px] ">
-                <button className="px-[64px] py-[16px] w-[200px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500 border-whiteSmoke500">
+                {/* <button className="px-[64px] py-[16px] w-[200px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500 border-whiteSmoke500">
                   <p className="shrink-0 text-[16px] font-medium leading-[24px] ">
                     Hubungi Kami
                   </p>
-                </button>
+                </button> */}
+                <ButtonBorderWhitesmoke500
+                  TEXT_BUTTON={"Hubungi Kami"}
+                  WIDTH={"max-w-[200px]"}
+                  RESPONSIF={"flex"}
+                />
                 <button className="px-[64px] py-[16px] w-[232px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
                   <p className="shrink-0 text-[16px] font-medium leading-[24px] text-black500">
                     Gabung Sekarang
@@ -57,16 +64,25 @@ function JoinSection() {
                 </p>
               </div>
               <div className="flex w-screen items-start justify-center overflow-y-scroll gap-[16px] ">
-                <button className="px-[64px] py-[16px] max-w-[152px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 border-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500">
+                {/* <button className="px-[64px] py-[16px] max-w-[152px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 border-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500">
                   <p className="shrink-0 text-[16px] font-medium leading-[24px] ">
                     Hubungi Kami
                   </p>
-                </button>
-                <button className="px-[64px] py-[16px] max-w-[190px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
+                </button> */}
+                <ButtonBorderWhitesmoke500
+                  TEXT_BUTTON={"Hubungi Kami"}
+                  WIDTH={"max-w-[152px]"}
+                  RESPONSIF={"flex"}
+                />
+                {/* <button className="px-[64px] py-[16px] max-w-[190px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
                   <p className="shrink-0 text-[16px] font-medium leading-[24px] text-black500">
                     Gabung Sekarang
                   </p>
-                </button>
+                </button> */}
+                <ButtonWhiteSmoke500
+                  TEXT_BUTTON={"Gabung Sekarang"}
+                  WIDTH={"w-[190px]"}
+                />
               </div>
             </div>
           </div>

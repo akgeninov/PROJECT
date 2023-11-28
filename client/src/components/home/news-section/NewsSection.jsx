@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { newsPic } from "../../../constants";
-import NewsCard from "./news-card/NewsCard";
+import NewsCard from "../../global-component/card/news-card/NewsCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 function NewsSection() {
   const [dataNesws, setDataNews] = useState([
     {
@@ -58,11 +59,12 @@ function NewsSection() {
           />
         ))}
       </div>
-      <button className="flex bg-black500 hover:bg-whiteSmoke800 px-[64px] py-[16px] justify-center items-center rounded-[10px] w-[260px]">
+      {/* <button className="flex bg-black500 hover:bg-whiteSmoke800 px-[64px] py-[16px] justify-center items-center rounded-[10px] w-[260px]">
         <p className="shrink-0 text-whiteSmoke500 text-[16px] font-medium leading-[24px]">
-          Lihat Semua Artikel
+          
         </p>
-      </button>
+      </button> */}
+      <ButtonBlack500 TEXT_BUTTON={"Lihat Semua Artikel"} WIDTH={"w-[260px]"} />
     </div>
   );
 }

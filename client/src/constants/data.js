@@ -72,4 +72,27 @@ const dataService = [
   },
 ];
 
-module.exports = { dataLayanan, dataService, dataKomunitas };
+const navigationData = [
+  {
+    BUTTON_TEXT: "Layanan",
+    data: dataLayanan,
+  },
+  {
+    BUTTON_TEXT: "Komunitas",
+    data: dataKomunitas,
+  },
+  {
+    BUTTON_TEXT: "Artikel",
+    data: null,
+  },
+  {
+    BUTTON_TEXT: "Karir",
+    data: null,
+  },
+  {
+    BUTTON_TEXT: "Tentang Kami",
+    data: null,
+  },
+];
+
+module.exports = { dataLayanan, dataService, dataKomunitas, navigationData };
