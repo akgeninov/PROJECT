@@ -7,7 +7,12 @@ const app = express();
 app.use(express.urlencoded({ extended: false }));
 
 const { userRouters } = require("./routers");
+const { artikelRouters } = require("./routers");
+
 app.use("/user", userRouters);
+app.use("/artikel", artikelRouters);
+
+app.use('/images', express.static('images'));
 
 app.listen(process.env.PORT, () => {
   // db.sequelize.sync({ alter: true });
