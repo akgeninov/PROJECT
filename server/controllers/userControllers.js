@@ -1,16 +1,22 @@
 const db = require("../models");
 const user = db.User;
+const role = db.Role;
 const bcrypt = require('bcrypt');
 const utility = require('./utility');
 
 module.exports = {
   getAllUser: async (req, res) => {
     try {
-      const result = await user.findAll();
+      const result = await user.findAll({
+        include: [{
+          model: role,
+          attributes: ['nama_role'],
+        }],
+      });
 
       res.status(200).send({
         message: "succes",
-        result,
+        data: result,
       });
     } catch (error) {
       res.status(400).send({
@@ -81,7 +87,7 @@ module.exports = {
       res.status(500).json({ error: error.message });
     }
   },
-//awldkjalmwkdmawkmdlakw
+
   usernameCheck : async (req, res) => {
     const { 
       nama_user, 
