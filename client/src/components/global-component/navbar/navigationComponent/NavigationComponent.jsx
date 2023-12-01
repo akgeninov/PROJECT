@@ -56,7 +56,7 @@ function NavigationComponent({
                 toggle.layanan
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
-              } duration-300 absolute rounded-[10px] -left-[16px] top-[44px] shadow-customSm`}
+              } duration-300 absolute rounded-[10px] -left-[16px] top-[44px] shadow-customSm z-50`}
             >
               <div
                 className={`${
@@ -87,7 +87,7 @@ function NavigationComponent({
                 toggle.komunitas
                   ? "opacity-100 pointer-events-auto"
                   : "opacity-0 pointer-events-none"
-              } duration-300 absolute rounded-[10px] -left-[16px] top-[44px] shadow-customSm`}
+              } duration-300 absolute rounded-[10px] -left-[16px] top-[44px] shadow-customSm z-50`}
             >
               <div
                 className={`${

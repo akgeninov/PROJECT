@@ -1,6 +1,9 @@
 import { Route } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Protection from "./Protection";
+import Artikel from "../pages/artikel/Artikel";
+import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
+import MainSection from "../components/artikel/main-section/MainSection";
 
 const routes = [
   <Route
@@ -12,6 +15,18 @@ const routes = [
       </Protection>
     }
   />,
+  <Route
+    key="home"
+    path="/artikel"
+    element={
+      <Protection publicSide={true}>
+        <Artikel />
+      </Protection>
+    }
+  >
+    <Route index element={<MainSection />} />
+    <Route path=":kategori" element={<MainSection />} />
+  </Route>,
 ];
 
 export default routes;
