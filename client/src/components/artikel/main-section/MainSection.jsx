@@ -1,13 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { newsPic } from "../../../constants";
 import NewsCard from "../../global-component/card/news-card/NewsCard";
 import PaginationStandart from "../../global-component/pagination/pagination-standart/PaginationStandart";
 import { api } from "../../../api/api";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
 function MainSection() {
+  const navigate = useNavigate();
+  const { kategori } = useParams();
+
   const [onHover, setOnHover] = useState("");
   const [itemOffset, setItemOffset] = useState(0);
   const [dataArtikel, setDataArtikel] = useState([]);
+  const [currentPage, setCurrentPage] = useState(0);
+  const [onKategori, setOnKategori] = useState("Semua");
   const tmpDataKategori = [
     {
       title: "Berita",
@@ -113,22 +119,41 @@ function MainSection() {
     },
   ];
 
+  const page1 = useRef();
+
   const fetchArtikel = async () => {
+    setOnKategori("Semua");
     try {
       const response = await api.get(
         `${process.env.REACT_APP_API_BASE_URL}/artikel/all`
       );
 
       setDataArtikel(response.data.data);
-      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const fetchArtikelByKategori = async () => {
+    try {
+      setOnKategori(kategori);
+      setCurrentPage(0);
+      setItemOffset(0);
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/artikel/kategori`,
+        {
+          kategori,
+        }
+      );
+      setDataArtikel(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
-    fetchArtikel();
-  }, []);
+    if (kategori && kategori.length > 0) fetchArtikelByKategori();
+    else fetchArtikel();
+  }, [kategori]);
 
   const itemsPerPage = 9;
   const endOffset = itemOffset + itemsPerPage;
@@ -138,34 +163,50 @@ function MainSection() {
 
   const handlePageClick = (event) => {
     const newOffset = (event.selected * itemsPerPage) % dataArtikel.length;
+    console.log(event);
     // console.log(
     //   `User requested page number ${event.selected}, which is offset ${newOffset}`
     // );
     setItemOffset(newOffset);
+    setCurrentPage(event.selected);
   };
 
   return (
-    <div className="mt-[160px] max-w-[1080px] flex flex-col  justify-center items-center">
-      <nav className="hidden sm:flex w-full justify-start items-center ">
+    <div className="mt-[160px] max-w-[1080px] flex flex-col  justify-center items-center ">
+      <nav className="flex w-screen md:w-full justify-start items-center overflow-scroll md:overflow-visible px-[5px] md:px-0">
         <ul className="flex gap-[16px]">
           <li className="flex justify-center items-center">
-            <button className="px-[48px] py-[16px] rounded-[10px] border-[1px] border-black500 ">
+            <Link
+              to={"/artikel"}
+              className={`${
+                onKategori === "Semua"
+                  ? "bg-black500 text-whiteSmoke500 border-black500"
+                  : "bg-whiteSmoke500 text-black500 border-black100"
+              } px-[24px] xl:px-[48px] py-[8px] xl:py-[16px] rounded-[10px] border-[1px]   `}
+            >
               <p className="text-[16px] font-medium leading-[24px]">Semua</p>
-            </button>
+            </Link>
           </li>
           {tmpDataKategori?.map((el, index) => (
             <li key={index} className="flex justify-center items-center">
-              <button className="px-[48px] py-[16px] rounded-[10px] border-[1px] border-black500 ">
+              <Link
+                to={`/artikel/${el.title}`}
+                className={`${
+                  onKategori === el.title
+                    ? "bg-black500 text-whiteSmoke500 border-black500"
+                    : "bg-whiteSmoke500 text-black500 border-black100"
+                } px-[24px] xl:px-[48px] py-[8px] xl:py-[16px] rounded-[10px] border-[1px]   `}
+              >
                 <p className="text-[16px] font-medium leading-[24px]">
                   {el.title}
                 </p>
-              </button>
+              </Link>
             </li>
           ))}
         </ul>
       </nav>
-      <div className="xl:h-[1636px] flex justify-center items-start">
-        <div className="grid grid-cols-1  md:grid-cols-2 xl:grid-cols-3 gap-[24px]  mt-[52px] my-[52px] ">
+      <div className="xl:h-[1636px] flex justify-center items-start mt-[52px] my-[52px] ">
+        <div className="grid grid-cols-1  md:grid-cols-2  xl:grid-cols-3 gap-[24px]  ">
           {currentItems?.map((el, index) => (
             <NewsCard
               onHover={onHover}
@@ -183,6 +224,7 @@ function MainSection() {
           handlePageClick={handlePageClick}
           pageCount={pageCount}
           marginBot={"mb-[160px]"}
+          currentPage={currentPage}
         />
       </div>
     </div>

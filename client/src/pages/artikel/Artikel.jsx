@@ -6,7 +6,7 @@ import ArtikelFilter from "../../components/artikel/artikel-filter/ArtikelFilter
 
 function Artikel() {
   return (
-    <div className="flex flex-col justify-center items-center shrink-0">
+    <div className="flex flex-col justify-center items-center shrink-0 ">
       <HeroSection />
       {/* <ArtikelFilter /> */}
       <Outlet />

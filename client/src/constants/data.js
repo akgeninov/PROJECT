@@ -95,4 +95,34 @@ const navigationData = [
   },
 ];
 
-module.exports = { dataLayanan, dataService, dataKomunitas, navigationData };
+const dataNews = [
+  {
+    judul: "3 Cara Mengembangkan Bisnis di TikTok Shop",
+    tanggal: new Date("11/2/2002"),
+    deskripsi:
+      "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+    images: "rectangle_news_1.png",
+  },
+  {
+    judul: "12 Tren Pemasaran Paling Efektif di 2023",
+    tanggal: new Date("11/2/2002"),
+    deskripsi:
+      "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+    images: "rectangle_news_2.png",
+  },
+  {
+    judul: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
+    tanggal: new Date("11/2/2002"),
+    deskripsi:
+      "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+    images: "rectangle_news_3.png",
+  },
+];
+
+module.exports = {
+  dataLayanan,
+  dataService,
+  dataKomunitas,
+  navigationData,
+  dataNews,
+};

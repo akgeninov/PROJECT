@@ -4,30 +4,31 @@ import NewsCard from "../../global-component/card/news-card/NewsCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
+import { dataNews } from "../../../constants/data";
 function NewsSection() {
-  const [dataNesws, setDataNews] = useState([
-    {
-      judul: "3 Cara Mengembangkan Bisnis di TikTok Shop",
-      tanggal: new Date("11/2/2002"),
-      deskripsi:
-        "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      images: "rectangle_news_1.png",
-    },
-    {
-      judul: "12 Tren Pemasaran Paling Efektif di 2023",
-      tanggal: new Date("11/2/2002"),
-      deskripsi:
-        "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      images: "rectangle_news_2.png",
-    },
-    {
-      judul: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
-      tanggal: new Date("11/2/2002"),
-      deskripsi:
-        "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      images: "rectangle_news_3.png",
-    },
-  ]);
+  // const [dataNesws, setDataNews] = useState([
+  //   {
+  //     judul: "3 Cara Mengembangkan Bisnis di TikTok Shop",
+  //     tanggal: new Date("11/2/2002"),
+  //     deskripsi:
+  //       "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+  //     images: "rectangle_news_1.png",
+  //   },
+  //   {
+  //     judul: "12 Tren Pemasaran Paling Efektif di 2023",
+  //     tanggal: new Date("11/2/2002"),
+  //     deskripsi:
+  //       "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+  //     images: "rectangle_news_2.png",
+  //   },
+  //   {
+  //     judul: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
+  //     tanggal: new Date("11/2/2002"),
+  //     deskripsi:
+  //       "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+  //     images: "rectangle_news_3.png",
+  //   },
+  // ]);
   const [onHover, setOnHover] = useState("");
   useEffect(() => {
     AOS.init();
@@ -49,7 +50,7 @@ function NewsSection() {
         </p>
       </div>
       <div className="w-screen xl:w-fit flex overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
-        {dataNesws.map((news, index) => (
+        {dataNews.map((news, index) => (
           <NewsCard
             key={index}
             news={news}

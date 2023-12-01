@@ -1,7 +1,12 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-function PaginationStandart({ handlePageClick, pageCount, marginBot }) {
+function PaginationStandart({
+  handlePageClick,
+  pageCount,
+  marginBot,
+  currentPage,
+}) {
   return (
     <>
       <ReactPaginate
@@ -12,6 +17,7 @@ function PaginationStandart({ handlePageClick, pageCount, marginBot }) {
         pageCount={pageCount}
         previousLabel="<"
         renderOnZeroPageCount={null}
+        forcePage={currentPage}
         containerClassName={`flex justify-center items-center ${marginBot}`}
         previousLinkClassName="px-[14px] py-[6px]  h-[20px] w-[20px] flex justify-center items-center"
         nextLinkClassName="px-[14px] py-[6px] h-[20px] w-[20px] flex justify-center items-center"

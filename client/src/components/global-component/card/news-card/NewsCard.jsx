@@ -1,9 +1,6 @@
 import React from "react";
 
 function NewsCard({ news, onHover, setOnHover, index, path }) {
-  console.log({
-    path: `${process.env.REACT_APP_SERVER_URL}${path}/${news.images}`,
-  });
   const formattedDate = news.tanggal
     ? new Intl.DateTimeFormat("in-IN", {
         year: "numeric",
