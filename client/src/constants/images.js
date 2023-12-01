@@ -8,6 +8,8 @@ import desainLogo from "../assets/images/desain_logo.png";
 import buatWebsiteDanAplikasi from "../assets/images/buat_website_dan_aplikasi.png";
 import ellipse9 from "../assets/images/ellipse_9.png";
 import rectangleJoin from "../assets/images/rectangle_join.png";
+import geometricShapeArtikelDesktop from "../assets/images/geometric_shape_article_desktop.png";
+import geometricShapeArtikelMobile from "../assets/images/geometric_shape_article_mobile.png";
 
 const images = {
   vector2,
@@ -20,6 +22,8 @@ const images = {
   buatWebsiteDanAplikasi,
   ellipse9,
   rectangleJoin,
+  geometricShapeArtikelDesktop,
+  geometricShapeArtikelMobile,
 };
 
 export default images;

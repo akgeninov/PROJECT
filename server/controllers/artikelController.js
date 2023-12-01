@@ -1,17 +1,19 @@
 const db = require("../models");
 const artikel = db.Artikel;
 const kategoriModel = db.Kategori;
-const bcrypt = require('bcrypt');
-const utility = require('./utility');
+const bcrypt = require("bcrypt");
+const utility = require("./utility");
 
 module.exports = {
   getAllArtikel: async (req, res) => {
     try {
       const result = await artikel.findAll({
-        include: [{
+        include: [
+          {
             model: kategoriModel,
-            attributes: ['nama_kategori'],
-          }],
+            attributes: ["nama_kategori"],
+          },
+        ],
       });
 
       res.status(200).send({
@@ -28,14 +30,17 @@ module.exports = {
   getAllArtikelByKategori: async (req, res) => {
     try {
       const { kategori } = req.body;
+      console.log({ res: kategori });
       const result = await artikel.findAll({
-        include: [{
+        include: [
+          {
             model: kategoriModel,
-            attributes: ['nama_kategori'],
+            attributes: ["nama_kategori"],
             where: {
-                nama_kategori: kategori
-              },
-          }],
+              nama_kategori: kategori,
+            },
+          },
+        ],
       });
 
       res.status(200).send({

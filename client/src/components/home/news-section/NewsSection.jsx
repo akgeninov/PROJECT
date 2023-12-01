@@ -7,25 +7,25 @@ import ButtonBlack500 from "../../global-component/button/button-black500/Button
 function NewsSection() {
   const [dataNesws, setDataNews] = useState([
     {
-      title: "3 Cara Mengembangkan Bisnis di TikTok Shop",
-      DATE: "November 2023",
+      judul: "3 Cara Mengembangkan Bisnis di TikTok Shop",
+      tanggal: new Date("11/2/2002"),
       deskripsi:
         "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      pic: newsPic.rectangleNews1,
+      images: "rectangle_news_1.png",
     },
     {
-      title: "12 Tren Pemasaran Paling Efektif di 2023",
-      DATE: "November 2023",
+      judul: "12 Tren Pemasaran Paling Efektif di 2023",
+      tanggal: new Date("11/2/2002"),
       deskripsi:
         "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      pic: newsPic.rectangleNews2,
+      images: "rectangle_news_2.png",
     },
     {
-      title: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
-      DATE: "November 2023",
+      judul: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
+      tanggal: new Date("11/2/2002"),
       deskripsi:
         "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      pic: newsPic.rectangleNews3,
+      images: "rectangle_news_3.png",
     },
   ]);
   const [onHover, setOnHover] = useState("");
@@ -56,6 +56,7 @@ function NewsSection() {
             onHover={onHover}
             setOnHover={setOnHover}
             index={index}
+            path={"news"}
           />
         ))}
       </div>
