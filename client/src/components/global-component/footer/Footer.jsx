@@ -49,11 +49,16 @@ function Footer() {
             <img
               src={logo.growlabWhite}
               alt="logo"
-              className="w-[156px] h-[120px] "
+              className="w-[200px] h-[200px] hidden md:block "
             />
-            <p className="text-[20px] font-normal leading-[28px] w-[309px] text-whiteSmoke600">
-              Ruko Borobudur, Jalan Borobudur 1A - 15, Mojolangu, Lowokwaru,
-              Malang, Jawa Timur 65142.
+            <img
+              src={logo.growLabWhiteMobile}
+              alt="logo"
+              className="w-[68px] h-[68px] block md:hidden "
+            />
+            <p className="text-[14px] md:text-[20px] font-light leading-[20px] md:leading-[28px] w-[309px] text-whiteSmoke600">
+              Jalan Candi Brahu no. 22 , Mojolangu, Lowokwaru, Malang, Jawa
+              Timur 65142
             </p>
           </div>
           <div className="mt-[32px] lg:mt-0 lg:w-[630px] lg:h-[328px] flex flex-col lg:flex-row gap-[32px] lg:gap-[100px]">

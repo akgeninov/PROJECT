@@ -127,6 +127,7 @@ function MainSection() {
       const response = await api.get(
         `${process.env.REACT_APP_API_BASE_URL}/artikel/all`
       );
+      console.log(response.data.data);
 
       setDataArtikel(response.data.data);
     } catch (error) {
@@ -209,6 +210,7 @@ function MainSection() {
         <div className="grid grid-cols-1  md:grid-cols-2  xl:grid-cols-3 gap-[24px]  ">
           {currentItems?.map((el, index) => (
             <NewsCard
+              key={index}
               onHover={onHover}
               setOnHover={setOnHover}
               index={index}
