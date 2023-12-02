@@ -7,7 +7,7 @@ import ButtonWhiteSmoke500 from "./../../global-component/button/button-whitesmo
 
 export default function JoincomunitySection() {
   return (
-    <div className="bg-neutral-950 mt-[60px] lg:mt-[160px]  w-fit h-[564px] flex flex-col items-center gap-[52px]">
+    <div className="bg-[#0F1011] bg-cover mt-[60px] lg:mt-[160px]  w-full h-[612px] flex flex-col items-center gap-[56px] justify-center min-h-screen">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
