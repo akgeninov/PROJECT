@@ -28,8 +28,6 @@ module.exports = {
         komunitySection: "url('./assets/images/wave_accent_bawah.png')",
         komunitasKontenCreatorPic:"url('./assets/komunitas-pic/komunitas_konten_creator.png')",
         komunitasBisnisPic:"url('./assets/komunitas-pic/komunitas_bisnis.png')",
-
-
       },
     },
   },

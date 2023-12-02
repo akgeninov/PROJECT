@@ -3,17 +3,17 @@ import { newsPic } from "../../../constants";
 import NewsCard from "../../global-component/card/news-card/NewsCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import ButtonWhiteSmoke500 from './../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500';
+import ButtonWhiteSmoke500 from "./../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 
 export default function JoincomunitySection() {
-    return(
-        <div className=" mt-[60px] lg:mt-[160px]  w-fit flex flex-col items-center gap-[52px]">
+  return (
+    <div className="bg-neutral-950 mt-[60px] lg:mt-[160px]  w-fit h-[564px] flex flex-col items-center gap-[52px]">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
         className="flex flex-col gap-[8px] lg:gap-[16px]"
       >
-        <h1 className="text-[24px] lg:text-[40px] font-bold leading-[36px] lg:leading-[60px] max-w-[700px] text-center">
+        <h1 className="text-[24px] lg:text-[40px] font-bold leading-[36px] lg:leading-[60px] max-w-[564px] text-center text-whiteSmoke500">
           Temukan Momen Berkualitas Bersama Komunitas
         </h1>
       </div>
@@ -22,7 +22,10 @@ export default function JoincomunitySection() {
           
         </p>
       </button> */}
-      <ButtonWhiteSmoke500 TEXT_BUTTON={"Gabung Komunitas"} WIDTH={"w-[260px]"} />
+      <ButtonWhiteSmoke500
+        TEXT_BUTTON={"Gabung Komunitas"}
+        WIDTH={"w-[260px]"}
+      />
     </div>
-    );
+  );
 }
