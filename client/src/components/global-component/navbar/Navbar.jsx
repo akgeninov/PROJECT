@@ -5,6 +5,7 @@ import ButtonBlack500 from "../button/button-black500/ButtonBlack500";
 import ButtonBorderWhitesmoke500 from "../button/button-borderwhitesmoke500/ButtonBorderWhitesmoke500";
 import ButtonBorderBlack500 from "../button/button-borderblack500/ButtonBorderBlack500";
 import NavigationComponent from "./navigationComponent/NavigationComponent";
+// import { Link } from "react-router-dom";
 
 function Navbar() {
   const [toggle, setToggle] = useState({
