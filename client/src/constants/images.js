@@ -10,6 +10,7 @@ import ellipse9 from "../assets/images/ellipse_9.png";
 import rectangleJoin from "../assets/images/rectangle_join.png";
 import geometricShapeArtikelDesktop from "../assets/images/geometric_shape_article_desktop.png";
 import geometricShapeArtikelMobile from "../assets/images/geometric_shape_article_mobile.png";
+import tiktokImages from "../assets/images/tiktok_images.png";
 
 const images = {
   vector2,
@@ -24,6 +25,7 @@ const images = {
   rectangleJoin,
   geometricShapeArtikelDesktop,
   geometricShapeArtikelMobile,
+  tiktokImages,
 };
 
 export default images;

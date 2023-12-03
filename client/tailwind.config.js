@@ -13,6 +13,7 @@ module.exports = {
         black400: "#3F4041",
         black500: "#0F1011",
         indigoDye500: "#12517C",
+        greenWhatsapp: "#32D951",
       },
       fontFamily: {
         heebo: "Heebo",

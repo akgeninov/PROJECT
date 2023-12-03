@@ -32,15 +32,24 @@ function Navbar() {
   }, [isActive]);
 
   return (
-    <div className=" flex  justify-center  items-center h-[120px] bg-whiteSmoke500">
-      <div className=" flex p-[16px] max-w-[1080px] w-[356px] sm:w-auto  flex-1 justify-between  items-center shrink-0 ">
+    <div className=" flex  justify-center  w-full items-center h-[120px] bg-whiteSmoke500 ">
+      <div className=" flex px-[5px] xl:px-0 max-w-[1080px] w-[356px] sm:w-auto  flex-1 justify-between  items-center shrink-0 ">
         <img
           onClick={() => {
             handleClick("");
             setIsActive("");
           }}
-          className=" w-[80px] h-[60px] shrink-0 cursor-pointer"
+          className=" w-[100px] h-[100px] shrink-0 cursor-pointer hidden md:block"
           src={logo.growlab}
+          alt="growlab"
+        />
+        <img
+          onClick={() => {
+            handleClick("");
+            setIsActive("");
+          }}
+          className=" w-[44px] h-[44px] shrink-0 cursor-pointer block md:hidden"
+          src={logo.growlabMobile}
           alt="growlab"
         />
         <ul className="hidden lg:inline-flex items-start gap-[16px]">

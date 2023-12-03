@@ -1,6 +1,8 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function NewsCard({ news, onHover, setOnHover, index, path }) {
+  const navigate = useNavigate();
   const formattedDate = news.tanggal
     ? new Intl.DateTimeFormat("in-IN", {
         year: "numeric",
@@ -8,12 +10,22 @@ function NewsCard({ news, onHover, setOnHover, index, path }) {
         day: "numeric",
       }).format(new Date(news.tanggal))
     : "Invalid Date";
+
+  const navigateToDetail = (title, data, kategori) => {
+    console.log({ title, data, kategori });
+    localStorage.setItem("artikel", JSON.stringify(data));
+    navigate(`/detail-artikel/${kategori}/${title}`);
+  };
+
   return (
     <div
       key={index}
       onMouseEnter={() => setOnHover(index)}
       onMouseLeave={() => setOnHover("")}
-      className="relative w-[344px] h-[524px] shrink-0 rounded-[10px] cursor-pointer shadow-customSm overflow-hidden "
+      onClick={() =>
+        navigateToDetail(news.judul, news, news.Kategori.nama_kategori)
+      }
+      className="relative w-[344px] h-[304px] md:h-[524px] shrink-0 rounded-[10px] cursor-pointer shadow-customSm overflow-hidden "
     >
       <div
         className={`${
