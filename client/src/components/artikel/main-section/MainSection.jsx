@@ -7,13 +7,15 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 
 function MainSection() {
   const navigate = useNavigate();
-  const { kategori } = useParams();
-
+  const { kategori, page } = useParams();
+  const itemsPerPage = 9;
   const [onHover, setOnHover] = useState("");
   const [itemOffset, setItemOffset] = useState(0);
   const [dataArtikel, setDataArtikel] = useState([]);
   const [currentPage, setCurrentPage] = useState(0);
   const [onKategori, setOnKategori] = useState("Semua");
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
   const tmpDataKategori = [
     {
       title: "Berita",
@@ -123,13 +125,18 @@ function MainSection() {
 
   const fetchArtikel = async () => {
     setOnKategori("Semua");
+    setCurrentPage(page - 1);
     try {
       const response = await api.get(
         `${process.env.REACT_APP_API_BASE_URL}/artikel/all`
       );
       console.log(response.data.data);
-
       setDataArtikel(response.data.data);
+      const newOffset = ((page - 1) * itemsPerPage) % response.data.data.length;
+      const endOffset = newOffset + itemsPerPage;
+
+      setCurrentItems(response.data.data.slice(newOffset, endOffset));
+      setPageCount(Math.ceil(response.data.data.length / itemsPerPage));
     } catch (error) {
       console.log(error);
     }
@@ -137,7 +144,7 @@ function MainSection() {
   const fetchArtikelByKategori = async () => {
     try {
       setOnKategori(kategori);
-      setCurrentPage(0);
+      setCurrentPage(page - 1);
       setItemOffset(0);
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/artikel/kategori`,
@@ -145,10 +152,44 @@ function MainSection() {
           kategori,
         }
       );
+
       setDataArtikel(response.data.data);
+      const newOffset = ((page - 1) * itemsPerPage) % response.data.data.length;
+      const endOffset = newOffset + itemsPerPage;
+      setDataArtikel(response.data.data);
+      setCurrentItems(response.data.data.slice(newOffset, endOffset));
+      setPageCount(Math.ceil(response.data.data.length / itemsPerPage));
     } catch (error) {
       console.log(error);
     }
+  };
+
+  // const endOffset = itemOffset + itemsPerPage;
+  // // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
+  // const currentItems = dataArtikel.slice(itemOffset, endOffset);
+  // const pageCount = Math.ceil(dataArtikel.length / itemsPerPage);
+
+  const handlePageClick = (event) => {
+    // const newOffset = (event.selected * itemsPerPage) % dataArtikel.length;
+    // setItemOffset(newOffset);
+    console.log({ event: event.selected });
+    if (kategori) navigate(`/artikel/${event.selected + 1}/${kategori}`);
+    else navigate(`/artikel/${event.selected + 1}`);
+    // console.log(event);
+    // console.log(
+    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
+    // );
+  };
+
+  const changePage = () => {
+    console.log(dataArtikel);
+    const newOffset = ((page - 1) * itemsPerPage) % dataArtikel.length;
+    const endOffset = newOffset + itemsPerPage;
+    console.log(newOffset);
+    setCurrentItems(dataArtikel.slice(newOffset, endOffset));
+    setPageCount(Math.ceil(dataArtikel.length / itemsPerPage));
+    // setItemOffset(newOffset);
+    setCurrentPage(page - 1);
   };
 
   useEffect(() => {
@@ -156,21 +197,9 @@ function MainSection() {
     else fetchArtikel();
   }, [kategori]);
 
-  const itemsPerPage = 9;
-  const endOffset = itemOffset + itemsPerPage;
-  // console.log(`Loading items from ${itemOffset} to ${endOffset}`);
-  const currentItems = dataArtikel.slice(itemOffset, endOffset);
-  const pageCount = Math.ceil(dataArtikel.length / itemsPerPage);
-
-  const handlePageClick = (event) => {
-    const newOffset = (event.selected * itemsPerPage) % dataArtikel.length;
-    console.log(event);
-    // console.log(
-    //   `User requested page number ${event.selected}, which is offset ${newOffset}`
-    // );
-    setItemOffset(newOffset);
-    setCurrentPage(event.selected);
-  };
+  useEffect(() => {
+    if (dataArtikel.length > 0) changePage();
+  }, [page]);
 
   return (
     <div className="mt-[160px] max-w-[1080px] flex flex-col  justify-center items-center ">
@@ -178,7 +207,7 @@ function MainSection() {
         <ul className="flex gap-[16px]">
           <li className="flex justify-center items-center">
             <Link
-              to={"/artikel"}
+              to={`/artikel/1`}
               className={`${
                 onKategori === "Semua"
                   ? "bg-black500 text-whiteSmoke500 border-black500"
@@ -191,7 +220,7 @@ function MainSection() {
           {tmpDataKategori?.map((el, index) => (
             <li key={index} className="flex justify-center items-center">
               <Link
-                to={`/artikel/${el.title}`}
+                to={`/artikel/1/${el.title}`}
                 className={`${
                   onKategori === el.title
                     ? "bg-black500 text-whiteSmoke500 border-black500"

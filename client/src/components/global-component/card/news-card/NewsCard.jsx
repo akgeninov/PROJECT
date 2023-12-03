@@ -14,7 +14,7 @@ function NewsCard({ news, onHover, setOnHover, index, path }) {
   const navigateToDetail = (title, data, kategori) => {
     console.log({ title, data, kategori });
     localStorage.setItem("artikel", JSON.stringify(data));
-    navigate(`/artikel/${kategori}/${title}`);
+    navigate(`/detail-artikel/${kategori}/${title}`);
   };
 
   return (
@@ -25,7 +25,7 @@ function NewsCard({ news, onHover, setOnHover, index, path }) {
       onClick={() =>
         navigateToDetail(news.judul, news, news.Kategori.nama_kategori)
       }
-      className="relative w-[344px] h-[524px] shrink-0 rounded-[10px] cursor-pointer shadow-customSm overflow-hidden "
+      className="relative w-[344px] h-[304px] md:h-[524px] shrink-0 rounded-[10px] cursor-pointer shadow-customSm overflow-hidden "
     >
       <div
         className={`${
