@@ -1,5 +1,6 @@
 const { default: images } = require("./images");
 const { default: komunitasPic } = require("./komunitasPic");
+const { default: logo } = require("./logo");
 
 const dataLayanan = [
   {
@@ -119,10 +120,34 @@ const dataNews = [
   },
 ];
 
+const dataLogoShare = [
+  {
+    title: "link",
+    images: logo.LINK,
+    background: "bg-whiteSmoke600",
+  },
+  {
+    title: "linkedin",
+    images: logo.LINKEDIN,
+    background: "",
+  },
+  {
+    title: "whatsapp",
+    images: logo.WHATSAPP,
+    background: "bg-greenWhatsapp",
+  },
+  {
+    title: "telegram",
+    images: logo.TELEGRAM,
+    background: "",
+  },
+];
+
 module.exports = {
   dataLayanan,
   dataService,
   dataKomunitas,
   navigationData,
   dataNews,
+  dataLogoShare,
 };
