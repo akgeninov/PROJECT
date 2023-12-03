@@ -28,6 +28,8 @@ module.exports = {
         aboutSection: "url('./assets/images/Rectangle_104.png')",
         serviceSection: "url('./assets/images/wave_accent.png')",
         komunitySection: "url('./assets/images/wave_accent_bawah.png')",
+        komunitasKontenCreatorPic:"url('./assets/komunitas-pic/komunitas_konten_creator.png')",
+        komunitasBisnisPic:"url('./assets/komunitas-pic/komunitas_bisnis.png')",
       },
     },
   },
