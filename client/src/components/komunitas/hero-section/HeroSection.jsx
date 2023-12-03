@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
-import { komunitasPic } from "./../../../constants";
+import { dataKomunitas } from "./../../../constants/data";
 
 export default function HeroSection() {
   return (
@@ -14,7 +14,7 @@ export default function HeroSection() {
           <div className="flex flex-col w-[250px] lg:w-[568px]  overflow-hidden gap-[52px]">
             <div className="flex flex-col max-w-[568px] gap-[8px] lg:gap-[16px]">
               <h1 className=" text-whiteSmoke500 text-[28px] lg:text-[48px] text-center lg:text-start font-bold leading-[32px] lg:leading-[60px]">
-                Komunitas Konten Kreator
+                {dataKomunitas[1].title}
               </h1>
               <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] text-whiteSmoke600 text-center lg:text-start">
                 Ayo bergabung dengan para penggerak industri kreatif untuk
@@ -35,7 +35,7 @@ export default function HeroSection() {
 
           <div className="flex flex-col items-center min-w-[352px] overflow-hidden rounded-[10px]">
             <img
-              src={komunitasPic.komunitasKontenCreator}
+              src={dataKomunitas[1].pic}
               alt="komunitas"
               className={
                 "gap-[52px] flex flex-col   min-w-fit h-[352px]  xl:min-w-fit rounded-[10px]"
