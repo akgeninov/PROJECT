@@ -49,18 +49,21 @@ function NewsSection() {
           berikutnya
         </p>
       </div>
-      <div className="w-screen xl:w-fit flex overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
-        {dataNews.map((news, index) => (
-          <NewsCard
-            key={index}
-            news={news}
-            onHover={onHover}
-            setOnHover={setOnHover}
-            index={index}
-            path={"news"}
-          />
-        ))}
+      <div className="flex justify-center items-start">
+        <div className="w-fit grid grid-cols-1  md:grid-cols-2  xl:grid-cols-3    items-center justify-center gap-y-[52px] gap-x-[24px]">
+          {dataNews.map((news, index) => (
+            <NewsCard
+              key={index}
+              news={news}
+              onHover={onHover}
+              setOnHover={setOnHover}
+              index={index}
+              path={"news"}
+            />
+          ))}
+        </div>
       </div>
+
       {/* <button className="flex bg-black500 hover:bg-whiteSmoke800 px-[64px] py-[16px] justify-center items-center rounded-[10px] w-[260px]">
         <p className="shrink-0 text-whiteSmoke500 text-[16px] font-medium leading-[24px]">
           

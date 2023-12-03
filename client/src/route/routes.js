@@ -18,7 +18,7 @@ const routes = [
   />,
   <Route
     key="home"
-    path="/artikel"
+    path="/artikel/:page"
     element={
       <Protection publicSide={true}>
         <Artikel />
@@ -30,7 +30,7 @@ const routes = [
   </Route>,
   <Route
     key="detail-artikel"
-    path="/artikel/:kategori/:title"
+    path="/detail-artikel/:kategori/:title"
     element={
       <Protection publicSide={true}>
         <DetailArtikel />
