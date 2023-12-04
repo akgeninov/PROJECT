@@ -1,19 +1,11 @@
 const db = require("../models");
-const artikel = db.Artikel;
+const artikelModel = db.Artikel;
 const kategoriModel = db.Kategori;
-const bcrypt = require("bcrypt");
-const utility = require("./utility");
 
 module.exports = {
-  getAllArtikel: async (req, res) => {
+  getKategori: async (req, res) => {
     try {
-      const result = await artikel.findAll({
-        include: [
-          {
-            model: kategoriModel,
-            attributes: ["nama_kategori"],
-          },
-        ],
+      const result = await kategoriModel.findAll({
       });
 
       res.status(200).send({
@@ -30,23 +22,79 @@ module.exports = {
   getAllArtikelByKategori: async (req, res) => {
     try {
       const { kategori } = req.body;
+      let result = '';
       console.log({ res: kategori });
-      const result = await artikel.findAll({
-        include: [
-          {
-            model: kategoriModel,
-            attributes: ["nama_kategori"],
-            where: {
-              nama_kategori: kategori,
+      if (kategori.toUpperCase() === "SEMUA") {
+        result = await artikelModel.findAll({
+          include: [
+            {
+              model: kategoriModel,
+              attributes: ["nama_kategori"],
             },
-          },
-        ],
+          ],
+        });
+      } else {
+        result = await artikelModel.findAll({
+          include: [
+            {
+              model: kategoriModel,
+              attributes: ["nama_kategori"],
+              where: {
+                nama_kategori: kategori,
+              },
+            },
+          ],
+        });
+      }
+     
+      res.status(200).send({
+        message: "succes",
+        data: result,
       });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+
+  getArtikelMenarik: async (req, res) => {
+    try {
+      const { kategori, limit } = req.body;
+      const numericLimit = parseInt(limit, 10);
+
+      if (kategori.toUpperCase() === "SEMUA") {
+        result = await artikelModel.findAll({
+          include: [
+            {
+              model: kategoriModel,
+              attributes: ["nama_kategori"],
+            },
+          ],
+          limit: numericLimit,
+          order: [['id', 'DESC']] 
+        });
+      } else {
+        result = await artikelModel.findAll({
+          include: [
+            {
+              model: kategoriModel,
+              attributes: ["nama_kategori"],
+              where: {
+                nama_kategori: kategori,
+              },
+            },
+          ],
+          limit: numericLimit, 
+          order: [['id', 'DESC']] 
+        });
+      }
 
       res.status(200).send({
         message: "succes",
         data: result,
       });
+      
     } catch (error) {
       res.status(400).send({
         error: error.message,
