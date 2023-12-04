@@ -4,37 +4,63 @@ import NewsCard from "../../global-component/card/news-card/NewsCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
-
+import { dataNews } from "../../../constants/data";
+import { api } from "../../../api/api";
 
 function ArticleSection() {
-  const [dataNesws, setDataNews] = useState([
-    {
-      title: "3 Cara Mengembangkan Bisnis di TikTok Shop",
-      DATE: "November 2023",
-      deskripsi:
-        "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      pic: newsPic.rectangleNews1,
-    },
-    {
-      title: "12 Tren Pemasaran Paling Efektif di 2023",
-      DATE: "November 2023",
-      deskripsi:
-        "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      pic: newsPic.rectangleNews2,
-    },
-    {
-      title: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
-      DATE: "November 2023",
-      deskripsi:
-        "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
-      pic: newsPic.rectangleNews3,
-    },
-  ]);
+  const [articles, setArticles] = useState([]);
+
+  const fetchArtikel = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/artikel/menarik`,
+        {
+          kategori: "semua",
+          limit: 3,
+        }
+      );
+      setArticles(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchArtikel();
+    // console.log(articles);
+  },[]);
+  // useEffect(() => {
+  //   console.log(articles);
+  // },[articles]);
+
+  // const [dataNesws, setDataNews] = useState([
+  //   {
+  //     title: "3 Cara Mengembangkan Bisnis di TikTok Shop",
+  //     DATE: "November 2023",
+  //     deskripsi:
+  //       "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+  //     pic: newsPic.rectangleNews1,
+  //   },
+  //   {
+  //     title: "12 Tren Pemasaran Paling Efektif di 2023",
+  //     DATE: "November 2023",
+  //     deskripsi:
+  //       "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+  //     pic: newsPic.rectangleNews2,
+  //   },
+  //   {
+  //     title: "10 Cara Agar Bisnis Kamu Muncul di Pencarian",
+  //     DATE: "November 2023",
+  //     deskripsi:
+  //       "TikTok Shop, salah satu platform e-commerce yang sedang naik daun, telah menjadi fokus utama para pengusaha untuk memperluas jangkauan bisnis mereka. Dengan basis pengguna yang besar dan beragam, TikTok Shop memberikan kesempatan yang luar biasa bagi para pemilik bisnis untuk meningkatkan visibilitas produk mereka",
+  //     pic: newsPic.rectangleNews3,
+  //   },
+  // ]);
+
   const [onHover, setOnHover] = useState("");
   useEffect(() => {
     AOS.init();
   }, []);
-
 
   return (
     <div className=" mb-20 mt-[60px] lg:mt-[160px]  w-fit flex flex-col items-center gap-[52px]">
@@ -53,13 +79,14 @@ function ArticleSection() {
         </p> */}
       </div>
       <div className="w-screen xl:w-fit flex overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
-        {dataNesws.map((news, index) => (
+        {articles.map((article, index) => (
           <NewsCard
             key={index}
-            news={news}
+            news={article}
             onHover={onHover}
             setOnHover={setOnHover}
             index={index}
+            path={"article"}
           />
         ))}
       </div>
