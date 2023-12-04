@@ -71,6 +71,29 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        judul: "Putuskan Hiatus, Ini Perjalanan Panjang Band Noah",
+        deskripsi:
+          "Band Noah sukses menggelar konser terakhirnya di tahun 2023. Konser bartajuk The Great Journey of Noah #the final show itu digelar di Beach City International Stadium, Ancol, Jakarta Minggu.",
+        images: "band-noah.jpg",
+        tanggal: new Date("11/2/2002"),
+        link: "https://timesindonesia.co.id/entertainment/478745/putuskan-hiatus-ini-perjalanan-panjang-band-noah",
+        id_kategori: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        judul: "Cafe Bromfiets Blitar Hadirkan Kenangan Nostalgia Benda Klasik",
+        deskripsi:
+          "Di Blitar ada yang menarik untuk para pengunjung yang mencari nuansa klasik yang unik. Cafe Bromfiets namanya. Kafe ini menggabungkan kemewahan klasik dengan cita rasa modern.",
+        images: "bromfietscafe.png",
+        tanggal: new Date("11/2/2002"),
+        link: "https://timesindonesia.co.id/gaya-hidup/478743/cafe-bromfiets-blitar-hadirkan-kenangan-nostalgia-benda-klasik",
+        id_kategori: 5,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+
     ]);
   },
 
