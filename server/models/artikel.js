@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Artikel extends Model {
     static associate(models) {
@@ -12,21 +10,29 @@ module.exports = (sequelize, DataTypes) => {
       });
     }
   }
-  Artikel.init({
-    judul: DataTypes.STRING,
-    deskripsi: DataTypes.STRING,
-    images: DataTypes.STRING,
-    tanggal: DataTypes.STRING,
-    link: DataTypes.STRING,
-    images_link: {
-      type: DataTypes.VIRTUAL,
-      get() {
-        return `${process.env.BASE_URL}/images/artikel/${this.getDataValue('images')}`;
+  Artikel.init(
+    {
+      judul: DataTypes.STRING,
+      deskripsi: {
+        type: DataTypes.STRING(1000),
+        allowNull: true,
+      },
+      images: DataTypes.STRING,
+      tanggal: DataTypes.STRING,
+      link: DataTypes.STRING,
+      images_link: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          return `${process.env.BASE_URL}/images/artikel/${this.getDataValue(
+            "images"
+          )}`;
+        },
       },
     },
-  }, {
-    sequelize,
-    modelName: 'Artikel',
-  });
+    {
+      sequelize,
+      modelName: "Artikel",
+    }
+  );
   return Artikel;
 };

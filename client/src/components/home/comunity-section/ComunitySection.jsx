@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { data } from "../../../constants";
+import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 
 function ComunitySection() {
   const title = useRef();
@@ -55,21 +56,23 @@ function ComunitySection() {
                 </p>
               </div>
 
-              <button className="w-[260px] h-[54px] px-[64px] py-[16px] flex items-center rounded-[10px] justify-center bg-whiteSmoke500">
+              {/* <button className=" h-[54px] px-[64px] py-[16px] flex items-center rounded-[10px] justify-center bg-whiteSmoke500">
                 <p className="text-black500 text-[16px] font-medium leading-[24px]">
                   Selengkapnya
                 </p>
-              </button>
+              </button> */}
+              <ButtonWhiteSmoke500
+                WIDTH={"w-[260px]"}
+                TEXT_BUTTON={"Selengkapnya"}
+              />
             </div>
           ))}
         </div>
 
-        <div className="flex flex-col items-center w-[358px] xl:w-[558px]  h-[432px] xl:h-[672px] overflow-hidden rounded-[10px]">
+        <div className="flex flex-col items-center  mx-[5px] xl:mx-0 max-w-[358px]  xl:max-w-[558px]  h-[432px] xl:h-[672px] overflow-hidden rounded-[10px]">
           {data.dataKomunitas.map((el, index) => (
-            <img
+            <div
               key={index}
-              src={el.pic}
-              alt="komunitas"
               className={`${
                 index !== 0
                   ? scrolled
@@ -78,8 +81,14 @@ function ComunitySection() {
                   : scrolled
                   ? "translate-y-0 scale-95 opacity-50 "
                   : "translate-y-0 scale-100 opacity-100 "
-              } gap-[52px] flex flex-col duration-500 w-auto min-h-[488px]  min-w-max  xl:min-h-[672px] rounded-[10px]`}
-            />
+              } flex flex-col duration-500 items-center  xl:w-[558px] rounded-[10px] min-h-[488px] xl:xl:min-h-[672px] overflow-hidden`}
+            >
+              <img
+                src={el.pic}
+                alt="komunitas"
+                className={`gap-[52px] flex flex-col  w-auto min-h-[488px]  min-w-max  xl:min-h-[672px] rounded-[10px]`}
+              />
+            </div>
           ))}
         </div>
       </div>
