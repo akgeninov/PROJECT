@@ -39,14 +39,23 @@ const routes = [
     }
   />,
   <Route
-    key="komunitas"
-    path="/komunitas"
+    key="komunitas-konten-kreator"
+    path="/komunitas/komunitas-konten-kreator"
     element={
       <Protection publicSide={true}>
         <Komunitas />
       </Protection>
     }
-  />
+  />,
+  <Route
+    key="komunitas-bisnis"
+    path="/komunitas/komunitas-bisnis"
+    element={
+      <Protection publicSide={true}>
+        <Komunitas />
+      </Protection>
+    }
+  />,
 ];
 
 export default routes;
