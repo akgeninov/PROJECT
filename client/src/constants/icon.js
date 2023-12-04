@@ -1,4 +1,5 @@
 import chevronSmallDownLight from "../assets/icon/chevron-small-down-light.png";
+import chevronSmallDownDark from "../assets/icon/chevron-small-down-dark.png";
 import vector5 from "../assets/icon/vector_5.png";
 import mail from "../assets/icon/mail.png";
 import facebook from "../assets/icon/facebook.png";
@@ -17,6 +18,7 @@ import megaphone from "../assets/icon/megaphone.png";
 
 const icon = {
   chevronSmallDownLight,
+  chevronSmallDownDark,
   vector5,
   mail,
   facebook,

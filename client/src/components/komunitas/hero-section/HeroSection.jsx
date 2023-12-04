@@ -1,22 +1,27 @@
 import React, { useEffect } from "react";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import { dataKomunitas } from "./../../../constants/data";
+import NavigasiKomunitas from "./navigasi-komunitas/NavigasiKomunitas";
 
 export default function HeroSection() {
   return (
-    <div className="bg-komunitasKontenCreatorPic bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[544px] lg:h-[544px] flex flex-col">
+    <div
+      className="bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[544px] lg:h-[544px] flex flex-col"
+      style={{ backgroundImage: `url(${dataKomunitas[1].pic})` }}
+    >
       <div className="bg-[rgba(15,16,17,0.95)] bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[544px] lg:h-[544px] absolute left-0 z-0 "></div>
       <div className="z-10">
         <div className="mt-[24px] gap-[8px]">
-          <h1 className="text-white>">Breadcrumb</h1>
+          {/* <h1 className="text-whiteSmoke500">Breadcrumb</h1> */}
+          <NavigasiKomunitas />
         </div>
-        <div className="flex gap-[80px] mt-[50px]">
+        <div className="flex gap-[80px] mt-[60px]">
           <div className="flex flex-col w-[250px] lg:w-[568px]  overflow-hidden gap-[52px]">
             <div className="flex flex-col max-w-[568px] gap-[8px] lg:gap-[16px]">
               <h1 className=" text-whiteSmoke500 text-[28px] lg:text-[48px] text-center lg:text-start font-bold leading-[32px] lg:leading-[60px]">
                 {dataKomunitas[1].title}
               </h1>
-              <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] text-whiteSmoke600 text-center lg:text-start">
+              <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] text-whiteSmoke500 text-center lg:text-start">
                 Ayo bergabung dengan para penggerak industri kreatif untuk
                 bertukar ide, mendapatkan inspirasi, dan memperluas jaringanmu.
               </p>
