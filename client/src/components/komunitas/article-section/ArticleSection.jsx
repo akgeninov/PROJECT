@@ -86,7 +86,7 @@ function ArticleSection() {
             onHover={onHover}
             setOnHover={setOnHover}
             index={index}
-            path={"article"}
+            path={"artikel"}
           />
         ))}
       </div>
