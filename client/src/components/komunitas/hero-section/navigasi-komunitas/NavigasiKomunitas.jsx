@@ -1,9 +1,14 @@
 import React from "react";
 import { icon } from "../../../../constants";
 import { useParams } from "react-router-dom";
+import { dataKomunitas } from "../../../../constants/data";
 
 function NavigasiKomunitas() {
-  const { submenu } = useParams();
+  const { title } = useParams();
+  let index = 1;
+  if (title === "komunitas-bisnis"){
+    index = 0;
+  }
   return (
     <div className=" flex max-w-[358px] md:max-w-[1080px] px-[5px] xl:px-0  w-full justify-start items-center mt-[24px]">
       <nav className="gap-[8px]   flex justify-start items-center list-none">
@@ -22,7 +27,7 @@ function NavigasiKomunitas() {
         </li>
         <li>
           <p className="text-[14px] text-whiteSmoke500 font-[Heebo] font-medium leading-[20px] cursor-pointer">
-            {submenu}
+            {dataKomunitas[index].title}
           </p>
         </li>
       </nav>

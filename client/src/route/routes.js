@@ -40,7 +40,7 @@ const routes = [
   />,
   <Route
     key="komunitas-konten-kreator"
-    path="/komunitas/komunitas-konten-kreator"
+    path="/komunitas/:title"
     element={
       <Protection publicSide={true}>
         <Komunitas />
@@ -49,7 +49,7 @@ const routes = [
   />,
   <Route
     key="komunitas-bisnis"
-    path="/komunitas/komunitas-bisnis"
+    path="/komunitas/:title"
     element={
       <Protection publicSide={true}>
         <Komunitas />
