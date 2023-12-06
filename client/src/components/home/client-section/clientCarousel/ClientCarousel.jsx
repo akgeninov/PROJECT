@@ -8,7 +8,7 @@ const dataImg = [
   clientPic.teamDominatus1,
   clientPic.yesaMalika1,
   clientPic.sasiifood,
-  clientPic.teamDominatus1,
+  clientPic.teamDominatus1
 ];
 
 function ClientCarousel() {

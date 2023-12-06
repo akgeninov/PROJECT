@@ -1,5 +1,6 @@
 import { Route } from "react-router-dom";
 import Home from "../pages/home/Home";
+import Komunitas from "../pages/komunitas/Komunitas";
 import Protection from "./Protection";
 import Artikel from "../pages/artikel/Artikel";
 import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
@@ -34,6 +35,24 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <DetailArtikel />
+      </Protection>
+    }
+  />,
+  <Route
+    key="komunitas-konten-kreator"
+    path="/komunitas/:title"
+    element={
+      <Protection publicSide={true}>
+        <Komunitas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="komunitas-bisnis"
+    path="/komunitas/:title"
+    element={
+      <Protection publicSide={true}>
+        <Komunitas />
       </Protection>
     }
   />,
