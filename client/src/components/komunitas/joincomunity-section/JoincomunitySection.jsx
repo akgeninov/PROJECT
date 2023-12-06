@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 // import AOS from "aos";
 // import "aos/dist/aos.css";
 import ButtonWhiteSmoke500 from "./../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
