@@ -30,7 +30,6 @@ function ComunitySection() {
   return (
     <div
       onWheel={handleScroll}
-      onClick={() => setScrolled((prev) => !prev)}
       className=" relative gap-[100px] flex flex-col  justify-start items-center  py-[80px] bg-komunitySection bg-no-repeat px-[5px] sm:px-[100px]  w-full 2xl:max-w-[1280px]  h-[836px] xl:h-[832px] bg-cover mt-[160px]  "
     >
       <div
