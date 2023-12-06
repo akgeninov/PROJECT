@@ -5,8 +5,7 @@ const kategoriModel = db.Kategori;
 module.exports = {
   getKategori: async (req, res) => {
     try {
-      const result = await kategoriModel.findAll({
-      });
+      const result = await kategoriModel.findAll({});
 
       res.status(200).send({
         message: "succes",
@@ -22,7 +21,7 @@ module.exports = {
   getAllArtikelByKategori: async (req, res) => {
     try {
       const { kategori } = req.body;
-      let result = '';
+      let result = "";
       console.log({ res: kategori });
       if (kategori.toUpperCase() === "SEMUA") {
         result = await artikelModel.findAll({
@@ -46,7 +45,7 @@ module.exports = {
           ],
         });
       }
-     
+
       res.status(200).send({
         message: "succes",
         data: result,
@@ -72,7 +71,7 @@ module.exports = {
             },
           ],
           limit: numericLimit,
-          order: [['id', 'DESC']] 
+          order: [["id", "DESC"]],
         });
       } else {
         result = await artikelModel.findAll({
@@ -85,8 +84,8 @@ module.exports = {
               },
             },
           ],
-          limit: numericLimit, 
-          order: [['id', 'DESC']] 
+          limit: numericLimit,
+          order: [["id", "DESC"]],
         });
       }
 
@@ -94,7 +93,6 @@ module.exports = {
         message: "succes",
         data: result,
       });
-      
     } catch (error) {
       res.status(400).send({
         error: error.message,
