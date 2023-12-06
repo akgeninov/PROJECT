@@ -6,6 +6,7 @@ import Artikel from "../pages/artikel/Artikel";
 import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
+import TentangKami from "../pages/tentang-kami/TentangKami";
 
 const routes = [
   <Route
@@ -53,6 +54,15 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Komunitas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="about-us"
+    path="/about-us"
+    element={
+      <Protection publicSide={true}>
+        <TentangKami />
       </Protection>
     }
   />,
