@@ -18,7 +18,7 @@ const routes = [
     }
   />,
   <Route
-    key="home"
+    key="artikel"
     path="/artikel/:page"
     element={
       <Protection publicSide={true}>
