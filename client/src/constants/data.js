@@ -129,7 +129,7 @@ const dataLogoShare = [
   {
     title: "linkedin",
     images: logo.LINKEDIN,
-    background: "",
+    background: "bg-linkedinColor",
   },
   {
     title: "whatsapp",

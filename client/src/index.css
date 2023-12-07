@@ -26,3 +26,12 @@ code {
 .bg-gradient-radial {
   background: radial-gradient(circle at left, transparent 10%, #3f4041 35%);
 }
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}

@@ -16,23 +16,24 @@ function MainSection() {
   const [onKategori, setOnKategori] = useState("Semua");
   const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
-  const tmpDataKategori = [
-    {
-      title: "Berita",
-    },
-    {
-      title: "Event",
-    },
-    {
-      title: "Wawasan",
-    },
-    {
-      title: "Tips",
-    },
-    {
-      title: "Komunitas",
-    },
-  ];
+  const [tmpDataKategori, setTmpDataKategori] = useState([]);
+  // const tmpDataKategori = [
+  //   {
+  //     title: "Berita",
+  //   },
+  //   {
+  //     title: "Event",
+  //   },
+  //   {
+  //     title: "Wawasan",
+  //   },
+  //   {
+  //     title: "Tips",
+  //   },
+  //   {
+  //     title: "Komunitas",
+  //   },
+  // ];
 
   const tmpDataNews = [
     {
@@ -121,38 +122,51 @@ function MainSection() {
     },
   ];
 
-  const page1 = useRef();
+  // const fetchArtikel = async () => {
+  //   setOnKategori("Semua");
+  //   setCurrentPage(page - 1);
+  //   try {
+  //     const response = await api.get(
+  //       `${process.env.REACT_APP_API_BASE_URL}/artikel/all`
+  //     );
+  //     console.log(response.data.data);
+  //     setDataArtikel(response.data.data);
+  //     const newOffset = ((page - 1) * itemsPerPage) % response.data.data.length;
+  //     const endOffset = newOffset + itemsPerPage;
 
-  const fetchArtikel = async () => {
-    setOnKategori("Semua");
-    setCurrentPage(page - 1);
+  //     setCurrentItems(response.data.data.slice(newOffset, endOffset));
+  //     setPageCount(Math.ceil(response.data.data.length / itemsPerPage));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const fetchKategori = async () => {
     try {
       const response = await api.get(
-        `${process.env.REACT_APP_API_BASE_URL}/artikel/all`
+        `${process.env.REACT_APP_API_BASE_URL}/artikel/navbar`
       );
-      console.log(response.data.data);
-      setDataArtikel(response.data.data);
-      const newOffset = ((page - 1) * itemsPerPage) % response.data.data.length;
-      const endOffset = newOffset + itemsPerPage;
-
-      setCurrentItems(response.data.data.slice(newOffset, endOffset));
-      setPageCount(Math.ceil(response.data.data.length / itemsPerPage));
+      setTmpDataKategori(response.data.data);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
   };
+
   const fetchArtikelByKategori = async () => {
+    // if (kategori)
+    // else setOnKategori("Semua");
+    setOnKategori(kategori);
     try {
-      setOnKategori(kategori);
       setCurrentPage(page - 1);
       setItemOffset(0);
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/artikel/kategori`,
         {
-          kategori,
+          kategori: kategori || "SEMUA",
         }
       );
-
+      console.log(response);
       setDataArtikel(response.data.data);
       const newOffset = ((page - 1) * itemsPerPage) % response.data.data.length;
       const endOffset = newOffset + itemsPerPage;
@@ -193,8 +207,12 @@ function MainSection() {
   };
 
   useEffect(() => {
-    if (kategori && kategori.length > 0) fetchArtikelByKategori();
-    else fetchArtikel();
+    fetchKategori();
+  }, []);
+  useEffect(() => {
+    // if (kategori && kategori.length > 0) fetchArtikelByKategori();
+    // else fetchArtikel();
+    fetchArtikelByKategori();
   }, [kategori]);
 
   useEffect(() => {
@@ -203,9 +221,9 @@ function MainSection() {
 
   return (
     <div className="mt-[160px] max-w-[1080px] flex flex-col  justify-center items-center ">
-      <nav className="flex w-screen md:w-full justify-start items-center overflow-scroll md:overflow-visible px-[5px] md:px-0">
+      <nav className="flex w-screen md:w-full justify-start items-center overflow-scroll scrollbar-hide px-[5px] md:px-0">
         <ul className="flex gap-[16px]">
-          <li className="flex justify-center items-center">
+          {/* <li className="flex justify-center items-center">
             <Link
               to={`/artikel/1`}
               className={`${
@@ -216,19 +234,19 @@ function MainSection() {
             >
               <p className="text-[16px] font-medium leading-[24px]">Semua</p>
             </Link>
-          </li>
+          </li> */}
           {tmpDataKategori?.map((el, index) => (
             <li key={index} className="flex justify-center items-center">
               <Link
-                to={`/artikel/1/${el.title}`}
+                to={`/artikel/1/${el.nama_kategori}`}
                 className={`${
-                  onKategori === el.title
+                  onKategori === el.nama_kategori
                     ? "bg-black500 text-whiteSmoke500 border-black500"
                     : "bg-whiteSmoke500 text-black500 border-black100"
                 } px-[24px] xl:px-[48px] py-[8px] xl:py-[16px] rounded-[10px] border-[1px]   `}
               >
                 <p className="text-[16px] font-medium leading-[24px]">
-                  {el.title}
+                  {el.nama_kategori}
                 </p>
               </Link>
             </li>
