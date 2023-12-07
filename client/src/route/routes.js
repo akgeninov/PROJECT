@@ -3,9 +3,11 @@ import Home from "../pages/home/Home";
 import Komunitas from "../pages/komunitas/Komunitas";
 import Protection from "./Protection";
 import Artikel from "../pages/artikel/Artikel";
-import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
+// import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
+import Career from "../pages/career/Career";
+
 
 const routes = [
   <Route
@@ -53,6 +55,15 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Komunitas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="career"
+    path="/career"
+    element={
+      <Protection publicSide={true}>
+        <Career />
       </Protection>
     }
   />,

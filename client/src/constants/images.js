@@ -11,6 +11,7 @@ import rectangleJoin from "../assets/images/rectangle_join.png";
 import geometricShapeArtikelDesktop from "../assets/images/geometric_shape_article_desktop.png";
 import geometricShapeArtikelMobile from "../assets/images/geometric_shape_article_mobile.png";
 import tiktokImages from "../assets/images/tiktok_images.png";
+import career_Herosection from "../assets/images/career_Herosection.jpg";
 
 const images = {
   vector2,
@@ -26,6 +27,7 @@ const images = {
   geometricShapeArtikelDesktop,
   geometricShapeArtikelMobile,
   tiktokImages,
+  career_Herosection,
 };
 
 export default images;
