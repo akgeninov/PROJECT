@@ -12,6 +12,9 @@ import geometricShapeArtikelDesktop from "../assets/images/geometric_shape_artic
 import geometricShapeArtikelMobile from "../assets/images/geometric_shape_article_mobile.png";
 import tiktokImages from "../assets/images/tiktok_images.png";
 import career_Herosection from "../assets/images/career_Herosection.jpg";
+import career_Section_2 from "../assets/images/career_Section_2.png";
+import career_momen1 from "../assets/images/career_momen1.png";
+import career_momen2 from "../assets/images/career_momen2.jpg";
 
 const images = {
   vector2,
@@ -28,6 +31,9 @@ const images = {
   geometricShapeArtikelMobile,
   tiktokImages,
   career_Herosection,
+  career_Section_2,
+  career_momen1,
+  career_momen2,
 };
 
 export default images;
