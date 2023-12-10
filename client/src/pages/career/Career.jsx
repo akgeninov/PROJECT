@@ -3,6 +3,7 @@ import HeroSection from "../../components/career/hero-section/HeroSection";
 import Section_2 from "../../components/career/section_2/Section_2";
 import MomenSection from "../../components/career/momen-section/MomenSection";
 import KerjaSection from "../../components/career/kerja-section/KerjaSection";
+import JoinKerjaSection from "../../components/career/join-kerja-section/JoinKerjaSection";
 
 
 function Career() {
@@ -11,7 +12,8 @@ function Career() {
       <HeroSection />
       <Section_2 />
       <MomenSection />
-      <KerjaSection />
+      <KerjaSection /> 
+      <JoinKerjaSection />
     </div>
     );
 }
