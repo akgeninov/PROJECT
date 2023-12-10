@@ -19,19 +19,21 @@ function Section_2() {
 
   const contentStyle = {
     display: 'flex',
-    alignItems: 'center',  // Center vertically
+    alignItems: 'center',  
     justifyContent: 'center',
-    padding: '40px',
+    paddingLeft: '40px',
+    paddingRight: '20px',
   };
 
   const imageStyle = {
    backgroundImage: `url(${images.career_Section_2})`,
     backgroundSize: 'contain',
-    backgroundPosition: 'center', // Align to the bottom and left
+    backgroundPosition: 'center', 
     backgroundRepeat: 'no-repeat',
-    width: '200px',
-    height: '200px',
-    marginLeft: '140px',  // Adjust the margin as needed
+    width: '550px',
+    height: '550px',
+    marginLeft: '50px',
+    marginTop: '135px',
   };
 
   return (
@@ -53,7 +55,7 @@ function Section_2() {
               Semangat belajar hal <br /> 
               baru tanpa rasa takut
             </h2>
-            <p className="max-w-[564px] text-[14px] lg:text-[18px] font-light leading-[20px] lg:leading-[28px] text-whiteSmoke600" style={{ textAlign: 'justify' }}>
+            <p className="max-w-[564px] text-[12px] lg:text-[18px] font-light leading-[20px] lg:leading-[28px] text-whiteSmoke600" style={{ textAlign: 'justify' }}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. 
               Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. 
               Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. 
