@@ -17,9 +17,9 @@ function MomenSection() {
             </div>
             <div>
                 <div class="grid grid-cols-3 divide-x">
-                    <div>01</div>
-                    <div>02</div>
-                    <div>03</div>
+                    <div><img src={images.career_momen1} alt="Career Momen 1" /></div>
+                    <div><img src={images.career_momen1} alt="Career Momen 1" /></div>
+                    <div><img src={images.career_momen1} alt="Career Momen 1" /></div>
                 </div>
             </div>
         </div>

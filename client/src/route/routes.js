@@ -7,6 +7,7 @@ import Artikel from "../pages/artikel/Artikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import Career from "../pages/career/Career";
+import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 
 
 const routes = [
@@ -67,6 +68,15 @@ const routes = [
       </Protection>
     }
   />,
+  <Route
+  key="careerLowongan"
+  path="/career-lowongan" 
+  element={
+    <Protection publicSide={true}>
+      <CareerLowongan /> 
+    </Protection>
+  }
+/>,
 ];
 
 export default routes;
