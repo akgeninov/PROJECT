@@ -12,7 +12,7 @@ function JoinKerjaSection() {
           alt="ellipse"
           className="absolute w-fit left-0 "
         />
-        <div className="relative bg-gradient-radial  w-full 2xl:max-w-[1280px] h-[484px]  pt-[80px]">
+        <div className="relative bg-gradient-radial w-full 2xl:max-w-[1280px] h-[484px]  pt-[80px]" style={{ background: "radial-gradient(circle at left, rgba(63, 64, 65, 0.35) 29%, #3f4041 30.5%)"}}>
           <div className="pr-[100px] flex flex-col  items-end ">
             <div className="space-y-[52px]">
               <div className="flex flex-col items-start gap-[16px]">
