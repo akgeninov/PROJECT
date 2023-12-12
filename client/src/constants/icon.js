@@ -14,7 +14,14 @@ import handshake from "../assets/icon/handshake.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
-
+import searchIcon from "../assets/icon/search_icon.png";
+import bookOpenSold from "../assets/icon/book_open_solid.png";
+import signal from "../assets/icon/signal.png";
+import userCircle from "../assets/icon/user_circle.png";
+import timer from "../assets/icon/timer.png";
+import AWARD from "../assets/icon/iaward.png";
+import BOOK from "../assets/icon/book.png";
+import CHAT from "../assets/icon/chat.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -32,7 +39,15 @@ const icon = {
   handshake,
   insight,
   koneksi,
-  megaphone
+  megaphone,
+  searchIcon,
+  bookOpenSold,
+  signal,
+  userCircle,
+  timer,
+  AWARD,
+  BOOK,
+  CHAT,
 };
 
 export default icon;

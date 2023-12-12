@@ -7,6 +7,8 @@ import profil1 from "../assets/review-pic/profil1.jpg";
 import profil2 from "../assets/review-pic/profil2.jpg";
 import profil3 from "../assets/review-pic/profil3.jpg";
 import profil4 from "../assets/review-pic/profil4.png";
+import review1 from "../assets/review-pic/review_1.png";
+import review2 from "../assets/review-pic/review_2.png";
 
 const reviewPic = {
   rectangle44,
@@ -18,6 +20,8 @@ const reviewPic = {
   profil2,
   profil3,
   profil4,
+  review1,
+  review2,
 };
 
 export default reviewPic;

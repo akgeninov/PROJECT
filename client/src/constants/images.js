@@ -11,6 +11,8 @@ import rectangleJoin from "../assets/images/rectangle_join.png";
 import geometricShapeArtikelDesktop from "../assets/images/geometric_shape_article_desktop.png";
 import geometricShapeArtikelMobile from "../assets/images/geometric_shape_article_mobile.png";
 import tiktokImages from "../assets/images/tiktok_images.png";
+import bisnisHeroMobile1 from "../assets/images/bisnis_hero_mobile_1.png";
+import bisnisHeroMobile2 from "../assets/images/bisnis_hero_mobile_2.png";
 
 const images = {
   vector2,
@@ -26,6 +28,8 @@ const images = {
   geometricShapeArtikelDesktop,
   geometricShapeArtikelMobile,
   tiktokImages,
+  bisnisHeroMobile1,
+  bisnisHeroMobile2,
 };
 
 export default images;

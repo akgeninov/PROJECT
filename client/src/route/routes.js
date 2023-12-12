@@ -6,6 +6,8 @@ import Artikel from "../pages/artikel/Artikel";
 import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
+import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
+import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
 
 const routes = [
   <Route
@@ -53,6 +55,24 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Komunitas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="kelas-bisnis"
+    path="/layanan/kelas-bisnis"
+    element={
+      <Protection publicSide={true}>
+        <KelasBisnis />
+      </Protection>
+    }
+  />,
+  <Route
+    key="kelas-bisnis"
+    path="/layanan/kelas-bisnis/:title"
+    element={
+      <Protection publicSide={true}>
+        <DetailKelasBisnis />
       </Protection>
     }
   />,

@@ -7,6 +7,8 @@ import reviewPic from "./reviewPic";
 import newsPic from "./newsPic";
 import komunitasPic from "./komunitasPic";
 import partnerLogo from "./partnerLogo";
+import kelasBisnisPic from "./kelasBisnis";
+import pengajarPic from "./profilePengajar";
 
 export {
   logo,
@@ -18,4 +20,6 @@ export {
   newsPic,
   komunitasPic,
   partnerLogo,
+  kelasBisnisPic,
+  pengajarPic,
 };
