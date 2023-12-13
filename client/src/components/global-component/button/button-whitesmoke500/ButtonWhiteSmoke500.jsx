@@ -1,6 +1,6 @@
 import React from "react";
 
-function ButtonWhiteSmoke500({ TEXT_BUTTON, WIDTH }) {
+function ButtonWhiteSmoke500({ TEXT_BUTTON, WIDTH}) {
   return (
     <>
       <button

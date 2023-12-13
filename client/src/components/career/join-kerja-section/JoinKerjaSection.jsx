@@ -6,7 +6,7 @@ import ButtonBorderWhitesmoke500 from "../../global-component/button/button-bord
 function JoinKerjaSection() {
   return (
     <>
-      <div className=" relative hidden md:flex justify-end items-center  w-full 2xl:max-w-[1280px] h-[484px] ">
+      <div className=" relative hidden md:flex justify-end items-center  w-full 2xl:max-w-[1280px] h-[484px]">
         <img
           src={images.ellipse9}
           alt="ellipse"
@@ -39,7 +39,7 @@ function JoinKerjaSection() {
           </div>
         </div>
       </div>
-      <div className=" relative flex flex-col md:hidden justify-center items-center mt-[160px] w-full 2xl:max-w-[1280px] min-h-[484px] ">
+      <div className=" relative flex flex-col md:hidden justify-center items-center w-full 2xl:max-w-[1280px] min-h-[484px] ">
         <img
           src={images.rectangleJoin}
           alt="ellipse"
