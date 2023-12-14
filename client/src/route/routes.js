@@ -8,7 +8,7 @@ import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
-
+import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 
 const routes = [
   <Route
@@ -69,14 +69,23 @@ const routes = [
     }
   />,
   <Route
-  key="careerLowongan"
-  path="/career-lowongan" 
-  element={
-    <Protection publicSide={true}>
-      <CareerLowongan /> 
-    </Protection>
-  }
-/>,
+    key="careerLowongan"
+    path="/career-lowongan"
+    element={
+      <Protection publicSide={true}>
+        <CareerLowongan />
+      </Protection>
+    }
+  />,
+  <Route
+    key="careerLowongan"
+    path="/career-lowongan/:id_lowongan"
+    element={
+      <Protection publicSide={true}>
+        <OneCareerLowongan />
+      </Protection>
+    }
+  />,
 ];
 
 export default routes;
