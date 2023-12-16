@@ -9,6 +9,7 @@ import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
+import Profile from "../pages/profile/Profile";
 
 const routes = [
   <Route
@@ -83,6 +84,15 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <OneCareerLowongan />
+      </Protection>
+    }
+  />,
+  <Route
+    key="profile"
+    path="/profile"
+    element={
+      <Protection publicSide={true}>
+        <Profile />
       </Protection>
     }
   />,
