@@ -20,7 +20,7 @@
             <div class="navigation">
                 <ul>
                     <li>
-                        <a href="home.php">
+                        <a href="../home.php">
                             <span class="icon">
                                 <i class="fa fa-house"></i>
                             </span>
@@ -36,17 +36,17 @@
                     </a>
                     <div class="list">
                         <ul>
-                            <li><a href="tampilAdmin.php">Data Admin</a></li>
-                            <li><a href="tampilPelanggan.php">Data Pelanggan</a></li>
-                            <li><a href="tampilPegawai.php">Data Pegawai</a></li>
-                            <li><a href="tampilKantor.php">Data Kantor</a></li>
-                            <li><a href="TampilOrder.php">Data Pesanan</a></li>
-                            <li><a href="TampilProduk.php">Data Produk</a></li>
+                            <li><a href="../view/tampilAdmin.php">Data Admin</a></li>
+                            <li><a href="../view/tampilPelanggan.php">Data Pelanggan</a></li>
+                            <li><a href="../view/tampilPegawai.php">Data Pegawai</a></li>
+                            <li><a href="../view/tampilKantor.php">Data Kantor</a></li>
+                            <li><a href="../view/tampilOrder.php">Data Pesanan</a></li>
+                            <li><a href="../view/tampilProduk.php">Data Produk</a></li>
                         </ul>
                     </div>
                 </li>
                 <li>
-                    <a href="logout.php">
+                    <a href="../logout.php">
                         <div class="keluar">
                         <span class="icon">
                         <i class="fa-solid fa-right-from-bracket"></i>
