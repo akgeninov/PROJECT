@@ -30,15 +30,25 @@ function FilterDataKelas({
   // checkFilter({ kategor: 2 });
 
   const handleChangeKategori = (id) => {
-    const newKategori = kategori.map((el) => {
-      if (el.id === id) {
-        return { ...el, bool: !el.bool };
-      }
-      return el;
-    });
+    let newKategori;
+    const kategoriId = kategori
+      .filter((el) => el.bool === true)
+      .map((el) => el.id);
+    console.log(kategoriId);
+    if (kategoriId[0] === id) {
+      newKategori = kategori.map((el) => {
+        return { ...el, bool: false };
+      });
+    } else {
+      newKategori = kategori.map((el) => {
+        return { ...el, bool: el.id === id };
+      });
+    }
+
+    console.log(newKategori);
     const forUrl = newKategori
       .filter((el) => el.bool === true)
-      .map((el) => el.kategori);
+      .map((el) => el.nama);
     console.log(forUrl);
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
@@ -63,15 +73,24 @@ function FilterDataKelas({
   };
 
   const handleChangeLevel = (id) => {
-    const newLevel = level.map((el) => {
-      if (el.id === id) {
-        return { ...el, bool: !el.bool };
-      }
-      return el;
-    });
+    let newLevel;
+    const levelId = level.filter((el) => el.bool === true).map((el) => el.id);
+    console.log(levelId);
+    if (levelId[0] === id) {
+      newLevel = level.map((el) => {
+        return { ...el, bool: false };
+      });
+    } else {
+      newLevel = level.map((el) => {
+        return { ...el, bool: el.id === id };
+      });
+    }
+    // const newLevel = level.map((el) => {
+    //   return { ...el, bool: el.id === id };
+    // });
     const forUrl = newLevel
       .filter((el) => el.bool === true)
-      .map((el) => el.level);
+      .map((el) => el.nama);
     console.log(forUrl);
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
@@ -94,12 +113,22 @@ function FilterDataKelas({
   };
 
   const handleChangeHarga = (id) => {
-    const newHarga = harga.map((el) => {
-      if (el.id === id) {
-        return { ...el, bool: !el.bool };
-      }
-      return el;
-    });
+    let newHarga;
+    const hargaId = harga.filter((el) => el.bool === true).map((el) => el.id);
+    console.log(hargaId);
+    if (hargaId[0] === id) {
+      newHarga = harga.map((el) => {
+        return { ...el, bool: false };
+      });
+    } else {
+      newHarga = harga.map((el) => {
+        return { ...el, bool: el.id === id };
+      });
+    }
+
+    // const newHarga = harga.map((el) => {
+    //   return { ...el, bool: el.id === id };
+    // });
     const forUrl = newHarga
       .filter((el) => el.bool === true)
       .map((el) => el.hargaMax);
@@ -152,16 +181,16 @@ function FilterDataKelas({
                         className="gap-[12px] flex justify-start items-center"
                       >
                         <input
-                          id={el.kategori}
+                          id={el.nama}
                           type="checkbox"
                           checked={!!el.bool}
                           onChange={() => handleChangeKategori(el.id)}
                         />
                         <label
-                          htmlFor={el.kategori}
+                          htmlFor={el.nama}
                           className="text-[16px] font-light leading-[24px]"
                         >
-                          {el.kategori}
+                          {el.nama}
                         </label>
                       </li>
                     ))}
@@ -194,16 +223,16 @@ function FilterDataKelas({
                         className="gap-[12px] flex justify-start items-center"
                       >
                         <input
-                          id={el.level}
+                          id={el.nama}
                           type="checkbox"
                           checked={!!el.bool}
                           onChange={() => handleChangeLevel(el.id)}
                         />
                         <label
-                          htmlFor={el.level}
+                          htmlFor={el.nama}
                           className="text-[16px] font-light leading-[24px]"
                         >
-                          {el.level}
+                          {el.nama}
                         </label>
                       </li>
                     ))}
@@ -223,7 +252,7 @@ function FilterDataKelas({
                       textAlign="left"
                       className="text-[22px] font-medium leading-[32px]"
                     >
-                      Level
+                      Harga
                     </Box>
                     <AccordionIcon />
                   </AccordionButton>
