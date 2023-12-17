@@ -34,11 +34,12 @@ function ListMateriKelasBisnis() {
               <iframe
                 width="560"
                 height="315"
-                src="https://www.youtube.com/embed/DHvZLI7Db8E?si=6Ti16jZIXtrXdLBu"
+                src="https://www.youtube-nocookie.com/embed/DHvZLI7Db8E?si=6Ti16jZIXtrXdLBu"
                 title="YouTube video player"
-                frameborder="0"
+                // frameBorder="0"
+
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                allowfullscreen
+                allowFullScreen
                 className="hidden md:flex w-[529px] h-[356px] rounded-[10px] "
               ></iframe>
               <p className="p-[24px] text-[14px] lg:text-[16px] font-light leading-[24px] text-black400">

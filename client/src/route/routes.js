@@ -8,6 +8,7 @@ import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
 import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
+import Login from "../pages/login/Login";
 
 const routes = [
   <Route
@@ -60,7 +61,7 @@ const routes = [
   />,
   <Route
     key="kelas-bisnis"
-    path="/layanan/kelas-bisnis"
+    path="/kelas-bisnis"
     element={
       <Protection publicSide={true}>
         <KelasBisnis />
@@ -69,10 +70,19 @@ const routes = [
   />,
   <Route
     key="kelas-bisnis"
-    path="/layanan/kelas-bisnis/:title"
+    path="/kelas-bisnis/:title"
     element={
       <Protection publicSide={true}>
         <DetailKelasBisnis />
+      </Protection>
+    }
+  />,
+  <Route
+    key="login"
+    path="/login"
+    element={
+      <Protection publicSide={true}>
+        <Login />
       </Protection>
     }
   />,

@@ -80,12 +80,12 @@ function ComunitySection() {
                   : scrolled
                   ? "translate-y-0 scale-95 opacity-50 "
                   : "translate-y-0 scale-100 opacity-100 "
-              } flex flex-col duration-500 items-center  xl:w-[558px] rounded-[10px] min-h-[488px] xl:xl:min-h-[672px] overflow-hidden`}
+              } flex flex-col duration-500 items-center  xl:w-[558px] rounded-[10px] min-h-[488px] xl:min-h-[672px] overflow-hidden`}
             >
               <img
                 src={el.pic}
                 alt="komunitas"
-                className={`gap-[52px] flex flex-col  w-auto min-h-[488px]  min-w-max  xl:min-h-[672px] rounded-[10px]`}
+                className={`object-cover gap-[52px] flex flex-col  w-full h-full rounded-[10px]`}
               />
             </div>
           ))}

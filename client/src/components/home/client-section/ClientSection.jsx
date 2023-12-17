@@ -19,7 +19,7 @@ function ClientSection() {
         <span className="font-bold text-indigoDye500"> 400+</span> UMKM dalam
         mencapai kesuksan mereka
       </h1>
-      <div className=" max-w-full 2xl:max-w-[1080px] overflow-hidden">
+      <div className=" max-w-full 2xl:max-w-[1080px] overflow-hidden   ">
         <ClientCarousel />
       </div>
     </div>

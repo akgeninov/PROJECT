@@ -39,7 +39,7 @@ function HeroSection() {
           </div>
           <div className="hidden md:flex bg-white w-full lg:w-[556px] px-[24px] py-[16px] rounded-[10px]  justify-start items-center gap-[8px]">
             <img src={icon.searchIcon} alt="search" />
-            <input type="text" className="w-full" />
+            <input type="text" className="w-full focus:outline-none" />
           </div>
         </div>
       </div>

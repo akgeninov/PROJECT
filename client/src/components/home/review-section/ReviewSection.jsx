@@ -33,7 +33,7 @@ function ReviewSection() {
       perushaaan: "amet consectetur adipisicing elit",
       deskripsi:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Totam aliquam, excepturi doloremque corporis dolore sed nesciunt, illo esse sequi, libero labore fugiat optio blanditiis delectus! Voluptates, nihil? Illum, enim delectus?",
-      bigPic: reviewPic.profil4,
+      bigPic: reviewPic.rectangle44,
       smallPic: reviewPic.profil4,
     },
   ]);
@@ -69,11 +69,13 @@ function ReviewSection() {
       </h1>
       <div className="w-full gap-[24px] flex flex-col lg:flex-row justify-center ">
         <div className="w-full gap-[24px] p-[24px] flex flex-col lg:flex-row items-center shadow-customSm rounded-[10px]">
-          <img
-            src={dataMessenger[currentIndex].bigPic}
-            alt="mesengger"
-            className=" w-[326px] h-[260px] lg:w-[384px] lg:h-[288px] rounded-[10px] "
-          />
+          <div className="w-[326px] h-[260px] lg:min-w-[384px] lg:min-h-[288px] rounded-[10px] overflow-hidden bg-red-300 ">
+            <img
+              src={dataMessenger[currentIndex].bigPic}
+              alt="mesengger"
+              className="object-cover w-full h-full"
+            />
+          </div>
 
           <div className="w-full ">
             <div className="gap-[8px]">
@@ -112,7 +114,7 @@ function ReviewSection() {
                 <img
                   src={data.smallPic}
                   alt="small-messenger"
-                  className="w-[34px] h-[34px] lg:w-[44px] lg:h-[44px] rounded-[4px]"
+                  className="object-cover  w-[34px] h-[34px] lg:w-[44px] lg:h-[44px] rounded-[4px]"
                 />
               </div>
             </div>

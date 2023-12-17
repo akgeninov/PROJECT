@@ -8,7 +8,7 @@ import ReviewPeserta from "./review-peserta/ReviewPeserta";
 
 function MainSection() {
   return (
-    <div className="mt-[160px] mb-[60px] md:mb-[160px] w-full px-[5px] md:px-[100px] 2xl:px-0   2xl:max-w-[1080px] h-full  flex justify-center items-start  ">
+    <div className="mt-[160px] mb-[60px] md:mb-[160px] w-full px-[5px] md:px-[100px] 2xl:px-0 gap-[52px]  2xl:max-w-[1080px] h-full  flex justify-between items-start  ">
       <div className="flex flex-col items-center  md:items-start gap-[48px] md:gap-[80px] ">
         <DescriptionKelasBisnis />
         <BenefitKelasBisnis />
@@ -16,7 +16,7 @@ function MainSection() {
         <ListMateriKelasBisnis />
         <ReviewPeserta />
       </div>
-      <div className="hidden xl:flex w-full ">
+      <div className="hidden xl:flex sticky top-[20px] w-fit">
         <CheckoutKelasBisnis />
       </div>
     </div>

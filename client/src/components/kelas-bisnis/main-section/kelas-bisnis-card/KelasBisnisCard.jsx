@@ -3,10 +3,11 @@ import { icon, kelasBisnisPic } from "../../../../constants";
 import { Link } from "react-router-dom";
 
 function KelasBisnisCard({ el, index }) {
+  console.log({ el });
   return (
     <>
       <Link
-        to={`/layanan/kelas-bisnis/${el.title}`}
+        to={`/kelas-bisnis/${el.title}`}
         key={index}
         className="w-[358px] md:w-[232px] h-[436px] flex flex-col items-center justify-start overflow-hidden rounded-[10px] bg-whiteSmoke500 shadow-customSm"
       >
@@ -14,13 +15,13 @@ function KelasBisnisCard({ el, index }) {
           <img
             src={kelasBisnisPic.pic1}
             alt="main"
-            className="hidden md:flex"
+            className=" object-cover w-full h-full md:flex"
           />
-          <img
+          {/* <img
             src={kelasBisnisPic.heroKelasBisnis1}
             alt="main"
             className="flex md:hidden "
-          />
+          /> */}
         </div>
         <div className="w-[326px] md:w-[200px] flex flex-col items-center gap-[16px]">
           <h1 className=" line-clamp-2 text-[18px] font-bold leading-[28px] mt-[16px]">
@@ -32,7 +33,7 @@ function KelasBisnisCard({ el, index }) {
                 <img
                   src={icon.bookOpenSold}
                   alt="bok"
-                  className="w-[16px] h-[16px]"
+                  className=" w-[16px] h-[16px]"
                 />
                 <p className="text-[14px] font-light leading-[20px] shrink-0">
                   {el.tipe}
@@ -61,21 +62,81 @@ function KelasBisnisCard({ el, index }) {
             </div>
           </div>
           <div className="w-full flex justify-start items-center  gap-[8px]">
-            <div className="rating rating-md md:rating-sm gap-[4px] ">
+            {/* <div className="rating rating-md md:rating-sm gap-[4px] ">
               {[...Array(5)].map((_, index) => (
                 <input
                   key={index}
                   type="radio"
                   name={`rating-${index + 1}`}
                   className="mask mask-star-2 bg-yellow-400"
-                  checked={index + 1 === el.star}
+                  defaultChecked={index + 1 === el.star}
                 />
               ))}
+            </div> */}
+            <div className="rating rating-sm rating-half gap-0">
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={el.star * 2 === 1}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={el.star * 2 === 2}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={el.star * 2 === 3}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={el.star * 2 === 4}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={el.star * 2 === 5}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={el.star * 2 === 6}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={el.star * 2 === 7}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={el.star * 2 === 8}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={!!(el.star * 2 === 9)}
+              />
+              <input
+                type="radio"
+                name={`rating-${index + 1}`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={el.star * 2 === 10}
+              />
             </div>
             <div className="flex items-center justify-center mt-1">
-              <p className="text-[14px] font-light leading-[20px]">
-                {el.star}.0
-              </p>
+              <p className="text-[14px] font-light leading-[20px]">{el.star}</p>
             </div>
           </div>
 

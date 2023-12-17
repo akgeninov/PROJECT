@@ -65,7 +65,7 @@ function HeroSection() {
                   type="radio"
                   name={`rating-${index + 1}`}
                   className="mask mask-star-2 bg-orange-400"
-                  checked={index + 1 === 5}
+                  defaultChecked={index + 1 === 5}
                 />
               ))}
             </div>

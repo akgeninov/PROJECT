@@ -1,7 +1,7 @@
 const kelasBisnis = [
   {
     title: "Langkah Sukses Jadi Youngtrepreneur",
-    star: 4,
+    star: 4.5,
     pendaftar: 2124,
     tipe: "Materi Eksklusif",
     level: "Pemula",

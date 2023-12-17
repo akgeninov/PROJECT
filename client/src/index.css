@@ -35,3 +35,34 @@ code {
   -ms-overflow-style: none;
   scrollbar-width: none;
 }
+
+.hero-image {
+  mask-image: url("./assets/images/vector2.svg");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+}
+
+/* @media (max-width: 1280px) {
+  .hero-image {
+    -webkit-mask-size: 360px 504px;
+  }
+} */
+
+/* @media (max-width: 1130px) {
+  .hero-image {
+    -webkit-mask-size: 330px 504px;
+  }
+} */
+
+/* @media (max-width: 1024px) {
+  .hero-image {
+    -webkit-mask-size: 400px 504px;
+  }
+}  */
+
+/* Responsif pada layar dengan lebar lebih dari 768px (laptop dan layar lebih besar) */
+/* @media (min-width: 1025px) {
+  .hero-image {
+    -webkit-mask-size: 400px 504px; 
+  }
+} */
