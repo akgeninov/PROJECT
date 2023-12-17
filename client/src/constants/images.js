@@ -20,7 +20,9 @@ import career_momen4 from "../assets/images/career_momen4.png";
 import career_momen5 from "../assets/images/career_momen5.png";
 import video_1 from "../assets/images/video_1.png";
 import video_2 from "../assets/images/video_2.png";
-import shapes from "../assets/images/Shapes3.png"
+import shapes from "../assets/images/Shapes3.png";
+import kelasFoto from "../assets/images/kelas-foto.png";
+import materi from "../assets/images/Component-1.png"
 
 const images = {
   vector2,
@@ -46,6 +48,9 @@ const images = {
   video_1,
   video_2,
   shapes,
+  kelasFoto,
+  materi
+
 };
 
 export default images;
