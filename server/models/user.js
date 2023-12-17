@@ -8,11 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.belongsTo(models.Role, {
-        foreignKey: {
-          name: "role_id",
-        },
-      });
+      User.belongsTo(models.Role, {foreignKey: {name: "role_id"}})
+      User.hasOne(models.kelas_rating, {foreignKey:"id_user"})
     }
   }
   User.init(
@@ -25,6 +22,14 @@ module.exports = (sequelize, DataTypes) => {
       tgl_berdiri: DataTypes.DATE,
       kota: DataTypes.STRING,
       profile_picture: DataTypes.STRING,
+      picture_link: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          return `${process.env.BASE_URL}/images/user/${this.getDataValue(
+            "profile_picture"
+          )}`;
+        },
+      }
     },
     {
       sequelize,
