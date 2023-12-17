@@ -259,4 +259,62 @@ module.exports = {
       });
     }
   },
+
+  getKelasBisnisBackup: async (req, res) => {
+    try {
+      const { kategori, level, harga1, harga2 } = req.body;
+
+      const result = await kelas_bisnis.findAll({
+        attributes: [
+          "id",
+          "nama",
+          "image",
+          "images_link",
+          "harga",
+          [
+            sequelize.literal(
+              "ROUND(COALESCE(SUM(kelas_ratings.nilai), 0) / COUNT(DISTINCT kelas_ratings.id_user),1)"
+            ),
+            "rata_nilai",
+          ],
+          [
+            sequelize.fn(
+              "COUNT",
+              sequelize.fn("DISTINCT", sequelize.col("kelas_ratings.id_user"))
+            ),
+            "jumlah_penilai",
+          ],
+          [
+            sequelize.literal(
+              "(SELECT COUNT(*) FROM kelas_regist WHERE kelas_regist.id_kelas_bisnis = kelas_bisnis.id)"
+            ),
+            "jumlah_pendaftar",
+          ],
+        ],
+        include: [
+          { model: kelas_kategori, attributes: ["nama"] },
+          { model: kelas_level, attributes: ["nama"] },
+          { model: kelas_rating, attributes: [] },
+          {
+            model: kelas_diskon,
+            attributes: ["nama", "jumlah_persen"],
+            through: { attributes: [] },
+          },
+        ],
+        where: {
+          ...(kategori ? { "$kelas_kategori.id$": kategori } : {}),
+          ...(level ? { "$kelas_level.id$": level } : {}),
+          ...(harga1 && harga2
+            ? { harga: { [Op.between]: [harga1, harga2] } }
+            : {}),
+        },
+        group: ["kelas_bisnis.id"],
+      });
+
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
 };
