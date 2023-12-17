@@ -4,7 +4,7 @@ import MainSection from "../../components/detail-kelas-bisnis/main-section/MainS
 
 function DetailKelasBisnis() {
   return (
-    <div className="flex flex-col justify-center items-center shrink-0">
+    <div className="flex flex-col justify-center items-center shrink-0 ">
       <HeroSection />
       <MainSection />
     </div>

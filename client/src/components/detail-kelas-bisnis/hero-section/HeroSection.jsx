@@ -1,11 +1,28 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { icon, kelasBisnisPic } from "../../../constants";
 import NavigationDetailKelasBisnis from "./navigation-detail-kelas-bisnis/NavigationDetailKelasBisnis";
 import { useParams } from "react-router-dom";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
+import { api } from "../../../api/api";
 
 function HeroSection() {
+  const { id } = useParams();
+  const fetchDetailKelas = useMemo(async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/detail`,
+        {
+          id: Number(id),
+        }
+      );
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+    console.log({ id });
+  }, []);
+
   const { title } = useParams();
   return (
     <div className="relative  w-full   2xl:max-w-[1280px] h-full  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">

@@ -7,6 +7,8 @@ import KelasBisnisCard from "./kelas-bisnis-card/KelasBisnisCard";
 import { api } from "../../../api/api";
 
 import FilterDataKelas from "./filter-data-kelas/FilterDataKelas";
+import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
+import { HiFilter } from "react-icons/hi";
 
 function MainSection() {
   const kategori = [
@@ -42,7 +44,7 @@ function MainSection() {
     {
       id: 2,
       hargaMax: 100000,
-      hargaMin: 5000,
+      hargaMin: 50000,
     },
     {
       id: 3,
@@ -81,7 +83,7 @@ function MainSection() {
   //     leve: el.level,
   //   }))
   // );
-
+  const [toggleFilter, setToggleFilter] = useState(false);
   const [pageCount, setPageCount] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
   const [page, setPage] = useState(0);
@@ -510,6 +512,8 @@ function MainSection() {
   return (
     <div className="w-full px-[5px] md:px-[100px] 2xl:p-0 2xl:max-w-[1080px] flex  justify-center items-start gap-[52px] mt-[160px]">
       <FilterDataKelas
+        setToggleFilter={setToggleFilter}
+        toggleFilter={toggleFilter}
         kategori={kategoriFilter}
         setKategori={setKategoriFilter}
         setLevel={setLevelFilter}
@@ -524,8 +528,15 @@ function MainSection() {
 
       <div className="w-full flex flex-col items-center gap-[52px] ">
         <div className="w-full flex flex-col items-center gap-[32px] h-[4200px] lg:h-[2372px]  xl:h-[1472px]">
-          <div className="w-full   flex justify-end">
-            <p>({kelasBisnis.length}) Kelas Ditemukan</p>
+          <div className="w-full   flex justify-between items-center lg:justify-end">
+            <button
+              onClick={() => setToggleFilter((prev) => !prev)}
+              className="flex md:hidden px-[36px] py-[12px]  justify-center items-center text-whiteSmoke500 bg-black500 rounded-[10px]"
+            >
+              <HiFilter />
+              <p className="text-[16px] leading-[24px] font-medium">Filter</p>
+            </button>
+            <p>({dataClass.length}) Kelas Ditemukan</p>
           </div>
           <div className="grid grid-cols-1  lg:grid-cols-2  xl:grid-cols-3  gap-[24px] ">
             {currentItems?.map((el, index) => {

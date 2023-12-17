@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 
 function KelasBisnisCard({ el, index, star }) {
   console.log({ el, star: Number(star) });
+
   return (
     <>
       <Link
-        to={`/kelas-bisnis/${el.title}`}
+        to={`/kelas-bisnis/${el.id}`}
         key={index}
         className="w-[358px] md:w-[232px] h-[436px] flex flex-col items-center justify-start overflow-hidden rounded-[10px] bg-whiteSmoke500 shadow-customSm"
       >
@@ -81,12 +82,12 @@ function KelasBisnisCard({ el, index, star }) {
                     type="radio"
                     name={index + 1}
                     className="rating-hidden"
+                    defaultChecked
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
                     className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked
                   />
                   <input
                     type="radio"

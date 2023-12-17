@@ -8,6 +8,7 @@ import {
   Box,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { HiX } from "react-icons/hi";
 
 function FilterDataKelas({
   kategori,
@@ -19,6 +20,8 @@ function FilterDataKelas({
   setHarga,
   // handleLevel,
   harga,
+  toggleFilter,
+  setToggleFilter,
 }) {
   const navigate = useNavigate();
 
@@ -126,10 +129,20 @@ function FilterDataKelas({
 
   return (
     <>
-      <div className="hidden md:flex flex-col gap-[32px]  h-full ">
-        <h1 className="text-[22px] font-medium leading-[32px]">Filter</h1>
-        <div className="flex flex-col rounded-[10px] shadow-customSm">
-          <div className="p-[24px] w-[280px] ">
+      <div
+        className={` ${
+          toggleFilter ? "flex" : "hidden md:flex"
+        } fixed z-50 bg-whiteSmoke500 left-0 top-0 md:left-auto md:top-auto h-screen w-screen md:w-auto md:h-full md:static   flex-col gap-[32px]`}
+      >
+        <div className="px-[16px] py-[20px] md:px-0 md:py-0 flex justify-between items-center">
+          <h1 className="text-[22px] font-medium leading-[32px]">Filter</h1>
+          <HiX
+            onClick={() => setToggleFilter((prev) => !prev)}
+            className="block md:hidden w-[24px] h-[24px]"
+          />
+        </div>
+        <div className="flex flex-col rounded-[10px] h-screen md:h-auto overflow-scroll md:overflow-visible md:shadow-customSm ">
+          <div className="p-[24px] w-full md:w-[280px] ">
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
                 <h2>
@@ -138,7 +151,7 @@ function FilterDataKelas({
                       as="span"
                       flex="1"
                       textAlign="left"
-                      className="text-[22px] font-medium leading-[32px]"
+                      className="text-[18px] md:text-[22px] font-medium leading-[28px] md:leading-[32px]"
                     >
                       Kategori
                     </Box>
@@ -171,7 +184,7 @@ function FilterDataKelas({
               </AccordionItem>
             </Accordion>
           </div>
-          <div className="p-[24px] w-[280px] ">
+          <div className="p-[24px] w-full md:w-[280px] ">
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
                 <h2>
@@ -180,7 +193,7 @@ function FilterDataKelas({
                       as="span"
                       flex="1"
                       textAlign="left"
-                      className="text-[22px] font-medium leading-[32px]"
+                      className="text-[18px] md:text-[22px] font-medium leading-[28px] md:leading-[32px]"
                     >
                       Level
                     </Box>
@@ -213,7 +226,7 @@ function FilterDataKelas({
               </AccordionItem>
             </Accordion>
           </div>
-          <div className="p-[24px] w-[280px] ">
+          <div className="p-[24px] w-full md:w-[280px] ">
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
                 <h2>
@@ -222,7 +235,7 @@ function FilterDataKelas({
                       as="span"
                       flex="1"
                       textAlign="left"
-                      className="text-[22px] font-medium leading-[32px]"
+                      className="text-[18px] md:text-[22px] font-medium leading-[28px] md:leading-[32px]"
                     >
                       Harga
                     </Box>

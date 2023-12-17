@@ -70,7 +70,7 @@ const routes = [
   />,
   <Route
     key="kelas-bisnis"
-    path="/kelas-bisnis/:title"
+    path="/kelas-bisnis/:id"
     element={
       <Protection publicSide={true}>
         <DetailKelasBisnis />
