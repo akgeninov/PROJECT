@@ -72,6 +72,7 @@ function MainSection() {
   const [kategoriFilter, setKategoriFilter] = useState([]);
   const [levelFilter, setLevelFilter] = useState([]);
   const [hargaFilter, setHargaFilter] = useState([]);
+  const [dataClass, setDataClass] = useState([]);
 
   // const [levelFilter, setLevelFilter] = useState(
   //   level.map((el, index) => ({
@@ -84,7 +85,6 @@ function MainSection() {
   const [pageCount, setPageCount] = useState(10);
   const [currentPage, setCurrentPage] = useState(0);
   const [page, setPage] = useState(0);
-  const [dataClass, setDataClass] = useState([]);
   const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 9;
 
@@ -152,21 +152,22 @@ function MainSection() {
       const hargaData = harga.filter((el) => el.id === hargaId[0]);
       console.log({ kategoriFilter, levelFilter, hargaFilter });
       console.log({
-        kategori: kategoriId[0],
-        level: levelId[0],
-        harga1: hargaData[0]?.hargaMin,
-        harga2: hargaData[0]?.hargaMax,
+        kategori: kategoriId,
+        level: levelId,
+        harga1: hargaData?.hargaMin,
+        harga2: hargaData?.hargaMax,
       });
 
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/data`,
         {
-          kategori: kategoriId[0],
-          level: levelId[0],
-          harga1: hargaData[0]?.hargaMin,
-          harga2: hargaData[0]?.hargaMax,
+          kategori: kategoriId,
+          level: levelId,
+          harga1: hargaData?.hargaMin,
+          harga2: hargaData?.hargaMax,
         }
       );
+      setDataClass(response.data.dataKelas);
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -314,17 +315,20 @@ function MainSection() {
     const searchParams = new URLSearchParams(url.search);
     let pageValue = searchParams.get("page");
     console.log({ pageValue });
-    const getPage = 1;
+    const getPage = 0;
     setCurrentPage(getPage);
-    const newOffset = (getPage * itemsPerPage) % kelasBisnis.length;
+
+    const newOffset = (getPage * itemsPerPage) % dataClass.length;
+    console.log({ dataClass: dataClass.length, getPage });
     const endOffset = newOffset + itemsPerPage;
-    setDataClass(kelasBisnis);
-    // console.log({ kelasBisnis });
-    setCurrentItems(kelasBisnis.slice(newOffset, endOffset));
-    setPageCount(Math.ceil(kelasBisnis.length / itemsPerPage));
+    // setDataClass(dataClass);
+    console.log({ dataClass });
+    console.log({ dataClass: dataClass.slice(newOffset, endOffset) });
+    setCurrentItems(dataClass.slice(newOffset, endOffset));
+    setPageCount(Math.ceil(dataClass.length / itemsPerPage));
 
     if (pageValue) return setPage(Number(pageValue) - 1);
-  }, []);
+  }, [dataClass]);
 
   // const handleLevel = (ind) => {
   //   console.log(ind);
@@ -460,12 +464,13 @@ function MainSection() {
       // console.log({ kategoriValue, levelValue, hargaValue });
       const getPage = Number(page);
       setCurrentPage(getPage);
-      const newOffset = (getPage * itemsPerPage) % kelasBisnis.length;
+      const newOffset = (getPage * itemsPerPage) % dataClass.length;
       const endOffset = newOffset + itemsPerPage;
-      setDataClass(kelasBisnis);
-      // console.log({ kelasBisnis });
-      setCurrentItems(kelasBisnis.slice(newOffset, endOffset));
-      setPageCount(Math.ceil(kelasBisnis.length / itemsPerPage));
+      // setDataClass(dataClass);
+      // console.log({ dataClass });
+      console.log({ current: dataClass.slice(newOffset, endOffset) });
+      setCurrentItems(dataClass.slice(newOffset, endOffset));
+      setPageCount(Math.ceil(dataClass.length / itemsPerPage));
 
       // navigate(
       //   `?${new URLSearchParams({
@@ -523,9 +528,24 @@ function MainSection() {
             <p>({kelasBisnis.length}) Kelas Ditemukan</p>
           </div>
           <div className="grid grid-cols-1  lg:grid-cols-2  xl:grid-cols-3  gap-[24px] ">
-            {currentItems?.map((el, index) => (
-              <KelasBisnisCard el={el} index={index} key={index} />
-            ))}
+            {currentItems?.map((el, index) => {
+              const dataRating = el.kelas_ratings;
+              console.log({ dataRating });
+              const getSum = dataRating.reduce(
+                (acc, obj) => acc + obj.nilai,
+                0
+              );
+              const getAvarage = Number(getSum / dataRating.length).toFixed(1);
+              console.log({ getSum, getAvarage });
+              return (
+                <KelasBisnisCard
+                  el={el}
+                  index={index}
+                  key={index}
+                  star={isNaN(getAvarage) ? Number(0) : getAvarage}
+                />
+              );
+            })}
           </div>
         </div>
 

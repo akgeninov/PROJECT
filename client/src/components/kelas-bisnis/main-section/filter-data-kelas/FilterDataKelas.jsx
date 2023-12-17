@@ -30,21 +30,12 @@ function FilterDataKelas({
   // checkFilter({ kategor: 2 });
 
   const handleChangeKategori = (id) => {
-    let newKategori;
-    const kategoriId = kategori
-      .filter((el) => el.bool === true)
-      .map((el) => el.id);
-    console.log(kategoriId);
-    if (kategoriId[0] === id) {
-      newKategori = kategori.map((el) => {
-        return { ...el, bool: false };
-      });
-    } else {
-      newKategori = kategori.map((el) => {
-        return { ...el, bool: el.id === id };
-      });
-    }
-
+    const newKategori = kategori.map((el) => {
+      if (el.id === id) {
+        return { ...el, bool: !el.bool };
+      }
+      return el;
+    });
     console.log(newKategori);
     const forUrl = newKategori
       .filter((el) => el.bool === true)
@@ -73,21 +64,12 @@ function FilterDataKelas({
   };
 
   const handleChangeLevel = (id) => {
-    let newLevel;
-    const levelId = level.filter((el) => el.bool === true).map((el) => el.id);
-    console.log(levelId);
-    if (levelId[0] === id) {
-      newLevel = level.map((el) => {
-        return { ...el, bool: false };
-      });
-    } else {
-      newLevel = level.map((el) => {
-        return { ...el, bool: el.id === id };
-      });
-    }
-    // const newLevel = level.map((el) => {
-    //   return { ...el, bool: el.id === id };
-    // });
+    const newLevel = level.map((el) => {
+      if (el.id === id) {
+        return { ...el, bool: !el.bool };
+      }
+      return el;
+    });
     const forUrl = newLevel
       .filter((el) => el.bool === true)
       .map((el) => el.nama);
@@ -113,22 +95,12 @@ function FilterDataKelas({
   };
 
   const handleChangeHarga = (id) => {
-    let newHarga;
-    const hargaId = harga.filter((el) => el.bool === true).map((el) => el.id);
-    console.log(hargaId);
-    if (hargaId[0] === id) {
-      newHarga = harga.map((el) => {
-        return { ...el, bool: false };
-      });
-    } else {
-      newHarga = harga.map((el) => {
-        return { ...el, bool: el.id === id };
-      });
-    }
-
-    // const newHarga = harga.map((el) => {
-    //   return { ...el, bool: el.id === id };
-    // });
+    const newHarga = harga.map((el) => {
+      if (el.id === id) {
+        return { ...el, bool: !el.bool };
+      }
+      return el;
+    });
     const forUrl = newHarga
       .filter((el) => el.bool === true)
       .map((el) => el.hargaMax);
