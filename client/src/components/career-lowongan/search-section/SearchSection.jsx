@@ -64,7 +64,7 @@ function SearchSection() {
     <img src={images.shapes} alt="Right" className="lg:h-[400px] lg:w-[599px] ml-[610px] lg:mr-[250px] mt-[-325px]" style={{ borderRadius: '10px'}} />
     </div>
     </div>
-    );
+  );
 }
 
 export default SearchSection;

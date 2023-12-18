@@ -25,6 +25,8 @@ import Linkedin from "../assets/images/Linkedin.png"
 import copy_link from "../assets/images/copy_link.png"
 import Whatsapp from "../assets/images/Whatsapp.png"
 import Telegram from "../assets/images/Telegram.png"
+import kelasFoto from "../assets/images/kelas-foto.png";
+import materi from "../assets/images/Component-1.png"
 
 const images = {
   vector2,
@@ -53,7 +55,9 @@ const images = {
   Linkedin,
   copy_link,
   Whatsapp,
-  Telegram
+  Telegram,
+  kelasFoto,
+  materi
 };
 
 export default images;
