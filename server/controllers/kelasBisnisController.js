@@ -94,8 +94,10 @@ module.exports = {
                     { model: kelas_mentor, attributes: ['nama', 'jabatan', 'perusahaan', 'deskripsi', 'image', 'images_link'], through: { attributes: [] } },
                     {
                         model: kelas_rating, 
-                        attributes: ['komentar', 'id_user'], 
-                        limit:  2,
+                        attributes: ['komentar', 'id_user',
+                        //  [sequelize.literal('(SELECT SUM(nilai) FROM kelas_rating WHERE kelas_rating.id_kelas_bisnis = kelas_detail.id_kelas_bisnis)'), 'total_nilai']
+                        ], 
+                        limit:2,
                         required: false,      
                         include:[
                             {
@@ -104,7 +106,24 @@ module.exports = {
                                 required:false
                             }
                         ]
-                    }
+                    },
+                    { 
+                        model: kelas_bisnis, 
+                        attributes: ['nama',
+                            [sequelize.literal('(SELECT COUNT(*) FROM kelas_regist WHERE kelas_regist.id_kelas_bisnis = kelas_bisni.id)'), 'jumlah_pendaftar'],
+                            [sequelize.literal('(SELECT ROUND(SUM(nilai) / COUNT(id_user),1) FROM kelas_rating WHERE kelas_rating.id_kelas_bisnis = kelas_bisni.id)'), 'total_nilai']
+                        ],
+                        include: [
+                            { model: kelas_kategori, attributes: ['nama'] },
+                            { model: kelas_level, attributes: ['nama'] },
+                            { model: kelas_regist, attributes: []},
+                            { model: kelas_diskon, attributes: ['nama', 'jumlah_persen'] , through: { attributes: [] }},
+                            { 
+                                model: kelas_rating, 
+                                attributes: [],
+                            },
+                        ]
+                    },
                 ]
             });
 
