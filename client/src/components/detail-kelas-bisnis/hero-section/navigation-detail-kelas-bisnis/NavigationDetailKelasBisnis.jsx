@@ -19,7 +19,7 @@ function NavigationDetailKelasBisnis({ dataDetail }) {
         </li>
         <li>
           <p className="w-[100px] md:w-full text-[14px] text-whiteSmoke500 font-[Heebo] font-medium leading-[20px] cursor-pointer line-clamp-1">
-            {dataDetail?.kelas_bisni.nama || "no data"}
+            {dataDetail?.kelas_bisni?.nama || "no data"}
           </p>
         </li>
       </nav>

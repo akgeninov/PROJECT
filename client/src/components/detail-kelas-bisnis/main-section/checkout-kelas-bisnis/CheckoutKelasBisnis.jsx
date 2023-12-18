@@ -4,12 +4,15 @@ import { icon } from "../../../../constants";
 import { HiOutlineHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
 
-function CheckoutKelasBisnis() {
-  const { title } = useParams();
+function CheckoutKelasBisnis({ dataDetail }) {
+  // const { title } = useParams();
   return (
     <div className="p-[20px] flex flex-col items-start   rounded-[10px] shadow-customSm">
       <h1 className="text-[22px] font-bold leading-[32px] w-[288px]">
-        {title}
+        {dataDetail?.kelas_bisni?.nama
+          .split(" ")
+          .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+          .join(" ") ?? "no data"}
       </h1>
       <div className=" mt-[16px] flex justify-start items-center ">
         <div className="w-fit grid grid-cols-2 gap-x-[10px] gap-y-[8px] ">
@@ -26,7 +29,7 @@ function CheckoutKelasBisnis() {
           <div className=" w-max flex items-center gap-1 ">
             <img src={icon.signal} alt="bok" className="w-[16px] h-[16px]" />
             <p className="text-[14px] font-light leading-[20px] shrink-0">
-              Pemula
+              {dataDetail?.kelas_bisni?.kelas_level?.nama ?? "no data"}
             </p>
           </div>
           <div className=" w-max flex items-center gap-1 ">
@@ -36,25 +39,162 @@ function CheckoutKelasBisnis() {
               className="w-[16px] h-[16px]"
             />
             <p className="text-[14px] font-light leading-[20px] shrink-0">
-              2124 Pendaftar
+              {dataDetail?.kelas_bisni?.jumlah_pendaftar ?? "no data"}
+              <span className="ml-[5px]">Pendaftar</span>
             </p>
           </div>
         </div>
       </div>
       <div className="flex justify-start items-center  mt-[20px] gap-[8px]">
-        <div className="rating rating-sm gap-[4px]">
-          {[...Array(5)].map((_, index) => (
-            <input
-              key={index}
-              type="radio"
-              name={`rating-${index + 1}`}
-              className="mask mask-star-2 bg-orange-400"
-              defaultChecked={index + 1 === 5}
-            />
-          ))}
+        <div className="rating rating-sm rating-half gap-0">
+          {Number(dataDetail?.kelas_bisni?.total_nilai || 0) === Number(0) ? (
+            <>
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="rating-hidden"
+                defaultChecked
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+              />
+            </>
+          ) : (
+            <>
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 1
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 2
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 3
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 4
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 5
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 6
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 7
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 8
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-1"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 9
+                }
+              />
+              <input
+                type="radio"
+                name={`rating-1`}
+                className="bg-green-500 mask mask-star-2 mask-half-2"
+                defaultChecked={
+                  Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 === 10
+                }
+              />
+            </>
+          )}
         </div>
         <div className="flex items-center justify-center mt-1">
-          <p className="text-[14px] font-light leading-[20px]">5.0</p>
+          <p className="text-[14px] font-light leading-[20px]">
+            {dataDetail?.kelas_bisni?.total_nilai || "0"}
+          </p>
         </div>
       </div>
       <div className="mt-[40px] flex flex-col gap-[12px]">
@@ -66,7 +206,7 @@ function CheckoutKelasBisnis() {
               {new Intl.NumberFormat("id-ID", {
                 style: "currency",
                 currency: "IDR",
-              }).format(500000)}
+              }).format(dataDetail?.kelas_bisni?.harga ?? 0)}
             </p>
             <p className="text-[14px] font-medium leading-[20px] text-[#BA0000]">
               100%
@@ -77,7 +217,10 @@ function CheckoutKelasBisnis() {
             {new Intl.NumberFormat("id-ID", {
               style: "currency",
               currency: "IDR",
-            }).format(500000 - (500000 * 100) / 100)}
+            }).format(
+              dataDetail?.kelas_bisni?.harga -
+                (dataDetail?.kelas_bisni?.harga * 100) / 100
+            )}
           </p>
         </div>
       </div>

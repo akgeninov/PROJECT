@@ -26,7 +26,10 @@ function KelasBisnisCard({ el, index, star }) {
         </div>
         <div className="w-[326px] md:w-[200px] flex flex-col items-center gap-[16px]">
           <h1 className=" line-clamp-2 text-[18px] font-bold leading-[28px] mt-[16px]">
-            {el.nama || "no data"}
+            {el?.nama
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ") ?? "no data"}
           </h1>
           <div className="w-full flex justify-center items-center">
             <div className="w-fit flex md:grid grid-cols-2 gap-x-[8px] md:gap-x-[50px] gap-y-[8px] ">

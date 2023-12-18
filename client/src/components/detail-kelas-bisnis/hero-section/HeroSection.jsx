@@ -23,14 +23,16 @@ function HeroSection({ dataDetail }) {
   //   // console.log({ id });
   // }, []);
 
+  console.log({ image: dataDetail?.kelas_bisni?.image });
+
   const { title } = useParams();
   return (
     <div className="relative  w-full   2xl:max-w-[1280px] h-full  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">
       <div className="flex min-w-[1280px] xl:min-w-full  max-h-[556px] md:max-h-[660px]  justify-center items-center">
         <img
-          src={kelasBisnisPic.heroKelasBisnis1}
+          src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
           alt="hero"
-          className="w-[1280px] xl:w-full h-[660px]"
+          className="object-cover w-full xl:w-full h-full"
         />
       </div>
       <div className="absolute h-[660px] left-0 top-0 bg-black500 opacity-90 w-full  z-10"></div>
@@ -39,7 +41,10 @@ function HeroSection({ dataDetail }) {
         <div className="gap-[24px] flex flex-col items-start mt-[52px]">
           <div className="gap-[16px]  flex flex-col items-start">
             <h1 className="text-[24px] md:text-[48px] text-center md:text-start text-whiteSmoke500 font-bold leading-[36px] md:leading-[72px] w-[358px] md:w-[568px]">
-              {dataDetail.kelas_bisni.nama}
+              {dataDetail?.kelas_bisni?.nama
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ") ?? "no data"}
             </h1>
             <div className="w-full flex text-whiteSmoke600 justify-start gap-x-[16px]  ">
               <div className=" w-max flex items-center  gap-1">
@@ -234,7 +239,7 @@ function HeroSection({ dataDetail }) {
             </div>
             <div className="flex items-center justify-center mt-1">
               <p className="text-[14px] text-whiteSmoke600 font-light leading-[20px]">
-                {dataDetail?.kelas_bisni?.total_nilai || 0}
+                {dataDetail?.kelas_bisni?.total_nilai || "0"}
               </p>
             </div>
           </div>
@@ -245,7 +250,7 @@ function HeroSection({ dataDetail }) {
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
-                }).format(500000)}
+                }).format(dataDetail?.kelas_bisni?.harga ?? 0)}
               </p>
               <p className="text-[14px] md:text-[18px] font-medium leading-[20px] md:leading-[28px] text-[#BA0000]">
                 100%
@@ -256,7 +261,10 @@ function HeroSection({ dataDetail }) {
               {new Intl.NumberFormat("id-ID", {
                 style: "currency",
                 currency: "IDR",
-              }).format(0)}
+              }).format(
+                dataDetail?.kelas_bisni?.harga -
+                  (dataDetail?.kelas_bisni?.harga * 100) / 100
+              )}
             </p>
           </div>
         </div>
@@ -271,17 +279,17 @@ function HeroSection({ dataDetail }) {
           />
         </div>
       </div>
-      <div className="absolute  z-20 w-[358px] md:w-[432px] h-[188px] md:h-[468px] bottom-[32px] md:bottom-auto md:top-[112px] md:right-[100px]">
+      <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] md:w-[432px] h-[188px] md:h-[468px] bottom-[32px] md:bottom-auto md:top-[112px] md:right-[100px]">
         <img
-          src={kelasBisnisPic.heroKelasBisnisSmall1}
+          src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
           alt="hero small"
-          className="hidden xl:flex"
+          className="w-full h-full object-cover"
         />
-        <img
+        {/* <img
           src={kelasBisnisPic.heroKelasBisnis1}
           alt="hero"
           className="rounded-[10px] flex md:hidden "
-        />
+        /> */}
       </div>
     </div>
   );

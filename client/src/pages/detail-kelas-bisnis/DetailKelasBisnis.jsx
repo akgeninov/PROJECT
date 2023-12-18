@@ -27,7 +27,7 @@ function DetailKelasBisnis() {
   return (
     <div className="flex flex-col justify-center items-center shrink-0 ">
       <HeroSection dataDetail={dataDetail} />
-      <MainSection />
+      <MainSection dataDetail={dataDetail} />
     </div>
   );
 }
