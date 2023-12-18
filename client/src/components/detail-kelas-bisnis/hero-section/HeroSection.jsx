@@ -16,11 +16,11 @@ function HeroSection() {
           id: Number(id),
         }
       );
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
-    console.log({ id });
+    // console.log({ id });
   }, []);
 
   const { title } = useParams();

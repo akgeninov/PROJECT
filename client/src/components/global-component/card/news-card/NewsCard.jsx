@@ -12,7 +12,7 @@ function NewsCard({ news, onHover, setOnHover, index, path }) {
     : "Invalid Date";
 
   const navigateToDetail = (title, data, kategori) => {
-    console.log({ title, data, kategori });
+    // console.log({ title, data, kategori });
     localStorage.setItem("artikel", JSON.stringify(data));
     navigate(`/detail-artikel/${kategori}/${title}`);
   };

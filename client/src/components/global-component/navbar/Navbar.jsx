@@ -29,7 +29,7 @@ function Navbar() {
     }
   };
   useEffect(() => {
-    console.log(isActive);
+    // console.log(isActive);
   }, [isActive]);
 
   return (

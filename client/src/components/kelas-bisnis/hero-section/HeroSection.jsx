@@ -1,8 +1,51 @@
-import React from "react";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import NavigasiKelasBisnis from "./navigasi-kelas-bisnis/NavigasiKelasBisnis";
 import { icon, images } from "../../../constants";
+import { useNavigate } from "react-router-dom";
+import { debounce } from "lodash";
 
-function HeroSection() {
+function HeroSection({ search, setSearch }) {
+  const navigate = useNavigate();
+
+  const getSearchUrl = useMemo(() => {
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const searchParams = new URLSearchParams(url.search);
+    let searchValue = searchParams.get("search")?.toString().split(",");
+  }, [window.location.href]);
+
+  const [count, setCount] = useState(0);
+
+  const handleChangeSearch = (word) => {
+    // const newLevel = level.map((el) => {
+    //   if (el.id === id) {
+    //     return { ...el, bool: !el.bool };
+    //   }
+    //   return el;
+    // });
+
+    const forUrl = word;
+    // console.log(forUrl);
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const searchParams = new URLSearchParams(url.search);
+    let pageValue = searchParams.get("page");
+    let kategoriValue = searchParams.get("kategori")?.toString().split(",");
+    let hargaValue = searchParams.get("harga")?.toString().split(",");
+    let levelValue = searchParams.get("level")?.toString().split(",");
+    console.log("Fungsi dijalankan setelah 1 detik");
+    navigate(
+      `?${new URLSearchParams({
+        page: 1,
+        kategori: kategoriValue || "",
+        level: levelValue || "",
+        harga: hargaValue || "",
+        search: forUrl,
+      })}`
+    );
+    setSearch(forUrl);
+  };
+
   return (
     <div className=" relative bg-black500 w-full lg:pl-[100px]  2xl:max-w-[1280px] h-[396px] lg:h-[444px]  flex items-center ">
       <div className="w-full h-full flex flex-col md:flex-row md:items-center justify-between md:justify-end">
@@ -39,7 +82,12 @@ function HeroSection() {
           </div>
           <div className="hidden md:flex bg-white w-full lg:w-[556px] px-[24px] py-[16px] rounded-[10px]  justify-start items-center gap-[8px]">
             <img src={icon.searchIcon} alt="search" />
-            <input type="text" className="w-full focus:outline-none" />
+            <input
+              type="search"
+              value={search}
+              onChange={(e) => handleChangeSearch(e.target.value)}
+              className="w-full focus:outline-none"
+            />
           </div>
         </div>
       </div>

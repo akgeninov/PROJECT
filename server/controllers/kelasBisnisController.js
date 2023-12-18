@@ -13,6 +13,7 @@ const {
   kelas_diskon,
   sequelize,
   User,
+  kelas_harga,
 } = require("../models");
 const { Sequelize } = require("sequelize");
 const utility = require("./utility");
@@ -55,12 +56,27 @@ module.exports = {
 
   getKelasBisnis: async (req, res) => {
     try {
-      const { kategori, level, harga1, harga2 } = req.body;
+      const { kategori, level, harga, search } = req.body;
+      console.log({ harga: harga.length });
+      let dataHarga;
+      if (harga && harga.length > 0) {
+        dataHarga = await kelas_harga.findAll({
+          where: {
+            id: {
+              [Op.in]: harga,
+            },
+          },
+        });
+      }
+
       let dataKelas;
       if (kategori.length > 0 || level.length > 0) {
         if (kategori.length > 0 && level.length === 0) {
           dataKelas = await kelas_bisnis.findAll({
             where: {
+              nama: {
+                [Op.like]: `%${search || ""}%`,
+              },
               id_kelas_kategori: {
                 [Op.in]: kategori,
               },
@@ -71,6 +87,9 @@ module.exports = {
           console.log("sini");
           dataKelas = await kelas_bisnis.findAll({
             where: {
+              nama: {
+                [Op.like]: `%${search}%`,
+              },
               id_kelas_level: {
                 [Op.in]: level,
               },
@@ -80,6 +99,9 @@ module.exports = {
         } else {
           dataKelas = await kelas_bisnis.findAll({
             where: {
+              nama: {
+                [Op.like]: `%${search}%`,
+              },
               id_kelas_level: {
                 [Op.in]: level,
               },
@@ -92,11 +114,66 @@ module.exports = {
         }
       } else {
         dataKelas = await kelas_bisnis.findAll({
+          where: {
+            nama: {
+              [Op.like]: `%${search}%`,
+            },
+          },
           include: [kelas_kategori, kelas_level, kelas_regist, kelas_rating],
         });
       }
 
-      const dataUser = await User.findAll();
+      const filterKelasById = (dataKelas, dataHarga, harga) => {
+        return new Promise(function (resolve, reject) {
+          const hasilFilter = dataKelas.filter((kelas) => {
+            const hargaKelas = kelas.harga;
+            console.log({ hargaKelas });
+            const filter = dataHarga.find((filter) => {
+              console.log({
+                1: harga.includes(filter.id),
+                2: hargaKelas >= filter.harga_min,
+                3: hargaKelas <= filter.harga_max,
+                hargaKelas,
+                filterMax: filter.harga_max,
+                filterMin: filter.harga_min,
+              });
+              return (
+                harga.includes(filter.id) &&
+                hargaKelas >= filter.harga_min &&
+                hargaKelas <= filter.harga_max
+              );
+            });
+            return filter !== undefined;
+          });
+
+          // Memberikan hasil filter melalui resolve
+          resolve(hasilFilter);
+        });
+      };
+
+      let coba;
+      if (harga && harga.length > 0) {
+        filterKelasById(dataKelas, dataHarga, harga)
+          .then((hasilFilter) => {
+            dataKelas = hasilFilter;
+            coba = hasilFilter;
+
+            res.status(200).send({
+              dataKelas,
+              dataHarga,
+              coba,
+            });
+          })
+          .catch((error) => console.log(error));
+      } else {
+        res.status(200).send({
+          dataKelas,
+          dataHarga,
+          coba,
+        });
+      }
+
+      // const dataUser = await User.findAll();
 
       //   const result = await kelas_bisnis.findAll({
       //     attributes: [
@@ -146,10 +223,6 @@ module.exports = {
       //   });
 
       //   res.json(dataKelas, dataUser);
-      res.status(200).send({
-        dataUser,
-        dataKelas,
-      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error", error });
@@ -315,6 +388,20 @@ module.exports = {
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
+
+  // code zainur
+  getHargaFilter: async (req, res) => {
+    try {
+      const result = await kelas_harga.findAll();
+
+      res.status(200).send({
+        message: "success",
+        data: result,
+      });
+    } catch (error) {
+      res.status(500).json({ message: "Internak Server Error" });
     }
   },
 };

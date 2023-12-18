@@ -3,7 +3,7 @@ import { icon, kelasBisnisPic } from "../../../../constants";
 import { Link } from "react-router-dom";
 
 function KelasBisnisCard({ el, index, star }) {
-  console.log({ el, star: Number(star) });
+  // console.log({ el, star: Number(star) });
   return (
     <>
       <Link

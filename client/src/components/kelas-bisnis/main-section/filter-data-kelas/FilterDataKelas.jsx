@@ -22,6 +22,9 @@ function FilterDataKelas({
   harga,
   toggleFilter,
   setToggleFilter,
+  setHargaUrl,
+  setLevelUrl,
+  setKategoriUrl,
 }) {
   const navigate = useNavigate();
 
@@ -39,11 +42,11 @@ function FilterDataKelas({
       }
       return el;
     });
-    console.log(newKategori);
+    // console.log(newKategori);
     const forUrl = newKategori
       .filter((el) => el.bool === true)
       .map((el) => el.nama);
-    console.log(forUrl);
+    // console.log(forUrl);
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
     const searchParams = new URLSearchParams(url.search);
@@ -61,9 +64,9 @@ function FilterDataKelas({
         harga: hargaValue || "",
       })}`
     );
-    console.log(kategoriValue);
+    setKategoriUrl(kategoriValue);
+    // console.log(kategoriValue);
     setKategori(newKategori);
-    setPage(0);
   };
 
   const handleChangeLevel = (id) => {
@@ -76,13 +79,14 @@ function FilterDataKelas({
     const forUrl = newLevel
       .filter((el) => el.bool === true)
       .map((el) => el.nama);
-    console.log(forUrl);
+    // console.log(forUrl);s
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
     const searchParams = new URLSearchParams(url.search);
     let pageValue = searchParams.get("page");
     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
     let hargaValue = searchParams.get("harga")?.toString().split(",");
+    let levelValue = searchParams.get("level")?.toString().split(",");
 
     navigate(
       `?${new URLSearchParams({
@@ -92,9 +96,9 @@ function FilterDataKelas({
         harga: hargaValue || "",
       })}`
     );
-    console.log({ newLevel, forUrl });
+    // console.log({ newLevel, forUrl });
+    setLevelUrl(levelValue);
     setLevel(newLevel);
-    setPage(0);
   };
 
   const handleChangeHarga = (id) => {
@@ -106,14 +110,15 @@ function FilterDataKelas({
     });
     const forUrl = newHarga
       .filter((el) => el.bool === true)
-      .map((el) => el.hargaMax);
-    console.log(forUrl);
+      .map((el) => el.harga_max);
+    // console.log(forUrl);
     const currentUrl = window.location.href;
     const url = new URL(currentUrl);
     const searchParams = new URLSearchParams(url.search);
     let pageValue = searchParams.get("page");
     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
     let levelValue = searchParams.get("level")?.toString().split(",");
+    let hargaValue = searchParams.get("harga")?.toString().split(",");
 
     navigate(
       `?${new URLSearchParams({
@@ -123,15 +128,15 @@ function FilterDataKelas({
         harga: forUrl,
       })}`
     );
+    setHargaUrl(hargaValue);
     setHarga(newHarga);
-    setPage(0);
   };
 
   return (
     <>
       <div
         className={` ${
-          toggleFilter ? "flex" : "hidden md:flex"
+          toggleFilter ? "flex " : "hidden md:flex"
         } fixed z-50 bg-whiteSmoke500 left-0 top-0 md:left-auto md:top-auto h-screen w-screen md:w-auto md:h-full md:static   flex-col gap-[32px]`}
       >
         <div className="px-[16px] py-[20px] md:px-0 md:py-0 flex justify-between items-center">
@@ -141,7 +146,11 @@ function FilterDataKelas({
             className="block md:hidden w-[24px] h-[24px]"
           />
         </div>
-        <div className="flex flex-col rounded-[10px] h-screen md:h-auto overflow-scroll md:overflow-visible md:shadow-customSm ">
+        <div
+          className={`${
+            toggleFilter ? "scrollbar-hide" : ""
+          } flex flex-col rounded-[10px] h-screen md:h-auto overflow-scroll md:overflow-visible md:shadow-customSm `}
+        >
           <div className="p-[24px] w-full md:w-[280px] ">
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
@@ -159,7 +168,7 @@ function FilterDataKelas({
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={0}>
-                  <ul className="gap-[16px] mb-[24px]">
+                  <ul className="space-y-[16px] mb-[24px]">
                     {kategoriFilter?.map((el, index) => (
                       <li
                         key={index}
@@ -201,7 +210,7 @@ function FilterDataKelas({
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={0}>
-                  <ul className="gap-[16px] mb-[24px] ">
+                  <ul className="space-y-[16px] mb-[24px] ">
                     {level.map((el, index) => (
                       <li
                         key={index}
@@ -243,28 +252,28 @@ function FilterDataKelas({
                   </AccordionButton>
                 </h2>
                 <AccordionPanel pb={0}>
-                  <ul className="gap-[16px] mb-[24px]  ">
+                  <ul className="space-y-[16px] mb-[24px]   ">
                     {harga.map((el, index) => (
                       <li
                         key={index}
                         className="gap-[12px] flex justify-start items-center"
                       >
                         <input
-                          id={el.hargaMax}
+                          id={el.harga_max}
                           checked={!!el.bool}
                           onChange={() => handleChangeHarga(el.id)}
                           type="checkbox"
                         />
                         <label
-                          htmlFor={el.hargaMax}
+                          htmlFor={el.harga_max}
                           className="text-[16px] font-light leading-[24px]"
                         >
-                          {el.hargaMin === 0 ? (
+                          {el.harga_min === 0 ? (
                             <p className="w-[190px]">Gratis</p>
                           ) : (
                             <p className="w-[190px]">
-                              Rp {el.hargaMin?.toLocaleString("id-ID")} - Rp{" "}
-                              {el.hargaMax?.toLocaleString("id-ID")}
+                              Rp {el.harga_min?.toLocaleString("id-ID")} - Rp{" "}
+                              {el.harga_max?.toLocaleString("id-ID")}
                             </p>
                           )}
                         </label>
