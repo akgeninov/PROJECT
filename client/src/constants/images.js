@@ -21,6 +21,10 @@ import career_momen5 from "../assets/images/career_momen5.png";
 import video_1 from "../assets/images/video_1.png";
 import video_2 from "../assets/images/video_2.png";
 import shapes from "../assets/images/Shapes3.png"
+import Linkedin from "../assets/images/Linkedin.png"
+import copy_link from "../assets/images/copy_link.png"
+import Whatsapp from "../assets/images/Whatsapp.png"
+import Telegram from "../assets/images/Telegram.png"
 
 const images = {
   vector2,
@@ -46,6 +50,10 @@ const images = {
   video_1,
   video_2,
   shapes,
+  Linkedin,
+  copy_link,
+  Whatsapp,
+  Telegram
 };
 
 export default images;

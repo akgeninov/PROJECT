@@ -20,7 +20,7 @@ function SearchSection() {
           };
 
     return (
-        <div className=" flex flex-col justify-start lg:mt-[10px] lg:mb-[60px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:h-[444px] gap-[52px] bg-black">
+        <div className=" flex flex-col justify-start lg:mt-[10px] lg:mb-[100px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:h-[444px] gap-[52px] bg-black">
         <div className="flex flex-col justify-start textAlign-left lg:ml-[95px]">
         <p className="max-w-[564px] text-[16px] lg:text-[14px] lg:mb-[15px] font-light leading-[32px] lg:leading-[100px] " style={{ color:'#888'}}>
               Karir  &nbsp; &gt; <span style={{ color: 'white', marginLeft:'5px' }}>  Semua Lowongan</span>
@@ -32,13 +32,13 @@ function SearchSection() {
               Temukan beragam pilihan karir yang paing sesuai dengan minat, <br />
               bakat, dan passion kamu
             </p>
-        <div className="search-container lg:text-[16px] relative">
+        <div className=" lg:text-[16px] relative" style={{color:'#919192'}}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
-            className="h-7 w-6 mr-2 absolute top-1/2 transform -translate-y-1/2"
+            className="h-7 w-6 mr-2 ml-1 absolute top-1/2 transform -translate-y-1/2"
             style={{ left: '8px' }}
           >
             <path
@@ -54,7 +54,8 @@ function SearchSection() {
             value={searchTerm}
             onChange={handleSearchChange}
             onKeyPress={handleKeyPress}
-            className="lg:w-[556px] h-14 bg-gray-300 rounded-md pl-10"
+            className="lg:w-[556px] h-14 text-gray-100 rounded-md pl-12"
+            style={{color: '#E7E7E7'}}
           />
         </div>
 

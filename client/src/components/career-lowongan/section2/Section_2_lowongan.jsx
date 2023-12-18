@@ -1,5 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBuilding,faBriefcase,faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function Section_2_lowongan(props) {
   const navigate = useNavigate();
@@ -9,37 +11,50 @@ function Section_2_lowongan(props) {
     navigate("/career-lowongan/" + props.lowongan.id);
   };
 
+  function formatDate(dateString) {
+    const options = { year: "numeric", month: "long", day: "numeric" };
+    const formattedDate = new Date(dateString).toLocaleDateString("id-ID", options);
+    return formattedDate;
+  }
+  
   return (
-    <div
-      className="p-4 w-full cursor-pointer flex justify-center"
-      onClick={handleContainerClick}
-    >
+    <div>
       <div
-        className="grid grid-cols-2 divide-x rounded border-none p-6" 
-        style={{
-          width: "1080px",
-          height: "160px",
-          boxShadow: "2px 2px 12px 0px #0101011A",
-        }}
-      >
-        <div className="border-none"> {/* Menggunakan border-none pada elemen anak */}
-          <div className="grid grid-cols-1 divide-y">
-            <div className="font-bold text-[22px] border-none">{props.lowongan.nama_lowongan_pekerjaan}</div>
-            <div className="font-semibold text-[#12517C] text-[16px] border-none">{props.lowongan.departemen.nama_departemen_pekerjaan}</div>
-            <div className="border-none">
-              <div className="grid grid-cols-3 divide-x lg:mt-[30px] lg:text-[16px]">
-                <div className="flex justify-center border-none">{props.lowongan.periode_pekerjaan.nama_periode_perkerjaan}</div>
-                <div className="flex justify-center border-none">{props.lowongan.tipe_pekerjaan.nama_tipe__perkerjaan}</div>
-                <div className="flex justify-center border-none">{props.lowongan.jenjang_pekerjaan.nama_jenjang__pekerjaan}</div>
-              </div>
+        className="p-4 w-full  flex justify-center"
+      >      
+        <div
+          className="grid grid-cols-2 divide-x rounded-md border-none p-6 cursor-pointer" 
+          onClick={handleContainerClick}
+
+          style={{
+            width: "1080px",
+            height: "160px",
+            boxShadow: "2px 2px 12px 0px #0101011A",
+          }}
+        >
+          <div className="border-none text-[#3F4041]"> 
+            <div className="grid grid-cols-1 divide-y">
+              <div className="font-bold text-[22px] border-none">{props.lowongan.nama_lowongan_pekerjaan}</div>
+              <div className="font-semibold text-[#12517C] text-[16px] border-none">{props.lowongan.departemen.nama_departemen_pekerjaan}</div>
+                <div className="border-none">
+                  <div className="flex items-center gap-3 mt-5 text-[#919192]">
+                    <FontAwesomeIcon icon={faBriefcase} />
+                    {props.lowongan.periode_pekerjaan.nama_periode_perkerjaan}{' '}
+                    <FontAwesomeIcon icon={faBuilding} />
+                    {props.lowongan.tipe_pekerjaan.nama_tipe__perkerjaan}{' '}
+                    <FontAwesomeIcon icon={faUserCircle} />
+                    {props.lowongan.jenjang_pekerjaan.nama_jenjang__pekerjaan}
+                  </div>
+                </div>
             </div>
           </div>
-        </div>
-        <div className="flex flex-col justify-center items-end h-full border-none"> {/* Menggunakan border-none pada elemen anak */}
-          <div>Batas Lamar :&nbsp;&nbsp;<br/>{props.lowongan.batas_lamar}&nbsp;&nbsp;</div>
+          <div className="flex flex-col justify-center items-end h-full border-none lg:text-[16px]">
+            <div>Batas Lamar :&nbsp;&nbsp;<br/><p className="font-semibold">{formatDate(props.lowongan.batas_lamar)}&nbsp;&nbsp;</p></div>
+          </div>
         </div>
       </div>
     </div>
+    
   );
 }
 
