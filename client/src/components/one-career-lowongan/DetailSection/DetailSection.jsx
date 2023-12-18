@@ -4,9 +4,9 @@ import { images } from "../../../constants";
 
 function DetailSection(props) {
   return (
-    <div className="m-20 p-10 grid grid-cols-3 gap-20 font-heebo text-[#3F4041]">
-      <div className="col-span-2">
-        <div className="grid grid-cols-1 divide-y lg:text-[18px]">
+    <div className="xl:m-20 p-10 grid grid-cols-3 xl:gap-20 lg:gap-10 gap-5 font-heebo text-[#3F4041]">
+      <div className="md:col-span-2 col-span-3">
+        <div className="grid grid-cols-1 divide-y lg:text-[18px] ">
           <div>
             <h1 className="lg:text-[24px] font-bold text-black">Deskripsi Pekerjaan </h1> <br />
             {props.lowongan.deskripsi_lowongan_pekerjaan}
@@ -17,9 +17,9 @@ function DetailSection(props) {
           </div>
         </div>
       </div>
-      <div className="col-span-1 ml-10">
+      <div className="col-span-1 xl:ml-[10px] md:flex hidden ">
         <div
-            className="p-5 rounded-lg border-none w-full h-[230px] text-[16px] max-w-[350px]"
+            className="p-5 rounded-lg border-none w-full lg:h-[230px] h-[200px] text-[16px] lg:max-w-[300px] max-w-[250px]"
             style={{
             boxShadow: "2px 2px 12px 0px #0101011A",
             }}
@@ -34,34 +34,33 @@ function DetailSection(props) {
                     <img
                     src={images.copy_link}
                     alt="Career Momen 2"
-                    className=" w-[55px] h-[55px]"
+                    className=" xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
                 <button className="rounded-md flex items-center justify-center w-full">
                     <img
                     src={images.Linkedin}
                     alt="Career Momen 2"
-                    className=" w-[55px] h-[55px]"
+                    className="xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
                 <button className="rounded-md flex items-center justify-center w-full">
                     <img
                     src={images.Whatsapp}
                     alt="Career Momen 2"
-                    className=" w-[55px] h-[55px]"
+                    className="xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
                 <button className="rounded-md flex items-center justify-center w-full">
                     <img
                     src={images.Telegram}
                     alt="Career Momen 2"
-                    className=" w-[55px] h-[55px]"
+                    className="xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
             </div>
         </div>
-        </div>
-
+      </div>
     </div>
   );
 }

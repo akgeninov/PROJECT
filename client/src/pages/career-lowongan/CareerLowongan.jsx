@@ -52,7 +52,7 @@ function Career() {
       <SearchSection />
       <div className="max-w-[1080px] justify-center mx-auto">
         <div>
-          <h2 className="lg:text-[22px] text-[#5E5F60] text-right font-semibold p-4">
+          <h2 className="md:text-[22px] text-[18px] text-[#5E5F60] text-right font-semibold md:p-4 px-10 py-4 mt-[40px]">
             ({lowonganData.length}) Total Lowongan
           </h2>
         </div>
@@ -63,36 +63,40 @@ function Career() {
             onClick={() => handleContainerClick(el.id)}
           />
         ))}
-        <div className="flex items-center space-x-4 max-w-[1080px] mx-auto p-4 mb-[30px]">
-          <p className="text-left">
-            Menampilkan {startIndex + 1} - {Math.min(startIndex + itemsPerPage, lowonganData.length)} dari {lowonganData.length} lowongan tersedia
-          </p>
-          <button onClick={handlePrevClick} disabled={startIndex === 0} className="focus:outline-none">
-            <FontAwesomeIcon icon={faChevronLeft} />
-          </button>
-          <div className="flex space-x-2">
-            {pageNumbers.map((pageNumber) => (
-              <button
-                key={pageNumber}
-                onClick={() => handlePageClick(pageNumber)}
-                className={`px-2 py-1 rounded-full focus:outline-none ${
-                  startIndex / itemsPerPage + 1 === pageNumber
-                    ? 'bg-black text-white'
-                    : 'bg-gray-200 text-gray-700'
-                }`}
-              >
-                {pageNumber}
-              </button>
-            ))}
+
+        <div className="grid grid-cols-1 md:grid-cols-2 items-center space-x-4 max-w-[1080px] mx-auto md:p-4 px-10 py-4 mb-[30px]">
+          <div className="md:flex md:flex-row md:items-center md:justify-between">
+            <p className="md:text-left text-center mb-4 md:mb-0">
+              Menampilkan {startIndex + 1} - {Math.min(startIndex + itemsPerPage, lowonganData.length)} dari {lowonganData.length} lowongan tersedia
+            </p>           
           </div>
-          <button
-            onClick={handleNextClick}
-            disabled={startIndex + itemsPerPage >= lowonganData.length}
-            className="focus:outline-none"
-          >
-            <FontAwesomeIcon icon={faChevronRight} />
-          </button>
+          <div className="flex space-x-2 justify-center md:justify-end ">
+              <button onClick={handlePrevClick} disabled={startIndex === 0} className="focus:outline-none">
+                <FontAwesomeIcon icon={faChevronLeft} />
+              </button>
+              {pageNumbers.map((pageNumber) => (
+                <button
+                  key={pageNumber}
+                  onClick={() => handlePageClick(pageNumber)}
+                  className={`px-2 py-1 rounded-full focus:outline-none ${
+                    startIndex / itemsPerPage + 1 === pageNumber
+                      ? 'bg-black text-white'
+                      : 'bg-gray-200 text-gray-700'
+                  }`}
+                >
+                  {pageNumber}
+                </button>
+              ))}
+              <button
+                onClick={handleNextClick}
+                disabled={startIndex + itemsPerPage >= lowonganData.length}
+                className="focus:outline-none"
+              >
+                <FontAwesomeIcon icon={faChevronRight} />
+              </button>
+          </div>
         </div>
+
       </div>
     </div>
   );
