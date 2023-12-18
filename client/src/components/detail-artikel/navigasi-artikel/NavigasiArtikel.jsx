@@ -10,7 +10,7 @@ function NavigasiArtikel() {
       <nav className="gap-[8px]   flex justify-start items-center list-none">
         <li>
           <p
-            onClick={() => navigate(`/artikel/1`)}
+            onClick={() => navigate(`/artikel/1/Semua`)}
             className="text-[14px] font-light leading-[20px] cursor-pointer"
           >
             Artikel

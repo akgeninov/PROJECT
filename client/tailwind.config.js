@@ -14,6 +14,7 @@ module.exports = {
         black500: "#0F1011",
         indigoDye500: "#12517C",
         greenWhatsapp: "#32D951",
+        linkedinColor: "#0066C8",
       },
       fontFamily: {
         heebo: "Heebo",

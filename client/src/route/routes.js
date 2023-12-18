@@ -24,7 +24,7 @@ const routes = [
     }
   />,
   <Route
-    key="home"
+    key="artikel"
     path="/artikel/:page"
     element={
       <Protection publicSide={true}>
@@ -32,7 +32,7 @@ const routes = [
       </Protection>
     }
   >
-    <Route index element={<MainSection />} />
+    {/* <Route index element={<MainSection />} /> */}
     <Route path=":kategori" element={<MainSection />} />
   </Route>,
   <Route

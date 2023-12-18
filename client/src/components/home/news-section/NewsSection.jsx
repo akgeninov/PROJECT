@@ -4,8 +4,27 @@ import NewsCard from "../../global-component/card/news-card/NewsCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
-import { dataNews } from "../../../constants/data";
+// import { dataNews } from "../../../constants/data";
+import { api } from "../../../api/api";
 function NewsSection() {
+  const [dataNews, setDataNews] = useState([]);
+  const [onHover, setOnHover] = useState("");
+  const fetchFavoriteArtikel = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/artikel/menarik`,
+        {
+          kategori: "Semua",
+          limit: 3,
+        }
+      );
+      setDataNews(response.data.data);
+      console.log(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   // const [dataNesws, setDataNews] = useState([
   //   {
   //     judul: "3 Cara Mengembangkan Bisnis di TikTok Shop",
@@ -29,9 +48,10 @@ function NewsSection() {
   //     images: "rectangle_news_3.png",
   //   },
   // ]);
-  const [onHover, setOnHover] = useState("");
+
   useEffect(() => {
     AOS.init();
+    fetchFavoriteArtikel();
   }, []);
   return (
     <div className=" mt-[60px] lg:mt-[160px]  w-fit flex flex-col items-center gap-[52px]">
@@ -58,7 +78,7 @@ function NewsSection() {
               onHover={onHover}
               setOnHover={setOnHover}
               index={index}
-              path={"news"}
+              path={"artikel"}
             />
           ))}
         </div>
