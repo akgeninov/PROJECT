@@ -4,11 +4,11 @@ import teamPic from "../../../constants/teamPic";
 function HeroSection() {
   return (
     <div
-      className="bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[712px] lg:h-[712px] flex flex-col"
+      className="bg-cover px-[16px] sm:px-[100px] w-full h-[712px] lg:h-[712px] flex flex-col flex-initial"
       style={{ backgroundImage: `url(${teamPic.heroPic})` }}
     >
-      <div className="bg-[rgba(8,34,52,0.9)] h-[712px] w-[525px] flex items-center justify-center min-h-screen">
-        <div className="h-[528px] w-[477px] flex flex-col gap-[16px]">
+      <div className="bg-[rgba(8,34,52,0.9)] h-[712px] w-[525px] flex flex-initial items-center justify-center min-h-screen">
+        <div className="h-[528px] w-[477px] flex flex-col flex-initial gap-[16px]">
           <p className="text-[24px] lg:text-[48px] font-bold font-[Heebo] leading-[36px] lg:leading-[72px] max-w-[431px] text-whiteSmoke500">
             Sebuah perjalanan panjang, dengan satu mimpi yang besar
           </p>

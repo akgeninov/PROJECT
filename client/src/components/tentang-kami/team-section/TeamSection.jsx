@@ -3,12 +3,12 @@ import teamPic from "../../../constants/teamPic";
 
 function HeroSection() {
   return (
-    <div className="bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1084px] max-h-[1012px] flex flex-col items-center my-[160px] ">
+    <div className="bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1084px] max-h-fit flex flex-col items-center my-[160px] ">
       <p className="text-[24px] lg:text-[40px] font-bold font-[Heebo] leading-[36px] lg:leading-[60px] max-w-[250px] mb-[42px]">
         Tim Kami
       </p>
 
-      <div className="flex flex-wrap gap-[52px] h-max-[424px] items-center">
+      <div className="flex flex-wrap gap-[52px] h-max-[424px] items-center justify-center sm:mb-[50px]">
         <div className="w-[516px] h-[424px] relative">
           <div className="bg-indigoDye500 w-[492px] h-[400px] top-[24px] absolute"></div>
           <img
@@ -25,7 +25,7 @@ function HeroSection() {
           <p className="text-[18px] font-light leading-[28px]">
             Aldo biasa dipanggil, merupakan lulusan dari Universitas Surabaya
             dengan predikat cumlaude serta mahasiswa berprestasi tahun 2019.
-            Sejak tahun 2018, Aldo sudah memiliki banyak pengalaman dalam duniat
+            Sejak tahun 2018, Aldo sudah memiliki banyak pengalaman dalam dunia
             Digital Marketing dan hal tersebut membuatnya terjun dengan
             membangun usaha dibidang digital untuk membantu para pebisnis UMKM
             agar dapat mengembangkan usahanya melalui dunia digital.
