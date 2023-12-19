@@ -203,7 +203,9 @@ function KelasBisnisCard({ el, index, star }) {
               )}
             </div>
             <div className="flex items-center justify-center mt-1">
-              <p className="text-[14px] font-light leading-[20px]">{el.star}</p>
+              <p className="text-[14px] font-light leading-[20px]">
+                {star ?? 0}
+              </p>
             </div>
           </div>
 

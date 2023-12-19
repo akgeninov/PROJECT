@@ -1,4 +1,10 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { kelasBisnis } from "./constant/data";
 import { icon, kelasBisnisPic } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
@@ -10,8 +16,10 @@ import FilterDataKelas from "./filter-data-kelas/FilterDataKelas";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { HiFilter } from "react-icons/hi";
 import { debounce } from "lodash";
+import { useMediaQuery } from "@chakra-ui/react";
 
 function MainSection({ search, setSearch }) {
+  const [isLargerThan768] = useMediaQuery("(min-width: 768px)");
   const kategori = [
     {
       id: 1,
@@ -110,46 +118,52 @@ function MainSection({ search, setSearch }) {
   const [page, setPage] = useState(0);
   const [currentItems, setCurrentItems] = useState([]);
   const itemsPerPage = 9;
+  const timeoutRef = useRef(null);
+  const [filterData, setFilterData] = useState(false);
 
   const navigate = useNavigate();
 
-  const fetchKategori = useMemo(async () => {
+  const fetchAllFilter = useMemo(async () => {
     try {
-      const response = await api.post(
+      //kategori
+      const responseKategori = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/kategori`
       );
-      const dataResponse = response.data.data;
-      const currentUrl = window.location.href;
-      const url = new URL(currentUrl);
-      const searchParams = new URLSearchParams(url.search);
-      const newKategori = dataResponse.map((el) => ({ ...el, bool: false }));
+      const dataResponseKategori = responseKategori.data.data;
+      const currentUrlKategori = window.location.href;
+      const urlKategori = new URL(currentUrlKategori);
+      const searchParamsKategori = new URLSearchParams(urlKategori.search);
+      const newKategori = dataResponseKategori.map((el) => ({
+        ...el,
+        bool: false,
+      }));
 
-      let kategoriValue = searchParams.get("kategori")?.toString().split(",");
+      let kategoriValue = searchParamsKategori
+        .get("kategori")
+        ?.toString()
+        .split(",");
+      console.log({ kategoriValue });
       if (kategoriValue && kategoriValue.length > 0) {
-        const oldLevel = newKategori?.map((kategori) => ({
+        const oldKategori = newKategori?.map((kategori) => ({
           ...kategori,
           bool: kategoriValue.includes(kategori.nama),
         }));
-        setKategoriFilter(oldLevel);
+        console.log({ oldKategori });
+        setKategoriFilter(oldKategori);
       } else setKategoriFilter(newKategori);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
 
-  const fetchLevel = useMemo(async () => {
-    try {
-      const response = await api.post(
+      //level
+      const responseLevel = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/level`
       );
-      const dataResponse = response.data.data;
-      const currentUrl = window.location.href;
-      const url = new URL(currentUrl);
-      const searchParams = new URLSearchParams(url.search);
-      const newLevel = dataResponse.map((el) => ({ ...el, bool: false }));
+      const dataResponseLevel = responseLevel.data.data;
+      const currentUrlLevel = window.location.href;
+      const urlLevel = new URL(currentUrlLevel);
+      const searchParamsLevel = new URLSearchParams(urlLevel.search);
+      const newLevel = dataResponseLevel.map((el) => ({ ...el, bool: false }));
       // console.log({ newLevel });
 
-      let levelValue = searchParams.get("level")?.toString().split(",");
+      let levelValue = searchParamsLevel.get("level")?.toString().split(",");
       if (levelValue && levelValue.length > 0) {
         const oldLevel = newLevel?.map((level) => ({
           ...level,
@@ -159,55 +173,314 @@ function MainSection({ search, setSearch }) {
         // console.log({ oldLevel });
       } else setLevelFilter(newLevel);
 
-      // console.log("done");
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
-
-  const fetchHargaFilter = useMemo(async () => {
-    try {
-      const response = await api.post(
+      // harga
+      const responseHarga = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/HargaFilter`
       );
       // console.log(response);
-      const dataResponse = response.data.data;
+      const dataResponseHarga = responseHarga.data.data;
 
-      const currentUrl = window.location.href;
-      const url = new URL(currentUrl);
-      const searchParams = new URLSearchParams(url.search);
-      const newHarga = dataResponse.map((el) => ({ ...el, bool: false }));
+      const currentUrlHarga = window.location.href;
+      const urlHarga = new URL(currentUrlHarga);
+      const searchParamsHarga = new URLSearchParams(urlHarga.search);
+      const newHarga = dataResponseHarga.map((el) => ({ ...el, bool: false }));
       // console.log({ newHarga });
 
-      let hargaValue = searchParams.get("harga")?.toString().split(",");
+      let hargaValue = searchParamsHarga.get("harga")?.toString().split(",");
       if (hargaValue && hargaValue.length > 0) {
+        console.log({ hargaValue });
         const oldHarga = newHarga?.map((harga) => ({
           ...harga,
-          bool: hargaValue.includes(harga.harga_max),
+          bool: hargaValue.includes(harga.harga_max.toString()),
         }));
-        // console.log({ oldHarga });
+        console.log({ oldHarga });
         setHargaFilter(oldHarga);
       } else setHargaFilter(newHarga);
+
+      setKategoriUrl(kategoriValue);
+      setLevelUrl(levelValue);
+      setHargaUrl(hargaValue);
+      setFilterData(true);
     } catch (error) {
       console.log(error);
     }
   }, []);
 
+  // const fetchKategori = useMemo(async () => {
+  //   try {
+  //     const response = await api.post(
+  //       `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/kategori`
+  //     );
+  //     const dataResponse = response.data.data;
+  //     const currentUrl = window.location.href;
+  //     const url = new URL(currentUrl);
+  //     const searchParams = new URLSearchParams(url.search);
+  //     const newKategori = dataResponse.map((el) => ({ ...el, bool: false }));
+
+  //     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
+  //     if (kategoriValue && kategoriValue.length > 0) {
+  //       const oldLevel = newKategori?.map((kategori) => ({
+  //         ...kategori,
+  //         bool: kategoriValue.includes(kategori.nama),
+  //       }));
+  //       setKategoriFilter(oldLevel);
+  //     } else setKategoriFilter(newKategori);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
+
+  // const fetchLevel = useMemo(async () => {
+  //   try {
+  //     const response = await api.post(
+  //       `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/level`
+  //     );
+  //     const dataResponse = response.data.data;
+  //     const currentUrl = window.location.href;
+  //     const url = new URL(currentUrl);
+  //     const searchParams = new URLSearchParams(url.search);
+  //     const newLevel = dataResponse.map((el) => ({ ...el, bool: false }));
+  //     // console.log({ newLevel });
+
+  //     let levelValue = searchParams.get("level")?.toString().split(",");
+  //     if (levelValue && levelValue.length > 0) {
+  //       const oldLevel = newLevel?.map((level) => ({
+  //         ...level,
+  //         bool: levelValue.includes(level.nama),
+  //       }));
+  //       setLevelFilter(oldLevel);
+  //       // console.log({ oldLevel });
+  //     } else setLevelFilter(newLevel);
+
+  //     // console.log("done");
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
+
+  // const fetchHargaFilter = useMemo(async () => {
+  //   try {
+  //     const response = await api.post(
+  //       `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/HargaFilter`
+  //     );
+  //     // console.log(response);
+  //     const dataResponse = response.data.data;
+
+  //     const currentUrl = window.location.href;
+  //     const url = new URL(currentUrl);
+  //     const searchParams = new URLSearchParams(url.search);
+  //     const newHarga = dataResponse.map((el) => ({ ...el, bool: false }));
+  //     // console.log({ newHarga });
+
+  //     let hargaValue = searchParams.get("harga")?.toString().split(",");
+  //     if (hargaValue && hargaValue.length > 0) {
+  //       const oldHarga = newHarga?.map((harga) => ({
+  //         ...harga,
+  //         bool: hargaValue.includes(harga.harga_max),
+  //       }));
+  //       // console.log({ oldHarga });
+  //       setHargaFilter(oldHarga);
+  //     } else setHargaFilter(newHarga);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, []);
+  const [render, setRender] = useState(0);
+
+  useEffect(() => {
+    console.log({ render });
+  }, [render]);
   const fetchKelasBisnis = useMemo(async () => {
-    const debouncedFunction = debounce(async () => {
+    if (isLargerThan768) {
+      if (timeoutRef.current) {
+        clearTimeout(timeoutRef.current);
+      }
+      timeoutRef.current = setTimeout(async () => {
+        try {
+          const currentUrl = window.location.href;
+          const url = new URL(currentUrl);
+          const searchParams = new URLSearchParams(url.search);
+          let pageValue = searchParams.get("page");
+
+          let kategoriValue = searchParams
+            .get("kategori")
+            ?.toString()
+            .split(",");
+          console.log({ kategoriValue });
+          let levelValue = searchParams.get("level")?.toString().split(",");
+          let hargaValue = searchParams.get("harga")?.toString().split(",");
+          let searchValue = searchParams.get("search")?.toString();
+
+          console.log({ searchValue });
+
+          let kategoriId = [];
+          let levelId = [];
+          let hargaId = [];
+
+          const oldKategori = kategoriFilter?.map((kategori) => ({
+            ...kategori,
+            bool: kategoriValue.includes(kategori.nama),
+          }));
+          console.log({ oldKategori });
+          setKategoriFilter(oldKategori);
+          kategoriId = oldKategori.filter((el) => el.bool).map((el) => el.id);
+
+          const oldLevel = levelFilter?.map((level) => ({
+            ...level,
+            bool: levelValue.includes(level.nama),
+          }));
+          console.log({ oldLevel });
+          setLevelFilter(oldLevel);
+          levelId = oldLevel.filter((el) => el.bool).map((el) => el.id);
+
+          const oldHarga = hargaFilter?.map((harga) => ({
+            ...harga,
+            bool: hargaValue.includes(harga.harga_max.toString()),
+          }));
+          console.log({ hargaValue });
+          setHargaFilter(oldHarga);
+          hargaId = oldHarga.filter((el) => el.bool).map((el) => el.id);
+
+          // if ( kategoriValue.length > 0 || levelValue.length > 0  ) {
+
+          // } else {
+          //   kategoriId = kategoriFilter
+          //       .filter((el) => el.bool)
+          //       .map((el) => el.id);
+          //    levelId = levelFilter
+          //       .filter((el) => el.bool)
+          //       .map((el) => el.id);
+          //     hargaId = hargaFilter
+          //       .filter((el) => el.bool)
+          //       .map((el) => el.id);
+          // }
+          // console.log({ search });
+
+          const hargaData = hargaFilter.filter((el) => el.id === hargaId[0]);
+          // console.log({ kategoriFilter, levelFilter, hargaFilter });
+          // console.log({
+          //   kategori: kategoriId,
+          //   level: levelId,
+          //   harga: hargaId,
+          //   search,
+          // });
+
+          console.log({ pageValue });
+
+          if (pageValue && Number(pageValue) === 1) {
+            setPage(Number(pageValue) - 1);
+            setCurrentPage(Number(pageValue) - 1);
+          } else if (pageValue && Number(pageValue) > 1) return;
+          else {
+            setPage(0);
+            setCurrentItems(0);
+          }
+
+          if (searchValue && searchValue.length > 0) {
+            setSearch(searchValue);
+          }
+
+          const response = await api.post(
+            `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/data`,
+            {
+              kategori: kategoriId,
+              level: levelId,
+              harga: hargaId,
+              search: searchValue,
+            }
+          );
+          setDataClass(response.data.dataKelas);
+        } catch (error) {
+          console.log(error);
+        }
+      }, 2000);
+    }
+  }, [kategoriUrl, levelUrl, hargaUrl, search, window.location.href]);
+
+  const firstRender = useMemo(async () => {
+    const currentUrl = window.location.href;
+    const url = new URL(currentUrl);
+    const searchParams = new URLSearchParams(url.search);
+    let pageValue = searchParams.get("page");
+
+    let kategoriValue = searchParams.get("kategori")?.toString().split(",");
+    console.log({ kategoriValue });
+    let levelValue = searchParams.get("level")?.toString().split(",");
+    let hargaValue = searchParams.get("harga")?.toString().split(",");
+
+    if (pageValue && Number(pageValue) < 2) return;
+
+    try {
+      let kategoriId = [];
+      let levelId = [];
+      let hargaId = [];
+
+      const oldKategori = kategoriFilter?.map((kategori) => ({
+        ...kategori,
+        bool: kategoriValue.includes(kategori.nama),
+      }));
+      console.log({ oldKategori });
+      setKategoriFilter(oldKategori);
+      kategoriId = oldKategori.filter((el) => el.bool).map((el) => el.id);
+
+      const oldLevel = levelFilter?.map((level) => ({
+        ...level,
+        bool: levelValue.includes(level.nama),
+      }));
+      console.log({ oldLevel });
+      setLevelFilter(oldLevel);
+      levelId = oldLevel.filter((el) => el.bool).map((el) => el.id);
+
+      const oldHarga = hargaFilter?.map((harga) => ({
+        ...harga,
+        bool: hargaValue.includes(harga.harga_max.toString()),
+      }));
+      console.log({ hargaValue });
+      setHargaFilter(oldHarga);
+      hargaId = oldHarga.filter((el) => el.bool).map((el) => el.id);
+
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/data`,
+        {
+          kategori: kategoriId,
+          level: levelId,
+          harga: hargaId,
+          search,
+        }
+      );
+      setDataClass(response.data.dataKelas);
+    } catch (error) {
+      console.log(error);
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log({ isLargerThan768 });
+  }, [isLargerThan768]);
+
+  const fetchFirstKelasMobile = useMemo(async () => {
+    if (isLargerThan768) return;
+    console.log("coba", isLargerThan768);
+
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(async () => {
       try {
         const currentUrl = window.location.href;
         const url = new URL(currentUrl);
         const searchParams = new URLSearchParams(url.search);
         let pageValue = searchParams.get("page");
+        // const searchValue = searchParams.get("search");
         // console.log({ search });
         const kategoriId = kategoriFilter
           .filter((el) => el.bool)
           .map((el) => el.id);
         const levelId = levelFilter.filter((el) => el.bool).map((el) => el.id);
         const hargaId = hargaFilter.filter((el) => el.bool).map((el) => el.id);
-        const hargaData = hargaFilter.filter((el) => el.id === hargaId[0]);
-        // console.log({ kategoriFilter, levelFilter, hargaFilter });
+
+        // const hargaData = hargaFilter.filter((el) => el.id === hargaId[0]);
+        console.log({ kategoriFilter, levelFilter, hargaFilter });
         console.log({
           kategori: kategoriId,
           level: levelId,
@@ -221,7 +494,7 @@ function MainSection({ search, setSearch }) {
             kategori: kategoriId,
             level: levelId,
             harga: hargaId,
-            search,
+            search: "",
           }
         );
         setDataClass(response.data.dataKelas);
@@ -233,12 +506,76 @@ function MainSection({ search, setSearch }) {
       } catch (error) {
         console.log(error);
       }
-    }, 1000);
+    }, 2000);
+  }, [filterData]);
 
-    debouncedFunction();
+  const fetchDataKelasButton = async (word) => {
+    if (isLargerThan768) return;
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    timeoutRef.current = setTimeout(async () => {
+      console.log({ word });
+      try {
+        if (word === "reset") {
+          const response = await api.post(
+            `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/data`,
+            {
+              kategori: [],
+              level: [],
+              harga: [],
+              search: "",
+            }
+          );
+          setDataClass(response.data.dataKelas);
 
-    return debouncedFunction;
-  }, [kategoriUrl, levelUrl, hargaUrl, search]);
+          setPage(0);
+          setCurrentPage(0);
+        } else {
+          const currentUrl = window.location.href;
+          const url = new URL(currentUrl);
+          const searchParams = new URLSearchParams(url.search);
+          let pageValue = searchParams.get("page");
+          // console.log({ search });
+          const kategoriId = kategoriFilter
+            .filter((el) => el.bool)
+            .map((el) => el.id);
+          const levelId = levelFilter
+            .filter((el) => el.bool)
+            .map((el) => el.id);
+          const hargaId = hargaFilter
+            .filter((el) => el.bool)
+            .map((el) => el.id);
+          const hargaData = hargaFilter.filter((el) => el.id === hargaId[0]);
+          // console.log({ kategoriFilter, levelFilter, hargaFilter });
+          console.log({
+            kategori: kategoriId,
+            level: levelId,
+            harga: hargaId,
+            search,
+          });
+
+          const response = await api.post(
+            `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/data`,
+            {
+              kategori: kategoriId,
+              level: levelId,
+              harga: hargaId,
+              search,
+            }
+          );
+          setDataClass(response.data.dataKelas);
+          console.log({ pageValue });
+          if (pageValue) {
+            setPage(Number(pageValue) - 1);
+            setCurrentPage(Number(pageValue) - 1);
+          }
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }, 2000);
+  };
 
   const handlePageClick = (event) => {
     setPage(event.selected);
@@ -281,106 +618,121 @@ function MainSection({ search, setSearch }) {
     console.log({ kategoriFilter });
   }, [kategoriFilter]);
 
-  useEffect(() => {
-    try {
-      // console.log(levelFilter);
-      // const newLevel = level.map((el) => ({ ...el, bool: false }));
-      const newHarga = harga.map((el) => ({ ...el, bool: false }));
-      // console.log("newLevel");
-      const currentUrl = window.location.href;
-      const url = new URL(currentUrl);
-      const searchParams = new URLSearchParams(url.search);
-      let pageValue = searchParams.get("page");
-      let kategoriValue = searchParams.get("kategori")?.toString().split(",");
-      let levelValue = searchParams.get("level")?.toString().split(",");
-      let hargaValue = searchParams.get("harga")?.toString().split(",");
-      let searchValue = searchParams.get("search")?.toString().split(",") || "";
+  // useEffect(() => {
+  //   setRender((prev) => prev + 1);
 
-      console.log({ pageValue, kategoriValue, hargaValue, searchValue });
-      if (kategoriValue && levelValue && hargaValue) {
-        // console.log({ newHarga });
-        const oldKategori = kategoriFilter?.map((kategori) => ({
-          ...kategori,
-          bool: kategoriValue.includes(kategori.nama),
-        }));
-        const oldLevel = levelFilter?.map((level) => ({
-          ...level,
-          bool: levelValue.includes(level.nama),
-        }));
+  //   try {
+  //     // console.log(levelFilter);
+  //     // const newLevel = level.map((el) => ({ ...el, bool: false }));
+  //     // const newHarga = harga.map((el) => ({ ...el, bool: false }));
+  //     // console.log("newLevel");
+  //     const currentUrl = window.location.href;
+  //     const url = new URL(currentUrl);
+  //     const searchParams = new URLSearchParams(url.search);
+  //     let pageValue = searchParams.get("page");
+  //     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
+  //     let levelValue = searchParams.get("level")?.toString().split(",");
+  //     let hargaValue = searchParams.get("harga")?.toString().split(",");
+  //     let searchValue = searchParams.get("search")?.toString().split(",") || "";
 
-        const oldHarga = hargaFilter.map((harga) => ({
-          ...harga,
-          bool: hargaValue.includes(harga.harga_max.toString()),
-        }));
-        // console.log({ levelFilter });
-        setRenderCount((prev) => prev + 1);
-        setHargaFilter(oldHarga);
-        setKategoriFilter(oldKategori);
-        setLevelFilter(oldLevel);
-      } else if (kategoriValue && !levelValue && !hargaValue) {
-        console.log("1");
-        const oldKategori = kategoriFilter?.map((kategori) => ({
-          ...kategori,
-          bool: kategoriValue.includes(kategori.nama),
-        }));
-        // console.log({ oldKategori });
-        setKategoriFilter(oldKategori);
-      } else if (!kategoriValue && levelValue && !hargaValue) {
-        console.log("2");
-        const oldLevel = levelFilter?.map((level) => ({
-          ...level,
-          bool: levelValue.includes(level.nama),
-        }));
-        setLevelFilter(oldLevel);
-      } else if (!kategoriValue && levelValue && hargaValue) {
-        console.log("3");
+  //     console.log({ pageValue, kategoriValue, hargaValue, searchValue });
+  //     if (kategoriValue && levelValue && hargaValue) {
+  //       // console.log({ newHarga });
+  //       const oldKategori = kategoriFilter?.map((kategori) => ({
+  //         ...kategori,
+  //         bool: kategoriValue.includes(kategori.nama),
+  //       }));
+  //       const oldLevel = levelFilter?.map((level) => ({
+  //         ...level,
+  //         bool: levelValue.includes(level.nama),
+  //       }));
 
-        const oldLevel = levelFilter?.map((level) => ({
-          ...level,
-          bool: levelValue.includes(level.nama),
-        }));
-        const oldHarga = newHarga.map((harga) => ({
-          ...harga,
-          bool: hargaValue.includes(harga.harga_max.toString()),
-        }));
+  //       const oldHarga = hargaFilter?.map((harga) => ({
+  //         ...harga,
+  //         bool: hargaValue.includes(harga.harga_max.toString()),
+  //       }));
+  //       console.log({ oldHarga, oldLevel, oldKategori });
 
-        setHargaFilter(oldHarga);
-        setLevelFilter(oldLevel);
-      } else if (!kategoriValue && !levelValue && hargaValue) {
-        console.log("4");
-        // console.log({ newHarga });
+  //       setHargaFilter(oldHarga);
+  //       setLevelFilter(oldLevel);
+  //       setKategoriFilter(oldKategori);
 
-        const oldHarga = newHarga.map((harga) => ({
-          ...harga,
-          bool: hargaValue.includes(harga.harga_max.toString()),
-        }));
+  //       setKategoriUrl(kategoriValue);
+  //       setLevelUrl(levelValue);
+  //       setHargaUrl(hargaValue);
 
-        setHargaFilter(oldHarga);
-      } else {
-        const oriKategori = kategoriFilter.map((el) => ({
-          ...el,
-          bool: false,
-        }));
-        const oriLevel = levelFilter.map((el) => ({
-          ...el,
-          bool: false,
-        }));
-        // console.log({ oriKategori });
-        // console.log({ newHarga });
-        setHargaFilter(newHarga);
-        setKategoriFilter(oriKategori);
-        setLevelFilter(oriLevel);
-      }
-      if (pageValue) {
-        setPage(Number(pageValue) - 1);
-        setCurrentPage(Number(pageValue) - 1);
-      }
+  //       setRenderCount((prev) => prev + 1);
+  //     } else if (kategoriValue && !levelValue && !hargaValue) {
+  //       console.log("1");
+  //       const oldKategori = kategoriFilter?.map((kategori) => ({
+  //         ...kategori,
+  //         bool: kategoriValue.includes(kategori.nama),
+  //       }));
+  //       // console.log({ oldKategori });
+  //       setKategoriFilter(oldKategori);
+  //     } else if (!kategoriValue && levelValue && !hargaValue) {
+  //       console.log("2");
+  //       const oldLevel = levelFilter?.map((level) => ({
+  //         ...level,
+  //         bool: levelValue.includes(level.nama),
+  //       }));
+  //       setLevelFilter(oldLevel);
+  //     } else if (!kategoriValue && levelValue && hargaValue) {
+  //       console.log("3");
 
-      setSearch(searchValue);
-    } catch (error) {
-      console.log(error);
-    }
-  }, []);
+  //       const oldLevel = levelFilter?.map((level) => ({
+  //         ...level,
+  //         bool: levelValue.includes(level.nama),
+  //       }));
+  //       const oldHarga = hargaFilter.map((harga) => ({
+  //         ...harga,
+  //         bool: hargaValue.includes(harga.harga_max.toString()),
+  //       }));
+
+  //       setHargaFilter(oldHarga);
+  //       setLevelFilter(oldLevel);
+  //     } else if (!kategoriValue && !levelValue && hargaValue) {
+  //       console.log("4");
+  //       // console.log({ newHarga });
+
+  //       const oldHarga = hargaFilter.map((harga) => ({
+  //         ...harga,
+  //         bool: hargaValue.includes(harga.harga_max.toString()),
+  //       }));
+
+  //       setHargaFilter(oldHarga);
+  //     } else {
+  //       const oriKategori = kategoriFilter.map((el) => ({
+  //         ...el,
+  //         bool: false,
+  //       }));
+  //       const oriLevel = levelFilter.map((el) => ({
+  //         ...el,
+  //         bool: false,
+  //       }));
+  //       const oriHarga = hargaFilter.map((el) => ({
+  //         ...el,
+  //         bool: false,
+  //       }));
+  //       // console.log({ oriKategori });
+  //       // console.log({ newHarga });
+  //       setHargaFilter(oriHarga);
+  //       setKategoriFilter(oriKategori);
+  //       setLevelFilter(oriLevel);
+  //       console.log("ke sini");
+  //     }
+
+  //     console.log("use");
+  //     if (pageValue) {
+  //       setPage(Number(pageValue) - 1);
+  //       setCurrentPage(Number(pageValue) - 1);
+  //     }
+
+  //     setSearch(searchValue);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // }, [filterData]);
 
   // console.log("render");
 
@@ -389,8 +741,19 @@ function MainSection({ search, setSearch }) {
     const url = new URL(currentUrl);
     const searchParams = new URLSearchParams(url.search);
     let pageValue = searchParams.get("page");
-    // console.log({ pageValue });
-    const getPage = 0;
+
+    console.log({ pageValue });
+    let getPage;
+    if (pageValue && Number(pageValue) > 1) {
+      getPage = Number(pageValue) - 1;
+      setPage(Number(pageValue) - 1);
+      console.log("sini");
+    } else {
+      getPage = 0;
+      setPage(0);
+      console.log("jangan sini");
+    }
+
     setCurrentPage(getPage);
 
     const newOffset = (getPage * itemsPerPage) % dataClass.length;
@@ -403,10 +766,10 @@ function MainSection({ search, setSearch }) {
     console.log({ pageCount: Math.ceil(dataClass.length / itemsPerPage) });
     setPageCount(Math.ceil(dataClass.length / itemsPerPage));
 
-    if (pageValue) {
-      setPage(Number(pageValue) - 1);
-      setCurrentPage(Number(pageValue) - 1);
-    }
+    // if (pageValue) {
+    //   setPage(Number(pageValue) - 1);
+    //   setCurrentPage(Number(pageValue) - 1);
+    // }
   }, [dataClass]);
 
   // const handleLevel = (ind) => {
@@ -585,12 +948,13 @@ function MainSection({ search, setSearch }) {
 
   useEffect(() => {
     // console.log((4 + 1) * 2 - 1 === 4.5 * 2);
-  }, [renderCount]);
+    window.scrollTo(0, 500);
+  }, [toggleFilter]);
 
   return (
     <div
       className={`${
-        toggleFilter ? "overflow-hidden" : ""
+        toggleFilter ? "  " : ""
       } w-full px-[5px] md:px-[100px] 2xl:p-0 2xl:max-w-[1080px] flex  justify-center items-start gap-[52px] mt-[160px]`}
     >
       <FilterDataKelas
@@ -608,6 +972,14 @@ function MainSection({ search, setSearch }) {
         setHargaUrl={setHargaUrl}
         setKategoriUrl={setKategoriUrl}
         setLevelUrl={setLevelUrl}
+        fetchDataKelasButton={fetchDataKelasButton}
+        kategoriFilter={kategoriFilter}
+        // setKategoriFilter={setKategoriFilter}
+        hargaFilter={hargaFilter}
+        // setHargaFilter={setHargaFilter}
+        levelFilter={levelFilter}
+        setSearch={setSearch}
+        // setLevelFilter={setLevelFilter}
       />
       {/* <h1>{renderCount}</h1> */}
 

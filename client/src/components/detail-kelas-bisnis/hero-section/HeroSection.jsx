@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { icon, kelasBisnisPic } from "../../../constants";
 import NavigationDetailKelasBisnis from "./navigation-detail-kelas-bisnis/NavigationDetailKelasBisnis";
 import { useParams } from "react-router-dom";
@@ -7,6 +7,8 @@ import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke
 import { api } from "../../../api/api";
 
 function HeroSection({ dataDetail }) {
+  const [star, setStar] = useState(0);
+
   // const { id } = useParams();
   // const fetchDetailKelas = useMemo(async () => {
   //   try {
@@ -22,6 +24,10 @@ function HeroSection({ dataDetail }) {
   //   }
   //   // console.log({ id });
   // }, []);
+
+  useEffect(() => {
+    setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
+  }, [dataDetail]);
 
   console.log({ image: dataDetail?.kelas_bisni?.image });
 
@@ -82,8 +88,7 @@ function HeroSection({ dataDetail }) {
           </div>
           <div className="w-full flex justify-center md:justify-start items-center  gap-[8px]">
             <div className="rating rating-sm rating-half gap-0">
-              {Number(dataDetail?.kelas_bisni?.total_nilai || 0) ===
-              Number(0) ? (
+              {star === Number(0) ? (
                 <>
                   <input
                     type="radio"
@@ -148,91 +153,61 @@ function HeroSection({ dataDetail }) {
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      1
-                    }
+                    defaultChecked={star * 2 === 1}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      2
-                    }
+                    defaultChecked={star * 2 === 2}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      3
-                    }
+                    defaultChecked={star * 2 === 3}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      4
-                    }
+                    defaultChecked={star * 2 === 4}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      5
-                    }
+                    defaultChecked={star * 2 === 5}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      6
-                    }
+                    defaultChecked={star * 2 === 6}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      7
-                    }
+                    defaultChecked={star * 2 === 7}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      8
-                    }
+                    defaultChecked={star * 2 === 8}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      9
-                    }
+                    defaultChecked={star * 2 === 9}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
                     className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={
-                      Number(dataDetail?.kelas_bisni?.total_nilai || 0) * 2 ===
-                      10
-                    }
+                    defaultChecked={star * 2 === 10}
                   />
                 </>
               )}

@@ -22,6 +22,7 @@ import timer from "../assets/icon/timer.png";
 import AWARD from "../assets/icon/iaward.png";
 import BOOK from "../assets/icon/book.png";
 import CHAT from "../assets/icon/chat.png";
+import playOutLine from "../assets/icon/play_outline.svg";
 
 const icon = {
   chevronSmallDownLight,
@@ -48,6 +49,7 @@ const icon = {
   AWARD,
   BOOK,
   CHAT,
+  playOutLine,
 };
 
 export default icon;

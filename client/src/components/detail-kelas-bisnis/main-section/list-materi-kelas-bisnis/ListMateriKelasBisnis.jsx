@@ -7,6 +7,7 @@ import {
   AccordionIcon,
   Box,
 } from "@chakra-ui/react";
+import { icon } from "../../../../constants";
 
 function ListMateriKelasBisnis({ dataDetail }) {
   return (
@@ -25,9 +26,14 @@ function ListMateriKelasBisnis({ dataDetail }) {
                     as="span"
                     flex="1"
                     textAlign="left"
-                    className="w-full text-[16px] md:text-[18px] font-medium leading-[24px] lg:leading-[28px] text-black400 "
+                    className="flex items-center gap-[12px] w-full text-[16px] md:text-[18px] font-medium leading-[24px] lg:leading-[28px] text-black400 "
                   >
-                    {el.materi}
+                    <img
+                      src={icon.playOutLine}
+                      alt="play"
+                      className="w-[24px] h-[24px] "
+                    />
+                    <p> {el.materi}</p>
                   </Box>
                   <AccordionIcon />
                 </AccordionButton>
@@ -48,7 +54,7 @@ function ListMateriKelasBisnis({ dataDetail }) {
                       title="YouTube video player"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                       allowFullScreen
-                      className="hidden md:flex w-[529px] h-[356px] rounded-[10px] "
+                      className="w-[350px] h-[200px] md:w-[529px] md:h-[356px] rounded-[10px] "
                     ></iframe>
                   ) : null}
 
