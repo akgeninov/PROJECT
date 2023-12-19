@@ -4,7 +4,7 @@ import NavbarKelasSaya from './../../../components/kelas-saya/navbar-kelas-saya/
 
 export default function KelasSaya() {
     return (
-    <div className="flex gap-[20px] justify-center items-center shrink-0">
+    <div className="flex flex-wrap gap-[20px] justify-center items-center shrink-0">
         <div>Sidebar</div>
         <div className="flex flex-col">
             <NavbarKelasSaya/>

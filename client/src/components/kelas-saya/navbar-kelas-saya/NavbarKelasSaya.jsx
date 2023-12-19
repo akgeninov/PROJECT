@@ -13,8 +13,8 @@ export default function NavbarKelasSaya() {
     const unactiveLink = "[&>hr]:opacity-0";
   
   return (
-    <div>
-      <p className="text-[32px] font-semibold leading-[72px] mb-[20px]">Kelas Saya</p>
+    <div className="flex-initial">
+      <p className="text-[24px] md:text-[32px] font-semibold leading-[72px] mb-[20px]">Kelas Saya</p>
       <nav className="flex gap-[20px] mb-[20px]">
           {[
             ['Semua Kelas', '/profil/kelas-saya/semua-kelas'],
