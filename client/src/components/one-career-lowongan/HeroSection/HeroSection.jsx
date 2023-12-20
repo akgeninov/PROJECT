@@ -1,7 +1,7 @@
 import React from "react";
 import { images } from "../../../constants";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBuilding,faBriefcase,faUserCircle } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+// import { faBuilding,faBriefcase,faUserCircle } from '@fortawesome/free-solid-svg-icons';
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -35,12 +35,12 @@ function HeroSection(props) {
             <h6 className="text-[#DEDEDE] md:text-[16px] text-[14px] text-center md:text-start font-semibold">{props.lowongan.departemen.nama_departemen_pekerjaan}</h6>
 
             <div className="flex items-center gap-3 font-heebo md:text-[16px] md:justify-start justify-center text-[14px] text-[#DEDEDE] font-light">
-              <FontAwesomeIcon icon={faBriefcase} />
+              {/* <FontAwesomeIcon icon={faBriefcase} />
               {props.lowongan.periode_pekerjaan.nama_periode_perkerjaan}{' '}
               <FontAwesomeIcon icon={faBuilding} />
               {props.lowongan.tipe_pekerjaan.nama_tipe__perkerjaan}{' '}
               <FontAwesomeIcon icon={faUserCircle} />
-              {props.lowongan.jenjang_pekerjaan.nama_jenjang__pekerjaan}
+              {props.lowongan.jenjang_pekerjaan.nama_jenjang__pekerjaan} */}
             </div>
             
             <h6 className="text-center md:text-start font-heebo md:text-[16px] text-[14px] text-[#DEDEDE] font-light mt-10">

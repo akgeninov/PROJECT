@@ -1,4 +1,4 @@
-import { Route, Switch } from "react-router-dom";
+import { Route } from "react-router-dom";
 import Home from "../pages/home/Home";
 import Komunitas from "../pages/komunitas/Komunitas";
 import Protection from "./Protection";
@@ -6,16 +6,20 @@ import Artikel from "../pages/artikel/Artikel";
 // import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
+import Profile from "../pages/profile/Profile";
+import DashboardProfile from "../components/profile/dashboard-profile/dashboardProfile";
+import KelasSaya from "../components/profile/kelas-saya/KelasSaya";
+import SemuaKelasSection from "./../components/profile/kelas-saya/semua-kelas-section/SemuaKelasSection";
+import SedangDipelajariSection from "./../components/profile/kelas-saya/sedang-dipelajari-section/SedangDipelajariSection";
+import BelumDimulaiSection from "./../components/profile/kelas-saya/belum-dimulai-section/BelumDimulaiSection";
+import SelesaiSection from "./../components/profile/kelas-saya/selesai-section/SelesaiSection";
+import Event from "./../components/profile/event/Event";
+import Wishlist from "./../components/profile/wishlist/Wishlist";
+import Transaksi from "./../components/profile/transaksi/Transaksi";
 import TentangKami from "../pages/tentang-kami/TentangKami";
-import KelasSaya from './../pages/profile/kelas-saya/KelasSaya';
-import BelumDimulaiSection from './../components/kelas-saya/belum-dimulai-section/BelumDimulaiSection';
-import SedangDipelajariSection from './../components/kelas-saya/sedang-dipelajari-section/SedangDipelajariSection';
-import SelesaiSection from './../components/kelas-saya/selesai-section/SelesaiSection';
-import SemuaKelasSection from './../components/kelas-saya/semua-kelas-section/SemuaKelasSection';
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
-import Profile from "../pages/profile/Profile";
 
 const routes = [
   <Route
@@ -67,31 +71,6 @@ const routes = [
     }
   />,
   <Route
-    key="about-us"
-    path="/about-us"
-    element={
-      <Protection publicSide={true}>
-        <TentangKami />
-      </Protection>
-    }
-  />,
-  <Route
-    key="kelas-saya"
-    path="/profile/kelas-saya"
-    element={
-      <Protection publicSide={true}>
-        <KelasSaya/>
-      </Protection>
-    }>
-
-      <Route index element={<SemuaKelasSection/>} />
-      <Route path="/profile/kelas-saya/semua-kelas" element={<SemuaKelasSection />} />
-      <Route path="/profile/kelas-saya/belum-dimulai" element={<BelumDimulaiSection />} />
-      <Route path="/profile/kelas-saya/sedang-dipelajari" element={<SedangDipelajariSection />} />
-      <Route path="/profile/kelas-saya/selesai" element={<SelesaiSection/>} />
-
-    </Route>,
-  <Route
     key="career"
     path="/career"
     element={
@@ -124,6 +103,37 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Profile />
+      </Protection>
+    }
+  >
+    <Route index element={<DashboardProfile />} />
+    <Route path="/profile/dashboard/" element={<DashboardProfile />} />
+    <Route path="/profile/kelas-saya/" element={<KelasSaya />}>
+      <Route index element={<SemuaKelasSection />} />
+      <Route
+        path="/profile/kelas-saya/semua-kelas"
+        element={<SemuaKelasSection />}
+      />
+      <Route
+        path="/profile/kelas-saya/belum-dimulai"
+        element={<BelumDimulaiSection />}
+      />
+      <Route
+        path="/profile/kelas-saya/sedang-dipelajari"
+        element={<SedangDipelajariSection />}
+      />
+      <Route path="/profile/kelas-saya/selesai" element={<SelesaiSection />} />
+    </Route>
+    <Route path="/profile/wishlist/" element={<Wishlist />} />
+    <Route path="/profile/event/" element={<Event />} />
+    <Route path="/profile/transaksi/" element={<Transaksi />} />
+  </Route>,
+  <Route
+    key="about-us"
+    path="/about-us"
+    element={
+      <Protection publicSide={true}>
+        <TentangKami />
       </Protection>
     }
   />,
