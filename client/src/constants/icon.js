@@ -14,6 +14,13 @@ import handshake from "../assets/icon/handshake.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
+import profile from "../assets/icon/profile.png";
+import iconHome from "../assets/icon/icon-home.png";
+import iconCourse from "../assets/icon/icon-course.png";
+import iconWishlist from "../assets/icon/icon-wishlist.png";
+import iconEvent from "../assets/icon/icon-zoom.png";
+import iconTransaksi from "../assets/icon/icon-walet.png";
+import iconEdit from "../assets/icon/icon-edit.png"
 
 
 const icon = {
@@ -32,7 +39,14 @@ const icon = {
   handshake,
   insight,
   koneksi,
-  megaphone
+  megaphone,
+  profile,
+  iconHome,
+  iconCourse,
+  iconWishlist,
+  iconEvent,
+  iconTransaksi,
+  iconEdit
 };
 
 export default icon;

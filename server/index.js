@@ -15,11 +15,13 @@ app.use(express.urlencoded({ extended: false }));
 
 const { userRouters } = require("./routers");
 const { artikelRouters } = require("./routers");
+const { lowonganRouters } = require("./routers");
 const { authorize } = require("./middleware/validator");
 
 app.use("/api", authorize);
 app.use("/api/user", userRouters);
 app.use("/api/artikel", artikelRouters);
+app.use("/api/lowongan", lowonganRouters);
 
 app.use("/images", express.static("images"));
 

@@ -3,7 +3,7 @@ import Home from "../pages/home/Home";
 import Komunitas from "../pages/komunitas/Komunitas";
 import Protection from "./Protection";
 import Artikel from "../pages/artikel/Artikel";
-import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
+// import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import TentangKami from "../pages/tentang-kami/TentangKami";
@@ -12,6 +12,10 @@ import BelumDimulaiSection from './../components/kelas-saya/belum-dimulai-sectio
 import SedangDipelajariSection from './../components/kelas-saya/sedang-dipelajari-section/SedangDipelajariSection';
 import SelesaiSection from './../components/kelas-saya/selesai-section/SelesaiSection';
 import SemuaKelasSection from './../components/kelas-saya/semua-kelas-section/SemuaKelasSection';
+import Career from "../pages/career/Career";
+import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
+import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
+import Profile from "../pages/profile/Profile";
 
 const routes = [
   <Route
@@ -87,6 +91,42 @@ const routes = [
       <Route path="/profil/kelas-saya/selesai" element={<SelesaiSection/>} />
 
     </Route>,
+  <Route
+    key="career"
+    path="/career"
+    element={
+      <Protection publicSide={true}>
+        <Career />
+      </Protection>
+    }
+  />,
+  <Route
+    key="careerLowongan"
+    path="/career-lowongan"
+    element={
+      <Protection publicSide={true}>
+        <CareerLowongan />
+      </Protection>
+    }
+  />,
+  <Route
+    key="careerLowongan"
+    path="/career-lowongan/:id_lowongan"
+    element={
+      <Protection publicSide={true}>
+        <OneCareerLowongan />
+      </Protection>
+    }
+  />,
+  <Route
+    key="profile"
+    path="/profile"
+    element={
+      <Protection publicSide={true}>
+        <Profile />
+      </Protection>
+    }
+  />,
 ];
 
 export default routes;
