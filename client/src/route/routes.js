@@ -7,7 +7,7 @@ import Artikel from "../pages/artikel/Artikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import TentangKami from "../pages/tentang-kami/TentangKami";
-import KelasSaya from './../pages/profil/kelas-saya/KelasSaya';
+import KelasSaya from './../pages/profile/kelas-saya/KelasSaya';
 import BelumDimulaiSection from './../components/kelas-saya/belum-dimulai-section/BelumDimulaiSection';
 import SedangDipelajariSection from './../components/kelas-saya/sedang-dipelajari-section/SedangDipelajariSection';
 import SelesaiSection from './../components/kelas-saya/selesai-section/SelesaiSection';
@@ -77,7 +77,7 @@ const routes = [
   />,
   <Route
     key="kelas-saya"
-    path="/profil/kelas-saya"
+    path="/profile/kelas-saya"
     element={
       <Protection publicSide={true}>
         <KelasSaya/>
@@ -85,10 +85,10 @@ const routes = [
     }>
 
       <Route index element={<SemuaKelasSection/>} />
-      <Route path="/profil/kelas-saya/semua-kelas" element={<SemuaKelasSection />} />
-      <Route path="/profil/kelas-saya/belum-dimulai" element={<BelumDimulaiSection />} />
-      <Route path="/profil/kelas-saya/sedang-dipelajari" element={<SedangDipelajariSection />} />
-      <Route path="/profil/kelas-saya/selesai" element={<SelesaiSection/>} />
+      <Route path="/profile/kelas-saya/semua-kelas" element={<SemuaKelasSection />} />
+      <Route path="/profile/kelas-saya/belum-dimulai" element={<BelumDimulaiSection />} />
+      <Route path="/profile/kelas-saya/sedang-dipelajari" element={<SedangDipelajariSection />} />
+      <Route path="/profile/kelas-saya/selesai" element={<SelesaiSection/>} />
 
     </Route>,
   <Route
