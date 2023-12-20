@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faBuilding,faBriefcase,faUserCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBuilding,faBriefcase,faUserCircle, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 function Section_2_lowongan(props) {
   const navigate = useNavigate();
@@ -29,13 +29,13 @@ function Section_2_lowongan(props) {
                 <div className="flex md:items-center gap-3 mt-5 text-[#3F4041] md:w-full">
                   <div className="flex flex-col md:flex-row md:flex-wrap md:items-center gap-3">
                     <div className="flex items-center gap-3" style={{ color: '#3F4041' }}>
-                      {/* <FontAwesomeIcon icon={faBriefcase} style={{ color: '#919192' }} />
+                      <FontAwesomeIcon icon={faBriefcase} style={{ color: '#919192' }} />
                       {props.lowongan.periode_pekerjaan.nama_periode_perkerjaan}
                       <FontAwesomeIcon icon={faBuilding} style={{ color: '#919192' }} />
-                      {props.lowongan.tipe_pekerjaan.nama_tipe__perkerjaan} */}
+                      {props.lowongan.tipe_pekerjaan.nama_tipe__perkerjaan}
                     </div>
                     <div className="flex items-center justify-start gap-3" style={{ color: '#3F4041' }}>
-                      {/* <FontAwesomeIcon icon={faUserCircle} style={{ color: '#919192' }} /> */}
+                      <FontAwesomeIcon icon={faUserCircle} style={{ color: '#919192' }} />
                       {props.lowongan.jenjang_pekerjaan.nama_jenjang__pekerjaan}
                     </div>
                     <div className="col-span-2 text-left mb-2 md:mb-0 md:hidden flex">
@@ -54,7 +54,7 @@ function Section_2_lowongan(props) {
             </div>
             <div className="col-span-1 flex flex-col justify-center items-end border-none text-[#3F4041] md:flex ">
               <button className="focus:outline-none">
-                {/* <FontAwesomeIcon icon={faChevronRight} /> */}
+                <FontAwesomeIcon icon={faChevronRight} />
               </button>
             </div>
           </div>
