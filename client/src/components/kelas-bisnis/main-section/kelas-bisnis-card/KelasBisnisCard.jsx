@@ -89,52 +89,52 @@ function KelasBisnisCard({ el, index, star }) {
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                 </>
               ) : (
@@ -142,61 +142,61 @@ function KelasBisnisCard({ el, index, star }) {
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 1}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 2}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 3}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 4}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 5}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 6}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 7}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 8}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 9}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 10}
                   />
                 </>

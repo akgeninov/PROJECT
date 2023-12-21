@@ -9,6 +9,7 @@ import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
 import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
 import Login from "../pages/login/Login";
+import Register from "../pages/register/Register";
 
 const routes = [
   <Route
@@ -83,6 +84,15 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Login />
+      </Protection>
+    }
+  />,
+  <Route
+    key="login"
+    path="/register"
+    element={
+      <Protection publicSide={true}>
+        <Register />
       </Protection>
     }
   />,

@@ -27,21 +27,25 @@ function HeroSection({ dataDetail }) {
 
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
+    console.log({ setStar: dataDetail?.kelas_bisni?.total_nilai });
   }, [dataDetail]);
+
+  useEffect(() => {
+    console.log({ star });
+  }, [star]);
 
   console.log({ image: dataDetail?.kelas_bisni?.image });
 
-  const { title } = useParams();
   return (
-    <div className="relative  w-full   2xl:max-w-[1280px] h-full  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">
-      <div className="flex min-w-[1280px] xl:min-w-full  max-h-[556px] md:max-h-[660px]  justify-center items-center">
+    <div className="relative  w-full   2xl:max-w-[1280px] h-[600px] md:h-[660px]  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">
+      <div className="flex w-[1280px] xl:w-full  h-[600px] md:h-[660px]  justify-center items-center">
         <img
           src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
           alt="hero"
           className="object-cover w-full xl:w-full h-full"
         />
       </div>
-      <div className="absolute h-[660px] left-0 top-0 bg-black500 opacity-90 w-full  z-10"></div>
+      <div className="absolute h-[600px] md:h-[660px] left-0 top-0 bg-black500 opacity-90 w-full  z-10"></div>
       <div className="absolute w-full z-20 px-0  md:px-[100px] flex flex-col items-center md:items-start mt-[24px] ">
         <NavigationDetailKelasBisnis dataDetail={dataDetail} />
         <div className="gap-[24px] flex flex-col items-start mt-[52px]">
@@ -88,7 +92,7 @@ function HeroSection({ dataDetail }) {
           </div>
           <div className="w-full flex justify-center md:justify-start items-center  gap-[8px]">
             <div className="rating rating-sm rating-half gap-0">
-              {star === Number(0) ? (
+              {star === Number(0) || isNaN(star) ? (
                 <>
                   <input
                     type="radio"
@@ -99,52 +103,52 @@ function HeroSection({ dataDetail }) {
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                 </>
               ) : (
@@ -152,62 +156,62 @@ function HeroSection({ dataDetail }) {
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={star * 2 === 1}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    checked={!!(star * 2 === 1)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={star * 2 === 2}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    checked={!!(star * 2 === 2)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={star * 2 === 3}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    checked={!!(star * 2 === 3)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={star * 2 === 4}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    checked={!!(star * 2 === 4)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={star * 2 === 5}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    checked={!!(star * 2 === 5)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={star * 2 === 6}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    checked={!!(star * 2 === 6)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={star * 2 === 7}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    checked={!!(star * 2 === 7)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={star * 2 === 8}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    checked={!!(star * 2 === 8)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={star * 2 === 9}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    checked={!!(star * 2 === 9)}
                   />
                   <input
                     type="radio"
                     name={`rating-1`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={star * 2 === 10}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    checked={!!(star * 2 === 10)}
                   />
                 </>
               )}
@@ -254,11 +258,11 @@ function HeroSection({ dataDetail }) {
           />
         </div>
       </div>
-      <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] md:w-[432px] h-[188px] md:h-[468px] bottom-[32px] md:bottom-auto md:top-[112px] md:right-[100px]">
+      <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] xl:w-[432px] h-[188px] xl:h-[468px] bottom-[32px] lg:bottom-auto lg:top-[300px] xl:top-[112px] lg:right-[100px]">
         <img
           src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
           alt="hero small"
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover flex md:hidden lg:flex"
         />
         {/* <img
           src={kelasBisnisPic.heroKelasBisnis1}

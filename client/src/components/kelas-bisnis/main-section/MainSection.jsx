@@ -985,14 +985,14 @@ function MainSection({ search, setSearch }) {
 
       <div className="w-full flex flex-col items-center gap-[52px] ">
         <div className="w-full flex flex-col items-center gap-[32px] h-[4200px] lg:h-[2372px]  xl:h-[1472px]">
-          <div className="w-full   flex justify-between items-center lg:justify-end">
-            <button
-              onClick={() => setToggleFilter((prev) => !prev)}
-              className="flex md:hidden px-[36px] py-[12px]  justify-center items-center text-whiteSmoke500 bg-black500 rounded-[10px]"
-            >
-              <HiFilter />
-              <p className="text-[16px] leading-[24px] font-medium">Filter</p>
-            </button>
+          <button
+            onClick={() => setToggleFilter((prev) => !prev)}
+            className="sticky top-[20px] flex md:hidden px-[36px] py-[12px]  justify-center items-center text-whiteSmoke500 bg-black500 rounded-[10px]"
+          >
+            <HiFilter />
+            <p className="text-[16px] leading-[24px] font-medium">Filter</p>
+          </button>
+          <div className="   w-full   flex  items-center justify-end">
             <p>({dataClass.length}) Kelas Ditemukan</p>
           </div>
           <div className="grid grid-cols-1  lg:grid-cols-2  xl:grid-cols-3  gap-[24px] ">
