@@ -6,12 +6,15 @@ import ButtonBorderWhitesmoke500 from "../../global-component/button/button-bord
 function JoinSection() {
   return (
     <>
-      <div className=" relative hidden md:flex justify-end items-center mt-[160px]  w-full 2xl:max-w-[1280px] h-[484px] ">
-        <img
-          src={images.ellipse9}
-          alt="ellipse"
-          className="absolute w-fit left-0 "
-        />
+      <div className=" relative hidden md:flex justify-end items-center mt-[160px]  w-full 2xl:max-w-[1280px] h-[484px] overflow-hidden">
+        <div className="absolute overflow-hidden w-[684px] h-[684px] rounded-full -left-[100px] flex items-center justify-center">
+          <img
+            src={images.joinOri}
+            alt="ellipse"
+            className="object-cover w-full h-full absolute -left-[15px] "
+          />
+        </div>
+
         <div className="relative bg-gradient-radial  w-full 2xl:max-w-[1280px] h-[484px]  pt-[80px]">
           <div className="pr-[100px] flex flex-col  items-end ">
             <div className="space-y-[52px]">
@@ -46,11 +49,14 @@ function JoinSection() {
         </div>
       </div>
       <div className=" relative flex flex-col md:hidden justify-center items-center mt-[160px] w-full 2xl:max-w-[1280px] min-h-[484px] ">
-        <img
-          src={images.rectangleJoin}
-          alt="ellipse"
-          className=" w-full top-0 "
-        />
+        <div className="relative  w-full top-0  flex justify-center items-center h-[196px] bg-red-300">
+          <div className="absolute h-full w-full bg-gradient-to-t from-black400 to-transparent"></div>
+          <img
+            src={images.joinOri}
+            alt="ellipse"
+            className=" object-cover w-full h-full"
+          />
+        </div>
         <div className="relative flex justify-center bg-black400  w-full 2xl:max-w-[1280px] min-h-[484px]  pt-[80px]  pb-[32px]">
           <div className="mt-[32px] flex flex-col  items-center ">
             <div className="space-y-[52px]  flex flex-col items-center">

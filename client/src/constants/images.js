@@ -17,6 +17,8 @@ import oriVector2 from "../assets/images/ori_vector_2.jpg";
 import oriKelasBisnis from "../assets/images/ori_kelas_bisnis.png";
 import lineWhiteSmoke from "../assets/images/line_white_smoke.png";
 import googleIcon from "../assets/images/google_icon.png";
+import headerLogin from "../assets/images/header-01.png";
+import joinOri from "../assets/images/join_ori.png";
 
 const images = {
   vector2,
@@ -38,6 +40,8 @@ const images = {
   oriKelasBisnis,
   lineWhiteSmoke,
   googleIcon,
+  headerLogin,
+  joinOri,
 };
 
 export default images;
