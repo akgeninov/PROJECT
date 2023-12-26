@@ -3,8 +3,8 @@ import SearchSection from "../../components/career-lowongan/search-section/Searc
 import Section_2_lowongan from "../../components/career-lowongan/section2/Section_2_lowongan";
 import { useNavigate } from "react-router-dom";
 import { api } from "../../api/api";
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
 
 function Career() {
   const navigate = useNavigate();
@@ -56,13 +56,13 @@ function Career() {
             ({lowonganData.length}) Total Lowongan
           </h2>
         </div>
-        {/* {displayData.map((el, index) => (
+        {displayData.map((el, index) => (
           <Section_2_lowongan
             lowongan={el}
             key={index}
             onClick={() => handleContainerClick(el.id)}
           />
-        ))} */}
+        ))}
 
         <div className="grid grid-cols-1 md:grid-cols-2 items-center space-x-4 max-w-[1080px] mx-auto md:p-4 px-10 py-4 mb-[30px]">
           <div className="md:flex md:flex-row md:items-center md:justify-between">
@@ -72,7 +72,7 @@ function Career() {
           </div>
           <div className="flex space-x-2 justify-center md:justify-end ">
               <button onClick={handlePrevClick} disabled={startIndex === 0} className="focus:outline-none">
-                {/* <FontAwesomeIcon icon={faChevronLeft} /> */}
+                <FontAwesomeIcon icon={faChevronLeft} />
               </button>
               {pageNumbers.map((pageNumber) => (
                 <button
@@ -92,7 +92,7 @@ function Career() {
                 disabled={startIndex + itemsPerPage >= lowonganData.length}
                 className="focus:outline-none"
               >
-                {/* <FontAwesomeIcon icon={faChevronRight} /> */}
+                <FontAwesomeIcon icon={faChevronRight} />
               </button>
           </div>
         </div>
