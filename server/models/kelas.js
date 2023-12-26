@@ -4,13 +4,22 @@ const {
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class kelas extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
     static associate(models) {
-      // define association here
+      kelas.belongsTo(models.kategori_kelas, {
+        foreignKey: {
+          name: "kategori",
+        }
+      });
+      kelas.belongsTo(models.level_kelas, {
+        foreignKey: {
+          name: "level",
+        }
+      });
+      kelas.belongsTo(models.akses_kelas, {
+        foreignKey: {
+          name: "akses",
+        }
+      });
     }
   }
   kelas.init({
@@ -21,7 +30,8 @@ module.exports = (sequelize, DataTypes) => {
     rating: DataTypes.FLOAT,
     gambar: DataTypes.BLOB,
     id_kategori_kelas: DataTypes.INTEGER,
-    id_level_kelas: DataTypes.INTEGER
+    id_level_kelas: DataTypes.INTEGER,
+    id_akses_kelas: DataTypes.INTEGER
   }, {
     sequelize,
     modelName: 'kelas',

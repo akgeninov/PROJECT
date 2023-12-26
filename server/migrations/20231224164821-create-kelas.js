@@ -28,10 +28,31 @@ module.exports = {
         type: Sequelize.BLOB
       },
       id_kategori_kelas: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "kategori_kelas",
+          },
+          key: "id",
+        },
       },
       id_level_kelas: {
-        type: Sequelize.INTEGER
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "level_kelas",
+          },
+          key: "id",
+        },
+      },
+      id_akses_kelas: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: {
+            tableName: "akses_kelas",
+          },
+          key: "id",
+        },
       },
       createdAt: {
         allowNull: false,
