@@ -28,7 +28,7 @@ function ArticleSection() {
   useEffect(() => {
     fetchArtikel();
     // console.log(articles);
-  },[]);
+  }, []);
   // useEffect(() => {
   //   console.log(articles);
   // },[articles]);
@@ -63,22 +63,17 @@ function ArticleSection() {
   }, []);
 
   return (
-    <div className=" pb-20 pt-[60px] lg:pt-[160px]  w-full flex flex-col items-center gap-[52px] bg-whiteSmoke500 z-10">
+    <div className=" pb-20 pt-[60px] lg:pt-[160px] max-w-screen-2xl w-full flex flex-col items-center gap-[52px] bg-whiteSmoke500 z-10">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
         className="flex flex-col gap-[8px] lg:gap-[16px]"
       >
-        <h1 className="text-[24px] lg:text-[40px] font-bold leading-[36px] lg:leading-[60px] max-w-[700px] text-center">
+        <h1 className="text-[22px] lg:text-[40px] font-bold leading-[32px] lg:leading-[60px] w-[358px] lg:w-[564px] text-center">
           Temukan Artikel Menarik dari Komunitas
         </h1>
-        {/* <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] max-w-[700px] text-center">
-          Temukan wawasan mendalam, strategi terkini, dan tips praktis yang
-          dapat langsung diterapkan untuk mengembangkan bisnismu ke level
-          berikutnya
-        </p> */}
       </div>
-      <div className="w-screen xl:w-fit flex overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
+      <div className="w-screen xl:w-fit flex  flex-wrap justify-center overflow-x-scroll xl:overflow-visible gap-y-[52px] gap-x-[24px]">
         {articles.map((article, index) => (
           <NewsCard
             key={index}

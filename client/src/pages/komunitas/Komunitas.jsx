@@ -7,7 +7,7 @@ import { useParams } from "react-router-dom";
 
 function Komunitas() {
     return (
-    <div className=" flex flex-col justify-center items-center shrink-0">
+    <div className="flex flex-col justify-center items-center shrink-0">
         <HeroSection/>
         <BenefitSection/>
         <JoincomunitySection/>

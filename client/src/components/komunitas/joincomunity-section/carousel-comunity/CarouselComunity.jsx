@@ -18,25 +18,27 @@ const dataImg = [
   ];
 
 function carouselComunity() {
+
+  
   return (
-    <div className="absolute z-0 w-full">
-      <Marquee direction="right" play="true" className="brightness-[0.2] mb-[70px]">
+    <div className="absolute z-0 w-[390px] md:w-full h-[844px] md:h-fit flex flex-row md:flex-col">
+      <Marquee direction="right"  play="true" className="brightness-[0.2] md:mb-[70px] ">
         {dataImg?.map((pic, index) => (
           <div key={index}>
             <img
               src={pic}
-              className="w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] mr-[240px] rounded-lg object-cover "
+              className="w-[164px] h-[164px] lg:w-[200px] lg:h-[200px] mb-[200px] md:mb-0 md:mr-[240px] rounded-lg object-cover "
               alt="client1"
             />
           </div>
         ))}
       </Marquee>
-      <Marquee  className="brightness-[0.2]">
+      <Marquee play="true" className="brightness-[0.2]">
         {dataImg?.map((pic, index) => (
           <div key={index}>
             <img
               src={pic}
-              className="w-[120px] h-[120px] sm:w-[200px] sm:h-[200px] mr-[240px] rounded-lg object-cover"
+              className="w-[164px] h-[164px] lg:w-[200px] lg:h-[200px] md:mr-[240px] rounded-lg object-cover"
               alt="client1"
             />
           </div>
