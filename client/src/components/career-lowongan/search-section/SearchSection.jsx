@@ -79,6 +79,7 @@ function SearchSection({ onSearch }) {
                   value={searchTerm}
                   onChange={handleSearchChange}
                   onKeyPress={handleKeyPress}
+                  style={{ color: 'black' }}
                 />
               </div>
           </div>
