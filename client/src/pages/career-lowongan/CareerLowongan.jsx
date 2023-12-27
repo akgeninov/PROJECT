@@ -19,14 +19,19 @@ function Career() {
   const getAllLowongan = async () => {
     try {
       const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}/lowongan/allLowongan`);
-      setLowonganData(response.data.data);
+      setLowonganData(response.data.data.filter(el => isValidDeadline(el.batas_lamar)));
     } catch (error) {
       console.error("Error:", error.message);
     }
   };
 
+  const isValidDeadline = (deadline) => {
+    const today = new Date();
+    const deadlineDate = new Date(deadline);
+    return today <= deadlineDate;
+  };
+
   const handleContainerClick = (lowonganId) => {
-    // Navigate to your desired route upon container click
     navigate(`/career-lowongan/${lowonganId}`);
   };
 
@@ -68,32 +73,32 @@ function Career() {
           <div className="md:flex md:flex-row md:items-center md:justify-between">
             <p className="md:text-left text-center mb-4 md:mb-0">
               Menampilkan {startIndex + 1} - {Math.min(startIndex + itemsPerPage, lowonganData.length)} dari {lowonganData.length} lowongan tersedia
-            </p>           
+            </p>
           </div>
           <div className="flex space-x-2 justify-center md:justify-end ">
-              <button onClick={handlePrevClick} disabled={startIndex === 0} className="focus:outline-none">
-                <FontAwesomeIcon icon={faChevronLeft} />
-              </button>
-              {pageNumbers.map((pageNumber) => (
-                <button
-                  key={pageNumber}
-                  onClick={() => handlePageClick(pageNumber)}
-                  className={`px-2 py-1 rounded-full focus:outline-none ${
-                    startIndex / itemsPerPage + 1 === pageNumber
-                      ? 'bg-black text-white'
-                      : 'bg-gray-200 text-gray-700'
-                  }`}
-                >
-                  {pageNumber}
-                </button>
-              ))}
+            <button onClick={handlePrevClick} disabled={startIndex === 0} className="focus:outline-none">
+              <FontAwesomeIcon icon={faChevronLeft} />
+            </button>
+            {pageNumbers.map((pageNumber) => (
               <button
-                onClick={handleNextClick}
-                disabled={startIndex + itemsPerPage >= lowonganData.length}
-                className="focus:outline-none"
+                key={pageNumber}
+                onClick={() => handlePageClick(pageNumber)}
+                className={`px-2 py-1 rounded-full focus:outline-none ${
+                  startIndex / itemsPerPage + 1 === pageNumber
+                    ? 'bg-black text-white'
+                    : 'bg-gray-200 text-gray-700'
+                }`}
               >
-                <FontAwesomeIcon icon={faChevronRight} />
+                {pageNumber}
               </button>
+            ))}
+            <button
+              onClick={handleNextClick}
+              disabled={startIndex + itemsPerPage >= lowonganData.length}
+              className="focus:outline-none"
+            >
+              <FontAwesomeIcon icon={faChevronRight} />
+            </button>
           </div>
         </div>
 
