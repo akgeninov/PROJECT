@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { images } from "../../../constants";
 import { Link } from 'react-router-dom';
 
-function SearchSection() {
-
+function SearchSection({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [isHovered, setIsHovered] = useState(false);
 
@@ -11,15 +10,15 @@ function SearchSection() {
     setSearchTerm(event.target.value);
   };
 
+  const handleSearchSubmit = () => {
+    onSearch(searchTerm);
+  };
+
   const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
-        performSearch();
-      }
-    };
-  
-    const performSearch = () => {
-      alert(`Melakukan pencarian untuk: ${searchTerm}`);
-    };
+    if (event.key === "Enter") {
+      handleSearchSubmit();
+    }
+  };
 
   return (
     <div className="flex bg-black500 w-full  w-full ">
@@ -76,10 +75,10 @@ function SearchSection() {
                 <input
                   type="text"
                   placeholder="Cari lowongan yang kamu inginkan"
+                  className="lg:w-[556px] md:w-[500px] w-full h-14 rounded-xl pl-12"
                   value={searchTerm}
                   onChange={handleSearchChange}
                   onKeyPress={handleKeyPress}
-                  className="lg:w-[556px] md:w-[500px] w-full h-14 rounded-xl pl-12"
                 />
               </div>
           </div>
