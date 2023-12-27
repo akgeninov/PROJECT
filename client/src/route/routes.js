@@ -16,7 +16,7 @@ const routes = [
     key="home"
     path="/"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Home />
       </Protection>
     }
@@ -25,7 +25,7 @@ const routes = [
     key="artikel"
     path="/artikel/:page"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Artikel />
       </Protection>
     }
@@ -37,7 +37,7 @@ const routes = [
     key="detail-artikel"
     path="/detail-artikel/:kategori/:title"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <DetailArtikel />
       </Protection>
     }
@@ -46,7 +46,7 @@ const routes = [
     key="komunitas-konten-kreator"
     path="/komunitas/:title"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Komunitas />
       </Protection>
     }
@@ -55,7 +55,7 @@ const routes = [
     key="komunitas-bisnis"
     path="/komunitas/:title"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Komunitas />
       </Protection>
     }
@@ -64,7 +64,7 @@ const routes = [
     key="kelas-bisnis"
     path="/kelas-bisnis"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <KelasBisnis />
       </Protection>
     }
@@ -73,7 +73,7 @@ const routes = [
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <DetailKelasBisnis />
       </Protection>
     }

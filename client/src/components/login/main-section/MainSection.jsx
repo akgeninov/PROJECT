@@ -1,14 +1,25 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { HiEye, HiEyeOff } from "react-icons/hi";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { images } from "../../../constants";
 import { useForm } from "react-hook-form";
 import { LuLoader2 } from "react-icons/lu";
+import { api } from "../../../api/api";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "./lib/signinSchema";
+import { signInWithPopup } from "firebase/auth";
+
+import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import { Link } from "react-router-dom";
 
 function MainSection() {
+  const dispatch = useDispatch();
+
+  const [googleButton, setGoogleButton] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -19,15 +30,52 @@ function MainSection() {
   });
 
   const [isHide, setIsHide] = useState(true);
-
+  const timeoutRef = useRef(null);
   const onSubmit = async (data) => {
-    console.log({ isSubmitting });
+    console.log({ data });
+
     try {
-      await new Promise((resolve) => setTimeout(resolve, 1000));
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+        {
+          nama_user: data.EMAIL,
+          password: data.PASSWORD,
+        }
+      );
+      console.log(response);
       reset();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const loginWithFirebse = async () => {
+    setGoogleButton(true);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
+        const response = await api.post(
+          `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+          {
+            email: responsFirebase.user.email,
+            uid_firebase: responsFirebase.user.uid,
+            display_name: responsFirebase.user.displayName,
+            // password: data.PASSWORD,
+          }
+        );
+        dispatch(setToken(response.data.token));
+        localStorage.setItem("auth", JSON.stringify(response.data.token));
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setGoogleButton(false);
+      }
+    }, 2000);
   };
 
   return (
@@ -128,7 +176,11 @@ function MainSection() {
         </div>
 
         <div className="w-[208px] md:w-[538px] mb-[414px]">
-          <button className="flex justify-center items-center h-[64px] w-full bg-whiteSmoke600 rounded-[10px] mt-[48px] gap-[10px]">
+          <button
+            disabled={googleButton}
+            onClick={loginWithFirebse}
+            className=" flex justify-center items-center h-[64px] w-full bg-whiteSmoke600 rounded-[10px] mt-[48px] gap-[10px] disabled:opacity-50"
+          >
             <img
               src={images.googleIcon}
               alt="google"
@@ -137,12 +189,15 @@ function MainSection() {
             <p className="text-[16px] font-medium leading-[24px]">Google</p>
           </button>
 
-          <div className="w-full flex justify-center items-center mt-[60px]">
+          <Link
+            to={"/register"}
+            className="w-full flex justify-center items-center mt-[60px]"
+          >
             <p className="text-[12px] md:text-[18px] font-medium leading-[24px]">
               Belum punya akun?{" "}
               <span className="text-indigoDye500 cursor-pointer ">Daftar</span>
             </p>
-          </div>
+          </Link>
         </div>
       </div>
     </div>

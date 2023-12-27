@@ -4,8 +4,15 @@ import ButtonBlack500 from "../../global-component/button/button-black500/Button
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signUpSchema } from "./lib/signupSchema";
+import { signInWithPopup, signInWithRedirect } from "firebase/auth";
+import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
+import { useDispatch } from "react-redux";
+import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import { api } from "../../../api/api";
 
 function MainSection() {
+  const dispatch = useDispatch();
+
   const {
     register,
     handleSubmit,
@@ -18,6 +25,27 @@ function MainSection() {
   // const confirmPassword = watch("CONFIRM_PASSWORD");
 
   const [isHide, setIsHide] = useState(true);
+
+  const loginWithFirebse = async () => {
+    try {
+      const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
+      // const responsFirebase = signInWithRedirect(auth, googleAuthProvider);
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+        {
+          email: responsFirebase.user.email,
+          uid_firebase: responsFirebase.user.uid,
+          display_name: responsFirebase.user.displayName,
+          // password: data.PASSWORD,
+        }
+      );
+      dispatch(setToken(response.data.token));
+      localStorage.setItem("auth", JSON.stringify(response.data.token));
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const onSubmit = async (data) => {
     console.log({ isSubmitting });
@@ -148,7 +176,10 @@ function MainSection() {
         </div>
 
         <div className="w-[208px] md:w-[538px] mb-[76px]">
-          <button className="flex justify-center items-center h-[64px] w-full bg-whiteSmoke600 rounded-[10px] mt-[48px] gap-[10px]">
+          <button
+            onClick={loginWithFirebse}
+            className="flex justify-center items-center h-[64px] w-full bg-whiteSmoke600 rounded-[10px] mt-[48px] gap-[10px]"
+          >
             <img
               src={images.googleIcon}
               alt="google"

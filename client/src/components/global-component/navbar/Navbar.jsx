@@ -5,15 +5,30 @@ import ButtonBlack500 from "../button/button-black500/ButtonBlack500";
 import ButtonBorderWhitesmoke500 from "../button/button-borderwhitesmoke500/ButtonBorderWhitesmoke500";
 import ButtonBorderBlack500 from "../button/button-borderblack500/ButtonBorderBlack500";
 import NavigationComponent from "./navigationComponent/NavigationComponent";
+import { api } from "../../../api/api";
+import { signOut } from "firebase/auth";
+import { auth } from "../../../lib/firebase/firebase";
+import { useDispatch, useSelector } from "react-redux";
+import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
 function Navbar() {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const [toggle, setToggle] = useState({
     layanan: false,
     komunitas: false,
   });
 
+  const [dataUser, setDataUser] = useState(null);
   const [isActive, setIsActive] = useState("");
+  const [toggleProfile, setTOggleProfile] = useState(false);
+
+  // const [token, setToken] = useState(JSON.parse(localStorage.getItem("auth")));
+
+  const { token } = useSelector((state) => state.userSlice);
 
   const handleClick = (title) => {
     if (title === "Layanan" || title === "Komunitas") {
@@ -28,9 +43,48 @@ function Navbar() {
       }));
     }
   };
+
+  const getUserData = async (token) => {
+    try {
+      const response = await api.get(
+        `${process.env.REACT_APP_API_BASE_URL}/user/one-user`,
+        {
+          headers: {
+            Authorization: token,
+            Accept: "appplication/json",
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setDataUser(response.data.data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const logOut = () => {
+    localStorage.removeItem("auth");
+    signOut(auth);
+    setDataUser(null);
+    setTOggleProfile(false);
+  };
+
   useEffect(() => {
-    // console.log(isActive);
-  }, [isActive]);
+    console.log({ dataUser: dataUser });
+  }, [dataUser]);
+
+  useEffect(() => {
+    console.log("jalan");
+    if (JSON.parse(localStorage.getItem("auth"))) {
+      dispatch(setToken(JSON.parse(localStorage.getItem("auth"))));
+      getUserData(JSON.parse(localStorage.getItem("auth")));
+    } else {
+      localStorage.setItem("auth", null);
+      setDataUser(null);
+    }
+    console.log({ token });
+  }, [token]);
 
   return (
     <div className=" flex  justify-center  w-full items-center h-[120px] bg-whiteSmoke500 ">
@@ -185,17 +239,72 @@ function Navbar() {
               Hubungi Kami
             </p>
           </button> */}
-          <ButtonBorderBlack500
-            TEXT_BUTTON={"Hubungi Kami"}
-            WIDTH={"w-[160px]"}
-            RESPONSIF={"hidden xl:flex"}
-          />
+          <div>
+            <ButtonBorderBlack500
+              TEXT_BUTTON={"Hubungi Kami"}
+              WIDTH={"w-[160px]"}
+              RESPONSIF={"hidden xl:flex"}
+            />
+          </div>
+
           {/* <button className="flex flex-auto w-[160px] px-[32px] py-[16px] justify-center items-center rounded-[10px] bg-black500 hover:bg-whiteSmoke800">
             <p className="w-[116px] shrink-0 text-whiteSmoke500 leading-[24px] font-medium text-[16px]">
               Login/Daftar
             </p>
           </button> */}
-          <ButtonBlack500 WIDTH={"w-[160px]"} TEXT_BUTTON={"Login/Daftar"} />
+
+          {dataUser ? (
+            <div className="relative flex justify-center items-center ">
+              <div
+                onClick={() => setTOggleProfile((prev) => !prev)}
+                className="w-[50px] h-[50px] rounded-full overflow-hidden cursor-pointer"
+              >
+                <img
+                  src={`${process.env.REACT_APP_SERVER_URL}images/user/${dataUser.profile_picture}`}
+                  alt="profile"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div
+                className={`${
+                  toggleProfile ? "block" : "hidden"
+                } absolute z-50 translate-y-48 -translate-x-28 py-[12px] bg-whiteSmoke500 shadow-customSm rounded-[10px]`}
+              >
+                <ul className="w-[268px] gap-[4px] text-[16px] font-medium">
+                  <li className="px-[24px] py-[12px] flex flex-col justify-center items-start ">
+                    <h1 className="text-[14px] font-bold leading-[20px]">
+                      {dataUser.nama_user}
+                    </h1>
+                    <p className="text-[14px] font-light leading-[20px]">
+                      {dataUser.email}
+                    </p>
+                  </li>
+                  <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer">
+                    Profile Saya
+                  </li>
+                  <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer ">
+                    Kelas Saya
+                  </li>
+                  <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer">
+                    Wishlist
+                  </li>
+                  <li
+                    onClick={logOut}
+                    className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer"
+                  >
+                    Keluar
+                  </li>
+                </ul>
+              </div>
+            </div>
+          ) : (
+            <div onClick={() => navigate("/login")}>
+              <ButtonBlack500
+                WIDTH={"w-[160px]"}
+                TEXT_BUTTON={"Login/Daftar"}
+              />
+            </div>
+          )}
         </div>
         <button className="flex lg:hidden  p-[4px]  justify-center items-center  bg-whiteSmoke500">
           <img src={icon.line3solid} alt="line3" />

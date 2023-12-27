@@ -8,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      User.belongsTo(models.Role, {foreignKey: {name: "role_id"}})
-      User.hasOne(models.kelas_rating, {foreignKey:"id_user"})
+      User.belongsTo(models.Role, { foreignKey: { name: "role_id" } });
+      User.hasOne(models.kelas_rating, { foreignKey: "id_user" });
     }
   }
   User.init(
@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
             "profile_picture"
           )}`;
         },
-      }
+      },
+      uid_firebase: DataTypes.STRING,
     },
     {
       sequelize,

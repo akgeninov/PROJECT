@@ -14,6 +14,7 @@ module.exports = {
         kota: null,
         profile_picture: null,
         role_id: 1,
+        uid_firebase: null,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -27,6 +28,8 @@ module.exports = {
         kota: null,
         profile_picture: null,
         role_id: 2,
+        uid_firebase: null,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -40,6 +43,8 @@ module.exports = {
         kota: "Jakarta",
         profile_picture: "chibi1.jpg",
         role_id: 3,
+        uid_firebase: null,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -53,6 +58,8 @@ module.exports = {
         kota: "Surabaya",
         profile_picture: "chibi2.jpg",
         role_id: 3,
+        uid_firebase: null,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -66,6 +73,8 @@ module.exports = {
         kota: "Cirebon",
         profile_picture: "chibi3.jpg",
         role_id: 3,
+        uid_firebase: null,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -79,6 +88,8 @@ module.exports = {
         kota: "Palembang",
         profile_picture: "chibi4.jpg",
         role_id: 3,
+        uid_firebase: null,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -92,6 +103,8 @@ module.exports = {
         kota: "Ngawi",
         profile_picture: "chibi5.jpg",
         role_id: 3,
+        uid_firebase: null,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
