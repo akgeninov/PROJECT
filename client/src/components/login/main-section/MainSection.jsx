@@ -132,7 +132,7 @@ function MainSection() {
                 type="button"
                 className="text-[12px] shrink-0 md:text-[18px] font-medium leading-[24px] underline text-indigoDye500"
               >
-                Lupa Password
+                Lupa Password?
               </button>
             </div>
           </div>
@@ -179,7 +179,7 @@ function MainSection() {
           <button
             disabled={googleButton}
             onClick={loginWithFirebse}
-            className=" flex justify-center items-center h-[64px] w-full bg-whiteSmoke600 rounded-[10px] mt-[48px] gap-[10px] disabled:opacity-50"
+            className=" flex justify-center items-center h-[64px] w-full bg-whiteSmoke500 border-2 border-black400 border-opacity-50 rounded-[10px] mt-[48px] gap-[10px] disabled:opacity-50"
           >
             <img
               src={images.googleIcon}

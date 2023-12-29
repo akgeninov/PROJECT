@@ -9,7 +9,7 @@ function JoinSection() {
       <div className=" relative hidden md:flex justify-end items-center mt-[160px]  w-full 2xl:max-w-[1280px] h-[484px] overflow-hidden">
         <div className="absolute overflow-hidden w-[684px] h-[684px] rounded-full -left-[100px] flex items-center justify-center">
           <img
-            src={images.joinOri}
+            src={images.kelasBisnis}
             alt="ellipse"
             className="object-cover w-full h-full absolute -left-[15px] "
           />

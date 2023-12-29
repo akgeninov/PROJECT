@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import { images } from "../../../constants";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -12,6 +12,9 @@ import { api } from "../../../api/api";
 
 function MainSection() {
   const dispatch = useDispatch();
+  const timeoutRef = useRef();
+
+  const [googleButton, setGoogleButton] = useState(false);
 
   const {
     register,
@@ -27,24 +30,32 @@ function MainSection() {
   const [isHide, setIsHide] = useState(true);
 
   const loginWithFirebse = async () => {
-    try {
-      const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
-      // const responsFirebase = signInWithRedirect(auth, googleAuthProvider);
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
-        {
-          email: responsFirebase.user.email,
-          uid_firebase: responsFirebase.user.uid,
-          display_name: responsFirebase.user.displayName,
-          // password: data.PASSWORD,
-        }
-      );
-      dispatch(setToken(response.data.token));
-      localStorage.setItem("auth", JSON.stringify(response.data.token));
-      console.log(response);
-    } catch (error) {
-      console.log(error);
+    setGoogleButton(true);
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
     }
+
+    timeoutRef.current = setTimeout(async () => {
+      try {
+        const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
+        const response = await api.post(
+          `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
+          {
+            email: responsFirebase.user.email,
+            uid_firebase: responsFirebase.user.uid,
+            display_name: responsFirebase.user.displayName,
+            // password: data.PASSWORD,
+          }
+        );
+        dispatch(setToken(response.data.token));
+        localStorage.setItem("auth", JSON.stringify(response.data.token));
+        console.log(response);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setGoogleButton(false);
+      }
+    }, 2000);
   };
 
   const onSubmit = async (data) => {
@@ -109,7 +120,6 @@ function MainSection() {
           <div className="w-full">
             <input
               {...register("EMAIL")}
-              type="email"
               placeholder="Email"
               className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
             />
@@ -177,8 +187,9 @@ function MainSection() {
 
         <div className="w-[208px] md:w-[538px] mb-[76px]">
           <button
+            disabled={googleButton}
             onClick={loginWithFirebse}
-            className="flex justify-center items-center h-[64px] w-full bg-whiteSmoke600 rounded-[10px] mt-[48px] gap-[10px]"
+            className=" flex justify-center items-center h-[64px] w-full bg-whiteSmoke500 border-2 border-black400 border-opacity-50 rounded-[10px] mt-[48px] gap-[10px] disabled:opacity-50"
           >
             <img
               src={images.googleIcon}

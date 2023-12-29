@@ -197,7 +197,7 @@ function MainSection({ search, setSearch }) {
           } else if (pageValue && Number(pageValue) > 1) return;
           else {
             setPage(0);
-            setCurrentItems(0);
+            setCurrentPage(0);
           }
 
           if (searchValue && searchValue.length > 0) {
@@ -482,6 +482,10 @@ function MainSection({ search, setSearch }) {
       console.log("Path tidak sesuai dengan /layanan/kelas-bisnis");
     }
   }, [page]);
+
+  useEffect(() => {
+    console.log({ currentItems });
+  }, [currentItems]);
 
   useEffect(() => {
     window.scrollTo(0, 500);
