@@ -33,7 +33,7 @@ function HeroSection() {
         <div className=" h-fit w-fit flex justify-center items-center hero-image">
           <img
             className="object-cover h-full w-full object-center  "
-            src={images.buatWebsiteDanAplikasi}
+            src={images.oriVector2Webp}
             alt="vector2"
           />
         </div>

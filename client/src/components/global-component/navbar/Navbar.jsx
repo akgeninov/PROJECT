@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { icon, logo, data } from "../../../constants";
 import { HiMenu } from "react-icons/hi";
 import ButtonBlack500 from "../button/button-black500/ButtonBlack500";
@@ -23,7 +23,7 @@ function Navbar() {
   });
 
   const [dataUser, setDataUser] = useState(null);
-  const [isActive, setIsActive] = useState("");
+  const [isActive, setIsActive] = useState("home");
   const [toggleProfile, setTOggleProfile] = useState(false);
 
   // const [token, setToken] = useState(JSON.parse(localStorage.getItem("auth")));
@@ -36,13 +36,117 @@ function Navbar() {
         layanan: title === "Layanan" ? !prev.layanan : false,
         komunitas: title === "Komunitas" ? !prev.komunitas : false,
       }));
+      console.log("atas");
     } else {
       setToggle(() => ({
         layanan: false,
         komunitas: false,
       }));
+      console.log("bawah");
     }
   };
+
+  const handleChangeNavi = (title) => {
+    console.log({ title });
+    const currentUrl = window.location.pathname;
+    const firstPath = currentUrl.split("/")[1];
+
+    if (isActive.toLowerCase() === title.toLowerCase()) {
+      const getSameData = data.navigationData.filter(
+        (el) =>
+          firstPath.toLowerCase() === el.navi?.split("/")[1]?.toLowerCase()
+      );
+      if (getSameData.length > 0) setIsActive(getSameData[0].BUTTON_TEXT);
+      else {
+        const getSameDropData = data.navigationData.filter((el) => {
+          const getDrop = el.data?.filter(
+            (nav) =>
+              firstPath.toLowerCase() === nav.navi?.split("/")[1]?.toLowerCase()
+          );
+          return getDrop && getDrop.length > 0;
+        });
+        if (getSameDropData.length > 0)
+          setIsActive(getSameDropData[0].BUTTON_TEXT);
+        else setIsActive("home");
+
+        console.log({ getSameDropData });
+      }
+      console.log({ getSameData });
+    } else {
+      const getSameData = data.navigationData.filter(
+        (el) => title.toLowerCase() === el.BUTTON_TEXT?.toLowerCase() && el.data
+      );
+      if (getSameData.length > 0) setIsActive(title);
+
+      console.log({ title, getSameData });
+    }
+
+    // const routeNow = sessionStorage.getItem("active");
+    // const oldRoute = JSON.parse(sessionStorage.getItem("active"));
+    // const currentUrl = window.location.pathname;
+    // const firstPath = currentUrl.split("/")[1];
+
+    // const pageRoute = data.navigationData.filter((el) => !el.data);
+    // const dropRoute = data.navigationData.filter((el) => el.data);
+    // const isExist = pageRoute.some(
+    //   (el) => el.BUTTON_TEXT.toLowerCase() === title.toLowerCase()
+    // );
+
+    // if ((oldRoute && isExist) || title === "home") {
+    //   alert("atas");
+    //   setIsActive(title);
+    //   const isExistDrop = dropRoute.some(
+    //     (el) => el.BUTTON_TEXT.toLowerCase() === oldRoute.toLowerCase()
+    //   );
+    //   if (!isExistDrop && oldRoute.toLowerCase() !== title.toLowerCase()) {
+    //     sessionStorage.setItem("oldroute", JSON.stringify(oldRoute));
+    //   } else {
+    //   }
+    //   sessionStorage.setItem("active", JSON.stringify(title));
+    // } else {
+    //   if (oldRoute && oldRoute.toLowerCase() === title.toLowerCase()) {
+    //     alert("sini");
+    //     const route = JSON.parse(sessionStorage.getItem("oldroute"));
+    //     setIsActive(route);
+    //     sessionStorage.setItem("active", JSON.stringify(route));
+    //   } else {
+    //     alert("bawah");
+    //     if (isActive.toLowerCase() === title.toLowerCase()) {
+    //       const route = JSON.parse(sessionStorage.getItem("active"));
+    //       setIsActive(route);
+    //     } else {
+    //       setIsActive(title);
+    //     }
+    //   }
+    // }
+
+    // console.log({ pageRoute, isExist });
+  };
+  useEffect(() => {
+    console.log({ isActive });
+  }, [isActive]);
+
+  const locationChange = useMemo(() => {
+    const currnetUrl = window.location.pathname;
+    const firstPath = currnetUrl.split("/")[1];
+
+    const getSameData = data.navigationData.filter(
+      (el) => firstPath.toLowerCase() === el.navi?.split("/")[1]?.toLowerCase()
+    );
+    if (getSameData.length > 0) setIsActive(getSameData[0].BUTTON_TEXT);
+    else {
+      const getSameDropData = data.navigationData.filter((el) => {
+        const getDrop = el.data?.filter(
+          (nav) =>
+            firstPath.toLowerCase() === nav.navi?.split("/")[1]?.toLowerCase()
+        );
+        return getDrop && getDrop.length > 0;
+      });
+      if (getSameDropData.length > 0)
+        setIsActive(getSameDropData[0].BUTTON_TEXT);
+      else setIsActive("home");
+    }
+  }, [window.location.pathname]);
 
   const getUserData = async (token) => {
     try {
@@ -70,6 +174,35 @@ function Navbar() {
     setTOggleProfile(false);
   };
 
+  const setNavbarActive = useMemo(() => {
+    const route = JSON.parse(sessionStorage.getItem("active"));
+    if (route) {
+      setIsActive(route);
+    } else {
+      const currentUrl = window.location.pathname;
+      const firstPath = currentUrl.split("/");
+      if (firstPath[1] !== "") {
+        const getDataPath = data.navigationData.filter(
+          (el) => `${el.navi && el.navi.split("/")[1]}` === firstPath[1]
+        );
+
+        setIsActive(getDataPath[0].BUTTON_TEXT);
+        sessionStorage.setItem(
+          "active",
+          JSON.stringify(getDataPath[0].BUTTON_TEXT)
+        );
+
+        console.log({
+          firstPath: firstPath[1],
+          data: data.dataService,
+          getDataPath,
+        });
+      } else {
+        sessionStorage.setItem("active", JSON.stringify("home"));
+      }
+    }
+  }, []);
+
   useEffect(() => {
     console.log({ dataUser: dataUser });
   }, [dataUser]);
@@ -92,7 +225,9 @@ function Navbar() {
         <img
           onClick={() => {
             handleClick("");
-            setIsActive("");
+            handleChangeNavi("home");
+            // setIsActive("");
+            navigate("/");
           }}
           className=" w-[100px] h-[100px] shrink-0 cursor-pointer hidden md:block"
           src={logo.growlab}
@@ -101,7 +236,9 @@ function Navbar() {
         <img
           onClick={() => {
             handleClick("");
-            setIsActive("");
+            handleChangeNavi("home");
+            // setIsActive("");
+            navigate("/");
           }}
           className=" w-[44px] h-[44px] shrink-0 cursor-pointer block md:hidden"
           src={logo.growlabMobile}
@@ -222,6 +359,7 @@ function Navbar() {
           {data.navigationData.map((el, index) => (
             <NavigationComponent
               handleClick={handleClick}
+              handleChangeNavi={handleChangeNavi}
               key={index}
               BUTTON_TEXT={el.BUTTON_TEXT}
               icon={icon}
@@ -230,6 +368,7 @@ function Navbar() {
               DATA={el.data}
               setIsActive={setIsActive}
               isActive={isActive}
+              navi={el.navi}
             />
           ))}
         </ul>
@@ -239,13 +378,6 @@ function Navbar() {
               Hubungi Kami
             </p>
           </button> */}
-          <div>
-            <ButtonBorderBlack500
-              TEXT_BUTTON={"Hubungi Kami"}
-              WIDTH={"w-[160px]"}
-              RESPONSIF={"hidden xl:flex"}
-            />
-          </div>
 
           {/* <button className="flex flex-auto w-[160px] px-[32px] py-[16px] justify-center items-center rounded-[10px] bg-black500 hover:bg-whiteSmoke800">
             <p className="w-[116px] shrink-0 text-whiteSmoke500 leading-[24px] font-medium text-[16px]">
@@ -254,21 +386,29 @@ function Navbar() {
           </button> */}
 
           {dataUser ? (
-            <div className="relative flex justify-center items-center ">
+            <div className="relative flex justify-end items-center ">
               <div
                 onClick={() => setTOggleProfile((prev) => !prev)}
-                className="w-[50px] h-[50px] rounded-full overflow-hidden cursor-pointer"
+                className="cursor-pointer px-[32px] py-[16px] flex justify-center items-center gap-[10px] border-[1px] rounded-[10px] border-black500"
               >
-                <img
-                  src={`${process.env.REACT_APP_SERVER_URL}images/user/${dataUser.profile_picture}`}
-                  alt="profile"
-                  className="h-full w-full object-cover"
-                />
+                <div className="w-[23px] h-[23px] rounded-full overflow-hidden ">
+                  <img
+                    src={`${process.env.REACT_APP_SERVER_URL}images/user/${dataUser.profile_picture}`}
+                    alt="profile"
+                    className="h-full w-full object-cover"
+                  />
+                </div>
+                <div className="">
+                  <h1 className="text-[16px] font-medium leading-[24px]">
+                    {dataUser.nama_user.split(" ")[0]}
+                  </h1>
+                </div>
               </div>
+
               <div
                 className={`${
                   toggleProfile ? "block" : "hidden"
-                } absolute z-50 translate-y-48 -translate-x-28 py-[12px] bg-whiteSmoke500 shadow-customSm rounded-[10px]`}
+                } absolute z-50 translate-y-48  py-[12px] bg-whiteSmoke500 shadow-customSm rounded-[10px]`}
               >
                 <ul className="w-[268px] gap-[4px] text-[16px] font-medium">
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start ">
@@ -298,12 +438,21 @@ function Navbar() {
               </div>
             </div>
           ) : (
-            <div onClick={() => navigate("/login")}>
-              <ButtonBlack500
-                WIDTH={"w-[160px]"}
-                TEXT_BUTTON={"Login/Daftar"}
-              />
-            </div>
+            <>
+              <div>
+                <ButtonBorderBlack500
+                  TEXT_BUTTON={"Hubungi Kami"}
+                  WIDTH={"w-[160px]"}
+                  RESPONSIF={"hidden xl:flex"}
+                />
+              </div>
+              <div onClick={() => navigate("/login")}>
+                <ButtonBlack500
+                  WIDTH={"w-[160px]"}
+                  TEXT_BUTTON={"Login/Daftar"}
+                />
+              </div>
+            </>
           )}
         </div>
         <button className="flex lg:hidden  p-[4px]  justify-center items-center  bg-whiteSmoke500">

@@ -19,6 +19,7 @@ import lineWhiteSmoke from "../assets/images/line_white_smoke.png";
 import googleIcon from "../assets/images/google_icon.png";
 import headerLogin from "../assets/images/header-01.png";
 import joinOri from "../assets/images/join_ori.png";
+import oriVector2Webp from "../assets/images/ori_vector_2.webp";
 
 const images = {
   vector2,
@@ -42,6 +43,7 @@ const images = {
   googleIcon,
   headerLogin,
   joinOri,
+  oriVector2Webp,
 };
 
 export default images;
