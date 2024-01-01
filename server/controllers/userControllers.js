@@ -46,6 +46,37 @@ module.exports = {
       email, 
     } = req.body;
     //cek nama user
-    await utility.checkAvailableColumn(user,'email',email,res)
-  }
+    await utility.checkAvailableColumn(user, "email", email, res);
+  },
+
+  getOneUser: async (req, res) => {
+    try {
+      const dataUser = req.dataToken;
+
+      const result = await user.findOne({
+        where: {
+          email: dataUser.email,
+        },
+        attributes: [
+          "email",
+          "nama_user",
+          "profile_picture",
+          "no_hp",
+          "nama_bisnis",
+          "tgl_berdiri",
+          "kota",
+          "id_role",
+        ],
+      });
+
+      res.status(200).send({
+        message: "succes",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
 };

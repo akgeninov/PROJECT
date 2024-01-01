@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "growlab_test",
+    "password": "",
+    "database": "growlab",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
