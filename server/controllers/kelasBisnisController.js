@@ -285,7 +285,10 @@ module.exports = {
           {
             model: kelas_bisnis,
             attributes: [
-              "nama","image", "images_link","harga",
+              "nama",
+              "image",
+              "images_link",
+              "harga",
               [
                 sequelize.literal(
                   "(SELECT COUNT(*) FROM kelas_regist WHERE kelas_regist.id_kelas_bisnis = kelas_bisni.id)"

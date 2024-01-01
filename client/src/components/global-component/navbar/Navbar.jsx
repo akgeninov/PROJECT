@@ -400,7 +400,7 @@ function Navbar() {
                 </div>
                 <div className="">
                   <h1 className="text-[16px] font-medium leading-[24px]">
-                    {dataUser.nama_user.split(" ")[0]}
+                    {dataUser.username}
                   </h1>
                 </div>
               </div>
@@ -413,7 +413,7 @@ function Navbar() {
                 <ul className="w-[268px] gap-[4px] text-[16px] font-medium">
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start ">
                     <h1 className="text-[14px] font-bold leading-[20px]">
-                      {dataUser.nama_user}
+                      {dataUser.nama_lengkap}
                     </h1>
                     <p className="text-[14px] font-light leading-[20px]">
                       {dataUser.email}

@@ -38,11 +38,13 @@ function MainSection() {
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
         {
-          nama_user: data.EMAIL,
+          email: data.EMAIL,
           password: data.PASSWORD,
         }
       );
       console.log(response);
+      dispatch(setToken(response.data.token));
+      localStorage.setItem("auth", JSON.stringify(response.data.token));
       reset();
     } catch (error) {
       console.log(error);

@@ -55,14 +55,16 @@ module.exports = {
         },
         attributes: [
           "email",
-          "nama_user",
+          "nama_lengkap",
           "profile_picture",
           "no_hp",
-          "nama_bisnis",
-          "tgl_berdiri",
-          "kota",
-          "role_id",
+          "id_role",
+          "username",
+          "nama_depan",
+          "nama_belakang",
+          "biografi",
         ],
+        include: [role],
       });
 
       res.status(200).send({

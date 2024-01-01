@@ -11,6 +11,7 @@ module.exports = {
       const { email, password, uid_firebase, display_name } = req.body;
 
       if (uid_firebase) {
+        console.log({ uid: uid_firebase, display_name });
         const uidGoogleIsExist = await user.findOne({
           where: { uid_firebase },
         });
@@ -24,12 +25,18 @@ module.exports = {
             token: jwt,
           });
         } else {
+          const nama_depan = display_name.split(" ")[0];
+          const nama_belakang = display_name.split(" ")[1];
+          console.log({ nama_depan });
           const creatUser = await user.create({
-            nama_user: display_name,
+            nama_lengkap: display_name,
             uid_firebase,
             email,
-            role_id: 3,
+            id_role: 3,
             profile_picture: "chibi2.jpg",
+            nama_depan,
+            nama_belakang: nama_belakang || "",
+            username: nama_depan.toLowerCase(),
           });
 
           const jwt = utility.makeJWT(creatUser);
@@ -72,39 +79,56 @@ module.exports = {
   },
 
   register: async (req, res) => {
-    const {
-      nama_user,
-      password,
-      email,
-      no_hp,
-      nama_bisnis,
-      tgl_berdiri,
-      kota,
-    } = req.body;
+    const { nama_lengkap, username, no_hp, email, password, konfirm_password } =
+      req.body;
+
+    //kofirmasi password
+    if (konfirm_password !== password)
+      return utility.createResponse(res, 400, false, "Password tidak sama");
+    //checking structure email
+    if (!utility.validateEmail(email))
+      return utility.createResponse(res, 400, false, "Email Tidak Valid");
+    //available username
+    if (!(await utility.checkAvailableColumn2(user, "username", username)))
+      return utility.createResponse(
+        res,
+        400,
+        false,
+        "username sudah digunakan"
+      );
+    //available email
+    if (!(await utility.checkAvailableColumn2(user, "email", email)))
+      return utility.createResponse(res, 400, false, "email sudah digunakan");
+    //available no hp
+    if (!(await utility.checkAvailableColumn2(user, "no_hp", no_hp)))
+      return utility.createResponse(
+        res,
+        400,
+        false,
+        "nomor hp sudah digunakan"
+      );
 
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    //cek no_hp
-    await utility.checkAvailableColumn(user, "no_hp", no_hp, res);
-
-    //cek no_hp
-    await utility.checkAvailableColumn(user, "email", email, res);
-
     try {
       const newUser = await user.create({
-        nama_user,
+        nama_lengkap: nama_lengkap,
+        username: username,
         password: hashedPassword,
-        email,
-        no_hp,
-        nama_bisnis,
-        tgl_berdiri,
-        kota,
-        role_id: 3,
+        email: email,
+        no_hp: no_hp,
+        id_role: 3,
       });
 
-      res.status(201).json({ user: "newUser" });
+      return utility.createResponse(
+        res,
+        201,
+        true,
+        "Pendaftaran Sukses",
+        newUser
+      );
     } catch (error) {
-      res.status(500).json({ error: error.message });
+      return utility.createResponse(res, 500, false, error.message);
     }
   },
 };

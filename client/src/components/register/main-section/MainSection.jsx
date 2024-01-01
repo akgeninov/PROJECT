@@ -59,13 +59,28 @@ function MainSection() {
   };
 
   const onSubmit = async (data) => {
+    setGoogleButton(true);
+
     console.log({ isSubmitting });
     try {
       console.log({ data });
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/auth/register`,
+        {
+          nama_lengkap: data.NAMA_LENGKAP,
+          username: data.USERNAME,
+          no_hp: data.HANDPHONE,
+          email: data.EMAIL,
+          password: data.PASSWORD,
+          konfirm_password: data.CONFIRM_PASSWORD,
+        }
+      );
+      console.log(response);
       reset();
     } catch (error) {
       console.log(error);
+    } finally {
+      setGoogleButton(false);
     }
   };
   return (
@@ -165,7 +180,8 @@ function MainSection() {
             {console.log(errors)}
           </div>
           <div className="flex justify-center items-center mt-[36px]">
-            <ButtonBlack500 TEXT_BUTTON={"Masuk"} WIDTH={"w-[160px]"} />
+            <button type="submit">Masuk</button>
+            {/* <ButtonBlack500 TEXT_BUTTON={"Masuk"} WIDTH={"w-[160px]"} /> */}
           </div>
         </form>
 
