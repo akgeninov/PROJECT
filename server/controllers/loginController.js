@@ -83,7 +83,7 @@ module.exports = {
     //kofirmasi password
     if (konfirm_password !== password) return utility.createResponse(res, 400, false, "Password tidak sama")
     //checking structure email
-    if (!utility.validateEmail(email)) return utility.createResponse(res, 400, false, "Email Tidak Valid")
+    if (! utility.validateEmail(email)) return utility.createResponse(res, 400, false, "Email Tidak Valid")
     //available username
     if (! await utility.checkAvailableColumn2(user, "username", username)) return utility.createResponse(res, 400, false, "username sudah digunakan")
     //available email
@@ -102,8 +102,8 @@ module.exports = {
         no_hp: no_hp,
         id_role: 3,
       });
+      
       return utility.createResponse(res, 201, true, "Pendaftaran Sukses", newUser)
-
     } catch (error) {
       return utility.createResponse(res, 500, false, error.message)
     }
