@@ -84,6 +84,8 @@ module.exports = {
     if (konfirm_password !== password) return utility.createResponse(res, 400, false, "Password tidak sama")
     //checking structure email
     if (!utility.validateEmail(email)) return utility.createResponse(res, 400, false, "Email Tidak Valid")
+    //available username
+    if (! await utility.checkAvailableColumn2(user, "username", username)) return utility.createResponse(res, 400, false, "username sudah digunakan")
     //available email
     if (! await utility.checkAvailableColumn2(user, "email", email)) return utility.createResponse(res, 400, false, "email sudah digunakan")
     //available no hp
