@@ -1,6 +1,5 @@
 import React from "react";
 import { images } from "../../../constants";
-import { Link } from 'react-router-dom';
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 
 function HeroSection() {
@@ -48,9 +47,7 @@ function HeroSection() {
           Mari kembangkan perjalanan karirmu bersama Growlab, karena kami 
           yakin kamu selalu memiliki inovasi yang menarik.
         </p>
-        <Link to="/career-lowongan">
         <ButtonWhiteSmoke500 WIDTH={"w-500"} TEXT_BUTTON={"Lihat Semua Lowongan"}/>
-        </Link>
       </div>
       <div className="w-[750px] mt-[px] lg:mt-[80px] flex justify-center"></div>
     </div>

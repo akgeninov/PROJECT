@@ -16,14 +16,6 @@ function Section_2_lowongan(props) {
     const formattedDate = new Date(dateString).toLocaleDateString("id-ID", options);
     return formattedDate;
   }
-
-  // Menampilkan data sesuai batas lamar
-  const today = new Date();
-  const deadlineDate = new Date(props.lowongan.batas_lamar);
-  const isDeadlineValid = today <= deadlineDate;
-  if (!isDeadlineValid) {
-    return null; 
-  }
   
   return (
     <div>
