@@ -1,23 +1,24 @@
 import React, { useState } from "react";
 import { images } from "../../../constants";
+import { Link } from 'react-router-dom';
 
-function SearchSection() {
-
+function SearchSection({ onSearch }) {
   const [searchTerm, setSearchTerm] = useState("");
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleSearchChange = (event) => {
     setSearchTerm(event.target.value);
   };
 
+  const handleSearchSubmit = () => {
+    onSearch(searchTerm);
+  };
+
   const handleKeyPress = (event) => {
-      if (event.key === "Enter") {
-        performSearch();
-      }
-    };
-  
-    const performSearch = () => {
-      alert(`Melakukan pencarian untuk: ${searchTerm}`);
-    };
+    if (event.key === "Enter") {
+      handleSearchSubmit();
+    }
+  };
 
   return (
     <div className="flex bg-black500 w-full  w-full ">
@@ -34,8 +35,18 @@ function SearchSection() {
         />
 
         <div className="justify-center flex flex-col absolute w-full left-0 w-fit md:ml-[100px]  z-10">
-          <p className="max-w-[564px] text-[14px] font-light md:leading-[100px] lg:leading-[100px] md:text-left" style={{ color:'#888'}}>
-              Karir  &nbsp; &gt; <span style={{ color: 'white', marginLeft:'5px' }}>  Semua Lowongan</span>
+        <p className="max-w-[564px] text-[14px] font-light md:leading-[100px] lg:leading-[100px] md:text-left" style={{ color:'#888'}}>
+        <Link
+        to="/career"
+        style={{
+          textDecoration: 'none',
+          color: isHovered ? 'white' : '#888',
+        }}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+      >
+        Karir
+      </Link> &nbsp; &gt; <span style={{ color: 'white', marginLeft:'5px' }}>  Semua Lowongan</span>
           </p>
           <div className="flex flex-col lg:my-0 md:p-0 md:h-full py-[110px] w-full h-[420px]">
               <h1 className="flex justify-center md:justify-start items-center text-center md:text-start text-[24px] md:text-[48px] font-bold leading-[36px] md:leading-[72px] text-whiteSmoke500 left-[100px] md:max-w-[572px] md:mb-[10px] ">
@@ -64,10 +75,11 @@ function SearchSection() {
                 <input
                   type="text"
                   placeholder="Cari lowongan yang kamu inginkan"
+                  className="lg:w-[556px] md:w-[500px] w-full h-14 rounded-xl pl-12"
                   value={searchTerm}
                   onChange={handleSearchChange}
                   onKeyPress={handleKeyPress}
-                  className="lg:w-[556px] md:w-[500px] w-full h-14 rounded-xl pl-12"
+                  style={{ color: 'black' }}
                 />
               </div>
           </div>

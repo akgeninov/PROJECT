@@ -16,12 +16,12 @@ export default function KelasCard() {
           Langkah Sukses Jadi Youngtrepeneur
         </h1>
         <div className="flex items-center justify-center">
-          <Progress
+          <Progress 
             colorScheme="blue"
             width="372px"
             height="14px"
             borderRadius="50px"
-            value={39}
+            hasStripe value={39}
           />
           <p className="ml-[8px]">39%</p>
         </div>

@@ -18,7 +18,7 @@ module.exports = {
       },
       {
         nama_lowongan_pekerjaan: "Social Media Admin",
-        batas_lamar: new Date('2023-12-31T23:59:59.999Z'),
+        batas_lamar: new Date('2023-12-26T23:59:59.999Z'),
         deskripsi_lowongan_pekerjaan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         persyaratan_lowongan_pekerjaan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         id_departemen_pekerjaan: 2,
@@ -103,6 +103,18 @@ module.exports = {
       {
         nama_lowongan_pekerjaan: "UI/UX Designer",
         batas_lamar: new Date('2023-12-31T23:59:59.999Z'),
+        deskripsi_lowongan_pekerjaan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        persyaratan_lowongan_pekerjaan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+        id_departemen_pekerjaan: 1,
+        id_periode_pekerjaan: 1,
+        id_tipe_pekerjaan:  1,
+        id_jenjang_pekerjaan: 1,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        nama_lowongan_pekerjaan: "Front-end Engineer",
+        batas_lamar: new Date('2023-12-25T23:59:59.999Z'),
         deskripsi_lowongan_pekerjaan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         persyaratan_lowongan_pekerjaan: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
         id_departemen_pekerjaan: 1,
