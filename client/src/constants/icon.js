@@ -14,6 +14,7 @@ import handshake from "../assets/icon/handshake.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
+<<<<<<< HEAD
 import profile from "../assets/icon/profile.png";
 import iconHome from "../assets/icon/icon-home.png";
 import iconCourse from "../assets/icon/icon-course.png";
@@ -22,6 +23,16 @@ import iconEvent from "../assets/icon/icon-zoom.png";
 import iconTransaksi from "../assets/icon/icon-walet.png";
 import iconEdit from "../assets/icon/icon-edit.png"
 
+=======
+import searchIcon from "../assets/icon/search_icon.png";
+import bookOpenSold from "../assets/icon/book_open_solid.png";
+import signal from "../assets/icon/signal.png";
+import userCircle from "../assets/icon/user_circle.png";
+import timer from "../assets/icon/timer.png";
+import AWARD from "../assets/icon/iaward.png";
+import BOOK from "../assets/icon/book.png";
+import CHAT from "../assets/icon/chat.png";
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
 
 const icon = {
   chevronSmallDownLight,
@@ -40,6 +51,7 @@ const icon = {
   insight,
   koneksi,
   megaphone,
+<<<<<<< HEAD
   profile,
   iconHome,
   iconCourse,
@@ -47,6 +59,16 @@ const icon = {
   iconEvent,
   iconTransaksi,
   iconEdit
+=======
+  searchIcon,
+  bookOpenSold,
+  signal,
+  userCircle,
+  timer,
+  AWARD,
+  BOOK,
+  CHAT,
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
 };
 
 export default icon;

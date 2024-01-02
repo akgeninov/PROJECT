@@ -1,12 +1,14 @@
-const acces = process.env.ACCESS_KEY;
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 module.exports = {
   authorize: async (req, res, next) => {
     console.log({ key: req.headers.key });
     console.log({ env: process.env.ACCESS_KEY });
-    if (req.headers.key == acces) {
+    const access = process.env.ACCESS_KEY;
+    
+    if (req.headers.key == access) {
       return next();
-    }
-    res.status(500).send({ message: "Authorize Failed" });
+    }else res.status(500).send({ message: "Token tidak valid" });
   },
 };

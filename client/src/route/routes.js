@@ -6,6 +6,7 @@ import Artikel from "../pages/artikel/Artikel";
 // import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
+<<<<<<< HEAD
 import Profile from "../pages/profile/Profile";
 import DashboardProfile from "../components/profile/dashboard-profile/dashboardProfile";
 import KelasSaya from "../components/profile/kelas-saya/KelasSaya";
@@ -20,6 +21,11 @@ import TentangKami from "../pages/tentang-kami/TentangKami";
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
+=======
+import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
+import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
+import Login from "../pages/login/Login";
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
 
 const routes = [
   <Route
@@ -71,24 +77,41 @@ const routes = [
     }
   />,
   <Route
+<<<<<<< HEAD
     key="career"
     path="/career"
     element={
       <Protection publicSide={true}>
         <Career />
+=======
+    key="kelas-bisnis"
+    path="/kelas-bisnis"
+    element={
+      <Protection publicSide={true}>
+        <KelasBisnis />
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
       </Protection>
     }
   />,
   <Route
+<<<<<<< HEAD
     key="careerLowongan"
     path="/career-lowongan"
     element={
       <Protection publicSide={true}>
         <CareerLowongan />
+=======
+    key="kelas-bisnis"
+    path="/kelas-bisnis/:id"
+    element={
+      <Protection publicSide={true}>
+        <DetailKelasBisnis />
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
       </Protection>
     }
   />,
   <Route
+<<<<<<< HEAD
     key="careerLowongan"
     path="/career-lowongan/:id_lowongan"
     element={
@@ -134,6 +157,13 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <TentangKami />
+=======
+    key="login"
+    path="/login"
+    element={
+      <Protection publicSide={true}>
+        <Login />
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
       </Protection>
     }
   />,

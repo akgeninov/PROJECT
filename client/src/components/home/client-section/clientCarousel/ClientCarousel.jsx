@@ -1,28 +1,34 @@
 import React from "react";
 import Marquee from "react-fast-marquee";
-import { clientPic } from "../../../../constants";
+import { clientPic, newsPic } from "../../../../constants";
 
 const dataImg = [
-  clientPic.risaRareBeauty1,
-  clientPic.sasiifood,
-  clientPic.teamDominatus1,
-  clientPic.yesaMalika1,
-  clientPic.sasiifood,
-  clientPic.teamDominatus1
+  clientPic.risaRareBeautyOri,
+  clientPic.sasiifoodOri,
+  clientPic.teamDominatusOri,
+  clientPic.yesaMalikaOri,
+  clientPic.sasiifoodOri,
+  newsPic.rectangleNews1,
+  clientPic.leironOri,
 ];
 
 function ClientCarousel() {
   return (
     <>
-      <Marquee gradient gradientColor="#F4F4F4">
+      <Marquee
+        gradient
+        gradientColor="#F4F4F4"
+        gradientWidth={200}
+        autoFill
+        className=""
+      >
         {dataImg?.map((pic, index) => (
-          <div key={index}>
-            <img
-              src={pic}
-              className="w-[120px] h-[90px] sm:w-[240px] sm:h-[180px]"
-              alt="client1"
-            />
-          </div>
+          <img
+            key={index}
+            src={pic}
+            className="object-cover  w-[120px] mx-[12px] sm:w-[240px] h-[90px] sm:h-[180px] rounded-[10px] "
+            alt="client1"
+          />
         ))}
       </Marquee>
     </>

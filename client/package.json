@@ -11,6 +11,10 @@
     "axios": "^1.6.2",
     "debug": "^4.3.4",
     "dotenv": "^16.3.1",
+<<<<<<< HEAD
+=======
+    "lodash": "^4.17.21",
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-fast-marquee": "^1.6.2",
@@ -50,7 +54,12 @@
     ]
   },
   "devDependencies": {
+<<<<<<< HEAD
     "nodemon": "^3.0.2",
     "tailwindcss": "^3.3.5"
+=======
+    "daisyui": "^4.4.19",
+    "tailwindcss": "^3.3.6"
+>>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
   }
 }

@@ -1,6 +1,7 @@
 const { default: images } = require("./images");
 const { default: komunitasPic } = require("./komunitasPic");
 const { default: logo } = require("./logo");
+const { default: newsPic } = require("./newsPic");
 
 const dataLayanan = [
   {
@@ -50,7 +51,7 @@ const dataService = [
     title: "Kelas Bisnis",
     deskripsi:
       "Kamu bakal belajar banyak hal yang bisa ningkatin omset bisnis kamu",
-    pic: images.kelasBisnis,
+    pic: images.oriKelasBisnis,
   },
   {
     title: "Konsultasi Bisnis",
