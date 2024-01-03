@@ -11,7 +11,6 @@ import rectangleJoin from "../assets/images/rectangle_join.png";
 import geometricShapeArtikelDesktop from "../assets/images/geometric_shape_article_desktop.png";
 import geometricShapeArtikelMobile from "../assets/images/geometric_shape_article_mobile.png";
 import tiktokImages from "../assets/images/tiktok_images.png";
-<<<<<<< HEAD
 import career_Herosection from "../assets/images/career_Herosection.jpg";
 import career_Section_2 from "../assets/images/career_Section_2.png";
 import career_momen1 from "../assets/images/career_momen1.png";
@@ -28,14 +27,12 @@ import Whatsapp from "../assets/images/Whatsapp.png"
 import Telegram from "../assets/images/Telegram.png"
 import kelasFoto from "../assets/images/kelas-foto.png";
 import materi from "../assets/images/Component-1.png"
-=======
 import bisnisHeroMobile1 from "../assets/images/bisnis_hero_mobile_1.png";
 import bisnisHeroMobile2 from "../assets/images/bisnis_hero_mobile_2.png";
 import oriVector2 from "../assets/images/ori_vector_2.jpg";
 import oriKelasBisnis from "../assets/images/ori_kelas_bisnis.png";
 import lineWhiteSmoke from "../assets/images/line_white_smoke.png";
 import googleIcon from "../assets/images/google_icon.png";
->>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
 
 const images = {
   vector2,
@@ -51,7 +48,6 @@ const images = {
   geometricShapeArtikelDesktop,
   geometricShapeArtikelMobile,
   tiktokImages,
-<<<<<<< HEAD
   career_Herosection,
   career_Section_2,
   career_momen1,
@@ -67,15 +63,13 @@ const images = {
   Whatsapp,
   Telegram,
   kelasFoto,
-  materi
-=======
+  materi,
   bisnisHeroMobile1,
   bisnisHeroMobile2,
   oriVector2,
   oriKelasBisnis,
   lineWhiteSmoke,
   googleIcon,
->>>>>>> dc3cf43e5a6a622e17d33d40653a75a29046600f
 };
 
 export default images;
