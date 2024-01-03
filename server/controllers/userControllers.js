@@ -28,9 +28,9 @@ module.exports = {
   },
 
   usernameCheck: async (req, res) => {
-    const { nama_user } = req.body;
+    const { username } = req.body;
     //cek nama user
-    await utility.checkAvailableColumn(user, "nama_user", nama_user, res);
+    await utility.checkAvailableColumn(user, "username", username, res);
   },
 
   phoneCheck: async (req, res) => {

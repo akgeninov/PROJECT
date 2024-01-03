@@ -118,6 +118,7 @@ module.exports = {
         email: email,
         no_hp: no_hp,
         id_role: 3,
+        profile_picture: "chibi2.jpg",
       });
 
       return utility.createResponse(

@@ -191,11 +191,19 @@ function HeroSection({ dataDetail, star }) {
   return (
     <div className="relative  w-full   2xl:max-w-[1280px] h-[600px] md:h-[660px]  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">
       <div className="flex w-[1280px] xl:w-full  h-[600px] md:h-[660px]  justify-center items-center">
-        <img
-          src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${value[0]?.kelas_bisni?.image}`}
-          alt="hero"
-          className="object-cover w-full xl:w-full h-full"
-        />
+        {value[0] && value[0]?.kelas_bisni?.image ? (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${value[0]?.kelas_bisni?.image}`}
+            alt="hero"
+            className="object-cover w-full xl:w-full h-full"
+          />
+        ) : (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${images.joinOri}`}
+            alt="hero"
+            className="object-cover w-full xl:w-full h-full"
+          />
+        )}
       </div>
       <div className="absolute h-[600px] md:h-[660px] left-0 top-0 bg-black500 opacity-90 w-full  z-10"></div>
       <div className="absolute w-full z-20 px-0  md:px-[100px] flex flex-col items-center md:items-start mt-[24px] ">
@@ -414,19 +422,19 @@ function HeroSection({ dataDetail, star }) {
         </div>
       </div>
       <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] xl:w-[432px] h-[188px] xl:h-[468px] bottom-[32px] lg:bottom-auto lg:top-[300px] xl:top-[112px] lg:right-[100px]">
-        <img
-          src={
-            `${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}` ||
-            images.joinOri
-          }
-          alt="hero small"
-          className="w-full h-full object-cover flex md:hidden lg:flex"
-        />
-        {/* <img
-          src={kelasBisnisPic.heroKelasBisnis1}
-          alt="hero"
-          className="rounded-[10px] flex md:hidden "
-        /> */}
+        {dataDetail?.kelas_bisni?.image ? (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
+            alt="hero"
+            className="w-full h-full object-cover flex md:hidden lg:flex"
+          />
+        ) : (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${images.joinOri}`}
+            alt="hero"
+            className="w-full h-full object-cover flex md:hidden lg:flex"
+          />
+        )}
       </div>
     </div>
   );

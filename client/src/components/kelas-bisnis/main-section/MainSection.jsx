@@ -9,7 +9,7 @@ import { kelasBisnis } from "./constant/data";
 import { icon, kelasBisnisPic } from "../../../constants";
 import { Link, useNavigate } from "react-router-dom";
 import PaginationDetaile from "../../global-component/pagination/pagination-detaile/PaginationDetaile";
-import KelasBisnisCard from "./kelas-bisnis-card/KelasBisnisCard";
+import KelasBisnisCard from "../../global-component/card/kelas-bisnis-card/KelasBisnisCard";
 import { api } from "../../../api/api";
 
 import FilterDataKelas from "./filter-data-kelas/FilterDataKelas";

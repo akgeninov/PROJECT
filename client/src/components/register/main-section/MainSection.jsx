@@ -179,10 +179,19 @@ function MainSection() {
             )}
             {console.log(errors)}
           </div>
-          <div className="flex justify-center items-center mt-[36px]">
+          {/* <div className="flex justify-center items-center mt-[36px]">
             <button type="submit">Masuk</button>
-            {/* <ButtonBlack500 TEXT_BUTTON={"Masuk"} WIDTH={"w-[160px]"} /> */}
-          </div>
+            <ButtonBlack500 TEXT_BUTTON={"Masuk"} WIDTH={"w-[160px]"} />
+          </div> */}
+          <button
+            disabled={isSubmitting ? true : false}
+            type="submit"
+            className={` flex  mx-[5px] sm:mx-0 w-[160px] px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
+          >
+            <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
+              Masuk
+            </p>
+          </button>
         </form>
 
         <div className=" flex justify-center items-center gap-[8px] w-full mt-[48px]">
