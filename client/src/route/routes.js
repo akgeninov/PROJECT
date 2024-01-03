@@ -3,13 +3,27 @@ import Home from "../pages/home/Home";
 import Komunitas from "../pages/komunitas/Komunitas";
 import Protection from "./Protection";
 import Artikel from "../pages/artikel/Artikel";
-import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
+// import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
 import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
 import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
 import Login from "../pages/login/Login";
 import Register from "../pages/register/Register";
+import Profile from "../pages/profile/Profile";
+import DashboardProfile from "../components/profile/dashboard-profile/dashboardProfile";
+import KelasSaya from "../components/profile/kelas-saya/KelasSaya";
+import SemuaKelasSection from "./../components/profile/kelas-saya/semua-kelas-section/SemuaKelasSection";
+import SedangDipelajariSection from "./../components/profile/kelas-saya/sedang-dipelajari-section/SedangDipelajariSection";
+import BelumDimulaiSection from "./../components/profile/kelas-saya/belum-dimulai-section/BelumDimulaiSection";
+import SelesaiSection from "./../components/profile/kelas-saya/selesai-section/SelesaiSection";
+import Event from "./../components/profile/event/Event";
+import Wishlist from "./../components/profile/wishlist/Wishlist";
+import Transaksi from "./../components/profile/transaksi/Transaksi";
+import TentangKami from "../pages/tentang-kami/TentangKami";
+import Career from "../pages/career/Career";
+import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
+import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 
 const routes = [
   <Route
@@ -93,6 +107,73 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Register />
+      </Protection>
+    }
+  />,
+  <Route
+    key="career"
+    path="/career"
+    element={
+      <Protection publicSide={true}>
+        <Career />
+      </Protection>
+    }
+  />,
+  <Route
+    key="careerLowongan"
+    path="/career-lowongan"
+    element={
+      <Protection publicSide={true}>
+        <CareerLowongan />
+      </Protection>
+    }
+  />,
+  <Route
+    key="careerLowongan"
+    path="/career-lowongan/:id_lowongan"
+    element={
+      <Protection publicSide={true}>
+        <OneCareerLowongan />
+      </Protection>
+    }
+  />,
+  <Route
+    key="profile"
+    path="/profile"
+    element={
+      <Protection publicSide={true}>
+        <Profile />
+      </Protection>
+    }
+  >
+    <Route index element={<DashboardProfile />} />
+    <Route path="/profile/dashboard/" element={<DashboardProfile />} />
+    <Route path="/profile/kelas-saya/" element={<KelasSaya />}>
+      <Route index element={<SemuaKelasSection />} />
+      <Route
+        path="/profile/kelas-saya/semua-kelas"
+        element={<SemuaKelasSection />}
+      />
+      <Route
+        path="/profile/kelas-saya/belum-dimulai"
+        element={<BelumDimulaiSection />}
+      />
+      <Route
+        path="/profile/kelas-saya/sedang-dipelajari"
+        element={<SedangDipelajariSection />}
+      />
+      <Route path="/profile/kelas-saya/selesai" element={<SelesaiSection />} />
+    </Route>
+    <Route path="/profile/wishlist/" element={<Wishlist />} />
+    <Route path="/profile/event/" element={<Event />} />
+    <Route path="/profile/transaksi/" element={<Transaksi />} />
+  </Route>,
+  <Route
+    key="about-us"
+    path="/about-us"
+    element={
+      <Protection publicSide={true}>
+        <TentangKami />
       </Protection>
     }
   />,

@@ -43,6 +43,17 @@ const dataKomunitas = [
   },
 ];
 
+const dataKarir = [
+  {
+    title: "Semangat belajar hal baru tanpa rasa takut",
+    pic: images.career_Section_2,
+  },
+  {
+    title: "Komunitas Content Creator",
+    pic: images.career_Section_2,
+  },
+];
+
 const dataService = [
   {
     title: "Kelas Bisnis",
@@ -164,4 +175,5 @@ module.exports = {
   navigationData,
   dataNews,
   dataLogoShare,
+  dataKarir
 };

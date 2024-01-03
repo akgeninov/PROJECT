@@ -63,7 +63,7 @@ function ArticleSection() {
   }, []);
 
   return (
-    <div className=" mb-20 mt-[60px] lg:mt-[160px]  w-fit flex flex-col items-center gap-[52px]">
+    <div className=" pb-20 pt-[60px] lg:pt-[160px]  w-full flex flex-col items-center gap-[52px] bg-whiteSmoke500 z-10">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
