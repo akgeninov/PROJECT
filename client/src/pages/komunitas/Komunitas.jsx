@@ -3,7 +3,7 @@ import HeroSection from "../../components/komunitas/hero-section/HeroSection";
 import BenefitSection from "../../components/komunitas/benefit-section/BenefitSection";
 import JoincomunitySection from "../../components/komunitas/joincomunity-section/JoincomunitySection";
 import ArticleSection from "../../components/komunitas/article-section/ArticleSection";
-import { useParams } from "react-router-dom";
+// import { useParams } from "react-router-dom";
 
 function Komunitas() {
     return (
