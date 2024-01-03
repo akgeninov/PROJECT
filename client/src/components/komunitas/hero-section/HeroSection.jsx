@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import { dataKomunitas } from "./../../../constants/data";
 import NavigasiKomunitas from "./navigasi-komunitas/NavigasiKomunitas";
