@@ -4,6 +4,7 @@ const artikelController = require("./artikelController");
 const lowonganController = require("./lowonganController");
 
 const kelasBisnisController = require("./kelasBisnisController");
+const userKelasController = require("./userKelasController");
 
 module.exports = {
   loginController,
@@ -11,4 +12,5 @@ module.exports = {
   artikelController,
   lowonganController,
   kelasBisnisController,
+  userKelasController,
 };
