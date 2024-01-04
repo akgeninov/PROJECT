@@ -13,12 +13,13 @@ import {
   setToken,
   setUser,
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
-import { useNavigate } from "react-router-dom";
-// import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 function Navbar() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { user } = useSelector((state) => state.userSlice);
 
   const [toggle, setToggle] = useState({
     layanan: false,
@@ -29,8 +30,6 @@ function Navbar() {
   const [isActive, setIsActive] = useState("home");
   const [toggleProfile, setTOggleProfile] = useState(false);
 
-  // const [token, setToken] = useState(JSON.parse(localStorage.getItem("auth")));
-
   const { token } = useSelector((state) => state.userSlice);
 
   const handleClick = (title) => {
@@ -39,13 +38,11 @@ function Navbar() {
         layanan: title === "Layanan" ? !prev.layanan : false,
         komunitas: title === "Komunitas" ? !prev.komunitas : false,
       }));
-      console.log("atas");
     } else {
       setToggle(() => ({
         layanan: false,
         komunitas: false,
       }));
-      console.log("bawah");
     }
   };
 
@@ -71,59 +68,13 @@ function Navbar() {
         if (getSameDropData.length > 0)
           setIsActive(getSameDropData[0].BUTTON_TEXT);
         else setIsActive("home");
-
-        console.log({ getSameDropData });
       }
-      console.log({ getSameData });
     } else {
       const getSameData = data.navigationData.filter(
         (el) => title.toLowerCase() === el.BUTTON_TEXT?.toLowerCase() && el.data
       );
       if (getSameData.length > 0) setIsActive(title);
-
-      console.log({ title, getSameData });
     }
-
-    // const routeNow = sessionStorage.getItem("active");
-    // const oldRoute = JSON.parse(sessionStorage.getItem("active"));
-    // const currentUrl = window.location.pathname;
-    // const firstPath = currentUrl.split("/")[1];
-
-    // const pageRoute = data.navigationData.filter((el) => !el.data);
-    // const dropRoute = data.navigationData.filter((el) => el.data);
-    // const isExist = pageRoute.some(
-    //   (el) => el.BUTTON_TEXT.toLowerCase() === title.toLowerCase()
-    // );
-
-    // if ((oldRoute && isExist) || title === "home") {
-    //   alert("atas");
-    //   setIsActive(title);
-    //   const isExistDrop = dropRoute.some(
-    //     (el) => el.BUTTON_TEXT.toLowerCase() === oldRoute.toLowerCase()
-    //   );
-    //   if (!isExistDrop && oldRoute.toLowerCase() !== title.toLowerCase()) {
-    //     sessionStorage.setItem("oldroute", JSON.stringify(oldRoute));
-    //   } else {
-    //   }
-    //   sessionStorage.setItem("active", JSON.stringify(title));
-    // } else {
-    //   if (oldRoute && oldRoute.toLowerCase() === title.toLowerCase()) {
-    //     alert("sini");
-    //     const route = JSON.parse(sessionStorage.getItem("oldroute"));
-    //     setIsActive(route);
-    //     sessionStorage.setItem("active", JSON.stringify(route));
-    //   } else {
-    //     alert("bawah");
-    //     if (isActive.toLowerCase() === title.toLowerCase()) {
-    //       const route = JSON.parse(sessionStorage.getItem("active"));
-    //       setIsActive(route);
-    //     } else {
-    //       setIsActive(title);
-    //     }
-    //   }
-    // }
-
-    // console.log({ pageRoute, isExist });
   };
   useEffect(() => {
     console.log({ isActive });
@@ -175,6 +126,8 @@ function Navbar() {
     localStorage.removeItem("auth");
     signOut(auth);
     setDataUser(null);
+    dispatch(setUser(null));
+    dispatch(setToken(null));
     setTOggleProfile(false);
   };
 
@@ -214,9 +167,7 @@ function Navbar() {
     }
   }, []);
 
-  useEffect(() => {
-    console.log({ dataUser: dataUser });
-  }, [dataUser]);
+  useEffect(() => {}, [dataUser]);
 
   useEffect(() => {
     console.log("jalan");
@@ -248,7 +199,6 @@ function Navbar() {
           onClick={() => {
             handleClick("");
             handleChangeNavi("home");
-            // setIsActive("");
             navigate("/");
           }}
           className=" w-[44px] h-[44px] shrink-0 cursor-pointer block md:hidden"
@@ -256,117 +206,6 @@ function Navbar() {
           alt="growlab"
         />
         <ul className="hidden lg:inline-flex items-start gap-[16px]">
-          {/* <li className="relative flex py-[4px] px-[8px] items-center ">
-            <button
-              onClick={() =>
-                setIsActive((prev) => ({
-                  layanan: !prev.layanan,
-                  komunitas: false,
-                }))
-              }
-              className="flex items-center gap-[4px] cursor-pointer "
-            >
-              <p className=" font-semibold">Layanan</p>
-              <img
-                src={icon.chevronSmallDownLight}
-                className={`${
-                  isActive.layanan ? "-rotate-180" : "rotate-0"
-                } w-[20px] h-[20px] duration-300`}
-                alt="chev"
-              />
-            </button>
-
-            <div
-              className={`${
-                isActive.layanan
-                  ? "opacity-100 pointer-events-auto"
-                  : "opacity-0 pointer-events-none"
-              } duration-300 absolute rounded-[10px] -left-[16px] top-[44px] shadow-customSm`}
-            >
-              <div
-                className={`${
-                  isActive.layanan
-                    ? " translate-y-0  pointer-events-auto "
-                    : "-translate-y-full  pointer-events-none "
-                }  relative duration-300 w-[268px] overflow-hidden rounded-[10px] `}
-              >
-                <div
-                  className={`${
-                    isActive.layanan ? "translate-y-0" : "translate-y-full"
-                  } relative duration-300 bg-whiteSmoke500 py-[16px]  flex-col   `}
-                >
-                  {data.dataLayanan.map((el, index) => (
-                    <div
-                      key={index}
-                      className={`cursor-pointer px-[24px] py-[12px] items-center hover:bg-black50`}
-                    >
-                      <p className="shrink-0  ">{el.title}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </li>
-          <li className="relative flex py-[4px] px-[8px] items-center cursor-pointer ">
-            <button
-              onClick={() =>
-                setIsActive((prev) => ({
-                  layanan: false,
-                  komunitas: !prev.komunitas,
-                }))
-              }
-              className=" flex items-center gap-[4px]"
-            >
-              <p className=" font-semibold">Komunitas</p>
-              <img
-                className={`${
-                  isActive.komunitas ? "-rotate-180" : "rotate-0"
-                } w-[20px] h-[20px] duration-300`}
-                src={icon.chevronSmallDownLight}
-                alt="chev"
-              />
-            </button>
-            <div
-              className={`${
-                isActive.komunitas
-                  ? "opacity-100 pointer-events-auto"
-                  : "opacity-0 pointer-events-none"
-              } duration-300 absolute rounded-[10px] -left-[16px] top-[44px] shadow-customSm`}
-            >
-              <div
-                className={`${
-                  isActive.komunitas
-                    ? " translate-y-0  pointer-events-auto "
-                    : "-translate-y-full  pointer-events-none "
-                }  relative duration-300 w-[268px] overflow-hidden rounded-[10px] `}
-              >
-                <div
-                  className={`${
-                    isActive.komunitas ? "translate-y-0" : "translate-y-full"
-                  } relative duration-300 bg-whiteSmoke500 py-[16px]  flex-col   `}
-                >
-                  {data.dataKomunitas.map((el, index) => (
-                    <div
-                      key={index}
-                      className={`cursor-pointer px-[24px] py-[12px] items-center hover:bg-black50`}
-                    >
-                      <p className="shrink-0  ">{el.title}</p>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </li>
-
-          <li className="flex py-[4px] px-[8px] items-cente cursor-pointer">
-            <p className=" font-semibold">Artikel</p>
-          </li>
-          <li className="flex py-[4px] px-[8px] items-cente cursor-pointer">
-            <p className=" font-semibold">Karir</p>
-          </li>
-          <li className="flex py-[4px] px-[8px] items-cente cursor-pointer">
-            <p className=" font-semibold">Tentang Kami</p>
-          </li> */}
           {data.navigationData.map((el, index) => (
             <NavigationComponent
               handleClick={handleClick}
@@ -384,19 +223,7 @@ function Navbar() {
           ))}
         </ul>
         <div className="hidden lg:flex gap-[24px]">
-          {/* <button className="hidden xl:flex flex-auto w-[160px] px-[32px] py-[16px] justify-center items-center rounded-[10px] border-[1px] border-black500 bg-whiteSmoke500">
-            <p className="w-[116px] flex-auto shrink-0 leading-[24px] font-medium text-[16px] text-[#0F1011] text-center ">
-              Hubungi Kami
-            </p>
-          </button> */}
-
-          {/* <button className="flex flex-auto w-[160px] px-[32px] py-[16px] justify-center items-center rounded-[10px] bg-black500 hover:bg-whiteSmoke800">
-            <p className="w-[116px] shrink-0 text-whiteSmoke500 leading-[24px] font-medium text-[16px]">
-              Login/Daftar
-            </p>
-          </button> */}
-
-          {dataUser ? (
+          {user ? (
             <div className="relative flex justify-end items-center ">
               <div
                 onClick={() => setTOggleProfile((prev) => !prev)}
@@ -404,14 +231,14 @@ function Navbar() {
               >
                 <div className="w-[23px] h-[23px] rounded-full overflow-hidden ">
                   <img
-                    src={`${process.env.REACT_APP_SERVER_URL}images/user/${dataUser.profile_picture}`}
+                    src={`${process.env.REACT_APP_SERVER_URL}images/user/${user.profile_picture}`}
                     alt="profile"
                     className="h-full w-full object-cover"
                   />
                 </div>
                 <div className="">
                   <h1 className="text-[16px] font-medium leading-[24px]">
-                    {dataUser.username}
+                    {user.username}
                   </h1>
                 </div>
               </div>
@@ -424,17 +251,27 @@ function Navbar() {
                 <ul className="w-[268px] gap-[4px] text-[16px] font-medium">
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start ">
                     <h1 className="text-[14px] font-bold leading-[20px]">
-                      {dataUser.nama_lengkap}
+                      {user.nama_lengkap}
                     </h1>
                     <p className="text-[14px] font-light leading-[20px]">
-                      {dataUser.email}
+                      {user.email}
                     </p>
                   </li>
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer">
-                    Profile Saya
+                    <Link
+                      to={"/profile/coba"}
+                      onClick={() => setTOggleProfile(false)}
+                    >
+                      Profil Saya
+                    </Link>
                   </li>
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer ">
-                    Dashboard
+                    <Link
+                      to={"/profile/dashboard"}
+                      onClick={() => setTOggleProfile(false)}
+                    >
+                      Dashboard
+                    </Link>
                   </li>
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer">
                     Transaksi

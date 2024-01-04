@@ -17,6 +17,14 @@ const firebaseConfig = {
   measurementId: "G-C3ETVDMWPC",
 };
 
+// apiKey: "AIzaSyBGkBouZriqaaH6C2ttDH6rJqelHakQBIY",
+// authDomain: "grow-lab-2b1a8.firebaseapp.com",
+// projectId: "grow-lab-2b1a8",
+// storageBucket: "grow-lab-2b1a8.appspot.com",
+// messagingSenderId: "344365633827",
+// appId: "1:344365633827:web:66f6878717015b10c27c96",
+// measurementId: "G-122X38H7WQ",
+
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
