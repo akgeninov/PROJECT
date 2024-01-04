@@ -20,6 +20,9 @@ import TentangKami from "../pages/tentang-kami/TentangKami";
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
+import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
+import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
+import Login from "../pages/login/Login";
 
 const routes = [
   <Route
@@ -78,7 +81,18 @@ const routes = [
         <Career />
       </Protection>
     }
+    />,
+
+    <Route
+    key="kelas-bisnis"
+    path="/kelas-bisnis"
+    element={
+      <Protection publicSide={true}>
+        <KelasBisnis />
+      </Protection>
+    }
   />,
+  
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -87,7 +101,18 @@ const routes = [
         <CareerLowongan />
       </Protection>
     }
+    />,
+
+    <Route
+    key="kelas-bisnis"
+    path="/kelas-bisnis/:id"
+    element={
+      <Protection publicSide={true}>
+        <DetailKelasBisnis />
+      </Protection>
+    }
   />,
+
   <Route
     key="careerLowongan"
     path="/career-lowongan/:id_lowongan"
@@ -97,6 +122,7 @@ const routes = [
       </Protection>
     }
   />,
+
   <Route
     key="profile"
     path="/profile"
@@ -134,6 +160,16 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <TentangKami />
+      </Protection>
+    }
+  />,
+
+  <Route
+    key="login"
+    path="/login"
+    element={
+      <Protection publicSide={true}>
+        <Login />
       </Protection>
     }
   />,

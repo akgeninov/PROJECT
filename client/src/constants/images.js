@@ -27,6 +27,12 @@ import Whatsapp from "../assets/images/Whatsapp.png"
 import Telegram from "../assets/images/Telegram.png"
 import kelasFoto from "../assets/images/kelas-foto.png";
 import materi from "../assets/images/Component-1.png"
+import bisnisHeroMobile1 from "../assets/images/bisnis_hero_mobile_1.png";
+import bisnisHeroMobile2 from "../assets/images/bisnis_hero_mobile_2.png";
+import oriVector2 from "../assets/images/ori_vector_2.jpg";
+import oriKelasBisnis from "../assets/images/ori_kelas_bisnis.png";
+import lineWhiteSmoke from "../assets/images/line_white_smoke.png";
+import googleIcon from "../assets/images/google_icon.png";
 
 const images = {
   vector2,
@@ -57,7 +63,13 @@ const images = {
   Whatsapp,
   Telegram,
   kelasFoto,
-  materi
+  materi,
+  bisnisHeroMobile1,
+  bisnisHeroMobile2,
+  oriVector2,
+  oriKelasBisnis,
+  lineWhiteSmoke,
+  googleIcon,
 };
 
 export default images;

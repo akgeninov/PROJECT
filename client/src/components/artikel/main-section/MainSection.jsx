@@ -147,7 +147,7 @@ function MainSection() {
         `${process.env.REACT_APP_API_BASE_URL}/artikel/navbar`
       );
       setTmpDataKategori(response.data.data);
-      console.log(response);
+      // console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -166,7 +166,7 @@ function MainSection() {
           kategori: kategori || "SEMUA",
         }
       );
-      console.log(response);
+      // console.log(response);
       setDataArtikel(response.data.data);
       const newOffset = ((page - 1) * itemsPerPage) % response.data.data.length;
       const endOffset = newOffset + itemsPerPage;
@@ -186,7 +186,7 @@ function MainSection() {
   const handlePageClick = (event) => {
     // const newOffset = (event.selected * itemsPerPage) % dataArtikel.length;
     // setItemOffset(newOffset);
-    console.log({ event: event.selected });
+    // console.log({ event: event.selected });
     if (kategori) navigate(`/artikel/${event.selected + 1}/${kategori}`);
     else navigate(`/artikel/${event.selected + 1}`);
     // console.log(event);

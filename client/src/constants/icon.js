@@ -22,6 +22,14 @@ import iconEvent from "../assets/icon/icon-zoom.png";
 import iconTransaksi from "../assets/icon/icon-walet.png";
 import iconEdit from "../assets/icon/icon-edit.png"
 
+import searchIcon from "../assets/icon/search_icon.png";
+import bookOpenSold from "../assets/icon/book_open_solid.png";
+import signal from "../assets/icon/signal.png";
+import userCircle from "../assets/icon/user_circle.png";
+import timer from "../assets/icon/timer.png";
+import AWARD from "../assets/icon/iaward.png";
+import BOOK from "../assets/icon/book.png";
+import CHAT from "../assets/icon/chat.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -46,7 +54,15 @@ const icon = {
   iconWishlist,
   iconEvent,
   iconTransaksi,
-  iconEdit
+  iconEdit,
+  searchIcon,
+  bookOpenSold,
+  signal,
+  userCircle,
+  timer,
+  AWARD,
+  BOOK,
+  CHAT,
 };
 
 export default icon;

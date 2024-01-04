@@ -12,7 +12,7 @@ function NewsCard({ news, onHover, setOnHover, index, path }) {
     : "Invalid Date";
 
   const navigateToDetail = (title, data, kategori) => {
-    console.log({ title, data, kategori });
+    // console.log({ title, data, kategori });
     localStorage.setItem("artikel", JSON.stringify(data));
     navigate(`/detail-artikel/${kategori}/${title}`);
   };
@@ -35,7 +35,7 @@ function NewsCard({ news, onHover, setOnHover, index, path }) {
       <img
         src={`${process.env.REACT_APP_SERVER_URL}${path}/${news.images}`}
         alt="news"
-        className={` relative h-full w-full`}
+        className={` relative object-cover h-full w-full`}
       />
       <div className="absolute bottom-0 w-[344px] h-[244px] rounded-b-[10px] z-30 overflow-hidden">
         <div

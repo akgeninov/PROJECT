@@ -31,7 +31,11 @@ function OurPartner() {
             key={index}
             className="flex justify-center items-center p-[24px] rounded-[10px] shadow-customSm bg-whiteSmoke500"
           >
-            <img src={logo.pic} alt="partner " className="w-[256px] h-[92px]" />
+            <img
+              src={logo.pic}
+              alt="partner "
+              className="object-cover w-[256px] h-[92px]"
+            />
           </div>
         ))}
       </div>
