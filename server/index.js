@@ -23,7 +23,7 @@ const { authorize } = require("./middleware/validator");
 app.use("/api", authorize);
 app.use("/api/auth", loginRouters);
 app.use("/api/user", userRouters);
-app.use("/api/user/kelas", userKelasRouters);
+app.use("/api/userKelas", userKelasRouters);
 app.use("/api/artikel", artikelRouters);
 app.use("/api/kelasBisnis", kelasBisnisRouters);
 

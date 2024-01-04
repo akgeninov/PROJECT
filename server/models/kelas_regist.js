@@ -11,8 +11,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   kelas_regist.init({
     tgl_daftar: DataTypes.DATE,
-    progess: DataTypes.INTEGER,
-    persen: { type : DataTypes.INTEGER, defaultValue: 0,}
+    progress: {type : DataTypes.INTEGER, defaultValue: 0},
   }, {
     sequelize,
     modelName: 'kelas_regist',
