@@ -17,11 +17,13 @@ const { loginRouters } = require("./routers");
 const { userRouters } = require("./routers");
 const { artikelRouters } = require("./routers");
 const { kelasBisnisRouters } = require("./routers");
+const { userKelasRouters } = require("./routers");
 const { authorize } = require("./middleware/validator");
 
 app.use("/api", authorize);
 app.use("/api/auth", loginRouters);
 app.use("/api/user", userRouters);
+app.use("/api/user/kelas", userKelasRouters);
 app.use("/api/artikel", artikelRouters);
 app.use("/api/kelasBisnis", kelasBisnisRouters);
 
