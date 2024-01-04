@@ -24,6 +24,8 @@ import TentangKami from "../pages/tentang-kami/TentangKami";
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
+import DetailProfile from "../pages/detail-profile/DetailProfile";
+import UbahProfile from "../pages/ubah-profile/UbahProfile";
 
 const routes = [
   <Route
@@ -141,7 +143,7 @@ const routes = [
     key="profile"
     path="/profile"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Profile />
       </Protection>
     }
@@ -177,6 +179,17 @@ const routes = [
       </Protection>
     }
   />,
+  <Route
+    key="profile"
+    path="/profile"
+    element={
+      <Protection publicSide={true} userOnly={true}>
+        <UbahProfile />
+      </Protection>
+    }
+  >
+    <Route path=":username" element={<DetailProfile />} />,
+  </Route>,
 ];
 
 export default routes;

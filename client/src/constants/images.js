@@ -36,6 +36,7 @@ import Whatsapp from "../assets/images/Whatsapp.png";
 import Telegram from "../assets/images/Telegram.png";
 import kelasFoto from "../assets/images/kelas-foto.png";
 import materi from "../assets/images/Component-1.png";
+import avatar2 from "../assets/images/avatar2.svg";
 
 const images = {
   vector2,
@@ -76,6 +77,7 @@ const images = {
   Telegram,
   kelasFoto,
   materi,
+  avatar2,
 };
 
 export default images;

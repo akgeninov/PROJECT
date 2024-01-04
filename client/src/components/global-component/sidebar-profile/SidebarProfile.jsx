@@ -1,16 +1,23 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faBook, faHeart, faVideo, faWallet } from '@fortawesome/free-solid-svg-icons'; // Add other icons as needed
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faHome,
+  faBook,
+  faHeart,
+  faVideo,
+  faWallet,
+} from "@fortawesome/free-solid-svg-icons"; // Add other icons as needed
 import { icon } from "../../../constants";
 
 export default function SidebarProfile() {
+  const navigate = useNavigate();
   const NavlinkStyles = ({ isActive }) => {
     return {
       fontWeight: isActive ? "bold" : "normal",
       color: isActive ? "#0F1011" : "#666",
       backgroundColor: "#F4F4F4",
-      boxShadow: isActive ? "3px 3px 7px rgba(128,128,128,0.3)" : ""
+      boxShadow: isActive ? "3px 3px 7px rgba(128,128,128,0.3)" : "",
     };
   };
 
@@ -30,9 +37,10 @@ export default function SidebarProfile() {
         style={{ boxShadow: "1px 1px 3px rgba(128, 128, 128, 0.3)" }}
       >
         <img
+          onClick={() => navigate("/profile/coba")}
           src={icon.iconEdit}
           alt="Career Momen 1"
-          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px] "
+          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px] cursor-pointer"
           style={{ borderRadius: "10px" }}
         />
         <img
@@ -40,9 +48,7 @@ export default function SidebarProfile() {
           alt="Career Momen 1"
           className="object-cover w-[150px] h-[140px]"
         />
-        <h1 className="font-medium mt-3 text-[32px]">
-          Anonymous
-        </h1>
+        <h1 className="font-medium mt-3 text-[32px]">Anonymous</h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
           {menuItems.map(([title, icon, url]) => (
             <NavLink

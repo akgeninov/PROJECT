@@ -9,7 +9,10 @@ import { api } from "../../../api/api";
 import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
-import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import {
+  setToken,
+  setUser,
+} from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { useNavigate } from "react-router-dom";
 // import { Link } from "react-router-dom";
 
@@ -161,6 +164,7 @@ function Navbar() {
         }
       );
       setDataUser(response.data.data);
+      dispatch(setUser(response.data.data));
       console.log(response);
     } catch (error) {
       console.log(error);
@@ -181,7 +185,14 @@ function Navbar() {
     } else {
       const currentUrl = window.location.pathname;
       const firstPath = currentUrl.split("/");
-      if (firstPath[1] !== "") {
+      if (
+        firstPath[1] !== "" &&
+        firstPath[1] !== "login" &&
+        firstPath[1] !== "register" &&
+        firstPath[1] !== "profile"
+      ) {
+        console.log(firstPath[1] !== "login");
+
         const getDataPath = data.navigationData.filter(
           (el) => `${el.navi && el.navi.split("/")[1]}` === firstPath[1]
         );
@@ -213,7 +224,7 @@ function Navbar() {
       dispatch(setToken(JSON.parse(localStorage.getItem("auth"))));
       getUserData(JSON.parse(localStorage.getItem("auth")));
     } else {
-      localStorage.setItem("auth", null);
+      localStorage.removeItem("auth");
       setDataUser(null);
     }
     console.log({ token });
@@ -423,10 +434,10 @@ function Navbar() {
                     Profile Saya
                   </li>
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer ">
-                    Kelas Saya
+                    Dashboard
                   </li>
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer">
-                    Wishlist
+                    Transaksi
                   </li>
                   <li
                     onClick={logOut}
