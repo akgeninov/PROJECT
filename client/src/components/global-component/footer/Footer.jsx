@@ -42,7 +42,7 @@ function Footer() {
   ]);
 
   return (
-    <div className=" z-50 w-full h-full flex justify-center lg:h-[588px] bg-black500 px-[16px] ">
+    <div className=" z-30 w-full h-full flex justify-center lg:h-[588px] bg-black500 px-[16px] ">
       <div className="flex flex-col items-center mt-[80px]  w-full 2xl:max-w-[1280px] sm:px-[10px] xl:px-[100px]  gap-[52px]">
         <div className="w-full flex flex-col lg:flex-row justify-between items-center">
           <div className="flex flex-col items-start gap-[24px]">

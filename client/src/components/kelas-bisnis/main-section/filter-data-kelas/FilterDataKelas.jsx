@@ -9,6 +9,8 @@ import {
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { HiX } from "react-icons/hi";
+import ButtonWhiteSmoke500 from "../../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
+import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
 
 function FilterDataKelas({
   kategori,
@@ -25,14 +27,17 @@ function FilterDataKelas({
   setHargaUrl,
   setLevelUrl,
   setKategoriUrl,
+  fetchDataKelasButton,
+  kategoriFilter,
+  hargaFilter,
+  levelFilter,
+  setSearch,
 }) {
   const navigate = useNavigate();
 
-  const [kategoriFilter, setKategoriFilter] = useState([]);
-
-  const fetchKategori = useMemo(() => {
-    setKategoriFilter(kategori);
-  }, [kategori]);
+  // const fetchKategori = useMemo(() => {
+  //   setKategoriFilter(kategori);
+  // }, [kategori]);
   // checkFilter({ kategor: 2 });
 
   const handleChangeKategori = (id) => {
@@ -55,6 +60,7 @@ function FilterDataKelas({
     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
     const levelValue = searchParams.get("level")?.toString().split(",");
     const hargaValue = searchParams.get("harga")?.toString().split(",");
+    const searchValue = searchParams.get("search")?.toString();
 
     navigate(
       `?${new URLSearchParams({
@@ -62,6 +68,7 @@ function FilterDataKelas({
         kategori: forUrl,
         level: levelValue || "",
         harga: hargaValue || "",
+        search: searchValue || "",
       })}`
     );
     setKategoriUrl(kategoriValue);
@@ -87,6 +94,7 @@ function FilterDataKelas({
     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
     let hargaValue = searchParams.get("harga")?.toString().split(",");
     let levelValue = searchParams.get("level")?.toString().split(",");
+    const searchValue = searchParams.get("search")?.toString();
 
     navigate(
       `?${new URLSearchParams({
@@ -94,6 +102,7 @@ function FilterDataKelas({
         kategori: kategoriValue || "",
         level: forUrl,
         harga: hargaValue || "",
+        search: searchValue || "",
       })}`
     );
     // console.log({ newLevel, forUrl });
@@ -119,6 +128,7 @@ function FilterDataKelas({
     let kategoriValue = searchParams.get("kategori")?.toString().split(",");
     let levelValue = searchParams.get("level")?.toString().split(",");
     let hargaValue = searchParams.get("harga")?.toString().split(",");
+    const searchValue = searchParams.get("search")?.toString();
 
     navigate(
       `?${new URLSearchParams({
@@ -126,10 +136,28 @@ function FilterDataKelas({
         kategori: kategoriValue || "",
         level: levelValue || "",
         harga: forUrl,
+        search: searchValue || "",
       })}`
     );
     setHargaUrl(hargaValue);
     setHarga(newHarga);
+  };
+
+  const resetFilterButton = () => {
+    setHargaUrl(null);
+    setKategori(null);
+    setLevelUrl(null);
+    setSearch("");
+
+    const newKategori = kategoriFilter.map((obj) => ({ ...obj, bool: false }));
+    setKategori(newKategori);
+    const newHarga = hargaFilter.map((obj) => ({ ...obj, bool: false }));
+    setHarga(newHarga);
+    const newLevel = levelFilter.map((obj) => ({ ...obj, bool: false }));
+    setLevel(newLevel);
+
+    navigate("/kelas-bisnis");
+    fetchDataKelasButton("reset");
   };
 
   return (
@@ -148,7 +176,23 @@ function FilterDataKelas({
         </div>
         <div
           className={`${
-            toggleFilter ? "scrollbar-hide" : ""
+            toggleFilter ? "flex md:hidden" : "hidden"
+          } items-center z-50 fixed bottom-0 right-0 w-screen gap-[16px] bg-whiteSmoke500 shadow-customSm px-[16px] py-[20px]`}
+        >
+          <div className="w-full" onClick={() => resetFilterButton()}>
+            <ButtonWhiteSmoke500
+              TEXT_BUTTON={"Reset"}
+              WIDTH={"w-full border-black border-[1px]"}
+            />
+          </div>
+
+          <div className="w-full" onClick={() => fetchDataKelasButton()}>
+            <ButtonBlack500 TEXT_BUTTON={"Terapkan Filter"} WIDTH={"w-full "} />
+          </div>
+        </div>
+        <div
+          className={`${
+            toggleFilter ? "scrollbar-hide mb-[100px] md:mb-0" : ""
           } flex flex-col rounded-[10px] h-screen md:h-auto overflow-scroll md:overflow-visible md:shadow-customSm `}
         >
           <div className="p-[24px] w-full md:w-[280px] ">

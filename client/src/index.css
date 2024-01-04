@@ -37,16 +37,19 @@ code {
 }
 
 .hero-image {
-  mask-image: url("./assets/images/vector2.svg");
+  mask-image: url("./assets/images/Vector 2.png");
   mask-size: contain;
   mask-repeat: no-repeat;
+  mask-mode: alpha;
+  height: 504px;
+  width: auto;
 }
 
-/* @media (max-width: 1280px) {
+/* @media (min-width: ); /* @media (max-width: 1280px) {
   .hero-image {
     -webkit-mask-size: 360px 504px;
   }
-} */
+}  */
 
 /* @media (max-width: 1130px) {
   .hero-image {

@@ -3,9 +3,9 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.belongsTo(models.Role, { foreignKey: { name: "id_role" } })
-      User.hasOne(models.user_pribadi, {foreignKey: {name: "id_user"}})
-      User.hasOne(models.kelas_rating, { foreignKey: "id_user" })
+      User.belongsTo(models.Role, { foreignKey: { name: "id_role" } });
+      User.hasOne(models.user_pribadi, { foreignKey: { name: "id_user" } });
+      User.hasOne(models.kelas_rating, { foreignKey: "id_user" });
     }
   }
   User.init(
@@ -15,11 +15,11 @@ module.exports = (sequelize, DataTypes) => {
       no_hp: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      nama_depan: DataTypes.DATE,
+      nama_depan: DataTypes.STRING,
       nama_belakang: DataTypes.STRING,
       biografi: DataTypes.STRING,
       uid_firebase: DataTypes.STRING,
-      proifile_picture: DataTypes.STRING,
+      profile_picture: DataTypes.STRING,
       picture_link: {
         type: DataTypes.VIRTUAL,
         get() {
@@ -27,7 +27,8 @@ module.exports = (sequelize, DataTypes) => {
             "profile_picture"
           )}`;
         },
-      }
+      },
+      uid_firebase: DataTypes.STRING,
     },
     {
       sequelize,

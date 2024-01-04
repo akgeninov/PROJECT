@@ -2,8 +2,9 @@ import React from "react";
 import { useParams } from "react-router-dom";
 import { icon } from "../../../../constants";
 
-function NavigationDetailKelasBisnis() {
-  const { title } = useParams();
+function NavigationDetailKelasBisnis({ dataDetail }) {
+  // const { title } = useParams();
+  console.log({ dataDetail });
 
   return (
     <div className="flex  px-[8px] xl:px-0 justify-start  items-center ">
@@ -18,7 +19,7 @@ function NavigationDetailKelasBisnis() {
         </li>
         <li>
           <p className="w-[100px] md:w-full text-[14px] text-whiteSmoke500 font-[Heebo] font-medium leading-[20px] cursor-pointer line-clamp-1">
-            {title}
+            {dataDetail?.kelas_bisni?.nama || "no data"}
           </p>
         </li>
       </nav>

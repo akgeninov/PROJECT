@@ -26,8 +26,8 @@ app.use("/api/auth", loginRouters);
 app.use("/api/user", userRouters);
 app.use("/api/userKelas", userKelasRouters);
 app.use("/api/artikel", artikelRouters);
-app.use("/api/lowongan", lowonganRouters);
 app.use("/api/kelasBisnis", kelasBisnisRouters);
+app.use("/api/lowongan", lowonganRouters);
 
 app.use("/images", express.static("images"));
 

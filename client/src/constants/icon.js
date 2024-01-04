@@ -14,14 +14,6 @@ import handshake from "../assets/icon/handshake.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
-import profile from "../assets/icon/profile.png";
-import iconHome from "../assets/icon/icon-home.png";
-import iconCourse from "../assets/icon/icon-course.png";
-import iconWishlist from "../assets/icon/icon-wishlist.png";
-import iconEvent from "../assets/icon/icon-zoom.png";
-import iconTransaksi from "../assets/icon/icon-walet.png";
-import iconEdit from "../assets/icon/icon-edit.png"
-
 import searchIcon from "../assets/icon/search_icon.png";
 import bookOpenSold from "../assets/icon/book_open_solid.png";
 import signal from "../assets/icon/signal.png";
@@ -30,6 +22,14 @@ import timer from "../assets/icon/timer.png";
 import AWARD from "../assets/icon/iaward.png";
 import BOOK from "../assets/icon/book.png";
 import CHAT from "../assets/icon/chat.png";
+import playOutLine from "../assets/icon/play_outline.svg";
+import profile from "../assets/icon/profile.png";
+import iconHome from "../assets/icon/icon-home.png";
+import iconCourse from "../assets/icon/icon-course.png";
+import iconWishlist from "../assets/icon/icon-wishlist.png";
+import iconEvent from "../assets/icon/icon-zoom.png";
+import iconTransaksi from "../assets/icon/icon-walet.png";
+import iconEdit from "../assets/icon/icon-edit.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -63,6 +63,7 @@ const icon = {
   AWARD,
   BOOK,
   CHAT,
+  playOutLine,
 };
 
 export default icon;
