@@ -134,7 +134,7 @@ module.exports = {
 
             const result = await kelas_bisnis.findAll({
                 include:[
-                    { model: kelas_regist, attributes: [],where: {id_user : userID}},
+                    { model: kelas_regist, attributes: ["progress"],where: {id_user : userID}},
                     { model: kelas_detail,  attributes: [], as: 'kelas_detail'},
                 ],
                 attributes: ["id", "nama", "image", "images_link", 
