@@ -33,7 +33,7 @@ export default function NavbarKelasSaya() {
         ))}
       </nav>
 
-      <div className="relative inline-block text-left">
+      {/* <div className="relative inline-block text-left">
         <div>
           <button
             type="button"
@@ -81,7 +81,7 @@ export default function NavbarKelasSaya() {
             </div>
           ))}
         </div>
-      </div>
+      </div> */}
 
       <Outlet />
     </div>

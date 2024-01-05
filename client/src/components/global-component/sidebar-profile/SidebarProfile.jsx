@@ -22,7 +22,7 @@ export default function SidebarProfile() {
   };
 
   return (
-    <div className="flex flex-row justify-start lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:h-[1000px] gap-[22px] flex-shrink-0">
+    <div className="flex flex-row justify-start lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
       {/* Left Side - Menu Box */}
       <div
         className="flex flex-col items-center w-[395px] h-full bg-white-200 border border-grey"

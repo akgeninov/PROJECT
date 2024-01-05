@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { newsPic } from "../../../constants";
+// import { newsPic } from "../../../constants";
 import NewsCard from "../../global-component/card/news-card/NewsCard";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
-import { dataNews } from "../../../constants/data";
+// import { dataNews } from "../../../constants/data";
 import { api } from "../../../api/api";
 
 function ArticleSection() {
@@ -20,6 +20,7 @@ function ArticleSection() {
         }
       );
       setArticles(response.data.data);
+      
     } catch (error) {
       console.log(error);
     }
