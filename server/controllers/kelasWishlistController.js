@@ -6,9 +6,9 @@ const kelasBisnisModel = db.kelas_bisnis;
 module.exports = {
     getWishlistByIdUSer: async (req, res) => {
         try {
-          const result = await kelasWishlistModel.findOne({
+          const result = await kelasWishlistModel.findAll({
             where: {
-              id: req.params.id_user,
+              id_user: req.params.id_user,
             },
             include: [
               { model: db.sequelize.model("User") },
