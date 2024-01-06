@@ -5,16 +5,8 @@ const {
 module.exports = (sequelize, DataTypes) => {
   class kelas_wishlist extends Model {
     static associate(models) {
-      kelas_wishlist.belongsTo(models.user,{
-        foreignKey: {
-          name: "id_user",
-        }
-      });
-      kelas_wishlist.belongsTo(models.kelas_bisnis,{
-        foreignKey: {
-          name: "id_kelas_bisnis",
-        }
-      })
+      kelas_wishlist.hasMany(models.User,{foreignKey: {name: "id_user",}})
+      kelas_wishlist.hasMany(models.kelas_bisnis,{foreignKey: {name: "id_kelas_bisnis",}})
     }
   }
   kelas_wishlist.init({

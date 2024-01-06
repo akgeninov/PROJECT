@@ -6,6 +6,8 @@ module.exports = (sequelize, DataTypes) => {
       User.belongsTo(models.Role, { foreignKey: { name: "id_role" } })
       User.hasOne(models.user_pribadi, {foreignKey: {name: "id_user"}})
       User.hasOne(models.kelas_rating, { foreignKey: "id_user" })
+      User.belongsTo(models.kelas_wishlist, { foreignKey: "id_user" })
+      
     }
   }
   User.init(

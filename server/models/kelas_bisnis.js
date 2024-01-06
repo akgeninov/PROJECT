@@ -11,6 +11,8 @@ module.exports = (sequelize, DataTypes) => {
       kelas_bisnis.hasMany(models.kelas_regist, { foreignKey: {name: "id_kelas_bisnis"}});
       kelas_bisnis.hasOne(models.kelas_detail, { foreignKey: {name: "id_kelas_bisnis"}});
       kelas_bisnis.belongsToMany(models.kelas_diskon, { through: 'kelas_bisnis_diskon', foreignKey: 'id_kelas_bisnis'});
+      kelas_bisnis.belongsTo(models.kelas_wishlist, { foreignKey: "id_kelas_bisnis" })
+
     }
   }
   kelas_bisnis.init({
