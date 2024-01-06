@@ -1,7 +1,5 @@
 import React from "react";
 import { NavLink, Outlet } from "react-router-dom";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHome, faBook, faHeart, faVideo, faWallet } from '@fortawesome/free-solid-svg-icons'; // Add other icons as needed
 import { icon } from "../../../constants";
 
 export default function SidebarProfile() {
@@ -15,11 +13,11 @@ export default function SidebarProfile() {
   };
 
   const menuItems = [
-    ["Dashboard", faHome, "/profile/dashboard"],
-    ["Kelas Saya", faBook, "/profile/kelas-saya/semua-kelas"],
-    ["Wishlist", faHeart, "/profile/wishlist"],
-    ["Event", faVideo, "/profile/event"],
-    ["Transaksi", faWallet, "/profile/transaksi"],
+    { title: "Dashboard", icon: icon.iconHome, url: "/profile/dashboard" },
+    { title: "Kelas Saya", icon: icon.iconCourse, url: "/profile/kelas-saya/semua-kelas" },
+    { title: "Wishlist", icon: icon.iconWishlist, url: "/profile/wishlist" },
+    { title: "Event", icon: icon.iconEvent, url: "/profile/event" },
+    { title: "Transaksi", icon: icon.iconTransaksi, url: "/profile/transaksi" },
   ];
 
   return (
@@ -32,7 +30,7 @@ export default function SidebarProfile() {
         <img
           src={icon.iconEdit}
           alt="Career Momen 1"
-          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px] "
+          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px]"
           style={{ borderRadius: "10px" }}
         />
         <img
@@ -44,13 +42,13 @@ export default function SidebarProfile() {
           Anonymous
         </h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
-          {menuItems.map(([title, icon, url]) => (
+          {menuItems.map(({ title, icon, url }) => (
             <NavLink
               to={url}
               style={NavlinkStyles}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
             >
-              <FontAwesomeIcon icon={icon} className="mr-5 ml-5" />
+              <img src={icon} alt={title} className="mr-5 ml-5" />
               {title}
             </NavLink>
           ))}
