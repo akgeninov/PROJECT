@@ -26,4 +26,25 @@ module.exports = {
           });
         }
       },
+
+      addToWishlist: async (req, res) => {
+        try {
+          const { id_user, id_kelas_bisnis } = req.body;
+    
+          const result = await kelasWishlistModel.create({
+            id_user: id_user,
+            id_kelas_bisnis: id_kelas_bisnis,
+            date_wishlist: new Date(), 
+          });
+    
+          res.status(200).send({
+            message: "success",
+            data: result,
+          });
+        } catch (error) {
+          res.status(400).send({
+            error: error.message,
+          });
+        }
+      },
 }
