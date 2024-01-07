@@ -1,8 +1,10 @@
 import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { icon } from "../../../constants";
 
 export default function SidebarProfile() {
+  const location = useLocation();
+
   const NavlinkStyles = ({ isActive }) => {
     return {
       fontWeight: isActive ? "bold" : "normal",
@@ -13,11 +15,11 @@ export default function SidebarProfile() {
   };
 
   const menuItems = [
-    { title: "Dashboard", icon: icon.iconHome, url: "/profile/dashboard" },
-    { title: "Kelas Saya", icon: icon.iconCourse, url: "/profile/kelas-saya/semua-kelas" },
-    { title: "Wishlist", icon: icon.iconWishlist, url: "/profile/wishlist" },
-    { title: "Event", icon: icon.iconEvent, url: "/profile/event" },
-    { title: "Transaksi", icon: icon.iconTransaksi, url: "/profile/transaksi" },
+    { title: "Dashboard", icon: icon.iconHome, activeIcon: icon.iconHome1, url: "/profile/dashboard" },
+    { title: "Kelas Saya", icon: icon.iconCourse, activeIcon: icon.iconCourse1, url: "/profile/kelas-saya/semua-kelas" },
+    { title: "Wishlist", icon: icon.iconWishlist, activeIcon: icon.iconWishlist1, url: "/profile/wishlist" },
+    { title: "Event", icon: icon.iconEvent, activeIcon: icon.iconEvent1, url: "/profile/event" },
+    { title: "Transaksi", icon: icon.iconTransaksi, activeIcon: icon.iconTransaksi1, url: "/profile/transaksi" },
   ];
 
   return (
@@ -42,13 +44,14 @@ export default function SidebarProfile() {
           Anonymous
         </h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
-          {menuItems.map(({ title, icon, url }) => (
+          {menuItems.map(({ title, icon, activeIcon, url }, index) => (
             <NavLink
+              key={index}
               to={url}
-              style={NavlinkStyles}
+              style={NavlinkStyles({ isActive: location.pathname === url })}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
             >
-              <img src={icon} alt={title} className="mr-5 ml-5" />
+              <img src={location.pathname === url ? activeIcon : icon} alt={title} className="mr-5 ml-5" />
               {title}
             </NavLink>
           ))}
