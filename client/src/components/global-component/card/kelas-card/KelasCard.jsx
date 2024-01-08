@@ -3,6 +3,25 @@ import { Link } from "react-router-dom";
 import { Progress } from "@chakra-ui/react";
 import { images } from "../../../../constants";
 import { Spinner } from "@chakra-ui/react";
+import {  extendTheme} from "@chakra-ui/react";
+
+
+const theme = extendTheme({
+  colors: {
+    lime: {
+      50: '#f2ffde',
+     100: '#defcb2',
+     200: '#caf884',
+     300: '#b5f554',
+     400: '#a1f226',
+     500: '#88d90d',
+     600: '#69a905',
+     700: '#4a7801',
+     800: '#2b4800',
+     900: '#0b1900',
+    }
+  }
+})
 
 
 export default function KelasCard(kelas) {
@@ -13,7 +32,6 @@ export default function KelasCard(kelas) {
           src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${kelas.kelas.image}`|| images.Linkedin}
           alt={kelas.kelas.nama || "No Data"}
           className="w-full h-full object-cover rounded-[10px]"
-          loading="lazy"
         />
         <h1 className="lg:hidden ml-[11px] font-medium text-[14px] lg:text-[24px] leading-[20px] lg:leading-[28px] text-black500 w-[234px] h-[56px] flex-shrink-0 mb-[43px]">
           {kelas.kelas.nama || "No Data"}
@@ -24,8 +42,8 @@ export default function KelasCard(kelas) {
           {kelas.kelas.nama || "No Data"}
         </h1>
         <div className="flex items-center justify-center">
-          <Progress
-            colorScheme="teal"
+          <Progress theme={theme}
+            colorScheme="lime50"
             className="w-[311px] h-[8px] lg:w-[372px] lg:h-[14px] sm:w-[500px]"
             borderRadius="50px"
             value={kelas.kelas.persentase}
