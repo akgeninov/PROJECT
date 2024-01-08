@@ -6,6 +6,10 @@ import Artikel from "../pages/artikel/Artikel";
 // import OneArtikel from "../pages/artikel/one-artikel/OneArtikel";
 import MainSection from "../components/artikel/main-section/MainSection";
 import DetailArtikel from "../pages/detail-artikel/DetailArtikel";
+import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
+import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
+import Login from "../pages/login/Login";
+import Register from "../pages/register/Register";
 import Profile from "../pages/profile/Profile";
 import DashboardProfile from "../components/profile/dashboard-profile/dashboardProfile";
 import KelasSaya from "../components/profile/kelas-saya/KelasSaya";
@@ -22,9 +26,6 @@ import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
-import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
-import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
-import Login from "../pages/login/Login";
 
 const routes = [
   <Route
