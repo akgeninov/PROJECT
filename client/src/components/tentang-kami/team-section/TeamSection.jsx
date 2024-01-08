@@ -3,26 +3,26 @@ import teamPic from "../../../constants/teamPic";
 
 function HeroSection() {
   return (
-    <div className="bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1084px] max-h-fit flex flex-col items-center my-[160px] ">
+    <div className="px-[16px] md:px-[100px] max-w-screen-2xl max-h-fit flex flex-col items-center my-[50px] md:my-[100px] ">
       <p className="text-[24px] lg:text-[40px] font-bold font-[Heebo] leading-[36px] lg:leading-[60px] max-w-[250px] mb-[42px]">
         Tim Kami
       </p>
 
-      <div className="flex flex-wrap gap-[52px] h-max-[424px] items-center justify-center sm:mb-[50px]">
-        <div className="w-[516px] h-[424px] relative">
-          <div className="bg-indigoDye500 w-[492px] h-[400px] top-[24px] absolute"></div>
+      <div className="flex flex-wrap gap-[52px] h-max-[424px] items-center justify-center md:mb-[50px] flex-shrink">
+        <div className="w-[316px] md:w-[516px] h-[242px] md:h-[424px] relative">
+          <div className="bg-indigoDye500 w-[292px] md:w-[492px] h-[238px] md:h-[400px] top-[24px] absolute"></div>
           <img
             src={teamPic.team1}
             alt="Oraldo Emeraldi Anggoro Pic"
-            className="w-[492px] h-[400px] absolute left-[24px]"
+            className="w-[292px] md:w-[492px] h-[238px] md:h-[400px] absolute left-[24px]"
           />
         </div>
-        <div className="w-[512px] h-fit">
+        <div className="w-[316px] md:w-[512px] h-fit">
           <div className="mb-[24px]">
-            <p className="text-[24px] font-bold leading-[36px] mb-[12px]">Oraldo Emeraldi Anggoro</p>
-            <p className="text-[18px] font-medium leading-[28px] text-indigoDye500">CEO & Co-Founder</p>
+            <p className="text-[20px] md:text-[24px] font-bold leading-[36px] mb-[12px]">Oraldo Emeraldi Anggoro</p>
+            <p className="text-[16px] md:text-[18px] font-medium leading-[28px] text-indigoDye500">CEO & Co-Founder</p>
           </div>
-          <p className="text-[18px] font-light leading-[28px]">
+          <p className="text-[16px] md:text-[18px] font-light leading-[28px]">
             Aldo biasa dipanggil, merupakan lulusan dari Universitas Surabaya
             dengan predikat cumlaude serta mahasiswa berprestasi tahun 2019.
             Sejak tahun 2018, Aldo sudah memiliki banyak pengalaman dalam dunia
@@ -32,14 +32,13 @@ function HeroSection() {
           </p>
         </div>
       </div>
-
-      <div className="flex flex-wrap gap-[52px] h-max-[424px] items-center justify-center">
-      <div className="w-[512px] h-fit">
+      <div className="flex flex-wrap gap-[52px] h-max-[424px] mt-[30px] md:mt-0 items-center justify-center flex-shrink"> 
+      <div className="w-[316px] md:w-[512px] h-fit">
           <div className="mb-[24px]">
-            <p className="text-[24px] font-bold leading-[36px] mb-[12px]">Shandy Christofer Setyono</p>
-            <p className="text-[18px] font-medium leading-[28px] text-indigoDye500">COO & Co-Founder</p>
+            <p className="text-[20px] md:text-[24px] font-bold leading-[36px] mb-[12px]">Shandy Christofer Setyono</p>
+            <p className="text-[16px] md:text-[18px] font-medium leading-[28px] text-indigoDye500">COO & Co-Founder</p>
           </div>
-          <p className="text-[18px] font-light leading-[28px]">
+          <p className="text-[16px] md:text-[18px] font-light leading-[28px]">
             Shandy merupakan lulusan dari Universitas Parahyangan pada tahun
             2019 dengan predikat cumlaude. Sejak tahun 2018 Shandy telah
             memiliki pengalaman dalam bidang data dan pengembangan bisnis serta
@@ -47,12 +46,12 @@ function HeroSection() {
             Gojek, Blibli, dan lainnya.
           </p>
         </div>
-        <div className="w-[516px] h-[424px] relative">
-          <div className="bg-indigoDye500 w-[492px] h-[400px] top-[24px] left-[24px] absolute"></div>
+        <div className="w-[316px] md:w-[516px] h-[242px] md:h-[424px] relative">
+          <div className=" bg-indigoDye500 w-[292px] md:w-[492px] h-[238px] md:h-[400px] top-[24px] left-[24px] absolute"></div>
           <img
             src={teamPic.team2}
             alt="Shandy Christofer Setyono Pic"
-            className="w-[492px] h-[400px] absolute"
+            className="w-[292px] md:w-[492px] h-[238px] md:h-[400px] absolute"
           />
         </div>
       </div>

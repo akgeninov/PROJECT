@@ -1,11 +1,11 @@
 const router = require("express").Router();
 const { userKelasController } = require("../controllers");
+const { verifyToken } = require("../middleware/verifyToken");
 
-router.post("/all", userKelasController.kelasUserAll);
-router.post("/nonProgess", userKelasController.kelasUserNonProgress);
-router.post("/progress", userKelasController.kelasUserProgress);
-router.post("/complete", userKelasController.kelasUserComplete);
-router.post("/progress/last", userKelasController.kelasUserLastProgress);
-
+router.get("/all", verifyToken, userKelasController.kelasUserAll);
+router.get("/nonProgess",verifyToken, userKelasController.kelasUserNonProgress);
+router.get("/progress",verifyToken, userKelasController.kelasUserProgress);
+router.get("/complete",verifyToken, userKelasController.kelasUserComplete);
+router.get("/progress/last",verifyToken, userKelasController.kelasUserLastProgress);
 
 module.exports = router;

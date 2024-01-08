@@ -12,6 +12,7 @@ module.exports = {
   artikelRouters,
   lowonganRouters,
   kelasBisnisRouters,
+  userKelasRouters
   userKelasRouters,
   kelasWishlistRouters
 };

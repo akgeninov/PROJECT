@@ -20,6 +20,8 @@ import TentangKami from "../pages/tentang-kami/TentangKami";
 import Career from "../pages/career/Career";
 import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
+import DetailProfile from "../pages/detail-profile/DetailProfile";
+import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import KelasBisnis from "../pages/kelas-bisnis/KelasBisnis";
 import DetailKelasBisnis from "../pages/detail-kelas-bisnis/DetailKelasBisnis";
 import Login from "../pages/login/Login";
@@ -29,7 +31,7 @@ const routes = [
     key="home"
     path="/"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Home />
       </Protection>
     }
@@ -38,7 +40,7 @@ const routes = [
     key="artikel"
     path="/artikel/:page"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Artikel />
       </Protection>
     }
@@ -50,7 +52,7 @@ const routes = [
     key="detail-artikel"
     path="/detail-artikel/:kategori/:title"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <DetailArtikel />
       </Protection>
     }
@@ -59,7 +61,7 @@ const routes = [
     key="komunitas-konten-kreator"
     path="/komunitas/:title"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Komunitas />
       </Protection>
     }
@@ -68,8 +70,44 @@ const routes = [
     key="komunitas-bisnis"
     path="/komunitas/:title"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <Komunitas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="kelas-bisnis"
+    path="/kelas-bisnis"
+    element={
+      <Protection publicSide={true} userOnly={true}>
+        <KelasBisnis />
+      </Protection>
+    }
+  />,
+  <Route
+    key="kelas-bisnis"
+    path="/kelas-bisnis/:id"
+    element={
+      <Protection publicSide={true} userOnly={true}>
+        <DetailKelasBisnis />
+      </Protection>
+    }
+  />,
+  <Route
+    key="login"
+    path="/login"
+    element={
+      <Protection publicSide={true}>
+        <Login />
+      </Protection>
+    }
+  />,
+  <Route
+    key="login"
+    path="/register"
+    element={
+      <Protection publicSide={true}>
+        <Register />
       </Protection>
     }
   />,
@@ -127,7 +165,7 @@ const routes = [
     key="profile"
     path="/profile"
     element={
-      <Protection publicSide={true}>
+      <Protection userOnly={true}>
         <Profile />
       </Protection>
     }
@@ -158,7 +196,7 @@ const routes = [
     key="about-us"
     path="/about-us"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <TentangKami />
       </Protection>
     }
@@ -173,6 +211,17 @@ const routes = [
       </Protection>
     }
   />,
+  <Route
+    key="profile"
+    path="/profile"
+    element={
+      <Protection publicSide={true} userOnly={true}>
+        <UbahProfile />
+      </Protection>
+    }
+  >
+    <Route path=":username" element={<DetailProfile />} />,
+  </Route>,
 ];
 
 export default routes;

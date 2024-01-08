@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import { dataKomunitas } from "./../../../constants/data";
 import NavigasiKomunitas from "./navigasi-komunitas/NavigasiKomunitas";
 import { useParams } from "react-router-dom";
 
-export default function HeroSection() {
+export default function HeroSection(props) {
   const { title } = useParams();
   let index = 1;
   if (title === "komunitas-bisnis") {
@@ -12,22 +12,22 @@ export default function HeroSection() {
   }
   return (
     <div
-      className="bg-cover bg-center px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[540px] sm:h-[544px] flex flex-col"
+      className="bg-cover bg-[center_top_-20px] px-[16px] sm:px-[100px] w-full max-w-screen-2xl h-[540px] lg:h-[544px] flex flex-col items-center"
       style={{ backgroundImage: `url(${dataKomunitas[index].pic})` }}
     >
-      <div className="bg-[rgba(15,16,17,0.95)] bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[544px] lg:h-[544px] absolute left-0 z-0 "></div>
+      <div className="bg-[rgba(15,16,17,0.95)] bg-cover px-[16px] sm:px-[100px] w-full max-w-screen-2xl h-[540px] lg:h-[544px] absolute z-0 "></div>
       <div className="z-10">
         <div className="mt-[24px] gap-[8px]">
           {/* <h1 className="text-whiteSmoke500">Breadcrumb</h1> */}
           <NavigasiKomunitas />
         </div>
-        <div className="flex flex-wrap gap-[32px] mt-[40px] items-center justify-center">
-          <div className="flex flex-col w-full lg:w-[568px]  overflow-hidden gap-[32px] items-center">
-            <div className="flex flex-col max-w-[568px] gap-[16px]">
-              <h1 className=" text-whiteSmoke500 text-[28px] lg:text-[48px] text-center lg:text-start font-bold leading-[32px] lg:leading-[60px]">
+        <div className="flex flex-col lg:flex-row gap-[32px] lg:gap[80px] mt-[40px] lg:mt-[70px] items-center justify-center lg:items-start lg:justify-start">
+          <div className="flex flex-col w-full lg:w-[568px]  overflow-hidden gap-[32px] items-center lg:items-start">
+            <div className="flex flex-col max-w-[568px] gap-[16px] lg:gap[52px]">
+              <h1 className=" lg:w-[568px] text-whiteSmoke500 text-[24px] lg:text-[48px] text-center lg:text-start font-bold leading-[36px] lg:leading-[72px]">
                 {dataKomunitas[index].title}
               </h1> 
-              <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] text-whiteSmoke500 text-center lg:text-start">
+              <p className="lg:w-[568px] text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] text-whiteSmoke500 text-center lg:text-start">
                 Ayo bergabung dengan para penggerak industri kreatif untuk
                 bertukar ide, mendapatkan inspirasi, dan memperluas jaringanmu.
               </p>
@@ -39,19 +39,12 @@ export default function HeroSection() {
                 </p>
               </button> */}
             <ButtonWhiteSmoke500
-              WIDTH={"w-[220px] sm:w-[260px]"}
+              WIDTH={"w-[220px] lg:w-[260px]"}
               TEXT_BUTTON={"Selengkapnya"}
             />
           </div>
 
-          <div className="flex flex-col items-center bg-center w-[358px] h-[188px] sm:min-w-[352px] overflow-hidden rounded-[10px]">
-            <img
-              src={dataKomunitas[index].pic}
-              alt="komunitas"
-              className={
-                "gap-[52px] flex flex-col rounded-[10px] shrink-0"
-              }
-            />
+          <div style={{ backgroundImage: `url(${dataKomunitas[index].pic})` }}  className="flex flex-col items-center bg-center bg-cover w-[358px] lg:w-[432px] h-[188px] lg:h-[352px]  sm:min-w-[352px] overflow-hidden rounded-[10px]">
           </div>
         </div>
       </div>
