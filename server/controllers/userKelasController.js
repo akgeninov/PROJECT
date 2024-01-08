@@ -21,7 +21,7 @@ module.exports = {
       if (!getUser) {
         throw new Error("User not Found");
       }
-    //   const { userID } = req.body;
+      //   const { userID } = req.body;
 
       const result = await kelas_bisnis.findAll({
         include: [
@@ -65,14 +65,23 @@ module.exports = {
 
   kelasUserNonProgress: async (req, res) => {
     try {
-      const { userID } = req.body;
+      //   const { userID } = req.body;
+      const userData = req.dataToken;
+      const getUser = await User.findOne({
+        where: {
+          email: userData.email,
+        },
+      });
+      if (!getUser) {
+        throw new Error("User not Found");
+      }
 
       const result = await kelas_bisnis.findAll({
         include: [
           {
             model: kelas_regist,
             attributes: ["progress"],
-            where: { id_user: userID },
+            where: { id_user: getUser.id },
           },
           { model: kelas_detail, attributes: [] },
         ],
@@ -110,14 +119,23 @@ module.exports = {
 
   kelasUserProgress: async (req, res) => {
     try {
-      const { userID } = req.body;
+      //   const { userID } = req.body;
+      const userData = req.dataToken;
+      const getUser = await User.findOne({
+        where: {
+          email: userData.email,
+        },
+      });
+      if (!getUser) {
+        throw new Error("User not Found");
+      }
 
       const result = await kelas_bisnis.findAll({
         include: [
           {
             model: kelas_regist,
             attributes: ["progress"],
-            where: { id_user: userID },
+            where: { id_user: getUser.id },
           },
           { model: kelas_detail, attributes: [] },
         ],
@@ -155,14 +173,23 @@ module.exports = {
 
   kelasUserComplete: async (req, res) => {
     try {
-      const { userID } = req.body;
+      //   const { userID } = req.body;
+      const userData = req.dataToken;
+      const getUser = await User.findOne({
+        where: {
+          email: userData.email,
+        },
+      });
+      if (!getUser) {
+        throw new Error("User not Found");
+      }
 
       const result = await kelas_bisnis.findAll({
         include: [
           {
             model: kelas_regist,
             attributes: ["progress"],
-            where: { id_user: userID },
+            where: { id_user: getUser.id },
           },
           { model: kelas_detail, attributes: [] },
         ],
@@ -200,14 +227,23 @@ module.exports = {
 
   kelasUserLastProgress: async (req, res) => {
     try {
-      const { userID } = req.body;
+      //   const { userID } = req.body;
+      const userData = req.dataToken;
+      const getUser = await User.findOne({
+        where: {
+          email: userData.email,
+        },
+      });
+      if (!getUser) {
+        throw new Error("User not Found");
+      }
 
       const result = await kelas_bisnis.findAll({
         include: [
           {
             model: kelas_regist,
             attributes: ["progress"],
-            where: { id_user: userID },
+            where: { id_user: getUser.id },
           },
           { model: kelas_detail, attributes: [], as: "kelas_detail" },
         ],

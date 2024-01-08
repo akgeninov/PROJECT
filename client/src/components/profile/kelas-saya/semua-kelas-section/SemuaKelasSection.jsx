@@ -31,8 +31,8 @@ export default function SemuaKelasSection() {
 
   return (
     <div>
-      {kelas.map((kelas) => (
-        <KelasCard kelas={kelas} />
+      {kelas.map((kelas, index) => (
+        <KelasCard key={index} kelas={kelas} />
       ))}
     </div>
   );
