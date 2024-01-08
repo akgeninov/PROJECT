@@ -35,15 +35,7 @@ import userCircle from "../assets/icon/user_circle.png";
 import timer from "../assets/icon/timer.png";
 import AWARD from "../assets/icon/iaward.png";
 import BOOK from "../assets/icon/book.png";
-import CHAT from "../assets/icon/chat.png";
-import playOutLine from "../assets/icon/play_outline.svg";
-import profile from "../assets/icon/profile.png";
-import iconHome from "../assets/icon/icon-home.png";
-import iconCourse from "../assets/icon/icon-course.png";
-import iconWishlist from "../assets/icon/icon-wishlist.png";
-import iconEvent from "../assets/icon/icon-zoom.png";
-import iconTransaksi from "../assets/icon/icon-walet.png";
-import iconEdit from "../assets/icon/icon-edit.png";
+import CHAT from "../assets/icon/chat.png"
 
 const icon = {
   chevronSmallDownLight,
