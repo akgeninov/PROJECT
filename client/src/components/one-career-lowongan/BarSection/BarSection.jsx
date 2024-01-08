@@ -2,7 +2,7 @@ import React from "react";
 
 function BarSection() {
   return (
-    <div className="font-heebo text-[#3F4041]">
+    <div className="font-heebo text-[#3F4041] fixed">
       <div className="md:hidden flex">
         <div
           className=" font-semibold p-7 rounded-lg border-none w-screen h-[120px] text-[18px] flex flex-row "

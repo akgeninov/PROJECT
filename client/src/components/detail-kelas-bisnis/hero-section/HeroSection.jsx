@@ -1,45 +1,220 @@
-import React, { useMemo } from "react";
-import { icon, kelasBisnisPic } from "../../../constants";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
+import { icon, images, kelasBisnisPic } from "../../../constants";
 import NavigationDetailKelasBisnis from "./navigation-detail-kelas-bisnis/NavigationDetailKelasBisnis";
 import { useParams } from "react-router-dom";
 import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import { api } from "../../../api/api";
+import { useSelector } from "react-redux";
 
-function HeroSection() {
-  const { id } = useParams();
-  const fetchDetailKelas = useMemo(async () => {
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/detail`,
-        {
-          id: Number(id),
-        }
+function HeroSection({ dataDetail, star }) {
+  const { value } = useSelector((state) => state.detailKelasSlice);
+  // const [star, setStar] = useState(null);
+
+  const renderStarRating = useCallback(() => {
+    const nilai = Number(star) * 2;
+    console.log({ start2: star });
+
+    if (Number(star) === 0 || isNaN(star) || star === undefined) {
+      return (
+        <>
+          <div className="rating rating-sm rating-half gap-0">
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="rating-hidden"
+              defaultChecked
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+            />
+            <input
+              type="radio"
+              name={`rating-1`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+            />
+          </div>
+        </>
       );
-      // console.log(response);
-    } catch (error) {
-      console.log(error);
+    } else {
+      return (
+        <>
+          <div className="rating rating-sm rating-half gap-0">
+            <div className="text-white">{star * 2}</div>
+            <input type="radio" name="rating-10" className="rating-hidden" />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+              defaultChecked={nilai === 1}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+              defaultChecked={nilai === 2}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+              defaultChecked={nilai === 3}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+              defaultChecked={nilai === 4}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+              defaultChecked={nilai === 5}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+              defaultChecked={nilai === 6}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+              defaultChecked={nilai === 7}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+              defaultChecked={nilai === 8}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-1"
+              defaultChecked={nilai === 9}
+            />
+            <input
+              type="radio"
+              name={`rating-10`}
+              className="bg-yellow-500 mask mask-star-2 mask-half-2"
+              defaultChecked={nilai === 10}
+            />
+          </div>
+        </>
+      );
     }
-    // console.log({ id });
-  }, []);
+  }, [star]);
 
-  const { title } = useParams();
+  // const { id } = useParams();
+  // const fetchDetailKelas = useMemo(async () => {
+  //   try {
+  //     const response = await api.post(
+  //       `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/detail`,
+  //       {
+  //         id: Number(id),
+  //       }
+  //     );
+  //     // console.log(response);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  //   // console.log({ id });
+  // }, []);
+
+  useEffect(() => {
+    // setStar(Number(value[0]?.kelas_bisni.total_nilai));
+    console.log({
+      start1: Number(star) * 2 === 1,
+      start2: Number(star) * 2 === 2,
+      start3: Number(star) * 2 === 3,
+      start4: Number(star) * 2 === 4,
+      start5: Number(star) * 2 === 5,
+      start6: Number(star) * 2 === 6,
+      start7: Number(star) * 2 === 7,
+      start8: Number(star) * 2 === 8,
+      start9: Number(star) * 2 === 9,
+      start10: Number(star) * 2 === 10,
+    });
+  }, [star]);
+
+  // useEffect(() => {
+  //   console.log({ star });
+  // }, [star]);
+
+  console.log({ image: dataDetail?.kelas_bisni?.image });
+
   return (
-    <div className="relative  w-full   2xl:max-w-[1280px] h-full  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">
-      <div className="flex min-w-[1280px] xl:min-w-full  max-h-[556px] md:max-h-[660px]  justify-center items-center">
-        <img
-          src={kelasBisnisPic.heroKelasBisnis1}
-          alt="hero"
-          className="w-[1280px] xl:w-full h-[660px]"
-        />
+    <div className="relative  w-full   2xl:max-w-[1280px] h-[600px] md:h-[660px]  flex flex-col md:flex-row items-center  md:items-start justify-start md:justify-center overflow-hidden">
+      <div className="flex w-[1280px] xl:w-full  h-[600px] md:h-[660px]  justify-center items-center">
+        {value[0] && value[0]?.kelas_bisni?.image ? (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${value[0]?.kelas_bisni?.image}`}
+            alt="hero"
+            className="object-cover w-full xl:w-full h-full"
+          />
+        ) : (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${images.joinOri}`}
+            alt="hero"
+            className="object-cover w-full xl:w-full h-full"
+          />
+        )}
       </div>
-      <div className="absolute h-[660px] left-0 top-0 bg-black500 opacity-90 w-full  z-10"></div>
+      <div className="absolute h-[600px] md:h-[660px] left-0 top-0 bg-black500 opacity-90 w-full  z-10"></div>
       <div className="absolute w-full z-20 px-0  md:px-[100px] flex flex-col items-center md:items-start mt-[24px] ">
-        <NavigationDetailKelasBisnis />
+        <NavigationDetailKelasBisnis dataDetail={value[0]} />
         <div className="gap-[24px] flex flex-col items-start mt-[52px]">
           <div className="gap-[16px]  flex flex-col items-start">
             <h1 className="text-[24px] md:text-[48px] text-center md:text-start text-whiteSmoke500 font-bold leading-[36px] md:leading-[72px] w-[358px] md:w-[568px]">
-              {title}
+              {value[0]?.kelas_bisni?.nama
+                .split(" ")
+                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                .join(" ") ?? "no data"}
             </h1>
             <div className="w-full flex text-whiteSmoke600 justify-start gap-x-[16px]  ">
               <div className=" w-max flex items-center  gap-1">
@@ -59,7 +234,7 @@ function HeroSection() {
                   className="w-[16px] h-[16px]"
                 />
                 <p className="text-[14px] font-light leading-[20px] shrink-0">
-                  Pemula
+                  {value[0]?.kelas_bisni?.kelas_level?.nama || "no data"}
                 </p>
               </div>
               <div className=" w-max flex items-center gap-1 ">
@@ -69,26 +244,144 @@ function HeroSection() {
                   className="w-[16px] h-[16px]"
                 />
                 <p className="text-[14px] font-light leading-[20px] shrink-0">
-                  2124 Pendaftar
+                  {value[0]?.kelas_bisni?.jumlah_pendaftar || "no data"}{" "}
+                  Pendaftar
                 </p>
               </div>
             </div>
           </div>
           <div className="w-full flex justify-center md:justify-start items-center  gap-[8px]">
-            <div className="rating rating-sm gap-[4px] ">
-              {[...Array(5)].map((_, index) => (
-                <input
-                  key={index}
-                  type="radio"
-                  name={`rating-${index + 1}`}
-                  className="mask mask-star-2 bg-orange-400"
-                  defaultChecked={index + 1 === 5}
-                />
-              ))}
-            </div>
+            {/* <div className="rating rating-sm rating-half gap-0"> */}
+            {/* {star && {Number(star) === Number(0) || isNaN(star) ? (
+                <>
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="rating-hidden"
+                    defaultChecked
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                  />
+                </>
+              ) : (
+                <>
+                  <div className="text-white">{star * 2}</div>
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    defaultChecked={Number(star) * 2 === 1}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    defaultChecked={Number(star) * 2 === 2}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    defaultChecked={Number(star) * 2 === 3}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    defaultChecked={Number(star) * 2 === 4}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    defaultChecked={Number(star) * 2 === 5}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    defaultChecked={Number(star) * 2 === 6}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    defaultChecked={Number(star) * 2 === 7}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    defaultChecked={Number(star) * 2 === 8}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
+                    defaultChecked={Number(star) * 2 === 9}
+                  />
+                  <input
+                    type="radio"
+                    name={`rating-1`}
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
+                    defaultChecked={Number(star) * 2 === 10}
+                  />
+                </>
+              )}
+} */}
+            {star && renderStarRating()}
+            {/* </div> */}
             <div className="flex items-center justify-center mt-1">
               <p className="text-[14px] text-whiteSmoke600 font-light leading-[20px]">
-                {5}.0
+                {dataDetail?.kelas_bisni?.total_nilai || "0"}
               </p>
             </div>
           </div>
@@ -99,7 +392,7 @@ function HeroSection() {
                 {new Intl.NumberFormat("id-ID", {
                   style: "currency",
                   currency: "IDR",
-                }).format(500000)}
+                }).format(dataDetail?.kelas_bisni?.harga ?? 0)}
               </p>
               <p className="text-[14px] md:text-[18px] font-medium leading-[20px] md:leading-[28px] text-[#BA0000]">
                 100%
@@ -110,7 +403,10 @@ function HeroSection() {
               {new Intl.NumberFormat("id-ID", {
                 style: "currency",
                 currency: "IDR",
-              }).format(0)}
+              }).format(
+                dataDetail?.kelas_bisni?.harga -
+                  (dataDetail?.kelas_bisni?.harga * 100) / 100
+              )}
             </p>
           </div>
         </div>
@@ -125,17 +421,20 @@ function HeroSection() {
           />
         </div>
       </div>
-      <div className="absolute  z-20 w-[358px] md:w-[432px] h-[188px] md:h-[468px] bottom-[32px] md:bottom-auto md:top-[112px] md:right-[100px]">
-        <img
-          src={kelasBisnisPic.heroKelasBisnisSmall1}
-          alt="hero small"
-          className="hidden xl:flex"
-        />
-        <img
-          src={kelasBisnisPic.heroKelasBisnis1}
-          alt="hero"
-          className="rounded-[10px] flex md:hidden "
-        />
+      <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] xl:w-[432px] h-[188px] xl:h-[468px] bottom-[32px] lg:bottom-auto lg:top-[300px] xl:top-[112px] lg:right-[100px]">
+        {dataDetail?.kelas_bisni?.image ? (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
+            alt="hero"
+            className="w-full h-full object-cover flex md:hidden lg:flex"
+          />
+        ) : (
+          <img
+            src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${images.joinOri}`}
+            alt="hero"
+            className="w-full h-full object-cover flex md:hidden lg:flex"
+          />
+        )}
       </div>
     </div>
   );

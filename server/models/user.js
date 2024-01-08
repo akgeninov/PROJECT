@@ -17,11 +17,11 @@ module.exports = (sequelize, DataTypes) => {
       no_hp: DataTypes.STRING,
       email: DataTypes.STRING,
       password: DataTypes.STRING,
-      nama_depan: DataTypes.DATE,
+      nama_depan: DataTypes.STRING,
       nama_belakang: DataTypes.STRING,
       biografi: DataTypes.STRING,
       uid_firebase: DataTypes.STRING,
-      proifile_picture: DataTypes.STRING,
+      profile_picture: DataTypes.STRING,
       picture_link: {
         type: DataTypes.VIRTUAL,
         get() {
@@ -29,7 +29,8 @@ module.exports = (sequelize, DataTypes) => {
             "profile_picture"
           )}`;
         },
-      }
+      },
+      uid_firebase: DataTypes.STRING,
     },
     {
       sequelize,

@@ -14,7 +14,10 @@ function KelasBisnisCard({ el, index, star }) {
         <div className="w-full h-[176px]">
           <img
             // src={kelasBisnisPic.pic1}
-            src={`${el.images_link}` || kelasBisnisPic.pic1}
+            src={
+              `${process.env.REACT_APP_SERVER_URL}/kelas/${el.image}` ||
+              kelasBisnisPic.pic1
+            }
             alt="main"
             className=" object-cover w-full h-full md:flex"
           />
@@ -26,7 +29,10 @@ function KelasBisnisCard({ el, index, star }) {
         </div>
         <div className="w-[326px] md:w-[200px] flex flex-col items-center gap-[16px]">
           <h1 className=" line-clamp-2 text-[18px] font-bold leading-[28px] mt-[16px]">
-            {el.nama || "no data"}
+            {el?.nama
+              .split(" ")
+              .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+              .join(" ") ?? "no data"}
           </h1>
           <div className="w-full flex justify-center items-center">
             <div className="w-fit flex md:grid grid-cols-2 gap-x-[8px] md:gap-x-[50px] gap-y-[8px] ">
@@ -86,52 +92,52 @@ function KelasBisnisCard({ el, index, star }) {
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                   />
                 </>
               ) : (
@@ -139,68 +145,70 @@ function KelasBisnisCard({ el, index, star }) {
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 1}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 2}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 3}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 4}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 5}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 6}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 7}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 8}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-1"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
                     defaultChecked={Number(star) * 2 === 9}
                   />
                   <input
                     type="radio"
                     name={`rating-${index + 1}`}
-                    className="bg-green-500 mask mask-star-2 mask-half-2"
+                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
                     defaultChecked={Number(star) * 2 === 10}
                   />
                 </>
               )}
             </div>
             <div className="flex items-center justify-center mt-1">
-              <p className="text-[14px] font-light leading-[20px]">{el.star}</p>
+              <p className="text-[14px] font-light leading-[20px]">
+                {star ?? 0}
+              </p>
             </div>
           </div>
 

@@ -13,6 +13,7 @@ const {
   kelas_diskon,
   sequelize,
   User,
+  user_pribadi,
   kelas_harga,
 } = require("../models");
 const { Sequelize } = require("sequelize");
@@ -272,12 +273,9 @@ module.exports = {
             include: [
               {
                 model: User,
-                attributes: [
-                  "nama_user",
-                  "profile_picture",
-                  "picture_link",
-                  "nama_bisnis",
-                ],
+                attributes: ["username", "profile_picture", "picture_link"],
+                include: [user_pribadi],
+
                 required: false,
               },
             ],
@@ -285,7 +283,10 @@ module.exports = {
           {
             model: kelas_bisnis,
             attributes: [
-              "nama","image", "images_link","harga",
+              "nama",
+              "image",
+              "images_link",
+              "harga",
               [
                 sequelize.literal(
                   "(SELECT COUNT(*) FROM kelas_regist WHERE kelas_regist.id_kelas_bisnis = kelas_bisni.id)"
