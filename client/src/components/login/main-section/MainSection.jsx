@@ -60,6 +60,7 @@ function MainSection() {
     timeoutRef.current = setTimeout(async () => {
       try {
         const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
+        console.log(responsFirebase);
         const response = await api.post(
           `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
           {
