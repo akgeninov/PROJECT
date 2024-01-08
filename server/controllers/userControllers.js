@@ -66,6 +66,9 @@ module.exports = {
         ],
         include: [role],
       });
+      console.log({ result, text: "sini" });
+
+      if (!result) throw new Error("failed to get user data");
 
       res.status(200).send({
         message: "succes",
