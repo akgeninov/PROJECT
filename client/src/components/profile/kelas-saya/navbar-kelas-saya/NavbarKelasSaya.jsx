@@ -6,16 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 export default function NavbarKelasSaya() {
   const parentPath = useLocation().pathname;
   const [dropdownShow, setDropdownShow] = useState(false);
-  const [options, setOption] = useState();
-
-  const toggleDropDown = () => {
-    setDropdownShow(!dropdownShow);
-  };
-
-  const handleOption = (option) => {
-    setOption(option);
-  };
-
+  const [toggle, setToggle] = useState(true);
   const statusKelas = [
     ["Semua Kelas", "/profile/kelas-saya/semua-kelas"],
     ["Belum Dimulai", "/profile/kelas-saya/belum-dimulai"],
@@ -23,9 +14,18 @@ export default function NavbarKelasSaya() {
     ["Selesai", "/profile/kelas-saya/selesai"],
   ];
 
-  // if (parentPath === "/profile/kelas-saya" || parentPath === "/profile/kelas-saya/") {
+  const toggleDropDown = () => {
+    setDropdownShow(!dropdownShow);
+    if (dropdownShow) {
+      setToggle(true);
+    }else{
+      setToggle(false);
+    }
+  };
 
-  // }
+  const statusOption = statusKelas.filter((items) =>
+    parentPath === items[1] ? items[0] : ""
+  );
 
   const NavlinkStyles = ({ isActive }) => {
     return {
@@ -51,12 +51,13 @@ export default function NavbarKelasSaya() {
             className={({ isActive }) => (isActive ? activeLink : unactiveLink)}
             id={title}
           >
-            a
+            {title}
             <hr className="w-[39px] h-[5px] bg-black500 border-3 rounded-[50px]"></hr>
           </NavLink>
         ))}
       </nav>
 
+      {/* mobile:Submenu */}
       <div className="relative inline-block lg:hidden text-left w-[358px] sm:w-[500px] mb-[54px]">
         <div>
           <button
@@ -65,12 +66,16 @@ export default function NavbarKelasSaya() {
             id="menu-button"
             onClick={toggleDropDown}
           >
-            {/* {statusKelas.filter((title, url)=> parentPath === url ? title : "Semua Kelas")} */}
-            Option
+            <p>
+              {parentPath === "/profile/kelas-saya/" ||
+              parentPath === "/profile/kelas-saya"
+                ? "Semua Kelas"
+                : statusOption[0][0]}
+            </p>
             <div className="flex items-center">
               <hr className="rotate-90 w-[16px] bg-[rgba(102,102,102,0.5)] border-1" />
               <FontAwesomeIcon
-                icon={faChevronDown}
+                icon={toggle === true ? faChevronDown : faChevronUp}
                 className="w-[18px] h-[18px] text-slate-600"
               />
             </div>
