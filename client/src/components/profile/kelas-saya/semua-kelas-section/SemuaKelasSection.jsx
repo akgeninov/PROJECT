@@ -6,15 +6,20 @@ export default function SemuaKelasSection() {
   const [kelas, setKelas] = useState([]);
 
   const fetchKelas = async () => {
+    const token = JSON.parse(localStorage.getItem("auth"));
     try {
-      const response = await api.post(
+      const response = await api.get(
         `${process.env.REACT_APP_API_BASE_URL}/userKelas/all`,
         {
-          userID: 8,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
         }
       );
       setKelas(response.data.data);
-      // console.log(response.data.data);
+      
     } catch (error) {
       console.log(error);
     }
@@ -23,10 +28,10 @@ export default function SemuaKelasSection() {
   useEffect(() => {
     fetchKelas();
   }, []);
-  
+
   return (
     <div>
-      {kelas.map((kelas, ) => (
+      {kelas.map((kelas) => (
         <KelasCard kelas={kelas} />
       ))}
     </div>
