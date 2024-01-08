@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import HeroSection from "../../components/kelas-bisnis/hero-section/HeroSection";
 import MainSection from "../../components/kelas-bisnis/main-section/MainSection";
 
 function KelasBisnis() {
   const [search, setSearch] = useState("");
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex flex-col justify-center items-center shrink-0">

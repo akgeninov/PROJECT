@@ -55,11 +55,6 @@ function ComunitySection() {
                 </p>
               </div>
 
-              {/* <button className=" h-[54px] px-[64px] py-[16px] flex items-center rounded-[10px] justify-center bg-whiteSmoke500">
-                <p className="text-black500 text-[16px] font-medium leading-[24px]">
-                  Selengkapnya
-                </p>
-              </button> */}
               <ButtonWhiteSmoke500
                 WIDTH={"w-[260px]"}
                 TEXT_BUTTON={"Selengkapnya"}
@@ -83,6 +78,7 @@ function ComunitySection() {
               } flex flex-col duration-500 items-center  xl:w-[558px] rounded-[10px] min-h-[488px] xl:min-h-[672px] overflow-hidden`}
             >
               <img
+                loading="lazy"
                 src={el.pic}
                 alt="komunitas"
                 className={`object-cover gap-[52px] flex flex-col  w-full h-full rounded-[10px]`}

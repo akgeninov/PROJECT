@@ -14,6 +14,7 @@ function KelasBisnisCard({ el, index, star }) {
         <div className="w-full h-[176px]">
           <img
             // src={kelasBisnisPic.pic1}
+            loading="lazy"
             src={
               `${process.env.REACT_APP_SERVER_URL}/kelas/${el.image}` ||
               kelasBisnisPic.pic1

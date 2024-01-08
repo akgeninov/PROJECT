@@ -7,6 +7,7 @@ export default function KelasCard() {
   return (
     <div className="flex w-[761px] h-[228px] flex-shrink-0 pt-[17px] border rounded-[10px] border-[rgba(102,102,102,0.5)]">
       <img
+        loading="lazy"
         src={images.kelasFoto}
         alt="Career Momen 1"
         className=" w-[150px] h-[150px] ml-[11px] mr-[28px]"
@@ -16,12 +17,13 @@ export default function KelasCard() {
           Langkah Sukses Jadi Youngtrepeneur
         </h1>
         <div className="flex items-center justify-center">
-          <Progress 
+          <Progress
             colorScheme="blue"
             width="372px"
             height="14px"
             borderRadius="50px"
-            hasStripe value={39}
+            hasStripe
+            value={39}
           />
           <p className="ml-[8px]">39%</p>
         </div>

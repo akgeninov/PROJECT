@@ -12,7 +12,10 @@ import { signInWithPopup } from "firebase/auth";
 
 import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import {
+  setToken,
+  setUser,
+} from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { Link } from "react-router-dom";
 
 function MainSection() {
@@ -44,6 +47,7 @@ function MainSection() {
       );
       console.log(response);
       dispatch(setToken(response.data.token));
+      dispatch(setUser(response.data.data));
       localStorage.setItem("auth", JSON.stringify(response.data.token));
       reset();
     } catch (error) {
@@ -70,6 +74,7 @@ function MainSection() {
           }
         );
         dispatch(setToken(response.data.token));
+        dispatch(setUser(response.data.data));
         localStorage.setItem("auth", JSON.stringify(response.data.token));
         console.log(response);
       } catch (error) {

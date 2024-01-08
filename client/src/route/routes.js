@@ -46,7 +46,7 @@ const routes = [
       </Protection>
     }
   >
-    {/* <Route index element={<MainSection />} /> */}
+    <Route index element={<MainSection />} />
     <Route path=":kategori" element={<MainSection />} />
   </Route>,
   <Route
