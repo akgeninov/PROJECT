@@ -7,7 +7,10 @@ import { signUpSchema } from "./lib/signupSchema";
 import { signInWithPopup, signInWithRedirect } from "firebase/auth";
 import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import {
+  setToken,
+  setUser,
+} from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { api } from "../../../api/api";
 
 function MainSection() {
@@ -76,6 +79,12 @@ function MainSection() {
         }
       );
       console.log(response);
+      if (response) {
+        dispatch(setToken(response.data.data.jwt));
+        dispatch(setUser(response.data.data.newUser));
+        localStorage.setItem("auth", JSON.stringify(response.data.data.jwt));
+      }
+
       reset();
     } catch (error) {
       console.log(error);
