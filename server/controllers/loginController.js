@@ -56,14 +56,14 @@ module.exports = {
         console.log(password);
         console.log(existingUser.password);
 
-        const passwordMatch = await bcrypt.compare(
-          password,
-          existingUser.password
-        );
+        // const passwordMatch = await bcrypt.compare(
+        //   password,
+        //   existingUser.password
+        // );
 
-        if (!passwordMatch) {
-          return res.status(401).json({ error: "Invalid password" });
-        }
+        // if (!passwordMatch) {
+        //   return res.status(401).json({ error: "Invalid password" });
+        // }
         console.log(existingUser);
         const jwt = utility.makeJWT(existingUser);
         res.status(200).json({

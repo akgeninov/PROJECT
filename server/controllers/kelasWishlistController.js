@@ -1,18 +1,28 @@
 const db = require("../models");
 const kelasWishlistModel = db.kelas_wishlist;
-const userModel = db.USer;
+const user = db.User;
 const kelasBisnisModel = db.kelas_bisnis;
 
 module.exports = {
     getWishlistByIdUSer: async (req, res) => {
         try {
+          const userData = req.dataToken;
+          const getuser = await user.findOne({
+            where: {
+              email: userData.email,
+            },
+            attributes: ["id"],
+          });
+          console.log({userData});
+          if(!getuser) {
+            throw new Error("USER TIDAK DITEMUKAN");
+          }
           const result = await kelasWishlistModel.findAll({
             where: {
-              id_user: req.params.id_user,
+              id_user: getuser.id,
             },
             include: [
-              { model: db.sequelize.model("User") },
-              { model: db.sequelize.model("kelas_bisnis") },
+              user, kelasBisnisModel
             ],
           });
     
