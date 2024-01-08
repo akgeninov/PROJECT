@@ -167,34 +167,18 @@ function FilterDataKelas({
           toggleFilter ? "flex " : "hidden md:flex"
         } fixed z-50 bg-whiteSmoke500 left-0 top-0 md:left-auto md:top-auto h-screen w-screen md:w-auto md:h-full md:static   flex-col gap-[32px]`}
       >
-        <div className="px-[16px] py-[20px] md:px-0 md:py-0 flex justify-between items-center">
-          <h1 className="text-[22px] font-medium leading-[32px]">Filter</h1>
-          <HiX
-            onClick={() => setToggleFilter((prev) => !prev)}
-            className="block md:hidden w-[24px] h-[24px]"
-          />
-        </div>
         <div
           className={`${
-            toggleFilter ? "flex md:hidden" : "hidden"
-          } items-center z-50 fixed bottom-0 right-0 w-screen gap-[16px] bg-whiteSmoke500 shadow-customSm px-[16px] py-[20px]`}
-        >
-          <div className="w-full" onClick={() => resetFilterButton()}>
-            <ButtonWhiteSmoke500
-              TEXT_BUTTON={"Reset"}
-              WIDTH={"w-full border-black border-[1px]"}
-            />
-          </div>
-
-          <div className="w-full" onClick={() => fetchDataKelasButton()}>
-            <ButtonBlack500 TEXT_BUTTON={"Terapkan Filter"} WIDTH={"w-full "} />
-          </div>
-        </div>
-        <div
-          className={`${
-            toggleFilter ? "scrollbar-hide mb-[100px] md:mb-0" : ""
+            toggleFilter ? "scrollbar-hide  md:mb-0" : ""
           } flex flex-col rounded-[10px] h-screen md:h-auto overflow-scroll md:overflow-visible md:shadow-customSm `}
         >
+          <div className="px-[16px] py-[20px] md:px-0 md:py-0 flex justify-between items-center">
+            <h1 className="text-[22px] font-medium leading-[32px]">Filter</h1>
+            <HiX
+              onClick={() => setToggleFilter((prev) => !prev)}
+              className="block md:hidden w-[24px] h-[24px]"
+            />
+          </div>
           <div className="p-[24px] w-full md:w-[280px] ">
             <Accordion defaultIndex={[0]} allowMultiple>
               <AccordionItem>
@@ -327,6 +311,25 @@ function FilterDataKelas({
                 </AccordionPanel>
               </AccordionItem>
             </Accordion>
+          </div>
+          <div
+            className={`${
+              toggleFilter ? "flex md:hidden" : "hidden"
+            } items-center z-50  bottom-0 right-0 w-screen gap-[16px] bg-whiteSmoke500 shadow-customSm px-[16px] py-[20px]`}
+          >
+            <div className="w-full" onClick={() => resetFilterButton()}>
+              <ButtonWhiteSmoke500
+                TEXT_BUTTON={"Reset"}
+                WIDTH={"w-full border-black border-[1px]"}
+              />
+            </div>
+
+            <div className="w-full" onClick={() => fetchDataKelasButton()}>
+              <ButtonBlack500
+                TEXT_BUTTON={"Terapkan Filter"}
+                WIDTH={"w-full "}
+              />
+            </div>
           </div>
         </div>
       </div>

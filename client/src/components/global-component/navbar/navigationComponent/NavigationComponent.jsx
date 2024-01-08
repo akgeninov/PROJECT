@@ -79,7 +79,7 @@ function NavigationComponent({
                   {DATA.map((el, index) => (
                     <div
                       onClick={() => {
-                        navigate(el.navi);
+                        if (el.navi !== "#") navigate(el.navi);
                         setToggle(() => ({
                           layanan: false,
                           komunitas: false,
@@ -117,7 +117,7 @@ function NavigationComponent({
                   {DATA.map((el, index) => (
                     <div
                       onClick={() => {
-                        navigate(el.navi);
+                        if (el.navi !== "#") navigate(el.navi);
                         setToggle(() => ({
                           layanan: false,
                           komunitas: false,

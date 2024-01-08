@@ -28,8 +28,6 @@ function AboutSection() {
             jenis industri.
           </p>
         </div>
-
-        {/* <img src={backgroundImages} alt="" /> */}
       </div>
     </div>
   );

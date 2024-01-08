@@ -18,7 +18,7 @@ function ServiceCard({ setOnHover, service, onHover }) {
         <img
           src={service.pic}
           alt="service"
-          className={` relative h-full object-cover rounded-[10px]`}
+          className={` relative h-full w-full object-cover rounded-[10px]`}
         />
         <div className="absolute bottom-0  w-[358px] lg:w-[344px] h-[136px] rounded-b-[10px] z-30 overflow-hidden">
           <div
