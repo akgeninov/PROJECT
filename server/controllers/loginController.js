@@ -65,7 +65,7 @@ module.exports = {
         if (!passwordMatch) {
           return res.status(401).json({ error: "Invalid password" });
         }
-        console.log(existingUser);
+
         const jwt = utility.makeJWT(existingUser);
         res.status(200).json({
           message: "Login successful",
@@ -120,14 +120,13 @@ module.exports = {
         id_role: 3,
         profile_picture: "chibi2.jpg",
       });
-
-      return utility.createResponse(
-        res,
-        201,
-        true,
-        "Pendaftaran Sukses",
-        newUser
-      );
+      if (!newUser) throw new Error("failed to register");
+      const jwt = utility.makeJWT(newUser);
+      const data = {
+        newUser,
+        jwt,
+      };
+      return utility.createResponse(res, 201, true, "Pendaftaran Sukses", data);
     } catch (error) {
       return utility.createResponse(res, 500, false, error.message);
     }
