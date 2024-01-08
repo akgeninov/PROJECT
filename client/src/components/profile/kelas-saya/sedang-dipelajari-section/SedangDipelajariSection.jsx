@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { api } from "../../../../api/api";
 import KelasCard from "../../../global-component/card/kelas-card/KelasCard";
 
-export default function SedangDipelajariSection(){
-    const [kelas, setKelas] = useState([]);
+export default function SedangDipelajariSection() {
+  const [kelas, setKelas] = useState([]);
 
   const fetchKelas = async () => {
     const token = JSON.parse(localStorage.getItem("auth"));
@@ -28,11 +28,11 @@ export default function SedangDipelajariSection(){
   useEffect(() => {
     fetchKelas();
   }, []);
-  
+
   return (
     <div>
-      {kelas.map((kelas, ) => (
-        <KelasCard kelas={kelas} />
+      {kelas.map((kelas, index) => (
+        <KelasCard key={index} kelas={kelas} />
       ))}
     </div>
   );

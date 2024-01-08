@@ -39,8 +39,9 @@ function DashboardProfile() {
       <h2 className="mt-[37px] mb-[17px] text-[32px] font-me text-[#666]">
         Lanjutkan progres terakhir kelas
       </h2>
-      {kelas.map((kelas, ) => (
-        <KelasCard kelas={kelas} />
+      
+      {kelas.map((kelas,  index) => (
+        <KelasCard key={index} kelas={kelas} />
       ))}
     </div>
   );

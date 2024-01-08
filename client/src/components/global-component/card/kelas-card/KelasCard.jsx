@@ -26,7 +26,7 @@ export default function KelasCard(kelas) {
         <div className="flex items-center justify-center">
           <Progress
             colorScheme="teal"
-            className="w-[311px] h-[8px] lg:w-[372px] lg:h-[14px]"
+            className="w-[311px] h-[8px] lg:w-[372px] lg:h-[14px] sm:w-[500px]"
             borderRadius="50px"
             value={kelas.kelas.persentase}
           />
