@@ -9,7 +9,7 @@ export default function JoincomunitySection() {
   //   AOS.init();
   // }, []);
   return (
-    <div className="bg-[#0F1011] bg-cover mt-[60px] lg:mt-[160px] max-w-screen-2xl  w-full h-[844px] md:h-[612px] flex flex-col items-center gap-[56px] justify-center min-h-screen top-0 lg:sticky">
+    <div className="bg-[#0F1011] bg-cover mt-[60px] lg:mt-[160px] max-w-screen-2xl  w-full h-[844px] lg:h-[612px] flex flex-col items-center gap-[56px] justify-center min-h-screen top-0 lg:sticky">
       <div className="z-10 flex flex-col items-center gap-[56px] justify-center min-h-screen">
         <div
           // data-aos="fade-up"

@@ -22,10 +22,10 @@ export default function SidebarProfile() {
   };
 
   return (
-    <div className="flex flex-row justify-start lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
+    <div className="flex flex-row justify-center lg:justify-start max-w-screen-2xl lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
       {/* Left Side - Menu Box */}
       <div
-        className="flex flex-col items-center w-[395px] h-full bg-white-200 border border-grey"
+        className="hidden lg:flex flex-col items-center w-[395px] h-full bg-white-200 border border-grey"
         style={{ boxShadow: "1px 1px 3px rgba(128, 128, 128, 0.3)" }}
       >
         <img
@@ -42,10 +42,13 @@ export default function SidebarProfile() {
         />
         <h1 className="font-medium mt-3 text-[32px]">Anonymous</h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
-
           {[
             ["Dashboard", icon.iconHome, "/profile/dashboard"],
-            ["Kelas Saya", icon.iconCourse, "/profile/kelas-saya/semua-kelas"],
+            [
+              "Kelas Saya",
+              icon.iconCourse,
+              "/profile/kelas-saya" || "/profile/kelas-saya/",
+            ],
             ["Wishlist", icon.iconWishlist, "/profile/wishlist"],
             ["Event", icon.iconEvent, "/profile/event"],
             ["Transaksi", icon.iconTransaksi, "/profile/transaksi"],

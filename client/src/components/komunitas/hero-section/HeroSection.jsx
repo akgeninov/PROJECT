@@ -4,7 +4,7 @@ import { dataKomunitas } from "./../../../constants/data";
 import NavigasiKomunitas from "./navigasi-komunitas/NavigasiKomunitas";
 import { useParams } from "react-router-dom";
 
-export default function HeroSection() {
+export default function HeroSection(props) {
   const { title } = useParams();
   let index = 1;
   if (title === "komunitas-bisnis") {

@@ -9,7 +9,6 @@ module.exports = {
   login: async (req, res) => {
     try {
       const { email, password, uid_firebase, display_name } = req.body;
-
       if (uid_firebase) {
         console.log({ uid: uid_firebase, display_name });
         const uidGoogleIsExist = await user.findOne({
