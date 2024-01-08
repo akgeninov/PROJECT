@@ -1,13 +1,16 @@
 const loginController = require("./loginController");
 const userControllers = require("./userControllers");
 const artikelController = require("./artikelController");
-const kelasBisnisController = require("./kelasBisnisController");
 const lowonganController = require("./lowonganController");
+
+const kelasBisnisController = require("./kelasBisnisController");
+const userKelasController = require("./userKelasController");
 
 module.exports = {
   loginController,
   userControllers,
   artikelController,
-  kelasBisnisController,
   lowonganController,
+  kelasBisnisController,
+  userKelasController,
 };

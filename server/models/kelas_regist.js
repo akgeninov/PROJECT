@@ -6,11 +6,12 @@ module.exports = (sequelize, DataTypes) => {
   class kelas_regist extends Model {
     static associate(models) {
       kelas_regist.belongsTo(models.User, {foreignKey: {name: "id_user"}});
-      kelas_regist.belongsTo(models.kelas_bisnis, { foreignKey: 'id_kelas_regist'});
+      kelas_regist.belongsTo(models.kelas_bisnis, { foreignKey: {name: "id_kelas_bisnis"}});
     }
   }
   kelas_regist.init({
-    tgl_daftar: DataTypes.DATE
+    tgl_daftar: DataTypes.DATE,
+    progress: {type : DataTypes.INTEGER, defaultValue: 0},
   }, {
     sequelize,
     modelName: 'kelas_regist',

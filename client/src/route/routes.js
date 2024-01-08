@@ -143,7 +143,7 @@ const routes = [
     key="profile"
     path="/profile"
     element={
-      <Protection publicSide={true} userOnly={true}>
+      <Protection userOnly={true}>
         <Profile />
       </Protection>
     }
@@ -174,7 +174,7 @@ const routes = [
     key="about-us"
     path="/about-us"
     element={
-      <Protection publicSide={true}>
+      <Protection publicSide={true} userOnly={true}>
         <TentangKami />
       </Protection>
     }

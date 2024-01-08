@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
       kelas_bisnis.belongsTo(models.kelas_kategori, {foreignKey: {name: "id_kelas_kategori"}});
       kelas_bisnis.belongsTo(models.kelas_level, {foreignKey: {name: "id_kelas_level"}});
       kelas_bisnis.hasMany(models.kelas_rating, { foreignKey: 'id_kelas_bisnis'});
-      kelas_bisnis.hasMany(models.kelas_regist, { foreignKey: 'id_kelas_bisnis'});
+      kelas_bisnis.hasMany(models.kelas_regist, { foreignKey: {name: "id_kelas_bisnis"}});
+      kelas_bisnis.hasOne(models.kelas_detail, { foreignKey: {name: "id_kelas_bisnis"}});
       kelas_bisnis.belongsToMany(models.kelas_diskon, { through: 'kelas_bisnis_diskon', foreignKey: 'id_kelas_bisnis'});
     }
   }
@@ -27,6 +28,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'kelas_bisnis',
+    tableName: 'kelas_bisnis',
   });
   return kelas_bisnis;
 };

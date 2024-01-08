@@ -1,8 +1,7 @@
-import React, {useState} from "react";
+import React from "react";
 import { images } from "../../../constants";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBuilding,faBriefcase,faUserCircle } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
 
 function formatDate(dateString) {
   const options = { year: "numeric", month: "long", day: "numeric" };
@@ -11,9 +10,6 @@ function formatDate(dateString) {
 }
 
 function HeroSection(props) {
-  const [isHoveredKarir, setIsHoveredKarir] = useState(false);
-  const [isHoveredLowongan, setIsHoveredLowongan] = useState(false);
-
   return (
     <div className="flex bg-black500 w-full  w-full ">
       <div className="relative flex  w-full justify-center md:justify-end">
@@ -29,22 +25,8 @@ function HeroSection(props) {
         />
 
         <div className="justify-center flex flex-col absolute w-full left-0 w-fit md:ml-[100px]  z-10">
-          <p className="max-w-[564px] text-[14px] font-light md:leading-[100px] lg:leading-[100px] md:text-left" style={{ color: '#888' }}>
-            <Link to="/career"
-              style={{
-                textDecoration: 'none',
-                color: isHoveredKarir ? 'white' : '#888',
-              }}
-              onMouseEnter={() => setIsHoveredKarir(true)}
-              onMouseLeave={() => setIsHoveredKarir(false)}> Karir  &nbsp;</Link>&gt;
-            <span> <Link to="/career-lowongan"
-              style={{
-                textDecoration: 'none',
-                color: isHoveredLowongan ? 'white' : '#888',
-              }}
-              onMouseEnter={() => setIsHoveredLowongan(true)}
-              onMouseLeave={() => setIsHoveredLowongan(false)}> &nbsp;Semua Lowongan &nbsp; </Link> &gt;</span>
-            <span style={{ color: 'white', marginLeft: '5px' }}>{props.lowongan.nama_lowongan_pekerjaan}</span>
+          <p className="max-w-[564px] text-[14px] font-light md:leading-[100px] lg:leading-[100px] md:text-left" style={{ color:'#888'}}>
+                Karir  &nbsp; &gt; <span> &nbsp;Semua Lowongan &nbsp; &gt;</span> <span style={{ color: 'white', marginLeft:'5px' }}>{props.lowongan.nama_lowongan_pekerjaan}</span>
           </p>
           <div className="flex flex-col lg:my-0 md:p-0 md:h-full py-[123px] w-full h-[420px]">
             <h1 className="flex justify-center md:justify-start items-center text-center md:text-start text-[24px] md:text-[48px] font-bold leading-[36px] md:leading-[72px] text-whiteSmoke500 left-[100px] md:max-w-[572px] ">
@@ -73,6 +55,3 @@ function HeroSection(props) {
 }
 
 export default HeroSection;
-
-
-

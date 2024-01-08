@@ -12,6 +12,9 @@ module.exports = {
       tgl_daftar: {
         type: Sequelize.DATE
       },
+      progress: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
