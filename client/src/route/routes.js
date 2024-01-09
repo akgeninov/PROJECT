@@ -27,6 +27,7 @@ import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneC
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import ChangePassword from "../pages/change-password/ChangePassword";
+import InfoLain from "../pages/info-lain/InfoLain";
 
 const routes = [
   <Route
@@ -105,7 +106,7 @@ const routes = [
     }
   />,
   <Route
-    key="login"
+    key="register"
     path="/register"
     element={
       <Protection publicSide={true}>
@@ -191,6 +192,7 @@ const routes = [
   >
     <Route path=":username" element={<DetailProfile />} />,
     <Route path="password" element={<ChangePassword />} />,
+    <Route path="info-lain" element={<InfoLain />} />,
   </Route>,
 ];
 

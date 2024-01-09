@@ -73,10 +73,10 @@ function MainSection() {
             // password: data.PASSWORD,
           }
         );
+        console.log(response);
         dispatch(setToken(response.data.token));
         dispatch(setUser(response.data.data));
         localStorage.setItem("auth", JSON.stringify(response.data.token));
-        console.log(response);
       } catch (error) {
         console.log(error);
       } finally {

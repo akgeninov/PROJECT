@@ -147,6 +147,12 @@ function MainSection() {
             timer: 1500,
           });
         } catch (error) {
+          Swal.fire({
+            title: "Error",
+            text: error.response.data.error || "something when wrong!",
+            icon: "error",
+            confirmButtonColor: "#0F1011",
+          });
           console.log(error);
         } finally {
           setIsSubmiting(false);

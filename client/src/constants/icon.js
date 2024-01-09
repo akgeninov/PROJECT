@@ -30,6 +30,9 @@ import iconWishlist from "../assets/icon/icon-wishlist.png";
 import iconEvent from "../assets/icon/icon-zoom.png";
 import iconTransaksi from "../assets/icon/icon-walet.png";
 import iconEdit from "../assets/icon/icon-edit.png";
+import linkedinProfile from "../assets/icon/linkedin_icon_profile.png";
+import facebookProfile from "../assets/icon/facebook_icon_profile.png";
+import instaProfile from "../assets/icon/insta_icon_profile.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -64,6 +67,9 @@ const icon = {
   BOOK,
   CHAT,
   playOutLine,
+  linkedinProfile,
+  facebookProfile,
+  instaProfile,
 };
 
 export default icon;

@@ -298,11 +298,18 @@ function Navbar() {
           ))}
         </ul>
         <div className="hidden lg:flex gap-[24px]">
+          <div>
+            <ButtonBorderBlack500
+              TEXT_BUTTON={"Hubungi Kami"}
+              WIDTH={"w-[160px]"}
+              RESPONSIF={"hidden xl:flex"}
+            />
+          </div>
           {user ? (
             <div className="relative flex justify-end items-center ">
               <div
                 onClick={() => setTOggleProfile((prev) => !prev)}
-                className="cursor-pointer px-[32px] py-[16px] flex justify-center items-center gap-[10px] border-[1px] rounded-[10px] border-black500"
+                className="cursor-pointer px-[22px] py-[16px] flex justify-center items-center gap-[10px] border-[1px] rounded-[10px] border-black500"
               >
                 <div className="w-[23px] h-[23px] rounded-full overflow-hidden ">
                   <img
@@ -312,7 +319,7 @@ function Navbar() {
                   />
                 </div>
                 <div className="">
-                  <h1 className="text-[16px] font-medium leading-[24px]">
+                  <h1 className="text-[16px] font-medium leading-[24px]  w-[70px] overflow-hidden overflow-ellipsis whitespace-nowrap">
                     {user.username}
                   </h1>
                 </div>
@@ -325,7 +332,7 @@ function Navbar() {
               >
                 <ul className="w-[268px] gap-[4px] text-[16px] font-medium">
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start ">
-                    <h1 className="text-[14px] font-bold leading-[20px]">
+                    <h1 className="text-[14px] font-bold leading-[20px] ">
                       {user.nama_lengkap}
                     </h1>
                     <p className="text-[14px] font-light leading-[20px]">
@@ -373,13 +380,6 @@ function Navbar() {
             </div>
           ) : (
             <>
-              <div>
-                <ButtonBorderBlack500
-                  TEXT_BUTTON={"Hubungi Kami"}
-                  WIDTH={"w-[160px]"}
-                  RESPONSIF={"hidden xl:flex"}
-                />
-              </div>
               <div onClick={() => navigate("/login")}>
                 <ButtonBlack500
                   WIDTH={"w-[160px]"}

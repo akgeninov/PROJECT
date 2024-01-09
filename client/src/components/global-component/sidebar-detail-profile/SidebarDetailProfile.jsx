@@ -26,7 +26,7 @@ export default function SidebarDetailprofile() {
   const menuEdit = [
     ["Detail Profil", `/profile/${user?.username || ""}`],
     ["Data Pribadi", "/profile/dashboard"],
-    ["Informasi Lainnya", "/profile/dashboard"],
+    ["Informasi Lainnya", "/profile/info-lain"],
     ["Ubah Password", "/profile/password"],
   ];
 

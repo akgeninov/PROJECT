@@ -1,5 +1,6 @@
 const db = require("../models");
 const user = db.User;
+const userPribadi = db.user_pribadi;
 const role = db.Role;
 const bcrypt = require("bcrypt");
 const utility = require("./utility");
@@ -64,9 +65,8 @@ module.exports = {
           "nama_belakang",
           "biografi",
         ],
-        include: [role],
+        include: [role, userPribadi],
       });
-      console.log({ result, text: "sini" });
 
       if (!result) throw new Error("failed to get user data");
 
@@ -94,6 +94,14 @@ module.exports = {
         },
         attributes: ["id"],
       });
+
+      const getUsername = await user.findAll({
+        where: {
+          username: body.username,
+        },
+      });
+
+      if (getUsername.length > 1) throw new Error("Username sudah di pakai");
 
       let updataUser;
       if (!data) {
@@ -141,13 +149,33 @@ module.exports = {
   changePassword: async (req, res) => {
     try {
       const userData = req.dataToken;
-      const { confirm_password, password } = req.body;
+      const { confirm_password, password, old_password } = req.body;
 
       if (confirm_password !== password)
         return utility.createResponse(res, 400, false, "Password tidak sama");
 
+      const getUser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["password", "uid_firebase"],
+      });
+
+      if (!getUser) throw new Error("User tidak ditemukan");
+      if (getUser.uid_firebase)
+        throw new Error(
+          "akun anda tidak membutuhkan password, jika ingin mengubah password, ubah password anda di google!"
+        );
+
+      const passwordMatch = await bcrypt.compare(
+        old_password,
+        getUser.password
+      );
+
+      if (!passwordMatch) throw new Error("Password lama salah!");
+
       const hashedPassword = await bcrypt.hash(password, 10);
-      const getUser = await User.update(
+      const updatePassword = await user.update(
         {
           password: hashedPassword,
         },
@@ -157,9 +185,50 @@ module.exports = {
           },
         }
       );
-      if (!getUser) {
-        throw new Error("failed to change password");
+      if (!updatePassword) {
+        throw new Error("Failed to change password");
       }
+
+      res.status(200).send({
+        message: "Berhasil mengubah password",
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+  editLinkSosmed: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const { insta, facebook, linkedin } = req.body;
+      if (!insta) throw new Error("insta kosong");
+      const getOne = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+
+      if (!getOne) throw new Error("User not found");
+      console.log({ getOne });
+
+      const result = await userPribadi.update(
+        {
+          link_ig: insta,
+          link_fb: facebook,
+          link_linkedid: linkedin,
+        },
+        {
+          where: {
+            id_user: getOne.id,
+          },
+        }
+      );
+
+      res.status(200).send({
+        message: "success",
+      });
     } catch (error) {
       res.status(400).send({
         error: error.message,

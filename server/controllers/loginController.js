@@ -1,5 +1,6 @@
 const db = require("../models");
 const user = db.User;
+const userPribadi = db.user_pribadi;
 const role = db.Role;
 const bcrypt = require("bcrypt");
 const utility = require("./utility");
@@ -35,7 +36,24 @@ module.exports = {
             profile_picture: "chibi2.jpg",
             nama_depan,
             nama_belakang: nama_belakang || "",
-            username: nama_depan.toLowerCase(),
+            username: nama_depan.toLowerCase() + Date.now(),
+          });
+
+          if (!creatUser) throw new Error("Failed to create user");
+
+          const createDataPribadi = await userPribadi.create({
+            no_wa: "",
+            jenis_kelamin: "",
+            tempat_lahir: "",
+            tanggal_lahir: null,
+            alamat: "",
+            provinsi: "",
+            kota_kabupaten: "",
+            kode_pos: "",
+            link_ig: "",
+            link_fb: "",
+            link_linkedid: "",
+            id_user: creatUser.id,
           });
 
           const jwt = utility.makeJWT(creatUser);
@@ -120,6 +138,20 @@ module.exports = {
         profile_picture: "chibi2.jpg",
       });
       if (!newUser) throw new Error("failed to register");
+      const createDataPribadi = await userPribadi.create({
+        no_wa: "",
+        jenis_kelamin: "",
+        tempat_lahir: "",
+        tanggal_lahir: null,
+        alamat: "",
+        provinsi: "",
+        kota_kabupaten: "",
+        kode_pos: "",
+        link_ig: "",
+        link_fb: "",
+        link_linkedid: "",
+        id_user: newUser.id,
+      });
       const jwt = utility.makeJWT(newUser);
       const data = {
         newUser,

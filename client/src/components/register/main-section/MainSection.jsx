@@ -12,6 +12,7 @@ import {
   setUser,
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { api } from "../../../api/api";
+import Swal from "sweetalert2";
 
 function MainSection() {
   const dispatch = useDispatch();
@@ -87,6 +88,12 @@ function MainSection() {
 
       reset();
     } catch (error) {
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.message || "something when wrong!",
+        icon: "error",
+        confirmButtonColor: "#0F1011",
+      });
       console.log(error);
     } finally {
       setGoogleButton(false);

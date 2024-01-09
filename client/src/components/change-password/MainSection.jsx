@@ -1,10 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
-import React from "react";
+import React, { useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { changePasswordSchema } from "./lib/changePassword";
 import { api } from "../../api/api";
+import Swal from "sweetalert2";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function MainSection() {
+  const [showLama, setShowLama] = useState(false);
+  const [showBaru, setShowBaru] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -22,8 +28,9 @@ function MainSection() {
       const response = await api.put(
         `${process.env.REACT_APP_API_BASE_URL}/user/change-password`,
         {
-          email: data.EMAIL,
           password: data.PASSWORD,
+          confirm_password: data.CONFIRM_PASSWORD,
+          old_password: data.OLD_PASSWORD,
         },
         {
           headers: {
@@ -33,9 +40,21 @@ function MainSection() {
           },
         }
       );
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: response.data.message,
+        showConfirmButton: false,
+        timer: 1500,
+      });
       console.log(response);
     } catch (error) {
-      console.log(error);
+      Swal.fire({
+        title: "Error",
+        text: error.response.data.error || "something when wrong!",
+        icon: "error",
+        confirmButtonColor: "#0F1011",
+      });
     }
   };
 
@@ -54,15 +73,28 @@ function MainSection() {
           >
             Password Lama <span className="text-red-600">*</span>
           </label>
-          <input
-            {...register("PASSWORD")}
-            autoFocus
-            id="passwordlama"
-            type="text"
-            className="border-[1px] text-[12px] lg:text-[24px] p-1 border-black400 w-full lg:w-[324px] h-[36px] lg:h-[57px] bg-transparent focus:outline-none rounded-[10px] "
-          />
+          <div className="relative w-full lg:w-[324px] flex items-center">
+            <button
+              onClick={() => setShowLama((prev) => !prev)}
+              className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+            >
+              {showLama ? (
+                <FaRegEyeSlash className="text-[20px]" />
+              ) : (
+                <FaRegEye className="text-[20px]" />
+              )}
+            </button>
+            <input
+              {...register("OLD_PASSWORD")}
+              autoFocus
+              id="passwordlama"
+              type={showLama ? "text" : "password"}
+              className="border-[1px] text-[12px] lg:text-[24px] p-1 border-black400 w-full lg:w-[324px] h-[36px] lg:h-[57px] bg-transparent focus:outline-none rounded-[10px] "
+            />
+          </div>
+
           {errors.PASSWORD && (
-            <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
+            <p className=" text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.OLD_PASSWORD.message}`}</p>
           )}
         </div>
         <div className="gap-[20px] flex flex-col mb-[26px]">
@@ -72,13 +104,27 @@ function MainSection() {
           >
             Password Baru <span className="text-red-600">*</span>
           </label>
-          <input
-            id="passwordbaru"
-            type="text"
-            className="border-[1px] text-[12px] lg:text-[24px] p-1 border-black400 w-full lg:w-[324px] h-[36px] lg:h-[57px] bg-transparent focus:outline-none rounded-[10px] "
-          />
-          {errors.CONFIRM_PASSWORD && (
-            <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
+          <div className="relative w-full lg:w-[324px] flex items-center">
+            <button
+              onClick={() => setShowBaru((prev) => !prev)}
+              className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+            >
+              {showBaru ? (
+                <FaRegEyeSlash className="text-[20px]" />
+              ) : (
+                <FaRegEye className="text-[20px]" />
+              )}
+            </button>
+            <input
+              {...register("PASSWORD")}
+              id="passwordbaru"
+              type={showBaru ? "text" : "password"}
+              className="border-[1px] text-[12px] lg:text-[24px] p-1 border-black400 w-full lg:w-[324px] h-[36px] lg:h-[57px] bg-transparent focus:outline-none rounded-[10px] "
+            />
+          </div>
+
+          {errors.PASSWORD && (
+            <p className=" text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
           )}
         </div>
         <div className="gap-[20px] flex flex-col mb-[26px]">
@@ -88,14 +134,30 @@ function MainSection() {
           >
             Confirm Password <span className="text-red-600">*</span>
           </label>
-          <input
-            {...register("CONFIRM_PASSWORD")}
-            id="confrimpassword"
-            type="text"
-            className="border-[1px] text-[12px] lg:text-[24px] p-1 border-black400 w-full lg:w-[324px] h-[36px] lg:h-[57px] bg-transparent focus:outline-none rounded-[10px] "
-          />
+          <div className="relative w-full lg:w-[324px] flex items-center">
+            <button
+              onClick={() => setShowConfirm((prev) => !prev)}
+              className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+            >
+              {showConfirm ? (
+                <FaRegEyeSlash className="text-[20px]" />
+              ) : (
+                <FaRegEye className="text-[20px]" />
+              )}
+            </button>
+            <input
+              {...register("CONFIRM_PASSWORD")}
+              id="confrimpassword"
+              type={showConfirm ? "text" : "password"}
+              className="border-[1px] text-[12px] lg:text-[24px] p-1 border-black400 w-full lg:w-[324px] h-[36px] lg:h-[57px] bg-transparent focus:outline-none rounded-[10px] "
+            />
+          </div>
+
+          {errors.CONFIRM_PASSWORD && (
+            <p className=" text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
+          )}
         </div>
-        <div className="w-full flex justify-end items-center">
+        <div className="w-full flex justify-end items-center mb-[200px]">
           <button
             type="submit"
             className="w-[123px] bg-black500 rounded-[10px] p-[10px]"
