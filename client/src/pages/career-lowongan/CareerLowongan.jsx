@@ -20,6 +20,7 @@ function Career() {
     try {
       const response = await api.get(`${process.env.REACT_APP_API_BASE_URL}/lowongan/allLowongan`);
       setLowonganData(response.data.data);
+      console.log(response);
     } catch (error) {
       console.error("Error:", error.message);
     }
@@ -56,13 +57,13 @@ function Career() {
             ({lowonganData.length}) Total Lowongan
           </h2>
         </div>
-        {/* {displayData.map((el, index) => (
+         {displayData.map((el, index) => (
           <Section_2_lowongan
             lowongan={el}
             key={index}
             onClick={() => handleContainerClick(el.id)}
           />
-        ))} */}
+        ))} 
 
         <div className="grid grid-cols-1 md:grid-cols-2 items-center space-x-4 max-w-[1080px] mx-auto md:p-4 px-10 py-4 mb-[30px]">
           <div className="md:flex md:flex-row md:items-center md:justify-between">

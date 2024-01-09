@@ -15,6 +15,11 @@ module.exports = (sequelize, DataTypes) => {
           name: "id_kelas_bisnis",
         }
       })
+      // kelas_wishlist.belongsTo(models.kelas_kategori,{
+      //   foreignKey: {
+      //     name: "id_kelas_kategori",
+      //   }
+      // })
     }
   }
   kelas_wishlist.init({

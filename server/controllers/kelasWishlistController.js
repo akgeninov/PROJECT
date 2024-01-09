@@ -2,6 +2,7 @@ const db = require("../models");
 const kelasWishlistModel = db.kelas_wishlist;
 const user = db.User;
 const kelasBisnisModel = db.kelas_bisnis;
+//const kelasKategoriModel = db.kelas_kategori;
 
 module.exports = {
     getWishlistByIdUSer: async (req, res) => {

@@ -6,7 +6,7 @@ function Wishlist() {
     const [wishlist, setWishlist] = useState([]);
     //const [count, setCount] = useState(0);
 
-    const fetchWislist = async () => {
+    const fetchWishlist = async () => {
        try {
         const token = JSON.parse(localStorage.getItem("auth"));
         const response = await api.get(
@@ -26,7 +26,8 @@ function Wishlist() {
      };
   
     useEffect(() => {
-      fetchWislist();
+      fetchWishlist();
+      
     }, []);
     console.log(wishlist.wishlist)
 
@@ -41,12 +42,17 @@ function Wishlist() {
       </p>
       <p className="mb-[37px] text-[24px] font-normal leading-[72px] text-black500">Course yang disimpan</p>
       <div className="grid grid-cols-1  lg:grid-cols-2  xl:grid-cols-3  gap-[24px]">
-      {wishlist.map((wishlist, ) =>  {
-      //setCount((prev) => prev+1)
-      return (
-      //<div>{count}</div>
-      <WishlistCard wishlist={wishlist} />
-      )})}
+      {/* {wishlist.map((wishlist, ) =>  { */}
+        {wishlist.map((wishlist, index) => (
+          <WishlistCard key={index} wishlist={wishlist} />
+        ))}
+        
+      {/* //setCount((prev) => prev+1)
+      // return (
+      // //<div>{count}</div>
+      // // <WishlistCard wishlist={wishlist} />
+      // )
+      //})} */}
       </div>
     </div>
   );
