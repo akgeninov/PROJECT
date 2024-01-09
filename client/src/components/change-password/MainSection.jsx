@@ -43,7 +43,7 @@ function MainSection() {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: response.data.message,
+        title: response.data.message || "success",
         showConfirmButton: false,
         timer: 1500,
       });
@@ -93,7 +93,7 @@ function MainSection() {
             />
           </div>
 
-          {errors.PASSWORD && (
+          {errors.OLD_PASSWORD && (
             <p className=" text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.OLD_PASSWORD.message}`}</p>
           )}
         </div>

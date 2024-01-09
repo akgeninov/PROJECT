@@ -400,10 +400,13 @@ function Navbar() {
             />
           ) : (
             <div onClick={() => navigate("/login")}>
-              <ButtonBlack500
-                WIDTH={"w-[160px]"}
-                TEXT_BUTTON={"Login/Daftar"}
-              />
+              <button
+                className={`flex mx-[5px] sm:mx-0 w-[103px] px-[64px] py-[8px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]`}
+              >
+                <p className="text-whiteSmoke500 shrink-0 font-medium text-[12px] leading-[24px]">
+                  Login/Daftar
+                </p>
+              </button>
             </div>
           )}
 

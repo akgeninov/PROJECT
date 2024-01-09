@@ -97,7 +97,7 @@ function MainSection() {
         </div>
       </div>
 
-      <div className="w-full flex flex-col gap-[15px]">
+      <div className="w-full flex flex-col gap-[15px] mb-[107px]">
         <div className="flex items-center gap-[20px]">
           <div className="w-[48px] h-[48px] flex items-center justify-center">
             <img
