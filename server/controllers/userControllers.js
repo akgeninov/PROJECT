@@ -138,4 +138,32 @@ module.exports = {
       });
     }
   },
+  changePassword: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const { confirm_password, password } = req.body;
+
+      if (confirm_password !== password)
+        return utility.createResponse(res, 400, false, "Password tidak sama");
+
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const getUser = await User.update(
+        {
+          password: hashedPassword,
+        },
+        {
+          where: {
+            email: userData.email,
+          },
+        }
+      );
+      if (!getUser) {
+        throw new Error("failed to change password");
+      }
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
 };

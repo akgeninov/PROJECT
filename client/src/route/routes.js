@@ -26,6 +26,7 @@ import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
+import ChangePassword from "../pages/change-password/ChangePassword";
 
 const routes = [
   <Route
@@ -189,6 +190,7 @@ const routes = [
     }
   >
     <Route path=":username" element={<DetailProfile />} />,
+    <Route path="password" element={<ChangePassword />} />,
   </Route>,
 ];
 

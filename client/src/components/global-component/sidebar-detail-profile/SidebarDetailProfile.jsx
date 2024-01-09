@@ -27,7 +27,7 @@ export default function SidebarDetailprofile() {
     ["Detail Profil", `/profile/${user?.username || ""}`],
     ["Data Pribadi", "/profile/dashboard"],
     ["Informasi Lainnya", "/profile/dashboard"],
-    ["Ubah Password", "/profile/dashboard"],
+    ["Ubah Password", "/profile/password"],
   ];
 
   useEffect(() => {

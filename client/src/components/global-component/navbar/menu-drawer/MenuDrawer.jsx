@@ -25,12 +25,6 @@ function MenuDrawer({ isActive, dropMenu, handleClick, handleChangeNavi }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const btnRef = React.useRef();
 
-  // const listItems = [];
-
-  // for (let i = 1; i <= 100; i++) {
-  //   listItems.push(<li key={i}>Item {i}</li>);
-  // }
-
   return (
     <div className="block lg:hidden">
       <button
@@ -40,7 +34,6 @@ function MenuDrawer({ isActive, dropMenu, handleClick, handleChangeNavi }) {
       >
         <img src={icon.line3solid} alt="line3" />
       </button>
-      {/* start of mobile responsif */}
       <Drawer
         size={"xs"}
         isOpen={isOpen}
@@ -54,11 +47,16 @@ function MenuDrawer({ isActive, dropMenu, handleClick, handleChangeNavi }) {
         />
         <DrawerContent
           display={{ base: "block", lg: "none" }}
-          className="mt-[64px] scrollbar-hide"
-          height={"100%"}
-          overflowY={"scroll"}
+          className="mt-[64px] "
         >
-          <DrawerBody width={"100%"} paddingX={0}>
+          <DrawerBody
+            width={"100%"}
+            paddingX={0}
+            overflowY={"scroll"}
+            paddingBottom={"20px"}
+            height={"100%"}
+            className="scrollbar-hide bg-whiteSmoke500"
+          >
             <Accordion allowMultiple width={"100%"}>
               {data.navigationData.map((el, index) => {
                 return (
@@ -112,7 +110,14 @@ function MenuDrawer({ isActive, dropMenu, handleClick, handleChangeNavi }) {
                         </AccordionPanel>
                       </AccordionItem>
                     ) : (
-                      <div key={index} className="mx-[15px] py-[12px]">
+                      <div
+                        key={index}
+                        className={`${
+                          isActive === el.BUTTON_TEXT
+                            ? "font-bold bg-black400 bg-opacity-10"
+                            : "font-medium "
+                        } px-[20px] w-full h-full  py-[12px]`}
+                      >
                         <Link
                           to={el.navi}
                           onClick={() => {
@@ -121,11 +126,6 @@ function MenuDrawer({ isActive, dropMenu, handleClick, handleChangeNavi }) {
                             handleChangeNavi(el.BUTTON_TEXT);
                             onClose();
                           }}
-                          className={`${
-                            isActive === el.BUTTON_TEXT
-                              ? "font-bold bg-black400 bg-opacity-10"
-                              : "font-medium"
-                          }`}
                         >
                           {el.BUTTON_TEXT}
                         </Link>

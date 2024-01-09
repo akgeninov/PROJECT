@@ -60,16 +60,21 @@ function ProfileDrawer({ user, setTOggleProfile, logOut }) {
         />
         <DrawerContent
           display={{ base: "block", lg: "none" }}
-          className="mt-[64px] scrollbar-hide"
+          className="mt-[64px] scrollbar-hide "
           paddingX={0}
         >
-          <DrawerBody width={"100%"} paddingX={0}>
+          <DrawerBody
+            width={"100%"}
+            paddingX={0}
+            className="h-full  bg-whiteSmoke500"
+          >
             <Accordion
               allowMultiple
               width={"100%"}
               alignItems={"baseline"}
               height={"100%"}
               paddingX={0}
+              className="flex flex-col justify-between"
             >
               <ul className="w-full gap-[4px] text-[16px]  font-medium">
                 <li className="px-[24px] py-[12px] flex flex-col justify-center items-start ">
@@ -117,7 +122,7 @@ function ProfileDrawer({ user, setTOggleProfile, logOut }) {
                   </NavLink>
                 </li>
               </ul>
-              <div className="absolute bottom-[54px] left-0 flex justify-center   w-full">
+              <div className=" mb-[54px] left-0 flex justify-center   w-full">
                 <button
                   onClick={() => {
                     logOut();

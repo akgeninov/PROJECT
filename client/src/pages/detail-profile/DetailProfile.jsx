@@ -6,7 +6,7 @@ function DetailProfile() {
     window.scrollTo(0, 0);
   }, []);
   return (
-    <div className="flex flex-col justify-center   w-full max-w-[687px] items-center shrink-0">
+    <div className="flex flex-col justify-start   w-full max-w-[687px] items-center shrink-0">
       <MainSection />
     </div>
   );

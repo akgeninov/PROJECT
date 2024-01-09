@@ -200,13 +200,7 @@ function MainSection() {
               </>
             )}
           />
-          {/* <input
-            {...register("IMG")}
-            onChange={(e) => console.log(e.target.files)}
-            type="file"
-            hidden
-            ref={fileInput}
-          /> */}
+
           <div className="flex flex-col items-start">
             <button
               type="button"
@@ -227,7 +221,7 @@ function MainSection() {
             </p>
           </div>
         </div>
-        <div className="flex flex-col 2xl:flex-row gap-[26px] mb-[39px] ">
+        <div className="flex flex-col xl:flex-row gap-[26px] mb-[39px] ">
           <div className="flex flex-col ">
             <label
               htmlFor="namadepan"
@@ -323,7 +317,6 @@ function MainSection() {
             {errors.BIODATA && (
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.BIODATA.message}`}</p>
             )}
-            {/* <textarea value={text} disabled /> */}
           </div>
         </div>
         <div className="w-full flex justify-end mb-[80px]">
