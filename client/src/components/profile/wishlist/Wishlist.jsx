@@ -7,16 +7,23 @@ function Wishlist() {
     //const [count, setCount] = useState(0);
 
     const fetchWislist = async () => {
-      try {
+       try {
+        const token = JSON.parse(localStorage.getItem("auth"));
         const response = await api.get(
-          `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/myWishlist/${3}`,
-        );
-        setWishlist(response.data.data);
-        console.log(response);
-      } catch (error) {
+          `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/myWishlist`,
+          {
+            headers: {
+              Accept: "application/json", "Content-Type": "application/Json",
+              Authorization: token,
+            },
+          }
+        )
+         setWishlist(response.data.data);
+          console.log(response);
+     } catch (error) {
         console.log(error);
       }
-    };
+     };
   
     useEffect(() => {
       fetchWislist();

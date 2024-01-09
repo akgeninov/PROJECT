@@ -3,7 +3,7 @@ import React from "react";
 import { images } from "../../../../constants";
 import { FaBook, FaSignal, FaUser, FaStar, FaBookmark } from "react-icons/fa";
 
-export default function WishlistCard() {
+export default function WishlistCard(wishlist) {
   const renderStars = () => {
     const stars = [];
     for (let i = 0; i < 5; i++) {
