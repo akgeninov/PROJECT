@@ -27,7 +27,7 @@ export default function SidebarProfile() {
     <div className="flex flex-row justify-center lg:justify-start max-w-screen-2xl lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
       {/* Left Side - Menu Box */}
       <div
-        className="hidden lg:flex flex-col items-center w-[395px] h-full bg-white-200 border border-grey"
+        className="hidden lg:flex flex-col items-center w-[395px] min-h-[1000px] bg-white-200 border border-grey"
         style={{ boxShadow: "1px 1px 3px rgba(128, 128, 128, 0.3)" }}
       >
         <img
