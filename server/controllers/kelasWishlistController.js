@@ -2,7 +2,10 @@ const db = require("../models");
 const kelasWishlistModel = db.kelas_wishlist;
 const user = db.User;
 const kelasBisnisModel = db.kelas_bisnis;
-//const kelasKategoriModel = db.kelas_kategori;
+const kelasKategoriModel = db.kelas_kategori;
+const kelasLevelModel = db.kelas_level;
+const kelasRegistModel = db.kelas_regist;
+const kelasRatingModel = db.kelas_rating;
 
 module.exports = {
     getWishlistByIdUSer: async (req, res) => {
@@ -23,7 +26,7 @@ module.exports = {
               id_user: getuser.id,
             },
             include: [
-              user, kelasBisnisModel
+              user, {model : kelasBisnisModel, include : [kelasKategoriModel, kelasLevelModel, kelasRegistModel, kelasRatingModel]}, 
             ],
           });
     

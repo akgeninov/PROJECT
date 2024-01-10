@@ -43,9 +43,22 @@ function Wishlist() {
       <p className="mb-[37px] text-[24px] font-normal leading-[72px] text-black500">Course yang disimpan</p>
       <div className="grid grid-cols-1  lg:grid-cols-2  xl:grid-cols-3  gap-[24px]">
       {/* {wishlist.map((wishlist, ) =>  { */}
-        {wishlist.map((wishlist, index) => (
-          <WishlistCard key={index} wishlist={wishlist} />
-        ))}
+        {wishlist.map((wishlist, index) => {
+          const dataRating = wishlist.kelas_bisni.kelas_ratings;
+          console.log(dataRating);
+          const getSum = dataRating.reduce(
+            (acc, obj) => acc + obj.nilai,
+            0
+          );
+          const getAvarage = Number(getSum / dataRating.length).toFixed(1);
+          return (
+            
+          <WishlistCard key={index} wishlist={wishlist} 
+           index={index}
+          star={isNaN(getAvarage) ? Number(0) : getAvarage}
+          />
+          );
+          })}
         
       {/* //setCount((prev) => prev+1)
       // return (
