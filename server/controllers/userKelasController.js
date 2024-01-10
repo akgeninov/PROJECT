@@ -161,12 +161,23 @@ module.exports = {
 
     kelasUserDetail: async (req, res) => {
         try {
-            const { kelasID, userID } = req.body;
-
+            const { kelasID } = req.body;
+            const dataUser = req.dataToken;
+            const user = await User.findOne({where: { email: dataUser.email }});
             const result = await kelas_bisnis.findOne({
                 where: { id: kelasID },
                 include: [
-                    { model: kelas_regist, attributes: ["progress"], where: { id_user: userID } },
+                    { model: kelas_regist, attributes: ["progress"], where: { id_user: user.id } },
+                    { model: kelas_rating ,
+                        attributes: ["komentar", "createdAt"],
+                        include: [
+                            {
+                                model: User,
+                                attributes: ["username", "profile_picture", "picture_link"],
+                                required: false,
+                            },
+                        ]
+                    },
                     { 
                         model: kelas_detail, 
                         attributes: ["deskripsi"],

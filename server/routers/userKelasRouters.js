@@ -7,7 +7,7 @@ router.post("/nonProgess", userKelasController.kelasUserNonProgress);
 router.post("/progress", userKelasController.kelasUserProgress);
 router.post("/complete", userKelasController.kelasUserComplete);
 router.post("/progress/last", userKelasController.kelasUserLastProgress);
-router.post("/detail", userKelasController.kelasUserDetail);
+router.post("/detail", verifyToken, userKelasController.kelasUserDetail);
 router.post("/materi/mulai", verifyToken, userKelasController.MulaiMateriUser);
 
 module.exports = router;
