@@ -12,7 +12,7 @@ export default function HeroSection() {
   }
   return (
     <div
-      className="bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[544px] lg:h-[544px] flex flex-col"
+      className="bg-cover bg-center px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[540px] sm:h-[544px] flex flex-col"
       style={{ backgroundImage: `url(${dataKomunitas[index].pic})` }}
     >
       <div className="bg-[rgba(15,16,17,0.95)] bg-cover px-[16px] sm:px-[100px] w-full 2xl:max-w-[1280px] h-[544px] lg:h-[544px] absolute left-0 z-0 "></div>
@@ -21,12 +21,12 @@ export default function HeroSection() {
           {/* <h1 className="text-whiteSmoke500">Breadcrumb</h1> */}
           <NavigasiKomunitas />
         </div>
-        <div className="flex gap-[80px] mt-[60px]">
-          <div className="flex flex-col w-[250px] lg:w-[568px]  overflow-hidden gap-[52px]">
-            <div className="flex flex-col max-w-[568px] gap-[8px] lg:gap-[16px]">
+        <div className="flex flex-wrap gap-[32px] mt-[40px] items-center justify-center">
+          <div className="flex flex-col w-full lg:w-[568px]  overflow-hidden gap-[32px] items-center">
+            <div className="flex flex-col max-w-[568px] gap-[16px]">
               <h1 className=" text-whiteSmoke500 text-[28px] lg:text-[48px] text-center lg:text-start font-bold leading-[32px] lg:leading-[60px]">
                 {dataKomunitas[index].title}
-              </h1>
+              </h1> 
               <p className="text-[16px] lg:text-[18px] font-light leading-[24px] lg:leading-[28px] text-whiteSmoke500 text-center lg:text-start">
                 Ayo bergabung dengan para penggerak industri kreatif untuk
                 bertukar ide, mendapatkan inspirasi, dan memperluas jaringanmu.
@@ -39,17 +39,17 @@ export default function HeroSection() {
                 </p>
               </button> */}
             <ButtonWhiteSmoke500
-              WIDTH={"w-[260px]"}
+              WIDTH={"w-[220px] sm:w-[260px]"}
               TEXT_BUTTON={"Selengkapnya"}
             />
           </div>
 
-          <div className="flex flex-col items-center min-w-[352px] overflow-hidden rounded-[10px]">
+          <div className="flex flex-col items-center bg-center w-[358px] h-[188px] sm:min-w-[352px] overflow-hidden rounded-[10px]">
             <img
               src={dataKomunitas[index].pic}
               alt="komunitas"
               className={
-                "gap-[52px] flex flex-col   min-w-fit h-[352px]  xl:min-w-fit rounded-[10px]"
+                "gap-[52px] flex flex-col rounded-[10px] shrink-0"
               }
             />
           </div>

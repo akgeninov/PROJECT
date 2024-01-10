@@ -23,18 +23,20 @@ function HeroSection() {
         </button> */}
         <ButtonBlack500 WIDTH={"w-[260px]"} TEXT_BUTTON={"Gabung Sekarang"} />
       </div>
-      <div className="relative w-[358px] h-[504px] z-20 xl:w-[400px] flex justify-center items-center hero-image">
+      <div className=" w-[358px] h-[504px] z-20 xl:w-[400px] ">
         {/* <img
           className=" flex-initial absolute z-20 "
           src={images.vector2}
           alt="vector2"
           style={{ filter: "brightness(0)" }}
         /> */}
-        {/* <img
-          className="object-cover h-full w-full "
-          src={images.oriVector2}
-          alt="vector2"
-        /> */}
+        <div className=" h-fit w-fit flex justify-center items-center hero-image">
+          <img
+            className="object-cover h-full w-full object-center  "
+            src={images.oriVector2Webp}
+            alt="vector2"
+          />
+        </div>
       </div>
     </div>
   );

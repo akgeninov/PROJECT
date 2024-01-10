@@ -36,7 +36,7 @@ function BenefitSection() {
     AOS.init();
   }, []);
   return (
-    <div className=" mt-[60px] lg:mt-[160px]  w-fit flex flex-col items-center gap-[52px]">
+    <div className=" mt-[60px] lg:mt-[160px]  w-fit flex flex-col flex-wrap items-center gap-[52px]">
       <div
         data-aos="fade-up"
         data-aos-duration="1000"
@@ -46,7 +46,7 @@ function BenefitSection() {
           Gabung Komunitas ada Banyak Manfaatnya
         </h1>
 
-        <div className="grid grid-cols-4 gap-4 items-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 w-[358px] gap-4 items-center">
             {dataBenefits.map((benefits, index) => (
               <BenefitCard key={index} benefits={benefits} index={index} />
             ))}

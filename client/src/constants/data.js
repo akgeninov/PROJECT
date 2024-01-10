@@ -6,21 +6,27 @@ const { default: newsPic } = require("./newsPic");
 const dataLayanan = [
   {
     title: "Kelas bisnis",
+    navi: "/kelas-bisnis",
   },
   {
     title: "Konsultasi Bisnis",
+    navi: "#",
   },
   {
     title: "Buat Website & Aplikasi",
+    navi: "#",
   },
   {
     title: "Social Media Management",
+    navi: "#",
   },
   {
     title: "Desain Logo",
+    navi: "#",
   },
   {
     title: "Live Streaming & Content",
+    navi: "#",
   },
 ];
 
@@ -28,10 +34,23 @@ const dataKomunitas = [
   {
     title: "Komunitas Bisnis",
     pic: komunitasPic.komunitasBisnis,
+    navi: "#",
   },
   {
     title: "Komunitas Content Creator",
     pic: komunitasPic.komunitasKontenCreator,
+    navi: "#",
+  },
+];
+
+const dataKarir = [
+  {
+    title: "Semangat belajar hal baru tanpa rasa takut",
+    pic: images.career_Section_2,
+  },
+  {
+    title: "Komunitas Content Creator",
+    pic: images.career_Section_2,
   },
 ];
 
@@ -78,22 +97,27 @@ const navigationData = [
   {
     BUTTON_TEXT: "Layanan",
     data: dataLayanan,
+    navi: null,
   },
   {
     BUTTON_TEXT: "Komunitas",
     data: dataKomunitas,
+    navi: null,
   },
   {
     BUTTON_TEXT: "Artikel",
     data: null,
+    navi: "/artikel/1/Semua",
   },
   {
     BUTTON_TEXT: "Karir",
     data: null,
+    navi: "#",
   },
   {
     BUTTON_TEXT: "Tentang Kami",
     data: null,
+    navi: "#",
   },
 ];
 
@@ -151,4 +175,5 @@ module.exports = {
   navigationData,
   dataNews,
   dataLogoShare,
+  dataKarir
 };

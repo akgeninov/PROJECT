@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 function NavigationComponent({
   DATA,
@@ -9,7 +10,11 @@ function NavigationComponent({
   toggle,
   setToggle,
   handleClick,
+  handleChangeNavi,
+  navi,
 }) {
+  const navigate = useNavigate();
+
   return (
     <>
       {DATA ? (
@@ -24,7 +29,8 @@ function NavigationComponent({
               //     BUTTON_TEXT === "Komunitas" ? !prev.komunitas : false,
               // }));
               handleClick(BUTTON_TEXT);
-              setIsActive(BUTTON_TEXT);
+              handleChangeNavi(BUTTON_TEXT);
+              // setIsActive(BUTTON_TEXT);
             }}
             className={`${
               isActive === BUTTON_TEXT ? "font-bold" : "font-medium"
@@ -72,6 +78,13 @@ function NavigationComponent({
                 >
                   {DATA.map((el, index) => (
                     <div
+                      onClick={() => {
+                        navigate(el.navi);
+                        setToggle(() => ({
+                          layanan: false,
+                          komunitas: false,
+                        }));
+                      }}
                       key={index}
                       className={`cursor-pointer px-[24px] py-[12px] items-center hover:bg-black50`}
                     >
@@ -103,6 +116,13 @@ function NavigationComponent({
                 >
                   {DATA.map((el, index) => (
                     <div
+                      onClick={() => {
+                        navigate(el.navi);
+                        setToggle(() => ({
+                          layanan: false,
+                          komunitas: false,
+                        }));
+                      }}
                       key={index}
                       className={`cursor-pointer px-[24px] py-[12px] items-center hover:bg-black50`}
                     >
@@ -118,7 +138,10 @@ function NavigationComponent({
         <li
           onClick={() => {
             handleClick(BUTTON_TEXT);
-            setIsActive(BUTTON_TEXT);
+            // setIsActive(BUTTON_TEXT);
+            handleChangeNavi(BUTTON_TEXT);
+
+            navigate(navi);
           }}
         >
           <button
