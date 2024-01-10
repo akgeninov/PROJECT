@@ -6,10 +6,6 @@ module.exports = (sequelize, DataTypes) => {
       kelas_detail.belongsTo(models.kelas_bisnis, {
         foreignKey: { name: "id_kelas_bisnis" },
       });
-      kelas_detail.belongsToMany(models.kelas_materi, {
-        through: "kelas_detail_materi",
-        foreignKey: "id_kelas_detail",
-      });
       kelas_detail.belongsToMany(models.kelas_benefit, {
         through: "kelas_detail_benefit",
         foreignKey: "id_kelas_detail",
@@ -22,6 +18,7 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "id_kelas_bisnis",
         targetKey: "id_kelas_bisnis",
       });
+      kelas_detail.hasMany(models.kelas_materi, {foreignKey: {name: "id_kelas_materi"}});
     }
   }
   kelas_detail.init(

@@ -26,25 +26,7 @@ module.exports = {
       });
     }
   },
-
-  usernameCheck: async (req, res) => {
-    const { username } = req.body;
-    //cek nama user
-    await utility.checkAvailableColumn(user, "username", username, res);
-  },
-
-  phoneCheck: async (req, res) => {
-    const { no_hp } = req.body;
-    //cek nama user
-    await utility.checkAvailableColumn(user, "no_hp", no_hp, res);
-  },
-
-  emailCheck: async (req, res) => {
-    const { email } = req.body;
-    //cek nama user
-    await utility.checkAvailableColumn(user, "email", email, res);
-  },
-
+  
   getOneUser: async (req, res) => {
     try {
       const dataUser = req.dataToken;

@@ -242,7 +242,6 @@ module.exports = {
           {
             model: kelas_materi,
             attributes: ["materi", "link", "deskripsi"],
-            through: { attributes: [] },
           },
           {
             model: kelas_benefit,
