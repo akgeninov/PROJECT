@@ -18,7 +18,7 @@ export default function NavbarKelasSaya() {
     setDropdownShow(!dropdownShow);
     if (dropdownShow) {
       setToggle(true);
-    }else{
+    } else {
       setToggle(false);
     }
   };
@@ -41,6 +41,7 @@ export default function NavbarKelasSaya() {
   const unactiveLink = "[&>hr]:opacity-0";
 
   return (
+    
     <div className="flex-initial">
       {/* lg:Submenu */}
       <nav className="hidden lg:flex gap-[27px] mb-[54px]">
@@ -49,7 +50,8 @@ export default function NavbarKelasSaya() {
             to={url}
             style={NavlinkStyles}
             className={({ isActive }) => (isActive ? activeLink : unactiveLink)}
-            id={title}
+            key={title}
+            
           >
             {title}
             <hr className="w-[39px] h-[5px] bg-black500 border-3 rounded-[50px]"></hr>
@@ -105,4 +107,3 @@ export default function NavbarKelasSaya() {
     </div>
   );
 }
-// ${parentPath === "/profile/kelas-saya" || parentPath === "/profile/kelas-saya/" ? activeLink : unactiveLink}

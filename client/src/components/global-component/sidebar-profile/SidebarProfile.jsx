@@ -57,6 +57,7 @@ export default function SidebarProfile() {
               to={url}
               style={NavlinkStyles}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
+              key={title}
             >
               <img
                 src={img}
