@@ -60,7 +60,7 @@ export default function NavbarTransaksi() {
         </nav>
 
         {/* mobile:Submenu */}
-        <div className="relative inline-block lg:hidden text-left w-[358px] sm:w-[500px] mb-[54px]">
+        <div className="relative inline-block lg:hidden text-left w-[358px] md:w-[500px] mb-[54px]">
           <div>
             <button
               type="button"
@@ -85,7 +85,7 @@ export default function NavbarTransaksi() {
           </div>
 
           {dropdownShow ? (
-            <div className="absolute right-0 z-10 mt-2 w-[358px] sm:w-[500px] origin-top-right rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
+            <div className="absolute right-0 z-10 mt-2 w-[358px] md:w-[500px] origin-top-right rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
               {statusTransaksi.map(([title, url]) => (
                 <NavLink
                   to={url}

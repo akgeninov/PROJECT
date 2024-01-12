@@ -62,20 +62,20 @@ export default function TransactionCard() {
   return (
     <>
       {dataTransaction.map((data) => (
-        <div className="w-[750px] h-[346px] border-[1px] border-whiteSmoke700 mb-[20px] rounded-[10px]">
-          <div className="h-[74px] flex justify-between bg-[rgba(204,204,204,0.2)] p-[11px] items-center text-[18px] font-medium leading-[30px]">
-            <p className="w-[335px]">Waktu Pembayaran, {data.DATE}</p>
-            <div className="border-l border-[#666666] border-opacity-30 h-[45px] w-[2px]"></div>
-            <p className="h-[60px]">No. Invoice: {data.noinvoice}</p>
+        <div className="flex flex-col w-[358px] h-[204px] justify-between md:w-[500px] md:h-[280px] lg:w-[750px] lg:h-[346px] border-[1px] border-whiteSmoke700 mb-[20px] rounded-[10px]">
+          <div className="h-[38px] lg:h-[74px] flex justify-between bg-[rgba(204,204,204,0.2)] p-[11px] items-center text-[12px] lg:text-[18px] font-medium leading-[30px] rounded-t-[10px]">
+            <p className="lg:w-[335px]"><span className="lg:inline hidden">Waktu Pembayaran,</span> {data.DATE}</p>
+            <div className="border-l border-[#666666] border-opacity-30 h-[45px] w-[2px] lg:block hidden"></div>
+            <p className="h-[60px] lg:block hidden">No. Invoice: {data.noinvoice}</p>
             <div
               className={`${labelColor(
                 data.status
-              )} flex justify-center items-center w-[109px] h-[36px] text-center border-[1px] rounded-[10px] text-whiteSmoke500`}
+              )} flex justify-center items-center w-[67px] h-[24px] lg:w-[109px] lg:h-[36px] text-center border-[1px] rounded-[5px] lg:rounded-[10px] text-whiteSmoke500`}
             >
               {data.status}
             </div>
           </div>
-          <div className="flex h-[198px] px-[11px] items-center">
+          <div className="flex lg:h-[198px] px-[11px] items-start lg:items-center">
             <div className="flex w-[78px] h-[78px] md:w-[150px] md:h-[150px] mr-[25px]">
               <img
                 src={data.pic}
@@ -83,18 +83,18 @@ export default function TransactionCard() {
                 className="w-full h-full object-cover rounded-[10px]"
               />
             </div>
-            <div className="flex h-[160px] leading-[28px] justify-start">
-              <p className="text-[24px] font-medium w-[50%]">{data.title}</p>
-              <div className=" h-[150px] w-[2px] text-[24px] font-medium border-l-2 border-[#666666)] border-opacity-50"></div>
-              <div className=" h-[160px] pl-[25px] text-[24px] font-medium">
-                <p className="text-[#666666] mb-[72px]">Harga Produk</p>
+            <div className="flex flex-col lg:flex-row lg:h-[160px] lg:leading-[28px] justify-start">
+              <p className="text-[14px] lg:text-[24px] font-medium lg:w-[50%] w-[160px] mb-[15px]">{data.title}</p>
+              <div className="lg:block hidden h-[150px] w-[2px] font-medium border-l-2 border-[#666666)] border-opacity-50"></div>
+              <div className=" lg:h-[160px] lg:pl-[25px] text-[12px] lg:text-[24px] font-medium">
+                <p className="text-[#666666] mb-[5px] lg:mb-[72px]">Harga Produk</p>
                 <p className="text-[#0F1011]">{rupiah(data.price)}</p>
               </div>
             </div>
           </div>
-          <div className="h-[74px] flex bg-[rgba(204,204,204,0.2)] px-[11px] text-[24px] leading-[72px] font-medium">
-            <p className="w-[65%] text-[#666666]">Total Pembayaran</p>
-            <p className=" text-[#0F1011]">
+          <div className="h-[38px] lg:h-[74px] flex items-center rounded-b-[10px] bg-[rgba(204,204,204,0.2)] px-[11px] text-[12px] lg:text-[24px] leading-[72px] font-medium">
+            <p className="w-[55%] lg:w-[65%] text-[#666666]">Total Pembayaran</p>
+            <p className="w-[45%] lg:w-[35%]  text-[#0F1011] text-right lg:text-left">
               {total(data.status, rupiah(data.price))}
             </p>
           </div>
