@@ -1,17 +1,11 @@
 import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faHome,
-  faBook,
-  faHeart,
-  faVideo,
-  faWallet,
-} from "@fortawesome/free-solid-svg-icons"; // Add other icons as needed
+import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { icon } from "../../../constants";
 
 export default function SidebarProfile() {
+  const location = useLocation();
   const navigate = useNavigate();
+
   const NavlinkStyles = ({ isActive }) => {
     return {
       fontWeight: isActive ? "bold" : "normal",
@@ -21,18 +15,26 @@ export default function SidebarProfile() {
     };
   };
 
+  const menuItems = [
+    { title: "Dashboard", icon: icon.iconHome, activeIcon: icon.iconHome1, url: "/profile/dashboard" },
+    { title: "Kelas Saya", icon: icon.iconCourse, activeIcon: icon.iconCourse1, url: "/profile/kelas-saya/semua-kelas" },
+    { title: "Wishlist", icon: icon.iconWishlist, activeIcon: icon.iconWishlist1, url: "/profile/wishlist" },
+    { title: "Event", icon: icon.iconEvent, activeIcon: icon.iconEvent1, url: "/profile/event" },
+    { title: "Transaksi", icon: icon.iconTransaksi, activeIcon: icon.iconTransaksi1, url: "/profile/transaksi" },
+  ];
+
   return (
     <div className="flex flex-row justify-center lg:justify-start max-w-screen-2xl lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
       {/* Left Side - Menu Box */}
       <div
-        className="hidden lg:flex flex-col items-center w-[395px] h-full bg-white-200 border border-grey"
+        className="hidden lg:flex flex-col items-center w-[395px] min-h-[1000px] bg-white-200 border border-grey"
         style={{ boxShadow: "1px 1px 3px rgba(128, 128, 128, 0.3)" }}
       >
         <img
           onClick={() => navigate("/profile/coba")}
           src={icon.iconEdit}
           alt="Career Momen 1"
-          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px] cursor-pointer"
+          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px]"
           style={{ borderRadius: "10px" }}
         />
         <img
@@ -42,27 +44,14 @@ export default function SidebarProfile() {
         />
         <h1 className="font-medium mt-3 text-[32px]">Anonymous</h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
-          {[
-            ["Dashboard", icon.iconHome, "/profile/dashboard"],
-            [
-              "Kelas Saya",
-              icon.iconCourse,
-              "/profile/kelas-saya" || "/profile/kelas-saya/",
-            ],
-            ["Wishlist", icon.iconWishlist, "/profile/wishlist"],
-            ["Event", icon.iconEvent, "/profile/event"],
-            ["Transaksi", icon.iconTransaksi, "/profile/transaksi"],
-          ].map(([title, img, url]) => (
+          {menuItems.map(({ title, icon, activeIcon, url }, index) => (
             <NavLink
+              key={index}
               to={url}
-              style={NavlinkStyles}
+              style={NavlinkStyles({ isActive: location.pathname === url })}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
             >
-              <img
-                src={img}
-                alt="Career Momen 1"
-                className="object-cover w-[30px] h-[30px] mr-5 ml-5"
-              />
+              <img src={location.pathname === url ? activeIcon : icon} alt={title} className="mr-5 ml-5" />
               {title}
             </NavLink>
           ))}

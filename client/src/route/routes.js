@@ -122,7 +122,18 @@ const routes = [
         <Career />
       </Protection>
     }
+    />,
+
+    <Route
+    key="kelas-bisnis"
+    path="/kelas-bisnis"
+    element={
+      <Protection publicSide={true}>
+        <KelasBisnis />
+      </Protection>
+    }
   />,
+  
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -131,7 +142,18 @@ const routes = [
         <CareerLowongan />
       </Protection>
     }
+    />,
+
+    <Route
+    key="kelas-bisnis"
+    path="/kelas-bisnis/:id"
+    element={
+      <Protection publicSide={true}>
+        <DetailKelasBisnis />
+      </Protection>
+    }
   />,
+
   <Route
     key="careerLowongan"
     path="/career-lowongan/:id_lowongan"
@@ -141,6 +163,7 @@ const routes = [
       </Protection>
     }
   />,
+
   <Route
     key="profile"
     path="/profile"
@@ -178,6 +201,16 @@ const routes = [
     element={
       <Protection publicSide={true} userOnly={true}>
         <TentangKami />
+      </Protection>
+    }
+  />,
+
+  <Route
+    key="login"
+    path="/login"
+    element={
+      <Protection publicSide={true}>
+        <Login />
       </Protection>
     }
   />,

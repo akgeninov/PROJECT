@@ -17,6 +17,14 @@ function Section_2_lowongan(props) {
     return formattedDate;
   }
   
+  // Menampilkan data sesuai batas lamar
+  const today = new Date();
+  const deadlineDate = new Date(props.lowongan.batas_lamar);
+  const isDeadlineValid = today <= deadlineDate;
+  if (!isDeadlineValid) {
+    return null; 
+  }
+  
   return (
     <div>
       <div className="p-4 w-full flex justify-center">

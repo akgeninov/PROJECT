@@ -19,6 +19,7 @@ const { artikelRouters } = require("./routers");
 const { lowonganRouters } = require("./routers");
 const { kelasBisnisRouters } = require("./routers");
 const { userKelasRouters } = require("./routers");
+const { kelasWishlistRouters } = require("./routers");
 const { authorize } = require("./middleware/validator");
 
 app.use("/api", authorize);
@@ -26,12 +27,13 @@ app.use("/api/auth", loginRouters);
 app.use("/api/user", userRouters);
 app.use("/api/userKelas", userKelasRouters);
 app.use("/api/artikel", artikelRouters);
-app.use("/api/kelasBisnis", kelasBisnisRouters);
 app.use("/api/lowongan", lowonganRouters);
+app.use("/api/kelasBisnis", kelasBisnisRouters);
+app.use("/api/kelasWishlist", kelasWishlistRouters);
 
 app.use("/images", express.static("images"));
 
-app.listen(1000, () => {
+app.listen(process.env.PORT, () => {
   // db.sequelize.sync({ alter: true });
-  console.log(`server is running on port 1000`);
+  console.log(`server is running on port ${process.env.PORT}`);
 });
