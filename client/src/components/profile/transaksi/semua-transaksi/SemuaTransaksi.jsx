@@ -1,10 +1,11 @@
 import TransactionCard from "../../../global-component/card/transaction-card/TransactionCard";
+import dataTransaction from "../constant";
 
 export default function SemuaTransaksi() {
-    return (
-      <div>
-        <TransactionCard/>
-      </div>
-    );
-  }
-  
+  // console.log(dataTransaction);
+  return (
+    <div>
+      <TransactionCard transaksi={dataTransaction} />
+    </div>
+  );
+}

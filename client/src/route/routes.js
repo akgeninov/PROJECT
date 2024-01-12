@@ -30,6 +30,8 @@ import SemuaTransaksi from "../components/profile/transaksi/semua-transaksi/Semu
 import TransaksiBerhasil from "./../components/profile/transaksi/transaksi-berhasil/TransaksiBerhasil";
 import TransaksiMenunggu from "../components/profile/transaksi/transaksi-menunggu/TransaksiMenunggu";
 import TransaksiDibatalkan from "./../components/profile/transaksi/transaksi-dibatalkan/TransaksiDibatalkan";
+// import LihatInvoice from "../components/profile/transaksi/lihat-invoice/LihatInvoice";
+import Invoice from './../pages/invoice/Invoice';
 
 const routes = [
   <Route
@@ -192,6 +194,15 @@ const routes = [
       />
     </Route>
   </Route>,
+  <Route
+    key="invoice"
+    path="/profile/transaksi/:transaction_id/lihat-invoice"
+    element={
+      <Protection userOnly={true}>
+        <Invoice/>
+      </Protection>
+    }
+  />,
   <Route
     key="about-us"
     path="/about-us"

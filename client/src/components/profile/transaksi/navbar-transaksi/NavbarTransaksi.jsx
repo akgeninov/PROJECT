@@ -52,6 +52,7 @@ export default function NavbarTransaksi() {
               className={({ isActive }) =>
                 isActive ? activeLink : unactiveLink
               }
+              key={title}
             >
               {title}
               <hr className="w-[39px] h-[5px] bg-black500 border-3 rounded-[50px]"></hr>
@@ -95,6 +96,7 @@ export default function NavbarTransaksi() {
                       : "text-whiteSmoke800 text-[12px] leading-[30px] block px-4 py-2"
                   }
                   onClick={toggleDropDown}
+                  key={title}
                 >
                   {title}
                 </NavLink>
