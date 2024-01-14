@@ -50,6 +50,7 @@ export default function SidebarProfile() {
               to={url}
               style={NavlinkStyles({ isActive: location.pathname === url })}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
+              key={title}
             >
               <img src={location.pathname === url ? activeIcon : icon} alt={title} className="mr-5 ml-5" />
               {title}

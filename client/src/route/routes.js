@@ -26,6 +26,12 @@ import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
+import SemuaTransaksi from "../components/profile/transaksi/semua-transaksi/SemuaTransaksi";
+import TransaksiBerhasil from "./../components/profile/transaksi/transaksi-berhasil/TransaksiBerhasil";
+import TransaksiMenunggu from "../components/profile/transaksi/transaksi-menunggu/TransaksiMenunggu";
+import TransaksiDibatalkan from "./../components/profile/transaksi/transaksi-dibatalkan/TransaksiDibatalkan";
+// import LihatInvoice from "../components/profile/transaksi/lihat-invoice/LihatInvoice";
+import Invoice from './../pages/invoice/Invoice';
 
 const routes = [
   <Route
@@ -191,8 +197,35 @@ const routes = [
     </Route>
     <Route path="/profile/wishlist/" element={<Wishlist />} />
     <Route path="/profile/event/" element={<Event />} />
-    <Route path="/profile/transaksi/" element={<Transaksi />} />
+    <Route path="/profile/transaksi/" element={<Transaksi />}>
+      <Route index element={<SemuaTransaksi />} />
+      <Route
+        path="/profile/transaksi/semua-transaksi"
+        element={<SemuaTransaksi />}
+      />
+      <Route
+        path="/profile/transaksi/transaksi-berhasil"
+        element={<TransaksiBerhasil />}
+      />
+      <Route
+        path="/profile/transaksi/transaksi-menunggu"
+        element={<TransaksiMenunggu />}
+      />
+      <Route
+        path="/profile/transaksi/transaksi-dibatalkan"
+        element={<TransaksiDibatalkan />}
+      />
+    </Route>
   </Route>,
+  <Route
+    key="invoice"
+    path="/profile/transaksi/:transaction_id/lihat-invoice"
+    element={
+      <Protection userOnly={true}>
+        <Invoice/>
+      </Protection>
+    }
+  />,
   <Route
     key="about-us"
     path="/about-us"
