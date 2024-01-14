@@ -3,7 +3,8 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class kelas_materi extends Model {
     static associate(models) {
-      kelas_materi.belongsTo(models.kelas_detail, {foreignKey: "id_kelas_materi"});
+      kelas_materi.belongsTo(models.kelas_detail, {foreignKey: "id_kelas_detail"});
+      kelas_materi.hasMany(models.sub_materi_kelas, {foreignKey: {name: "id_materi"}});
     }
   }
   kelas_materi.init(
@@ -14,6 +15,12 @@ module.exports = (sequelize, DataTypes) => {
       deskripsi: {
         type: DataTypes.STRING(1000),
         allowNull: true,
+      },
+      title: {
+        type: DataTypes.VIRTUAL,
+        get() {
+          return `Modul ${this.getDataValue("urutan")} : ${this.getDataValue("materi")}`;
+        },
       },
     },
     {

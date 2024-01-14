@@ -1,3 +1,4 @@
+const utility = require("./utility");
 const {
     sequelize,
     kelas_bisnis,
@@ -5,9 +6,10 @@ const {
     kelas_detail,
     kelas_materi,
     kelas_rating,
-    User
+    User,
+    sub_materi_kelas,
+    kelas_kuis
 } = require("../models");
-const utility = require("./utility");
 
 module.exports = {
     kelasUserAll: async (req, res) => {
@@ -215,12 +217,67 @@ module.exports = {
             const dataUser = req.dataToken;
 
             const user = await User.findOne({where: { email: dataUser.email }});
-            const materi = await kelas_materi.findOne({where: { id: materiID }});
             const regist = await kelas_regist.findOne({where: { id_kelas_bisnis: kelasID , id_user: user.id}});
+            const materi = await kelas_materi.findOne(
+                {
+                    where: { id: materiID }, 
+                    include:[ {model:sub_materi_kelas, attributes:["nama", "link"]}],
+                    attributes: ["materi", "urutan"]
+                }
+            );
+
+            const progress_user = await kelas_bisnis.findOne({
+                where: { id: kelasID },
+                include: [
+                    { model: kelas_regist, attributes: ["progress"], where: { id_user: user.id } },
+                    { 
+                        model: kelas_detail, 
+                        attributes: [],
+                    },
+                ],
+                attributes: [
+                    [sequelize.literal('(SELECT COUNT(*) FROM kelas_detail_materi WHERE kelas_detail_materi.id_kelas_detail = kelas_detail.id)'), 'total_materi'],
+                    [
+                        sequelize.literal(`ROUND(kelas_regists.progress * 100 / (SELECT COUNT(*) FROM kelas_detail_materi WHERE kelas_detail_materi.id_kelas_detail = kelas_detail.id))`),
+                        'persentase'
+                    ],
+                ],
+            });
+
+            const modul_kuis = await kelas_detail.findOne({
+                where: { id_kelas_bisnis: kelasID },
+                attributes: [],
+                include: [
+                        {model: kelas_materi,attributes: ["id","materi","urutan","title"]},
+                        {model: kelas_kuis,attributes: ["id","nama","urutan","title"]},
+                ],
+            });
+
+            const rawr = modul_kuis.kelas_materis.map((materi) => {
+                const matchingKuis = modul_kuis.kelas_kuis.find((kuis) => kuis.urutan === materi.urutan);
+                
+                return [
+                    {
+                        title: materi.title,
+                        id: materi.id,
+                        materi: materi.materi,
+                        urutan: materi.urutan,
+                        type: "modul"
+                    },
+                    {
+                        title: matchingKuis.title,
+                        id: matchingKuis.id,
+                        nama: matchingKuis.nama,
+                        urutan: matchingKuis.urutan,
+                        type: "kuis"
+                    },
+                ];
+            });
+            const modul = rawr.flat(1);
 
             //cek progess user
             if (regist.progress >= materi.urutan) {
-                utility.createResponse(res,200,true,"User Sudah Melewati Kelas Ini",{materi,regist})
+                utility.createResponse(res,200,true,"User Sudah Melewati Kelas Ini",{materi,progress_user, modul})
 
             } if (regist.progress < materi.urutan && (materi.urutan - regist.progress) == 1) {
                 //update progress
