@@ -286,7 +286,7 @@ module.exports = {
                     { where: {where: { id_kelas_bisnis: kelasID , id_user: user.id} }}
                 );
                 console.log(updateResult);
-                utility.createResponse(res,200,true,"User Baru Akses Kelas Ini",{materi,regist})
+                utility.createResponse(res,200,true,"User Baru Akses Kelas Ini",{materi,progress_user, modul})
 
             } if (regist.progress < materi.urutan && (materi.urutan - regist.progress) > 1) {
                 utility.createResponse(res,200,false,"User Melewati Urutan Kelas", {progress_user: regist.progress,urutan_materi: materi.urutan})
