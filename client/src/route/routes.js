@@ -28,6 +28,8 @@ import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import ChangePassword from "../pages/change-password/ChangePassword";
 import InfoLain from "../pages/info-lain/InfoLain";
+import TentangKelas from "../pages/tentang-kelas/TentangKelas";
+import LmsKelas from "../pages/lms-kelas/LmsKelas";
 
 const routes = [
   <Route
@@ -122,9 +124,9 @@ const routes = [
         <Career />
       </Protection>
     }
-    />,
+  />,
 
-    <Route
+  <Route
     key="kelas-bisnis"
     path="/kelas-bisnis"
     element={
@@ -133,7 +135,7 @@ const routes = [
       </Protection>
     }
   />,
-  
+
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -142,9 +144,9 @@ const routes = [
         <CareerLowongan />
       </Protection>
     }
-    />,
+  />,
 
-    <Route
+  <Route
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
     element={
@@ -199,7 +201,7 @@ const routes = [
     key="about-us"
     path="/about-us"
     element={
-      <Protection publicSide={true} userOnly={true}>
+      <Protection publicSide={true}>
         <TentangKami />
       </Protection>
     }
@@ -218,7 +220,7 @@ const routes = [
     key="profile"
     path="/profile"
     element={
-      <Protection publicSide={true} userOnly={true}>
+      <Protection userOnly={true}>
         <UbahProfile />
       </Protection>
     }
@@ -227,6 +229,24 @@ const routes = [
     <Route path="password" element={<ChangePassword />} />,
     <Route path="info-lain" element={<InfoLain />} />,
   </Route>,
+  <Route
+    key="tentang-kelas"
+    path="/tentang-kelas"
+    element={
+      <Protection userOnly={true}>
+        <TentangKelas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="lms-kelas"
+    path="/tentang-kelas/lms"
+    element={
+      <Protection userOnly={true}>
+        <LmsKelas />
+      </Protection>
+    }
+  />,
 ];
 
 export default routes;
