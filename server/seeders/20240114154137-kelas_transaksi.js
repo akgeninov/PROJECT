@@ -8,7 +8,6 @@ module.exports = {
         id_user: 4,
         id_kelas_bisnis: 1,
         status_transaksi: 'canceled',
-        nomor_invoice: null ,
         date_transaksi: new Date(),
         createdAt: new Date(),
         updatedAt: new Date(),
