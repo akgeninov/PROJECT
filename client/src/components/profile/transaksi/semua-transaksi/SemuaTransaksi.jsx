@@ -5,7 +5,9 @@ export default function SemuaTransaksi() {
   // console.log(dataTransaction);
   return (
     <div>
-      <TransactionCard transaksi={dataTransaction} />
+      {dataTransaction.map((transaksi, index) => (
+        <TransactionCard transaksi={transaksi} key={index} />
+      ))}
     </div>
   );
 }

@@ -27,38 +27,36 @@ export default function NavbarTransaksi() {
     parentPath === items[1] ? items[0] : ""
   );
 
-  const NavlinkStyles = ({ isActive }) => {
-    return {
-      fontWeight: isActive ? "500" : "normal",
-      fontSize: "24px",
-      textUnderlineOffset: "30px",
-    };
-  };
-
-  const activeLink =
-    "[&>hr]:opacity-100 delay-700 duration-300 ease-in-out  items-center justify-center flex flex-col";
-
-  const unactiveLink = "[&>hr]:opacity-0";
-
   return (
     <div className="flex flex-col">
       <div className="flex-initial">
         {/* lg:Submenu */}
         <nav className="hidden lg:flex gap-[27px] mb-[54px]">
-          {statusTransaksi.map(([title, url]) => (
-            <NavLink
-              to={url}
-              style={NavlinkStyles}
-              className={({ isActive }) =>
-                isActive ? activeLink : unactiveLink
-              }
-              key={title}
-            >
-              {title}
-              <hr className="w-[39px] h-[5px] bg-black500 border-3 rounded-[50px]"></hr>
-            </NavLink>
-          ))}
-        </nav>
+        {statusTransaksi.map(([title, url]) => (
+          <NavLink
+            to={url}
+            className={({ isActive }) =>
+              (isActive
+                ? "font-medium items-center justify-center flex flex-col text-[24px]"
+                : "font-normal text-[24px]")
+            }
+            key={title}
+          >
+            {({ isActive }) => {
+              return (
+                <>
+                  {title}
+                  {isActive ? (
+                    <hr className="w-[39px] h-[5px] bg-black500 border-3 rounded-[50px] mt-[3px]"></hr>
+                  ) : (
+                    ""
+                  )}
+                </>
+              );
+            }}
+          </NavLink>
+        ))}
+      </nav>
 
         {/* mobile:Submenu */}
         <div className="relative inline-block lg:hidden text-left w-[358px] md:w-[500px] mb-[54px]">

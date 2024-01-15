@@ -27,7 +27,6 @@ function DashboardProfile() {
   useEffect(() => {
     fetchKelas();
   }, []);
-  console.log(kelas.kelas)
   return (
     <div className="justify-start lg:mt-[10px] lg:px-0 w-fit lg:w-[fit] h-full lg:h-full gap-[12px]">
       <div className="p-[28px] flex flex-col items-left justify-center w-[761px] h-[112px] bg-black500 text-whiteSmoke500 border border-grey rounded-[10px] shadow-[1px_1px_3px_rgba(128,128,128,0.3) gap-[4px]">
