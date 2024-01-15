@@ -46,5 +46,38 @@ module.exports = {
           });
         }
       },
+
+      getTransaksiByIdUser: async (req, res) => {
+        try {
+          const userData = req.dataToken;
+          const getuser = await user.findOne({
+            where: {
+              email: userData.email,
+            },
+            attributes: ["id"],
+          });
+          console.log({userData});
+          if(!getuser) {
+            throw new Error("USER TIDAK DITEMUKAN");
+          }
+          const result = await kelasTransaksiModel.findAll({
+            where: {
+              id_user: getuser.id,
+            },
+            include: [
+              user, kelasBisnisModel
+            ],
+          });
+
+          res.status(200).send({
+            message: "success",
+            data: result,
+          });
+        } catch (error) {
+          res.status(400).send({
+            error: error.message,
+          });
+        }
+      }
 }
 

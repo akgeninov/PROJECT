@@ -3,5 +3,6 @@ const kelasTransaksiController = require("../controllers/kelasTransaksiControlle
 const { verifyToken } = require("../middleware/verifyToken");
 
 router.post("/addToKelasTransaksi", verifyToken, kelasTransaksiController.addToKelasTransaksi);
+router.get("/getTransaksiByIdUser", verifyToken, kelasTransaksiController.getTransaksiByIdUser);
 
 module.exports = router;

@@ -12,6 +12,30 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id_user: 4,
+        id_kelas_bisnis: 2,
+        status_transaksi: 'success',
+        date_transaksi: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id_user: 4,
+        id_kelas_bisnis: 3,
+        status_transaksi: 'pending',
+        date_transaksi: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      {
+        id_user: 3,
+        id_kelas_bisnis: 3,
+        status_transaksi: 'pending',
+        date_transaksi: new Date(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ])
   },
 
