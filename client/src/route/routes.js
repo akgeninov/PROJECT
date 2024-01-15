@@ -26,6 +26,7 @@ import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
+import Checkout from "../pages/checkout/Checkout";
 
 const routes = [
   <Route
@@ -223,6 +224,16 @@ const routes = [
   >
     <Route path=":username" element={<DetailProfile />} />,
   </Route>,
+
+   <Route
+    key="checkout"
+    path="/checkout"
+    element={
+      <Protection publicSide={true}>
+        <Checkout />
+      </Protection>
+    }
+    />,
 ];
 
 export default routes;
