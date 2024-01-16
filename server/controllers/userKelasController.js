@@ -244,36 +244,13 @@ module.exports = {
                 ],
             });
 
-            const modul_kuis = await kelas_detail.findOne({
+            const modul = await kelas_detail.findOne({
                 where: { id_kelas_bisnis: kelasID },
                 attributes: [],
                 include: [
                         {model: kelas_materi,attributes: ["id","materi","urutan","title"]},
-                        {model: kelas_kuis,attributes: ["id","nama","urutan","title"]},
                 ],
             });
-
-            const rawr = modul_kuis.kelas_materis.map((materi) => {
-                const matchingKuis = modul_kuis.kelas_kuis.find((kuis) => kuis.urutan === materi.urutan);
-                
-                return [
-                    {
-                        title: materi.title,
-                        id: materi.id,
-                        materi: materi.materi,
-                        urutan: materi.urutan,
-                        type: "modul"
-                    },
-                    {
-                        title: matchingKuis.title,
-                        id: matchingKuis.id,
-                        nama: matchingKuis.nama,
-                        urutan: matchingKuis.urutan,
-                        type: "kuis"
-                    },
-                ];
-            });
-            const modul = rawr.flat(1);
 
             //cek progess user
             if (regist.progress >= materi.urutan) {
