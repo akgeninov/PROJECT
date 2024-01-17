@@ -20,6 +20,7 @@ const { lowonganRouters } = require("./routers");
 const { kelasBisnisRouters } = require("./routers");
 const { userKelasRouters } = require("./routers");
 const { kelasWishlistRouters } = require("./routers");
+const { kelasTransaksiRouters } = require("./routers");
 const { authorize } = require("./middleware/validator");
 
 app.use("/api", authorize);
@@ -30,6 +31,7 @@ app.use("/api/artikel", artikelRouters);
 app.use("/api/lowongan", lowonganRouters);
 app.use("/api/kelasBisnis", kelasBisnisRouters);
 app.use("/api/kelasWishlist", kelasWishlistRouters);
+app.use("/api/kelasTransaksi", kelasTransaksiRouters);
 
 app.use("/images", express.static("images"));
 

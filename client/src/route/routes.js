@@ -32,6 +32,7 @@ import TransaksiMenunggu from "../components/profile/transaksi/transaksi-menungg
 import TransaksiDibatalkan from "./../components/profile/transaksi/transaksi-dibatalkan/TransaksiDibatalkan";
 // import LihatInvoice from "../components/profile/transaksi/lihat-invoice/LihatInvoice";
 import Invoice from "./../pages/invoice/Invoice";
+import Checkout from "../pages/checkout/Checkout";
 
 const routes = [
   <Route
@@ -235,6 +236,16 @@ const routes = [
   >
     <Route path=":username" element={<DetailProfile />} />,
   </Route>,
+
+   <Route
+    key="checkout"
+    path="/checkout"
+    element={
+      <Protection publicSide={true}>
+        <Checkout />
+      </Protection>
+    }
+    />,
 ];
 
 export default routes;
