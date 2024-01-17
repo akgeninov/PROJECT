@@ -1,27 +1,26 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Progress } from "@chakra-ui/react";
 import { images } from "../../../../constants";
 import { Spinner } from "@chakra-ui/react";
-import {  extendTheme} from "@chakra-ui/react";
-
+import { extendTheme } from "@chakra-ui/react";
 
 const theme = extendTheme({
   colors: {
     lime: {
-      50: '#f2ffde',
-     100: '#defcb2',
-     200: '#caf884',
-     300: '#b5f554',
-     400: '#a1f226',
-     500: '#88d90d',
-     600: '#69a905',
-     700: '#4a7801',
-     800: '#2b4800',
-     900: '#0b1900',
-    }
-  }
-})
+      50: "#f2ffde",
+      100: "#defcb2",
+      200: "#caf884",
+      300: "#b5f554",
+      400: "#a1f226",
+      500: "#88d90d",
+      600: "#69a905",
+      700: "#4a7801",
+      800: "#2b4800",
+      900: "#0b1900",
+    },
+  },
+});
 
 export default function KelasCard(kelas) {
   return (
@@ -44,7 +43,8 @@ export default function KelasCard(kelas) {
           {kelas.kelas.nama || "No Data"}
         </h1>
         <div className="flex items-center justify-center">
-          <Progress theme={theme}
+          <Progress
+            theme={theme}
             colorScheme="lime50"
             className="w-[311px] h-[8px] lg:w-[372px] lg:h-[14px] sm:w-[500px]"
             borderRadius="50px"
@@ -61,7 +61,7 @@ export default function KelasCard(kelas) {
       </div>
       <div className="flex items-center justify-center w-100 lg:w-fit h-fit p-[10px] lg:ml-[23px] bg-whiteSmoke500 border border-[#66666680] rounded-[10px]">
         <Link
-          to={`/kelas-bisnis/${kelas.kelas.id}`}
+          to={`/tentang-kelas/${kelas.kelas.id}`}
           className="font-medium text-[11px] lg:text-[18px] leading-[24px] lg:leading-[28px] font-[#0F1011]"
         >
           Lihat Kelas

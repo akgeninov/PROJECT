@@ -8,7 +8,12 @@ import { api } from "../../../api/api";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "./lib/signinSchema";
-import { signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
 import { useDispatch } from "react-redux";
@@ -17,6 +22,7 @@ import {
   setUser,
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function MainSection() {
   const dispatch = useDispatch();
@@ -35,8 +41,6 @@ function MainSection() {
   const [isHide, setIsHide] = useState(true);
   const timeoutRef = useRef(null);
   const onSubmit = async (data) => {
-    console.log({ data });
-
     try {
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
@@ -47,11 +51,22 @@ function MainSection() {
       );
       console.log(response);
       dispatch(setToken(response.data.token));
-      dispatch(setUser(response.data.data));
+      dispatch(setUser(response.data.user));
       localStorage.setItem("auth", JSON.stringify(response.data.token));
+      localStorage.setItem(
+        "verified",
+        JSON.stringify(response.data.user.verified)
+      );
       reset();
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: "Login failed!",
+        text: " Ada yang salah, coba lagi!",
+        // footer: "Coba lagi atau lupa password!",
+        icon: "error",
+        confirmButtonColor: "#0F1011",
+      });
     }
   };
 
@@ -75,15 +90,28 @@ function MainSection() {
           }
         );
         console.log(response);
+
+        localStorage.setItem("auth", JSON.stringify(response.data.token));
+        localStorage.setItem(
+          "verified",
+          JSON.stringify(response.data.data.verified)
+        );
         dispatch(setToken(response.data.token));
         dispatch(setUser(response.data.data));
-        localStorage.setItem("auth", JSON.stringify(response.data.token));
       } catch (error) {
         console.log(error);
       } finally {
         setGoogleButton(false);
       }
     }, 2000);
+  };
+  const logOut = () => {
+    localStorage.removeItem("auth");
+    signOut(auth);
+    // setDataUser(null);
+    // dispatch(setUser(null));
+    // dispatch(setToken(null));
+    // setTOggleProfile(false);
   };
 
   return (
@@ -136,12 +164,12 @@ function MainSection() {
               {errors.PASSWORD && (
                 <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
               )}
-              <button
-                type="button"
+              <Link
+                to={"/request-reset"}
                 className="text-[12px] shrink-0 md:text-[18px] font-medium leading-[24px] underline text-indigoDye500"
               >
                 Lupa Password?
-              </button>
+              </Link>
             </div>
           </div>
 

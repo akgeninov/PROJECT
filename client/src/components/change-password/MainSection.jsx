@@ -5,23 +5,32 @@ import { changePasswordSchema } from "./lib/changePassword";
 import { api } from "../../api/api";
 import Swal from "sweetalert2";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { auth } from "../../lib/firebase/firebase";
+import {
+  EmailAuthProvider,
+  getAuth,
+  reauthenticateWithCredential,
+  updatePassword,
+} from "firebase/auth";
 
 function MainSection() {
   const [showLama, setShowLama] = useState(false);
   const [showBaru, setShowBaru] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
 
+  console.log({ auth: auth.currentUser });
+
   const {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
     reset,
+    getValues,
   } = useForm({
     resolver: zodResolver(changePasswordSchema),
   });
 
   const onSubmit = async (data) => {
-    console.log({ data });
     const token = JSON.parse(localStorage.getItem("auth"));
 
     try {
@@ -49,12 +58,15 @@ function MainSection() {
       });
       console.log(response);
     } catch (error) {
+      console.log(error);
       Swal.fire({
         title: "Error",
-        text: error.response.data.error || "something when wrong!",
+        text: "something when wrong!",
         icon: "error",
         confirmButtonColor: "#0F1011",
       });
+    } finally {
+      console.log("done");
     }
   };
 
