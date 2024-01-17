@@ -20,7 +20,7 @@ function ApprovalCheckout() {
                 <div className="lg:ml-[40px] ml-[40px] lg:mt-[20px] mt-[20px]">
                     <p className="lg:text-[16px] text-[16px] text-center lg:text-center" style={{color: "#3F4041"}}>Tunggu sebentar ya, pembayaranmu sedang diperiksa <br /> oleh tim kami</p>
                 </div>
-                <Link>
+                <Link to="/checkout">
                     <div className="lg:ml-[30px] ml-[30px] lg:mt-[20px] mt-[20px]">
                         <p className="lg:text-[16px] text-[16px] text-center lg:text-center underline">Belum Melakukan Pembayaran?</p>
                     </div>

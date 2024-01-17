@@ -28,6 +28,7 @@ import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import Checkout from "../pages/checkout/Checkout";
 import Approval from "../pages/approval/Approval";
+import Success from "../pages/success-checkout/Success";
 
 
 const routes = [
@@ -242,6 +243,16 @@ const routes = [
     element={
       <Protection publicSide={true}>
         <Approval />
+      </Protection>
+    }
+  />,
+
+  <Route
+    key="success"
+    path="/checkout/success-checkout"
+    element={
+      <Protection publicSide={true}>
+        <Success />
       </Protection>
     }
   />,

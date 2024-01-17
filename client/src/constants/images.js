@@ -39,6 +39,7 @@ import materi from "../assets/images/Component-1.png";
 import avatar2 from "../assets/images/avatar2.svg";
 import approvalimage from "../assets/images/approval.png";
 import BCA from "../assets/images/bca.png";
+import SUCCESS from "../assets/images/success.png";
 
 const images = {
   vector2,
@@ -82,6 +83,7 @@ const images = {
   avatar2,
   approvalimage,
   BCA,
+  SUCCESS,
 };
 
 export default images;
