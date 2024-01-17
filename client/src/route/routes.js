@@ -27,6 +27,8 @@ import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneC
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import Checkout from "../pages/checkout/Checkout";
+import Approval from "../pages/approval/Approval";
+
 
 const routes = [
   <Route
@@ -232,8 +234,18 @@ const routes = [
       <Protection publicSide={true}>
         <Checkout />
       </Protection>
+    } />,
+
+    <Route
+    key="approval"
+    path="/checkout/approval-checkout"
+    element={
+      <Protection publicSide={true}>
+        <Approval />
+      </Protection>
     }
-    />,
+  />,
+
 ];
 
 export default routes;

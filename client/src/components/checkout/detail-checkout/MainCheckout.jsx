@@ -46,8 +46,8 @@ function MainCheckout() {
                     <div className="w-full h-full lg:ml-[20px] mt-[20px]">
                         <div className="flex">
                             <img
-                            src= {images.career_momen1}
-                            alt= "kelas bisnis"
+                            src= {images.BCA}
+                            alt= "atm"
                             className="w-[48px] h-[48px] object-cover rounded-[6px]"
                              />
                                 <div>
@@ -117,7 +117,7 @@ function MainCheckout() {
                     <div className="w-[350px]  mt-[20px]">
                         <p className="lg:text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link className=" mt-[15px] ml-[20px]">
+                    <Link to="/checkout/approval-checkout"  className=" mt-[15px] ml-[20px]">
                         <ButtonBlack500 WIDTH={"w-[320px]"} HEIGHT={"w-[56px]"} TEXT_BUTTON={"Saya Sudah Bayar"}/>
                     </Link>
                 </div>

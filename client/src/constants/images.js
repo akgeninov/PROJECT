@@ -37,6 +37,8 @@ import Telegram from "../assets/images/Telegram.png";
 import kelasFoto from "../assets/images/kelas-foto.png";
 import materi from "../assets/images/Component-1.png";
 import avatar2 from "../assets/images/avatar2.svg";
+import approvalimage from "../assets/images/approval.png";
+import BCA from "../assets/images/bca.png";
 
 const images = {
   vector2,
@@ -78,6 +80,8 @@ const images = {
   kelasFoto,
   materi,
   avatar2,
+  approvalimage,
+  BCA,
 };
 
 export default images;

@@ -35,7 +35,8 @@ import userCircle from "../assets/icon/user_circle.png";
 import timer from "../assets/icon/timer.png";
 import AWARD from "../assets/icon/iaward.png";
 import BOOK from "../assets/icon/book.png";
-import CHAT from "../assets/icon/chat.png"
+import CHAT from "../assets/icon/chat.png";
+import COPY from "../assets/icon/Copy.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -75,6 +76,7 @@ const icon = {
   BOOK,
   CHAT,
   playOutLine,
+  COPY,
 };
 
 export default icon;
