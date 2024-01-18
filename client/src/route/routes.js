@@ -27,7 +27,7 @@ import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneC
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import Checkout from "../pages/checkout/Checkout";
-import Approval from "../pages/approval/Approval";
+import Approval from "../pages/checkout-approval/Approval";
 import Success from "../pages/success-checkout/Success";
 
 
@@ -232,7 +232,7 @@ const routes = [
     key="checkout"
     path="/checkout"
     element={
-      <Protection publicSide={true}>
+      <Protection userOnly={true}>
         <Checkout />
       </Protection>
     } />,
@@ -241,7 +241,7 @@ const routes = [
     key="approval"
     path="/checkout/approval-checkout"
     element={
-      <Protection publicSide={true}>
+      <Protection userOnly={true}>
         <Approval />
       </Protection>
     }
@@ -251,7 +251,7 @@ const routes = [
     key="success"
     path="/checkout/success-checkout"
     element={
-      <Protection publicSide={true}>
+      <Protection userOnly={true}>
         <Success />
       </Protection>
     }
