@@ -23,11 +23,13 @@ import {
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function MainSection() {
   const dispatch = useDispatch();
 
   const [googleButton, setGoogleButton] = useState(false);
+  const [showBaru, setShowBaru] = useState(false);
 
   const {
     register,
@@ -63,7 +65,6 @@ function MainSection() {
       Swal.fire({
         title: "Login failed!",
         text: " Ada yang salah, coba lagi!",
-        // footer: "Coba lagi atau lupa password!",
         icon: "error",
         confirmButtonColor: "#0F1011",
       });
@@ -137,25 +138,27 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <button
+                type="button"
+                onClick={() => setShowBaru((prev) => !prev)}
+                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showBaru ? (
+                  <FaRegEyeSlash className="text-[20px]" />
+                ) : (
+                  <FaRegEye className="text-[20px]" />
+                )}
+              </button>
+              <input
+                {...register("PASSWORD")}
+                id="passwordbaru"
+                type={showBaru ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+            </div>
 
-          <div className="relative">
-            <input
-              {...register("PASSWORD")}
-              type="password"
-              placeholder="Password"
-              className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
-            />
-            <button
-              onClick={() => setIsHide((prev) => !prev)}
-              type="button"
-              className="absolute right-2 h-[50px]  "
-            >
-              {/* {isHide ? (
-                <HiEyeOff className="text-[20px]" />
-              ) : (
-                <HiEye className="text-[20px]" />
-              )} */}
-            </button>
             <div
               className={`w-full flex ${
                 errors.PASSWORD ? "justify-between" : "justify-end"
@@ -172,6 +175,35 @@ function MainSection() {
               </Link>
             </div>
           </div>
+
+          {/* <div className="relative">
+            <input
+              {...register("PASSWORD")}
+              type="password"
+              placeholder="Password"
+              className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+            />
+            <button
+              onClick={() => setIsHide((prev) => !prev)}
+              type="button"
+              className="absolute right-2 h-[50px]  "
+            ></button>
+            <div
+              className={`w-full flex ${
+                errors.PASSWORD ? "justify-between" : "justify-end"
+              }   items-start mt-[10px] gap-5`}
+            >
+              {errors.PASSWORD && (
+                <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
+              )}
+              <Link
+                to={"/request-reset"}
+                className="text-[12px] shrink-0 md:text-[18px] font-medium leading-[24px] underline text-indigoDye500"
+              >
+                Lupa Password?
+              </Link>
+            </div>
+          </div> */}
 
           <div className={`flex justify-center items-center mt-[49px]`}>
             <button

@@ -71,6 +71,7 @@ function MainSection() {
             </label>
             <div className="relative w-full lg:w-[324px] flex items-center">
               <button
+                type="button"
                 onClick={() => setShowBaru((prev) => !prev)}
                 className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
               >

@@ -19,10 +19,13 @@ import {
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { api } from "../../../api/api";
 import Swal from "sweetalert2";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function MainSection() {
   const dispatch = useDispatch();
   const timeoutRef = useRef();
+  const [showBaru, setShowBaru] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [googleButton, setGoogleButton] = useState(false);
 
@@ -174,7 +177,7 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
-          <div className="w-full">
+          {/* <div className="w-full">
             <div className="relative">
               <input
                 {...register("PASSWORD")}
@@ -186,8 +189,59 @@ function MainSection() {
             {errors.PASSWORD && (
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
             )}
+          </div> */}
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <button
+                type="button"
+                onClick={() => setShowBaru((prev) => !prev)}
+                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showBaru ? (
+                  <FaRegEyeSlash className="text-[20px]" />
+                ) : (
+                  <FaRegEye className="text-[20px]" />
+                )}
+              </button>
+              <input
+                {...register("PASSWORD")}
+                id="password"
+                type={showBaru ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+            </div>
+
+            {errors.PASSWORD && (
+              <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
+            )}
           </div>
-          <div className="w-full">
+
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <button
+                type="button"
+                onClick={() => setShowConfirm((prev) => !prev)}
+                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showConfirm ? (
+                  <FaRegEyeSlash className="text-[20px]" />
+                ) : (
+                  <FaRegEye className="text-[20px]" />
+                )}
+              </button>
+              <input
+                {...register("CONFIRM_PASSWORD")}
+                id="confirmPassword"
+                type={showConfirm ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+            </div>
+
+            {errors.CONFIRM_PASSWORD && (
+              <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
+            )}
+          </div>
+          {/* <div className="w-full">
             <div className="relative">
               <input
                 {...register("CONFIRM_PASSWORD")}
@@ -199,8 +253,7 @@ function MainSection() {
             {errors.CONFIRM_PASSWORD && (
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
             )}
-            {console.log(errors)}
-          </div>
+          </div> */}
 
           <div className="w-full flex justify-center items-center">
             <button
