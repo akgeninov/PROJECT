@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MainSection from "../../components/lms-kelas/main-section/MainSection";
+import { useParams } from "react-router-dom";
+import { api } from "../../api/api";
 
 function LmsKelas() {
   return (

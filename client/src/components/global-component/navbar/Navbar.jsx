@@ -10,6 +10,7 @@ import { signOut } from "firebase/auth";
 import { auth } from "../../../lib/firebase/firebase";
 import { useDispatch, useSelector } from "react-redux";
 import {
+  getVerified,
   setToken,
   setUser,
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
@@ -33,7 +34,7 @@ function Navbar() {
   const [isActive, setIsActive] = useState("home");
   const [toggleProfile, setTOggleProfile] = useState(false);
 
-  const { token } = useSelector((state) => state.userSlice);
+  const { token, verified } = useSelector((state) => state.userSlice);
   const [dropMenu, setDropMenu] = useState("");
 
   const NavlinkStyles = ({ isActive }) => {
@@ -182,6 +183,12 @@ function Navbar() {
       );
       setDataUser(response.data.data);
       dispatch(setUser(response.data.data));
+      dispatch(getVerified(response.data.data.verified));
+      localStorage.setItem(
+        "verified",
+        JSON.stringify(response.data.data.verified)
+      );
+
       console.log(response);
     } catch (error) {
       localStorage.removeItem("auth");
@@ -197,6 +204,7 @@ function Navbar() {
 
   const logOut = () => {
     localStorage.removeItem("auth");
+    localStorage.removeItem("verified");
     signOut(auth);
     setDataUser(null);
     dispatch(setUser(null));
@@ -215,7 +223,9 @@ function Navbar() {
         firstPath[1] !== "" &&
         firstPath[1] !== "login" &&
         firstPath[1] !== "register" &&
-        firstPath[1] !== "profile"
+        firstPath[1] !== "profile" &&
+        firstPath[1] !== "verifikasi" &&
+        firstPath[1] !== "reset-password"
       ) {
         console.log(firstPath[1] !== "login");
 
@@ -251,8 +261,14 @@ function Navbar() {
       localStorage.removeItem("auth");
       setDataUser(null);
     }
+
+    if (JSON.parse(localStorage.getItem("verified"))) {
+      dispatch(getVerified(JSON.parse(localStorage.getItem("verified"))));
+    } else {
+      localStorage.removeItem("verified");
+    }
     console.log({ token });
-  }, [token]);
+  }, [token, verified]);
 
   return (
     <div className=" flex  justify-center  w-full items-center h-[64px] lg:h-[120px]   drawer drawer-end">

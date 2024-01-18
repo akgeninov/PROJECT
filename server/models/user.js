@@ -3,11 +3,10 @@ const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class User extends Model {
     static associate(models) {
-      User.belongsTo(models.Role, { foreignKey: { name: "id_role" } })
-      User.hasOne(models.user_pribadi, {foreignKey: {name: "id_user"}})
-      User.hasOne(models.kelas_rating, { foreignKey: {name: "id_user" }})
-      User.hasMany(models.kelas_wishlist, { foreignKey: {name: "id_user" }})
-      
+      User.belongsTo(models.Role, { foreignKey: { name: "id_role" } });
+      User.hasOne(models.user_pribadi, { foreignKey: { name: "id_user" } });
+      User.hasOne(models.kelas_rating, { foreignKey: { name: "id_user" } });
+      User.hasMany(models.kelas_wishlist, { foreignKey: { name: "id_user" } });
     }
   }
   User.init(
@@ -31,6 +30,10 @@ module.exports = (sequelize, DataTypes) => {
         },
       },
       uid_firebase: DataTypes.STRING,
+      verified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
     },
     {
       sequelize,

@@ -4,7 +4,13 @@ import ButtonBlack500 from "../../global-component/button/button-black500/Button
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signUpSchema } from "./lib/signupSchema";
-import { signInWithPopup, signInWithRedirect } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithRedirect,
+  updatePassword,
+} from "firebase/auth";
 import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
 import { useDispatch } from "react-redux";
 import {
@@ -13,10 +19,13 @@ import {
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { api } from "../../../api/api";
 import Swal from "sweetalert2";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function MainSection() {
   const dispatch = useDispatch();
   const timeoutRef = useRef();
+  const [showBaru, setShowBaru] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [googleButton, setGoogleButton] = useState(false);
 
@@ -42,6 +51,7 @@ function MainSection() {
     timeoutRef.current = setTimeout(async () => {
       try {
         const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
+        const coba = await updatePassword();
         const response = await api.post(
           `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
           {
@@ -53,6 +63,10 @@ function MainSection() {
         );
         dispatch(setToken(response.data.token));
         localStorage.setItem("auth", JSON.stringify(response.data.token));
+        localStorage.setItem(
+          "verified",
+          JSON.stringify(response.data.data.verified)
+        );
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -65,7 +79,7 @@ function MainSection() {
   const onSubmit = async (data) => {
     setGoogleButton(true);
 
-    console.log({ isSubmitting });
+    // console.log({ responsFirebase });
     try {
       console.log({ data });
       const response = await api.post(
@@ -80,21 +94,26 @@ function MainSection() {
         }
       );
       console.log(response);
+
       if (response) {
         dispatch(setToken(response.data.data.jwt));
         dispatch(setUser(response.data.data.newUser));
         localStorage.setItem("auth", JSON.stringify(response.data.data.jwt));
+        localStorage.setItem(
+          "verified",
+          JSON.stringify(response.data.data.newUser.verified)
+        );
       }
 
-      reset();
+      // reset();
     } catch (error) {
       Swal.fire({
-        title: "Error",
-        text: error.response.data.message || "something when wrong!",
+        title: "Register failed!",
+        text: "Mungkin email anda telah terdaftar! atau Ada yang salah, coba lagi!",
+        // footer: "Coba lagi atau lupa password!",
         icon: "error",
         confirmButtonColor: "#0F1011",
       });
-      console.log(error);
     } finally {
       setGoogleButton(false);
     }
@@ -158,7 +177,7 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
-          <div className="w-full">
+          {/* <div className="w-full">
             <div className="relative">
               <input
                 {...register("PASSWORD")}
@@ -166,17 +185,63 @@ function MainSection() {
                 placeholder="Password"
                 className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
-              {/* <button
-              onClick={() => setIsHide((prev) => !prev)}
-              type="button"
-              className="absolute right-2 h-[50px]  "
-            ></button> */}
             </div>
             {errors.PASSWORD && (
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
             )}
+          </div> */}
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <button
+                type="button"
+                onClick={() => setShowBaru((prev) => !prev)}
+                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showBaru ? (
+                  <FaRegEyeSlash className="text-[20px]" />
+                ) : (
+                  <FaRegEye className="text-[20px]" />
+                )}
+              </button>
+              <input
+                {...register("PASSWORD")}
+                id="password"
+                type={showBaru ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+            </div>
+
+            {errors.PASSWORD && (
+              <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
+            )}
           </div>
-          <div className="w-full">
+
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <button
+                type="button"
+                onClick={() => setShowConfirm((prev) => !prev)}
+                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showConfirm ? (
+                  <FaRegEyeSlash className="text-[20px]" />
+                ) : (
+                  <FaRegEye className="text-[20px]" />
+                )}
+              </button>
+              <input
+                {...register("CONFIRM_PASSWORD")}
+                id="confirmPassword"
+                type={showConfirm ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+            </div>
+
+            {errors.CONFIRM_PASSWORD && (
+              <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
+            )}
+          </div>
+          {/* <div className="w-full">
             <div className="relative">
               <input
                 {...register("CONFIRM_PASSWORD")}
@@ -184,30 +249,23 @@ function MainSection() {
                 placeholder="Confirm Password"
                 className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
-              {/* <button
-              onClick={() => setIsHide((prev) => !prev)}
-              type="button"
-              className="absolute right-2 h-[50px]  "
-            ></button> */}
             </div>
             {errors.CONFIRM_PASSWORD && (
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
             )}
-            {console.log(errors)}
-          </div>
-          {/* <div className="flex justify-center items-center mt-[36px]">
-            <button type="submit">Masuk</button>
-            <ButtonBlack500 TEXT_BUTTON={"Masuk"} WIDTH={"w-[160px]"} />
           </div> */}
-          <button
-            disabled={isSubmitting ? true : false}
-            type="submit"
-            className={` flex  mx-[5px] sm:mx-0 w-[160px] px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
-          >
-            <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
-              Masuk
-            </p>
-          </button>
+
+          <div className="w-full flex justify-center items-center">
+            <button
+              disabled={isSubmitting ? true : false}
+              type="submit"
+              className={` flex   mx-[5px] sm:mx-0 w-[160px] px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
+            >
+              <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
+                Masuk
+              </p>
+            </button>
+          </div>
         </form>
 
         <div className=" flex justify-center items-center gap-[8px] w-full mt-[48px]">

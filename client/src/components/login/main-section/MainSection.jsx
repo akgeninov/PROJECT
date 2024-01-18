@@ -8,7 +8,12 @@ import { api } from "../../../api/api";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signInSchema } from "./lib/signinSchema";
-import { signInWithPopup } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signOut,
+} from "firebase/auth";
 
 import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
 import { useDispatch } from "react-redux";
@@ -17,11 +22,14 @@ import {
   setUser,
 } from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
 
 function MainSection() {
   const dispatch = useDispatch();
 
   const [googleButton, setGoogleButton] = useState(false);
+  const [showBaru, setShowBaru] = useState(false);
 
   const {
     register,
@@ -35,8 +43,6 @@ function MainSection() {
   const [isHide, setIsHide] = useState(true);
   const timeoutRef = useRef(null);
   const onSubmit = async (data) => {
-    console.log({ data });
-
     try {
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
@@ -47,11 +53,21 @@ function MainSection() {
       );
       console.log(response);
       dispatch(setToken(response.data.token));
-      dispatch(setUser(response.data.data));
+      dispatch(setUser(response.data.user));
       localStorage.setItem("auth", JSON.stringify(response.data.token));
+      localStorage.setItem(
+        "verified",
+        JSON.stringify(response.data.user.verified)
+      );
       reset();
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: "Login failed!",
+        text: " Ada yang salah, coba lagi!",
+        icon: "error",
+        confirmButtonColor: "#0F1011",
+      });
     }
   };
 
@@ -75,15 +91,28 @@ function MainSection() {
           }
         );
         console.log(response);
+
+        localStorage.setItem("auth", JSON.stringify(response.data.token));
+        localStorage.setItem(
+          "verified",
+          JSON.stringify(response.data.data.verified)
+        );
         dispatch(setToken(response.data.token));
         dispatch(setUser(response.data.data));
-        localStorage.setItem("auth", JSON.stringify(response.data.token));
       } catch (error) {
         console.log(error);
       } finally {
         setGoogleButton(false);
       }
     }, 2000);
+  };
+  const logOut = () => {
+    localStorage.removeItem("auth");
+    signOut(auth);
+    // setDataUser(null);
+    // dispatch(setUser(null));
+    // dispatch(setToken(null));
+    // setTOggleProfile(false);
   };
 
   return (
@@ -109,8 +138,45 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <button
+                type="button"
+                onClick={() => setShowBaru((prev) => !prev)}
+                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showBaru ? (
+                  <FaRegEyeSlash className="text-[20px]" />
+                ) : (
+                  <FaRegEye className="text-[20px]" />
+                )}
+              </button>
+              <input
+                {...register("PASSWORD")}
+                id="passwordbaru"
+                type={showBaru ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+            </div>
 
-          <div className="relative">
+            <div
+              className={`w-full flex ${
+                errors.PASSWORD ? "justify-between" : "justify-end"
+              }   items-start mt-[10px] gap-5`}
+            >
+              {errors.PASSWORD && (
+                <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
+              )}
+              <Link
+                to={"/request-reset"}
+                className="text-[12px] shrink-0 md:text-[18px] font-medium leading-[24px] underline text-indigoDye500"
+              >
+                Lupa Password?
+              </Link>
+            </div>
+          </div>
+
+          {/* <div className="relative">
             <input
               {...register("PASSWORD")}
               type="password"
@@ -121,13 +187,7 @@ function MainSection() {
               onClick={() => setIsHide((prev) => !prev)}
               type="button"
               className="absolute right-2 h-[50px]  "
-            >
-              {/* {isHide ? (
-                <HiEyeOff className="text-[20px]" />
-              ) : (
-                <HiEye className="text-[20px]" />
-              )} */}
-            </button>
+            ></button>
             <div
               className={`w-full flex ${
                 errors.PASSWORD ? "justify-between" : "justify-end"
@@ -136,14 +196,14 @@ function MainSection() {
               {errors.PASSWORD && (
                 <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
               )}
-              <button
-                type="button"
+              <Link
+                to={"/request-reset"}
                 className="text-[12px] shrink-0 md:text-[18px] font-medium leading-[24px] underline text-indigoDye500"
               >
                 Lupa Password?
-              </button>
+              </Link>
             </div>
-          </div>
+          </div> */}
 
           <div className={`flex justify-center items-center mt-[49px]`}>
             <button

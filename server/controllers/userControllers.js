@@ -4,6 +4,10 @@ const userPribadi = db.user_pribadi;
 const role = db.Role;
 const bcrypt = require("bcrypt");
 const utility = require("./utility");
+const nodemailer = require("../lib/nodemailer/nodemailer");
+const dotenv = require("dotenv");
+const jwt = require("jsonwebtoken");
+dotenv.config();
 
 module.exports = {
   getAllUser: async (req, res) => {
@@ -28,24 +32,6 @@ module.exports = {
     }
   },
 
-  usernameCheck: async (req, res) => {
-    const { username } = req.body;
-    //cek nama user
-    await utility.checkAvailableColumn(user, "username", username, res);
-  },
-
-  phoneCheck: async (req, res) => {
-    const { no_hp } = req.body;
-    //cek nama user
-    await utility.checkAvailableColumn(user, "no_hp", no_hp, res);
-  },
-
-  emailCheck: async (req, res) => {
-    const { email } = req.body;
-    //cek nama user
-    await utility.checkAvailableColumn(user, "email", email, res);
-  },
-
   getOneUser: async (req, res) => {
     try {
       const dataUser = req.dataToken;
@@ -64,6 +50,7 @@ module.exports = {
           "nama_depan",
           "nama_belakang",
           "biografi",
+          "verified",
         ],
         include: [role, userPribadi],
       });
@@ -233,6 +220,143 @@ module.exports = {
       res.status(400).send({
         error: error.message,
       });
+    }
+  },
+  requestVerifikasi: async (req, res) => {
+    try {
+      const dataToken = req.dataToken;
+      const getUser = await user.findOne({
+        where: {
+          email: dataToken.email,
+        },
+      });
+      const payload = {
+        email: getUser.email,
+        id_role: getUser.id_role,
+      };
+      const result = jwt.sign(payload, process.env.SECRET_JWT, {
+        algorithm: "HS256",
+        expiresIn: "1m",
+        issuer: "Growlab",
+      });
+
+      if (!result) throw new Error("failed to create token");
+      // const jwt = utility.makeJWT(getUser);
+
+      const resetLink = `${process.env.CLIENT_BASE_URL}/verifikasi/${result}`;
+      let mail = {
+        from: `Admin <zainurrouf4@gmail.com>`,
+        to: `${dataToken.email}`,
+        subject: ` verifikasi akun growlab`,
+        html: `<a href="${resetLink}">${resetLink}</a>`,
+      };
+      let response = nodemailer.sendMail(mail);
+      res.status(200).send({
+        message: "success",
+      });
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  },
+  verifikasiUser: async (req, res) => {
+    const t = await db.sequelize.transaction();
+    try {
+      const { token } = req.params;
+
+      if (!token) throw new Error("Token not found!");
+
+      const validateTokenResult = jwt.verify(token, process.env.SECRET_JWT);
+
+      const result = await user.update(
+        {
+          verified: true,
+        },
+        {
+          where: {
+            email: validateTokenResult.email,
+          },
+        },
+        {
+          transaction: t,
+        }
+      );
+
+      await t.commit();
+      res.status(200).send({
+        message: "success",
+      });
+    } catch (error) {
+      await t.rollback();
+      res.status(400).send(error);
+    }
+  },
+  resetPassword: async (req, res) => {
+    const t = await db.sequelize.transaction();
+
+    try {
+      const { password, token } = req.body;
+
+      if (!token) throw new Error("Token not found!");
+
+      const validateTokenResult = jwt.verify(token, process.env.SECRET_JWT);
+      const hashedPassword = await bcrypt.hash(password, 10);
+      const result = await user.update(
+        {
+          password: hashedPassword,
+        },
+        {
+          where: {
+            email: validateTokenResult.email,
+          },
+        },
+        {
+          transaction: t,
+        }
+      );
+      await t.commit();
+      res.status(200).send({
+        message: "success",
+      });
+    } catch (error) {
+      await t.rollback();
+      res.status(400).send(error);
+    }
+  },
+  requestResetPassword: async (req, res) => {
+    try {
+      const { email } = req.body;
+
+      const getUser = await user.findOne({
+        where: {
+          email: email,
+        },
+      });
+      const payload = {
+        email: getUser.email,
+        id_role: getUser.id_role,
+      };
+      const result = jwt.sign(payload, process.env.SECRET_JWT, {
+        algorithm: "HS256",
+        expiresIn: "1m",
+        issuer: "Growlab",
+      });
+
+      if (!result) throw new Error("failed to create token");
+      // const jwt = utility.makeJWT(getUser);
+
+      const resetLink = `${process.env.CLIENT_BASE_URL}/reset-password/${result}`;
+      let mail = {
+        from: `Admin <zainurrouf4@gmail.com>`,
+        to: `${email}`,
+        subject: ` Reset password growlab`,
+        html: `<a href="${resetLink}">${resetLink}</a>`,
+      };
+      let response = nodemailer.sendMail(mail);
+      res.status(200).send({
+        message: "success",
+      });
+    } catch (error) {
+      res.status(400).send(error);
     }
   },
 };

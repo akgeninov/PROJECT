@@ -30,6 +30,9 @@ import ChangePassword from "../pages/change-password/ChangePassword";
 import InfoLain from "../pages/info-lain/InfoLain";
 import TentangKelas from "../pages/tentang-kelas/TentangKelas";
 import LmsKelas from "../pages/lms-kelas/LmsKelas";
+import Verifikasi from "../pages/verifikasi/Verifikasi";
+import ResetPassword from "../pages/reset-password/ResetPassword";
+import RequestReset from "../pages/request-reset/RequestReset";
 
 const routes = [
   <Route
@@ -231,7 +234,7 @@ const routes = [
   </Route>,
   <Route
     key="tentang-kelas"
-    path="/tentang-kelas"
+    path="/tentang-kelas/:id"
     element={
       <Protection userOnly={true}>
         <TentangKelas />
@@ -240,10 +243,37 @@ const routes = [
   />,
   <Route
     key="lms-kelas"
-    path="/tentang-kelas/lms"
+    path="/lms"
     element={
       <Protection userOnly={true}>
         <LmsKelas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="verifikasi"
+    path="/verifikasi/:verif"
+    element={
+      <Protection>
+        <Verifikasi />
+      </Protection>
+    }
+  />,
+  <Route
+    key="reset-password"
+    path="/reset-password/:token"
+    element={
+      <Protection>
+        <ResetPassword />
+      </Protection>
+    }
+  />,
+  <Route
+    key="request-reset"
+    path="/request-reset"
+    element={
+      <Protection publicSide={true}>
+        <RequestReset />
       </Protection>
     }
   />,

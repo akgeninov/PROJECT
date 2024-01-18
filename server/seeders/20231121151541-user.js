@@ -17,6 +17,7 @@ module.exports = {
         uid_firebase: null,
         profile_picture: null,
         id_role: 1,
+        verified: true,
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -33,6 +34,8 @@ module.exports = {
         uid_firebase: null,
         profile_picture: null,
         id_role: 2,
+        verified: true,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -49,6 +52,8 @@ module.exports = {
         uid_firebase: null,
         profile_picture: "chibi1.jpg",
         id_role: 3,
+        verified: true,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -65,6 +70,8 @@ module.exports = {
         uid_firebase: null,
         profile_picture: "chibi2.jpg",
         id_role: 3,
+        verified: true,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -81,6 +88,8 @@ module.exports = {
         uid_firebase: null,
         profile_picture: "chibi3.jpg",
         id_role: 3,
+        verified: true,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -97,6 +106,8 @@ module.exports = {
         uid_firebase: null,
         profile_picture: "chibi4.jpg",
         id_role: 3,
+        verified: true,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
@@ -113,6 +124,8 @@ module.exports = {
         uid_firebase: null,
         profile_picture: "chibi5.jpg",
         id_role: 3,
+        verified: true,
+
         createdAt: new Date(),
         updatedAt: new Date(),
       },
