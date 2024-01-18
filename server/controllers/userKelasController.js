@@ -240,7 +240,7 @@ module.exports = {
                     [
                         sequelize.literal(`ROUND(kelas_regists.progress * 100 / (SELECT COUNT(*) FROM kelas_detail_materi WHERE kelas_detail_materi.id_kelas_detail = kelas_detail.id))`),
                         'persentase'
-                    ],
+                    ], "nama"
                 ],
             });
 
