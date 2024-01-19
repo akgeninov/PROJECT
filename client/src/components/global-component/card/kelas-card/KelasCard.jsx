@@ -22,7 +22,7 @@ const theme = extendTheme({
 export default function KelasCard(kelas) {
   return (
     <ChakraProvider theme={theme}>
-      <div className="flex flex-col px-[11px] lg:px-0 lg:flex-row w-[358px] h-[216px] sm:w-[500px] lg:w-[761px] lg:h-[228px] flex-shrink pt-[17px] border rounded-[10px] border-[rgba(102,102,102,0.2)] mb-[40px] shadow-md shadow-gray-300">
+      <div className="flex flex-col px-[11px] lg:px-0 lg:flex-row w-[358px] h-[216px] sm:w-[500px] lg:w-[761px] lg:h-[228px] flex-shrink pt-[17px] border rounded-[10px] border-[rgba(102,102,102,0.2)] mb-[30px] shadow-md shadow-gray-300">
         <div className="flex w-[78px] h-[78px] lg:w-[150px] lg:h-[150px] lg:ml-[11px] lg:mr-[28px]">
           <img
             src={
