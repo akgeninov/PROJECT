@@ -98,6 +98,8 @@ module.exports = {
       const result = await kelasTransaksiModel.findAll({
         where: {
           id_user: getuser.id,
+          status_transaksi: ["success"],
+
         },
         include: [
           {

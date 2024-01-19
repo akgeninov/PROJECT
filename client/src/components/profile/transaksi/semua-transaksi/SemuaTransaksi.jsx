@@ -1,6 +1,6 @@
-import TransactionCard from "../../../global-component/card/transaction-card/TransactionCard";
 import React, { useEffect, useState } from "react";
 import { api } from "../../../../api/api";
+import TransactionCard from "../../../global-component/card/transaction-card/TransactionCard";
 
 export default function SemuaTransaksi() {
   const [transaksi, setTransaksi] = useState([]);

@@ -32,7 +32,7 @@ export default function TransactionCard(transaksi) {
     if (status === "success") {
       return price;
     } else if (status === "canceled") {
-      return "Berhasil";
+      return "Dibatalkan";
     } else {
       return "Menunggu Konfirmasi";
     }

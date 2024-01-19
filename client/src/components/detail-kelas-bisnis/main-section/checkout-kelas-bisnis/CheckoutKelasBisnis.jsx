@@ -235,7 +235,7 @@ function CheckoutKelasBisnis({ dataDetail }) {
         <button className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-black500 rounded-[10px]">
           <HiOutlineHeart className="text-[32px] text-black500" />
         </button>
-        <div onClick={() => user ? navigate("/login") : navigate("/login")}>
+        <div onClick={() => user ? navigate("/checkout") : navigate("/login")}>
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>
       </div>
