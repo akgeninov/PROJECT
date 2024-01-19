@@ -20,9 +20,9 @@ export default function LihatInvoice() {
   };
 
   const labelColor = (status) => {
-    if (status == "Berhasil") {
+    if (status === "Berhasil") {
       return "text-[#278B03]";
-    } else if (status == "Dibatalkan") {
+    } else if (status === "Dibatalkan") {
       return "text-[#A12105]";
     } else {
       return "text-[#E49333]";
@@ -30,10 +30,10 @@ export default function LihatInvoice() {
   };
 
   const total = (status, price) => {
-    if (status == "Berhasil") {
+    if (status === "success") {
       return price;
-    } else if (status == "Dibatalkan") {
-      return "Dibatalkan";
+    } else if (status === "canceled") {
+      return "Berhasil";
     } else {
       return "Menunggu Konfirmasi";
     }
