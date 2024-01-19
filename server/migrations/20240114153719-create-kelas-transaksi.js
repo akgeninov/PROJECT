@@ -1,5 +1,6 @@
 'use strict';
 /** @type {import('sequelize-cli').Migration} */
+
 module.exports = {
   async up(queryInterface, Sequelize) {
     await queryInterface.createTable('kelas_transaksis', {
@@ -15,6 +16,15 @@ module.exports = {
       id_kelas_bisnis: {
         type: Sequelize.INTEGER
       },
+      harga: {
+        type: Sequelize.INTEGER
+      },
+      persen_diskon: {
+        type: Sequelize.INTEGER
+      },
+      total: {
+        type: Sequelize.INTEGER
+      },
       status_transaksi: {
         type: Sequelize.STRING
       },
@@ -22,6 +32,9 @@ module.exports = {
         type: Sequelize.UUID
       },
       date_transaksi: {
+        type: Sequelize.DATE
+      },
+      date_expired: {
         type: Sequelize.DATE
       },
       createdAt: {

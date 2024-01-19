@@ -20,6 +20,9 @@ module.exports = (sequelize, DataTypes) => {
   kelas_transaksi.init({
     id_user: DataTypes.INTEGER,
     id_kelas_bisnis: DataTypes.INTEGER,
+    harga: DataTypes.INTEGER,
+    persen_diskon: DataTypes.INTEGER,
+    total: DataTypes.INTEGER,
     status_transaksi: {
       type: DataTypes.ENUM('success', 'canceled', 'pending'),
       allowNull: false,
@@ -29,6 +32,7 @@ module.exports = (sequelize, DataTypes) => {
       defaultValue: sequelize.literal('UUID()'), // Menggunakan ekspresi SQL untuk UUID versi 4 secara otomatis
     },
     date_transaksi: DataTypes.DATE,
+    date_expired: DataTypes.DATE,
   }, {
     sequelize,
     modelName: 'kelas_transaksi',
