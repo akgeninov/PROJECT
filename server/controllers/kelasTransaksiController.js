@@ -99,7 +99,18 @@ module.exports = {
         where: {
           id_user: getuser.id,
         },
-        include: [user, kelasBisnisModel],
+        include: [
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          },
+        ],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
       });
 
       res.status(200).send({
@@ -162,6 +173,44 @@ module.exports = {
           status_transaksi: ["canceled"],
         },
         include: [user, kelasBisnisModel],
+      });
+
+      res.status(200).send({
+        message: "success",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+
+  getTransaksiInvoice: async (req, res) => {
+    try {
+      // const userData = req.dataToken;
+      // const getuser = await user.findOne({
+      //   where: {
+      //     email: userData.email,
+      //   },
+      //   attributes: ["id"],
+      // });
+      // console.log({ userData });
+      // if (!getuser) {
+      //   throw new Error("USER TIDAK DITEMUKAN");
+      // }
+      const result = await kelasTransaksiModel.findAll({
+        where: {
+          ...(id ? { id: id } : {}),
+        },
+        attributes: ["id", "nomor_invoice", "date_transaksi", "status_transaksi"],
+        include: [
+          { model: user, attributes: ["nama_lengkap", "email"] },
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          }
+        ],
       });
 
       res.status(200).send({
