@@ -1,11 +1,36 @@
 import TransactionCard from "../../../global-component/card/transaction-card/TransactionCard";
-import dataTransaction from "../constant";
+import React, { useEffect, useState } from "react";
+import { api } from "../../../../api/api";
 
 export default function SemuaTransaksi() {
-  // console.log(dataTransaction);
+  const [transaksi, setTransaksi] = useState([]);
+  // console.log(transaksi);
+
+  const fetchTransaksi = async () => {
+    const token = JSON.parse(localStorage.getItem("auth"));
+    try {
+      const response = await api.get(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/getTransaksiByIdUser`,
+        {
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: token,
+          },
+        }
+      );
+      setTransaksi(response.data.data);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    fetchTransaksi();
+  }, []);
   return (
     <div>
-      {dataTransaction.map((transaksi, index) => (
+      {transaksi.map((transaksi, index) => (
         <TransactionCard transaksi={transaksi} key={index} />
       ))}
     </div>
