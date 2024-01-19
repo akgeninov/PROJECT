@@ -25,7 +25,7 @@ function Protection({
     }
     console.log({ token });
     setReadyToRender(true);
-  }, [publicSide, userOnly, adminOnly, tokenFromRedux]);
+  }, [publicSide, userOnly, adminOnly, tokenFromRedux, navigate]);
   console.log({ publicSide, userOnly, adminOnly });
 
   return readyToRender ? (

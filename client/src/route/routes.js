@@ -33,6 +33,9 @@ import TransaksiDibatalkan from "./../components/profile/transaksi/transaksi-dib
 // import LihatInvoice from "../components/profile/transaksi/lihat-invoice/LihatInvoice";
 import Invoice from "./../pages/invoice/Invoice";
 import Checkout from "../pages/checkout/Checkout";
+import Approval from "../pages/checkout-approval/Approval";
+import Success from "../pages/success-checkout/Success";
+
 
 const routes = [
   <Route
@@ -241,11 +244,31 @@ const routes = [
     key="checkout"
     path="/checkout"
     element={
-      <Protection publicSide={true}>
+      <Protection userOnly={true}>
         <Checkout />
       </Protection>
+    } />,
+
+    <Route
+    key="approval"
+    path="/checkout/approval-checkout"
+    element={
+      <Protection userOnly={true}>
+        <Approval />
+      </Protection>
     }
-    />,
+  />,
+
+  <Route
+    key="success"
+    path="/checkout/success-checkout"
+    element={
+      <Protection userOnly={true}>
+        <Success />
+      </Protection>
+    }
+  />,
+
 ];
 
 export default routes;
