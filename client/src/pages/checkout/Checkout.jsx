@@ -1,5 +1,6 @@
 import React from "react";
 import MainChekcout from "../../components/checkout/detail-checkout/MainCheckout";
+// import ApprovalCheckout from "../../components/checkout/approval-checkout/ApprovalCheckout";
 
 function Checkout() {
     return (
