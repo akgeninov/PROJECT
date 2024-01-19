@@ -20,6 +20,7 @@ import {
 import { api } from "../../../api/api";
 import Swal from "sweetalert2";
 import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Spinner } from "@chakra-ui/react";
 
 function MainSection() {
   const dispatch = useDispatch();
@@ -204,6 +205,7 @@ function MainSection() {
                 )}
               </button>
               <input
+                placeholder="Password"
                 {...register("PASSWORD")}
                 id="password"
                 type={showBaru ? "text" : "password"}
@@ -230,6 +232,7 @@ function MainSection() {
                 )}
               </button>
               <input
+                placeholder="Confirm password"
                 {...register("CONFIRM_PASSWORD")}
                 id="confirmPassword"
                 type={showConfirm ? "text" : "password"}
@@ -255,12 +258,14 @@ function MainSection() {
             )}
           </div> */}
 
-          <div className="w-full flex justify-center items-center">
+          <div className="w-full  flex justify-center items-center">
             <button
               disabled={isSubmitting ? true : false}
               type="submit"
-              className={` flex   mx-[5px] sm:mx-0 w-[160px] px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
+              className={` flex gap-5  mx-[5px] sm:mx-0 w-full px-[64px] py-[16px] justify-center items-center bg-black500  hover:bg-whiteSmoke800 rounded-[10px]`}
             >
+              {isSubmitting ? <Spinner size={"md"} color="white" /> : null}
+
               <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
                 Masuk
               </p>
@@ -284,7 +289,7 @@ function MainSection() {
           />
         </div>
 
-        <div className="w-[208px] md:w-[538px] mb-[76px]">
+        <div className="w-[208px] md:w-[538px] mb-[271px]">
           <button
             disabled={googleButton}
             onClick={loginWithFirebse}

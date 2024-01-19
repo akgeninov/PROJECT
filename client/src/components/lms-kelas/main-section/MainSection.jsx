@@ -1,6 +1,7 @@
 import {
   Box,
   Progress,
+  Spinner,
   Step,
   StepDescription,
   StepIcon,
@@ -35,7 +36,26 @@ function MainSection() {
   const [materiSite, setMateriSite] = useState("");
   const [toggle, setToggle] = useState(false);
   const [materiNow, setMateriNow] = useState([]);
+  const [moduleTitle, setModuleTitle] = useState("");
+  const [urutan, setUrutan] = useState("no data");
+  const [isLoading, setIsLoading] = useState(false);
   const timeoutRef = useRef(null);
+  const timeoutFetchRef = useRef(null);
+
+  const coba = [
+    {
+      link: "https://youtu.be/6pRGiE55dYo?si=VeunatEd-LT9akVY",
+    },
+    {
+      link: "https://youtu.be/6pRGiE55dYo?si=VeunatEd-LT9akVY",
+    },
+    {
+      link: "https://youtu.be/6pRGiE55dYo?si=VeunatEd-LT9akVY",
+    },
+    {
+      link: "https://youtu.be/6pRGiE55dYo?si=VeunatEd-LT9akVY",
+    },
+  ];
 
   const { activeStep, goToNext, goToPrevious, setActiveStep, isCompleteStep } =
     useSteps({
@@ -46,9 +66,6 @@ function MainSection() {
   const navigate = useNavigate();
 
   // Fungsi untuk mengubah indeks langkah yang aktif
-  const changeActiveStep = (newIndex) => {
-    // Pastikan indeks baru berada dalam rentang yang valid
-  };
 
   // const { activeStep } = useSteps({
   //   index: 1,
@@ -57,6 +74,7 @@ function MainSection() {
 
   const fetchMateri = async () => {
     // const meteriID = JSON.parse(localStorage.getItem("materi")) || 7;
+    setIsLoading(true);
     const currentUrl = window.location.href;
 
     const url = new URL(currentUrl);
@@ -76,42 +94,52 @@ function MainSection() {
 
     // alert(idMateriClick);
     const token = JSON.parse(localStorage.getItem("auth"));
-
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/userKelas/materi/mulai`,
-        {
-          materiID: Number(materi),
-          kelasID: Number(kelas),
-        },
-        {
-          headers: {
-            Accept: "application/json",
-            "Content-Type": "application/json",
-            Authorization: token,
-          },
-        }
-      );
-
-      const progressSave = response.data.data.progress_user;
-      console.log(response);
-      setTitle(response.data.data.materi.materi);
-      setUserProgres(progressSave);
-      setKelasModul(response.data.data.modul);
-      setSubModul(response.data.data.materi.sub_materi_kelas);
-      // setMateriNow(response.data.data.)
-      if (
-        progressSave.kelas_regists[0].progress + 1 >= 0 &&
-        progressSave.kelas_regists[0].progress + 1 <= kelasModul.length
-      ) {
-        // Metode onNext akan memperbarui indeks langkah yang aktif
-        console.log({ progres: progressSave.kelas_regists[0].progress });
-        setActiveStep(progressSave.kelas_regists[0].progress);
-        // setActiveStep(2);
-      }
-    } catch (error) {
-      console.log(error);
+    if (timeoutFetchRef.current) {
+      clearTimeout(timeoutFetchRef.current);
     }
+
+    timeoutFetchRef.current = setTimeout(async () => {
+      try {
+        const response = await api.post(
+          `${process.env.REACT_APP_API_BASE_URL}/userKelas/materi/mulai`,
+          {
+            materiID: Number(materi),
+            kelasID: Number(kelas),
+          },
+          {
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+              Authorization: token,
+            },
+          }
+        );
+
+        const progressSave = response.data.data.progress_user;
+        console.log(response);
+        console.log(progressSave.kelas_regists[0].progress);
+        setTitle(response.data.data.progress_user.nama);
+        setUserProgres(progressSave);
+        setKelasModul(response.data.data.modul.kelas_materis);
+        setSubModul(response.data.data.materi.sub_materi_kelas);
+        setModuleTitle(response.data.data.materi.materi);
+        setUrutan(response.data.data.materi.urutan);
+        // setMateriNow(response.data.data.)
+        if (
+          progressSave.kelas_regists[0].progress > 0 ||
+          progressSave.kelas_regists[0].progress <= kelasModul.length
+        ) {
+          // Metode onNext akan memperbarui indeks langkah yang aktif
+          console.log({ progres: progressSave.kelas_regists[0].progress });
+          setActiveStep(progressSave.kelas_regists[0].progress);
+          // setActiveStep(2);
+        }
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setIsLoading(false);
+      }
+    }, 2000);
   };
 
   useEffect(() => {
@@ -129,16 +157,16 @@ function MainSection() {
       }, 10000);
     }
   }, [toggle]);
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div
-      className={`${
-        toggle ? "h-full" : "h-full"
-      } relative flex overflow-hidden   w-full justify-between items-start mt-[52px] `}
+      className={`bg-whiteSmoke500  bg-opacity-50  relative flex  h-full  w-screen justify-center lg:justify-between items-start  `}
     >
-      {/* <button onClick={() => changeActiveStep(activeStep + 1)}>click</button> */}
-      <div className="w-full max-w-[373px]  h-[1340px]  overflow-y-scroll overflow-x-clip  bg-whiteSmoke600  py-[24px] hidden xl:flex flex-col justify-start items-center">
-        <div className="w-full  h-full">
+      <div className="relative w-full max-w-[373px] overflow-x-clip  bg-whiteSmoke600   py-[24px] hidden xl:flex  flex-col flex-grow h-full     items-center">
+        <div className="w-full flex flex-col  h-full  min-h-[1340px]">
           <div className="w-full px-[24px]">
             <p className="text-[22px] font-medium leading-[32px]">
               {title || "no data"}
@@ -166,7 +194,7 @@ function MainSection() {
             </div>
           </div>
 
-          <div className="w-full">
+          <div className="flex flex-col flex-1 w-full h-full">
             <Stepper
               index={activeStep}
               orientation="vertical"
@@ -188,14 +216,30 @@ function MainSection() {
                               <StepStatus complete={<StepIcon />} />
                             </StepIndicator>
 
-                            <Box flexShrink="0" cursor={"pointer"}>
+                            <Box
+                              flexShrink="0"
+                              cursor={"pointer"}
+                              onClick={() =>
+                                navigate(
+                                  `/lms?kelas=${kelasSite}&materi=${Number(
+                                    step.id
+                                  )}`
+                                )
+                              }
+                            >
                               <StepStatus
                                 complete={
                                   <>
-                                    <p className="opacity-0 line-clamp-2 w-[336px]  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold ">
+                                    <p className="opacity-0  w-[336px]  bg-black400  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold leading-[21px]">
                                       {step.title}
                                     </p>
-                                    <p className="absolute line-clamp-2 -left-[20px] -top-[26px] w-[336px]  bg-opacity-10 px-[48px] py-[24px] text-[14px] font-bold hover:font-extrabold ">
+                                    <p
+                                      className={`${
+                                        Number(materiSite) === step.id
+                                          ? "bg-black400  bg-opacity-10 "
+                                          : ""
+                                      } absolute z-40  -left-[24px] right-0 -top-[26px] w-[380px] px-[48px] py-[24px] text-[14px] font-bold leading-[21px] `}
+                                    >
                                       {step.title}
                                     </p>
                                   </>
@@ -242,23 +286,31 @@ function MainSection() {
                               <StepStatus complete={<StepIcon />} />
                             </StepIndicator>
 
-                            <Box flexShrink="0" cursor={"pointer"}>
+                            <Box
+                              flexShrink="0"
+                              cursor={"pointer"}
+                              onClick={() =>
+                                navigate(
+                                  `/lms?kelas=${kelasSite}&materi=${Number(
+                                    step.id
+                                  )}`
+                                )
+                              }
+                            >
                               <StepStatus
                                 active={
                                   <>
                                     <p className="opacity-0  w-[336px]  bg-black400  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold leading-[21px]">
                                       {step.title}
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
                                     </p>
-                                    <p className="absolute  -left-[24px] right-0 -top-[26px] w-[380px] bg-black400  bg-opacity-10 px-[48px] py-[24px] text-[14px] font-bold leading-[21px] ">
+                                    <p
+                                      className={`${
+                                        Number(materiSite) === step.id
+                                          ? "bg-black400  bg-opacity-10 "
+                                          : ""
+                                      } absolute z-40  -left-[24px] right-0 -top-[26px] w-[380px] px-[48px] py-[24px] text-[14px] font-bold leading-[21px] `}
+                                    >
                                       {step.title}
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
                                     </p>
                                   </>
                                 }
@@ -273,28 +325,6 @@ function MainSection() {
                 </Box>
               ))}
             </Stepper>
-            {/* <Stepper
-              index={activeStep}
-              orientation="vertical"
-              height="100vh"
-              gap="0"
-            >
-              {kelasModul.map((step, index) => (
-                <Step key={index}>
-                  <StepIndicator>
-                    <StepStatus complete={<StepIcon />} />
-                  </StepIndicator>
-
-                  <Box flexShrink="0">
-                    <StepTitle className="text-sky-700 w-[260px] text-[14px] font-bold hover:font-extrabold">
-                      {step.title}
-                    </StepTitle>
-                  </Box>
-
-                  <StepSeparator />
-                </Step>
-              ))}
-            </Stepper> */}
           </div>
         </div>
       </div>
@@ -303,174 +333,192 @@ function MainSection() {
         onClick={() => setToggle((prev) => !prev)}
         className={`${
           toggle ? "bg-opacity-80 " : "bg-opacity-0 pointer-events-none"
-        } absolute w-screen h-full bg-black  `}
+        } absolute  top-0 left-0  flex justify-start xl:hidden w-screen h-full bg-black  `}
       ></div>
       <div
         onClick={() => setToggle((prev) => !prev)}
-        className={`absolute ${
+        className={`sticky ${
           toggle ? "translate-x-0" : "-translate-x-[373px]"
-        } duration-300   cursor-pointer left-[373px] top-[232px] rounded-r-[10px] bg-whiteSmoke600 w-[25px] h-[64px] flex justify-center items-center`}
+        } duration-300 bg-whiteSmoke600  left-[373px] rounded-r-[10px] top-[232px] flex xl:hidden justify-center items-center`}
       >
-        <HiChevronRight
-          className={`${toggle ? "rotate-0" : "rotate-180"} duration-300`}
-        />
+        <div
+          className={` cursor-pointer  rounded-r-[10px]  bg-opacity-50 w-[25px] h-[64px]  flex justify-center items-center bg-whiteSmoke600 `}
+        >
+          <HiChevronRight
+            className={`${toggle ? "rotate-0" : "rotate-180"} duration-300`}
+          />
+        </div>
       </div>
       <div
         className={`${
           toggle ? "translate-x-0" : "-translate-x-full"
-        } duration-300 absolute bg-whiteSmoke600 w-full max-w-[373px]  h-[1340px]  overflow-y-scroll overflow-x-clip    py-[24px] flex xl:hidden flex-col justify-start items-center`}
+        } duration-300 absolute left-0 top-0 bg-whiteSmoke600 w-full max-w-[373px] h-full min-h-[1340px]  overflow-x-clip overflow-y-scroll    flex xl:hidden flex-col justify-start items-center`}
       >
-        <div className="w-full  h-full">
-          <div className="w-full px-[24px]">
-            <p className="text-[22px] font-medium leading-[32px]">
-              {title || "no data"}
-            </p>
-          </div>
-
-          <div className="w-full max-w-[373px]  flex flex-col mt-[16px] mb-[48px] px-[24px]">
-            <Progress
-              value={Number(
-                userProgres && userProgres.persentase
-                  ? userProgres.persentase
-                  : 0
-              )}
-              size="xs"
-              colorScheme="blue"
-              width={"100%"}
-            />
-            <div className="mt-[16px] w-full flex flex-col items-start text-whiteSmoke800">
-              <p className="text-[12px] font-bold leading-[20px]">
-                {userProgres?.persentase || 0}% selesai
-              </p>
-              <p className="text-[12px] font-bold leading-[20px]">
-                Terakhir dipelajari
+        <div className="w-full h-full flex flex-col justify-start items-center py-[24px]">
+          <div className="w-full  h-full">
+            <div className="w-full px-[24px]">
+              <p className="text-[22px] font-medium leading-[32px]">
+                {title || "no data"}
               </p>
             </div>
-          </div>
 
-          <div className="w-full">
-            <Stepper
-              index={activeStep}
-              orientation="vertical"
-              className="h-full w-full"
-              gap="0"
-              size={"xs"}
-              colorScheme="blue"
-              paddingX={0}
-              display={"flex"}
-            >
-              {kelasModul?.map((step, index) => (
-                <Box width={"100%"} className=" flex flex-1 text-sky-700">
-                  <StepStatus
-                    complete={
-                      <div className="relative w-full">
-                        <Step key={index} className={`  ml-[24px] w-full`}>
-                          <Box className=" w-full   gap-5  flex flex-1 ">
-                            <StepIndicator>
-                              <StepStatus complete={<StepIcon />} />
-                            </StepIndicator>
+            <div className="w-full max-w-[373px]  flex flex-col mt-[16px] mb-[48px] px-[24px]">
+              <Progress
+                value={Number(
+                  userProgres && userProgres.persentase
+                    ? userProgres.persentase
+                    : 0
+                )}
+                size="xs"
+                colorScheme="blue"
+                width={"100%"}
+              />
+              <div className="mt-[16px] w-full flex flex-col items-start text-whiteSmoke800">
+                <p className="text-[12px] font-bold leading-[20px]">
+                  {userProgres?.persentase || 0}% selesai
+                </p>
+                <p className="text-[12px] font-bold leading-[20px]">
+                  Terakhir dipelajari
+                </p>
+              </div>
+            </div>
 
-                            <Box flexShrink="0" cursor={"pointer"}>
-                              <StepStatus
-                                complete={
-                                  <>
-                                    <p className="opacity-0 line-clamp-2 w-[336px]  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold ">
-                                      {step.title}
-                                    </p>
-                                    <p className="absolute line-clamp-2 -left-[20px] -top-[26px] w-[336px]  bg-opacity-10 px-[48px] py-[24px] text-[14px] font-bold hover:font-extrabold ">
-                                      {step.title}
-                                    </p>
-                                  </>
-                                }
-                              />
+            <div className="w-full">
+              <Stepper
+                index={activeStep}
+                orientation="vertical"
+                className="h-full w-full"
+                gap="0"
+                size={"xs"}
+                colorScheme="blue"
+                paddingX={0}
+                display={"flex"}
+              >
+                {kelasModul?.map((step, index) => (
+                  <Box width={"100%"} className=" flex flex-1 text-sky-700">
+                    <StepStatus
+                      complete={
+                        <div className="relative w-full">
+                          <Step key={index} className={`  ml-[24px] w-full`}>
+                            <Box className=" w-full   gap-5  flex flex-1 ">
+                              <StepIndicator>
+                                <StepStatus complete={<StepIcon />} />
+                              </StepIndicator>
+
+                              <Box flexShrink="0" cursor={"pointer"}>
+                                <StepStatus
+                                  complete={
+                                    <>
+                                      <p className="opacity-0  w-[336px]  bg-black400  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold leading-[21px]">
+                                        {step.title}
+                                      </p>
+                                      <p
+                                        className={`${
+                                          Number(materiSite) === step.id
+                                            ? "bg-black400  bg-opacity-10 "
+                                            : ""
+                                        } absolute z-40  -left-[24px] right-0 -top-[26px] w-[380px] px-[48px] py-[24px] text-[14px] font-bold leading-[21px] `}
+                                      >
+                                        {step.title}
+                                      </p>
+                                    </>
+                                  }
+                                />
+                              </Box>
                             </Box>
-                          </Box>
-                          <StepSeparator />
-                        </Step>
-                      </div>
-                    }
-                    incomplete={
-                      <div className="relative w-full">
-                        <Step key={index} className={` ml-[24px] w-full`}>
-                          <Box className=" w-full   gap-5  flex flex-1 ">
-                            <StepIndicator>
-                              <StepStatus complete={<StepIcon />} />
-                            </StepIndicator>
+                            <StepSeparator />
+                          </Step>
+                        </div>
+                      }
+                      incomplete={
+                        <div className="relative w-full">
+                          <Step key={index} className={` ml-[24px] w-full`}>
+                            <Box className=" w-full   gap-5  flex flex-1 ">
+                              <StepIndicator>
+                                <StepStatus complete={<StepIcon />} />
+                              </StepIndicator>
 
-                            <Box flexShrink="0" cursor={"pointer"}>
-                              <StepStatus
-                                incomplete={
-                                  <>
-                                    <p className="opacity-0 line-clamp-2 w-[336px]   bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold ">
-                                      {step.title}
-                                    </p>
-                                    <p className="absolute line-clamp-2 opacity-10 -left-[20px] -top-[26px] w-[336px]   bg-opacity-10 px-[48px] py-[24px] text-[14px] font-bold hover:font-extrabold ">
-                                      {step.title}
-                                    </p>
-                                  </>
-                                }
-                              />
+                              <Box flexShrink="0" cursor={"pointer"}>
+                                <StepStatus
+                                  incomplete={
+                                    <>
+                                      <p className="opacity-0 line-clamp-2 w-[336px]   bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold ">
+                                        {step.title}
+                                      </p>
+                                      <p className="absolute line-clamp-2 opacity-10 -left-[20px] -top-[26px] w-[336px]   bg-opacity-10 px-[48px] py-[24px] text-[14px] font-bold hover:font-extrabold ">
+                                        {step.title}
+                                      </p>
+                                    </>
+                                  }
+                                />
+                              </Box>
                             </Box>
-                          </Box>
-                          <StepSeparator />
-                        </Step>
-                      </div>
-                    }
-                    active={
-                      <div className="relative w-full">
-                        <Step key={index} className={` ml-[24px]  w-full`}>
-                          <Box className=" w-full    gap-5  flex flex-1 ">
-                            <StepIndicator className="">
-                              <StepStatus complete={<StepIcon />} />
-                            </StepIndicator>
+                            <StepSeparator />
+                          </Step>
+                        </div>
+                      }
+                      active={
+                        <div className="relative w-full">
+                          <Step key={index} className={` ml-[24px]  w-full`}>
+                            <Box className=" w-full    gap-5  flex flex-1 ">
+                              <StepIndicator className="">
+                                <StepStatus complete={<StepIcon />} />
+                              </StepIndicator>
 
-                            <Box flexShrink="0" cursor={"pointer"}>
-                              <StepStatus
-                                active={
-                                  <>
-                                    <p className="opacity-0  w-[336px]  bg-black400  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold leading-[21px]">
-                                      {step.title}
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                    </p>
-                                    <p className="absolute  -left-[24px] right-0 -top-[26px] w-[380px] bg-black400  bg-opacity-10 px-[48px] py-[24px] text-[14px] font-bold leading-[21px] ">
-                                      {step.title}
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                      fbiebfififiqfiqbfiiqwifqifwnwqfnqfuiwbqofnqnfqonfwqnfqfn
-                                    </p>
-                                  </>
-                                }
-                              />
+                              <Box flexShrink="0" cursor={"pointer"}>
+                                <StepStatus
+                                  active={
+                                    <>
+                                      <p className="opacity-0  w-[336px]  bg-black400  bg-opacity-10 py-[24px] text-[14px] font-bold hover:font-extrabold leading-[21px]">
+                                        {step.title}
+                                      </p>
+                                      <p
+                                        className={`${
+                                          Number(materiSite) === step.id
+                                            ? "bg-black400  bg-opacity-10 "
+                                            : ""
+                                        } absolute z-40  -left-[24px] right-0 -top-[26px] w-[380px] px-[48px] py-[24px] text-[14px] font-bold leading-[21px] `}
+                                      >
+                                        {step.title}
+                                      </p>
+                                    </>
+                                  }
+                                />
+                              </Box>
                             </Box>
-                          </Box>
-                          <StepSeparator />
-                        </Step>
-                      </div>
-                    }
-                  />
-                </Box>
-              ))}
-            </Stepper>
+                            <StepSeparator />
+                          </Step>
+                        </div>
+                      }
+                    />
+                  </Box>
+                ))}
+              </Stepper>
+            </div>
           </div>
         </div>
       </div>
 
-      <div className="w-full  flex flex-col h-[1340px] overflow-y-scroll  scrollbar-hide items-center pt-[32px] px-5  lg:px-[100px] gap-[32px] lg:gap-[52px]">
-        <div className="flex flex-col items-start w-full gap-[8px]">
+      <div className="w-full    flex flex-1 flex-col h-[1388px] overflow-y-scroll   scrollbar-hide items-center pt-[32px]  gap-[32px] lg:gap-[52px]">
+        <div className="flex flex-col items-start w-full gap-[8px] px-5  lg:px-[100px]">
           <p className="text-[12px] font-light leading-[20px]">
-            Pelajaran 3 dari 4
+            Pelajaran {urutan || "0"} dari {kelasModul.length}
           </p>
           <p className="text-[22px] lg:text-[32px] font-bold leading-[40px]">
-            Modul 3: Pembentukan Ide Bisnis Kreatif
+            {moduleTitle}
           </p>
         </div>
 
-        <div className="w-full lg:w-[752px]   flex flex-col items-center justify-center gap-[52px]">
-          {/* <iframe
+        <div className="w-full lg:w-[752px] h-max  px-5  lg:px-[100px] flex flex-col flex-grow items-center justify-center ">
+          {isLoading ? (
+            <Spinner size={"xl"} />
+          ) : (
+            <div className="w-full h-full flex flex-col gap-[52px] justify-start items-center">
+              {subModul?.map((el) => {
+                return (
+                  <div className="w-full flex flex-col justify-center items-center">
+                    <iframe
+                      loading="lazy"
                       width="560"
                       height="315"
                       src={`${
@@ -481,43 +529,33 @@ function MainSection() {
                         )
                       }`}
                       title="YouTube video player"
+                      frameborder="0"
                       allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                      allowFullScreen
-                      className="w-[350px] h-[200px] md:w-[529px] md:h-[356px] rounded-[10px] "
-                    ></iframe> */}
-          {subModul?.map((el) => {
-            return (
-              <div className="w-full flex flex-col justify-center items-center">
-                <iframe
-                  width="560"
-                  height="315"
-                  src={`${
-                    el?.link &&
-                    el.link.replace(
-                      "youtu.be",
-                      "www.youtube-nocookie.com/embed"
-                    )
-                  }`}
-                  title="YouTube video player"
-                  frameborder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowfullscreen
-                  className="w-[358px] h-[204px] md:w-[752px] md:h-[424px]  rounded-[10px] "
-                ></iframe>
-              </div>
-            );
-          })}
+                      allowfullscreen
+                      className="w-[358px] h-[204px] md:w-[552px] md:h-[324px] lg:w-[752px] lg:h-[424px]  rounded-[10px] "
+                    ></iframe>
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
         <div className="w-full flex items-center justify-center">
           <button
-            onClick={() =>
-              navigate(
-                `/lms?kelas=${kelasSite}&materi=${Number(materiSite) + 1}`
-              )
-            }
-            className="px-[48px] py-[16px] flex items-center justify-center bg-black500 rounded-[10px] mb-[52px]"
+            onClick={() => {
+              if (
+                Number(materiSite) <
+                Number(kelasModul[0].id) + kelasModul.length - 1
+              ) {
+                navigate(
+                  `/lms?kelas=${kelasSite}&materi=${Number(materiSite) + 1}`
+                );
+              }
+            }}
+            className="px-[48px] py-[16px] gap-5 flex items-center justify-center bg-black500 rounded-[10px] mb-[52px]"
           >
+            {isLoading && <Spinner size={"sm"} color="white" />}
             <p className="text-[16px] font-medium leading-[24px] text-white">
               Pelajaran Berikutnya
             </p>

@@ -325,7 +325,6 @@ module.exports = {
   requestResetPassword: async (req, res) => {
     try {
       const { email } = req.body;
-
       const getUser = await user.findOne({
         where: {
           email: email,
@@ -335,6 +334,7 @@ module.exports = {
         email: getUser.email,
         id_role: getUser.id_role,
       };
+
       const result = jwt.sign(payload, process.env.SECRET_JWT, {
         algorithm: "HS256",
         expiresIn: "1m",

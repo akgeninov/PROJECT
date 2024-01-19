@@ -5,7 +5,7 @@ import { api } from "../../api/api";
 
 function LmsKelas() {
   return (
-    <div className="flex flex-col justify-center items-center shrink-0">
+    <div className="flex w-full h-full flex-col justify-start  items-center shrink-0">
       <MainSection />
     </div>
   );

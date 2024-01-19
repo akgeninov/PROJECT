@@ -138,7 +138,7 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
-          <div className="gap-[20px] flex flex-col mb-[26px]">
+          <div className="gap-[20px] flex flex-col ">
             <div className="relative w-full  flex items-center">
               <button
                 type="button"
@@ -205,11 +205,11 @@ function MainSection() {
             </div>
           </div> */}
 
-          <div className={`flex justify-center items-center mt-[49px]`}>
+          <div className={`flex justify-center items-center mt-[46px]`}>
             <button
               disabled={isSubmitting ? true : false}
               type="submit"
-              className={` flex  mx-[5px] sm:mx-0 w-[160px] px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
+              className={` flex  mx-[5px] sm:mx-0 w-full px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
             >
               <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
                 Masuk

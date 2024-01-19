@@ -5,6 +5,7 @@ const lowonganController = require("./lowonganController");
 const kelasWishlistController = require("./kelasWishlistController");
 const kelasBisnisController = require("./kelasBisnisController");
 const userKelasController = require("./userKelasController");
+const testingController = require("./testingControllesrs");
 
 module.exports = {
   loginController,
@@ -13,4 +14,5 @@ module.exports = {
   lowonganController,
   kelasBisnisController,
   userKelasController,
+  testingController,
 };
