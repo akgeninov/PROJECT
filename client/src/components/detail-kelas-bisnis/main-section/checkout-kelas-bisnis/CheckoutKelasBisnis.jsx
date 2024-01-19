@@ -1,11 +1,34 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { icon } from "../../../../constants";
-import { HiOutlineHeart } from "react-icons/hi";
+import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
+// import { api } from "../../../../api/api";
+import { useSelector } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
 
 function CheckoutKelasBisnis({ dataDetail }) {
   const [star, setStar] = useState(0);
+  const { user } = useSelector((state) => state.userSlice);
+  const navigate = useNavigate();
+
+  // const addWishlist = async (data) => {
+  //   console.log({ data });
+
+  //   try {
+  //     const response = await api.post(
+  //       `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/addToWishlist`,
+  //       {
+  //         id_kelas_bisnis: data.id,
+  //       }
+  //     );
+  //     console.log(response);
+  //     localStorage.setItem("auth", JSON.stringify(response.data.token));
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
   }, [dataDetail]);
@@ -212,7 +235,9 @@ function CheckoutKelasBisnis({ dataDetail }) {
         <button className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-black500 rounded-[10px]">
           <HiOutlineHeart className="text-[32px] text-black500" />
         </button>
-        <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
+        <div onClick={() => user ? navigate("/login") : navigate("/login")}>
+          <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
+        </div>
       </div>
     </div>
   );
