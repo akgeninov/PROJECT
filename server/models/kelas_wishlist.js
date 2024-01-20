@@ -1,6 +1,6 @@
 'use strict';
 const {
-  Model
+  Model, BOOLEAN
 } = require('sequelize');
 module.exports = (sequelize, DataTypes) => {
   class kelas_wishlist extends Model {
@@ -15,18 +15,24 @@ module.exports = (sequelize, DataTypes) => {
           name: "id_kelas_bisnis",
         }
       })
-      // kelas_wishlist.belongsTo(models.kelas_kategori,{
-      //   foreignKey: {
-      //     name: "id_kelas_kategori",
-      //   }
-      // })
     }
   }
-  kelas_wishlist.init({
-    date_wishlist: DataTypes.DATE
-  }, {
-    sequelize,
-    modelName: 'kelas_wishlist',
-  });
+  kelas_wishlist.init(
+    {
+      date_wishlist: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      isRemove: {
+        type: DataTypes.BOOLEAN,
+        allowNull: false,
+        defaultValue: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: 'kelas_wishlist',
+    }
+  );
   return kelas_wishlist;
 };
