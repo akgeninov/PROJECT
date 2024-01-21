@@ -17,7 +17,7 @@ export default function NavbarKelasSaya() {
   // if(parentPath === "/profile/kelas-saya" || parentPath === "/profile/kelas-saya/"){
   //   parentPath = "/profile/kelas-saya/semua-kelas";
   // }
-  
+
   const toggleDropDown = () => {
     setDropdownShow(!dropdownShow);
     if (dropdownShow) {
@@ -31,21 +31,20 @@ export default function NavbarKelasSaya() {
     parentPath === items[1] ? items[0] : ""
   );
 
-  // console.log(statusKelas);
   return (
     <div className="flex-initial">
       {/* lg:Submenu */}
       <nav className="hidden lg:flex gap-[27px] mb-[54px]">
-        {statusKelas.map(([title, url]) => (
+        {statusKelas.map(([title, url], index) => (
           <NavLink
             to={url}
-            activeclassname='is-active'
+            activeclassname="is-active"
             className={({ isActive }) =>
               isActive
                 ? "font-medium items-center justify-center flex flex-col text-[24px]"
                 : "font-normal text-[24px]"
             }
-            key={title}
+            key={index}
           >
             {({ isActive }) => {
               return (
@@ -64,11 +63,11 @@ export default function NavbarKelasSaya() {
       </nav>
 
       {/* mobile:Submenu */}
-      <div className="relative inline-block lg:hidden text-left w-[358px] sm:w-[500px] mb-[54px]">
+      <div className="relative inline-block lg:hidden text-left w-[358px] h-[36px] sm:w-[500px] mb-[54px]">
         <div>
           <button
             type="button"
-            className="inline-flex justify-between items-center w-full gap-x-1.5 rounded-md bg-white px-3 py-2 text-[12px] font-normal text-black500 leading-[30px] shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+            className="inline-flex justify-between items-center w-[358px] h-[36px] sm:w-[500px] gap-x-1.5 rounded-[5px] bg-white px-3 py-2 text-[12px] font-normal text-black500 leading-[30px] shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
             id="menu-button"
             onClick={toggleDropDown}
           >
@@ -89,14 +88,15 @@ export default function NavbarKelasSaya() {
         </div>
 
         {dropdownShow ? (
-          <div className="absolute right-0 z-10 mt-2 w-[358px] sm:w-[500px] origin-top-right rounded-md bg-white ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
-            {statusKelas.map(([title, url]) => (
+          <div className="absolute right-0 z-10 mt-2 w-[358px] sm:w-[500px] origin-top-right rounded-[5px] bg-white ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
+            {statusKelas.map(([title, url], index) => (
               <NavLink
+                key={index}
                 to={url}
-                className={({ isActive }) =>
+                className={({ isActive }) => 
                   isActive
-                    ? "text-black500 text-[12px] leading-[30px] block px-4 py-2 font-normal border-[1px] rounded-[5px] border-whiteSmoke600 shadow-lg shadow-gray-300"
-                    : "text-whiteSmoke800 text-[12px] leading-[30px] block px-4 py-2"
+                    ? "h-[36px] text-black500 text-[12px] leading-[30px] block px-4 py-1 font-normal border-[1px] rounded-[5px] border-whiteSmoke600 shadow-lg shadow-gray-300"
+                    : "h-[36px] text-whiteSmoke800 text-[12px] leading-[30px] block px-4 py-1"
                 }
                 onClick={toggleDropDown}
               >

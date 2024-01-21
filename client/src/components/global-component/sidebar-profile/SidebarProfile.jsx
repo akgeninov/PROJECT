@@ -1,14 +1,19 @@
-import React from "react";
-import { NavLink, Outlet, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { icon } from "../../../constants";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export default function SidebarProfile() {
   const navigate = useNavigate();
+  const parentPath = useLocation().pathname;
+  const [dropdownShow, setDropdownShow] = useState(false);
+  const [toggle, setToggle] = useState(true);
 
   const NavlinkStyles = ({ isActive }) => {
     return {
       fontWeight: isActive ? "bold" : "normal",
-      color: isActive ? "#0F1011" : "#666",
+      color: isActive ? "#0F1011" : "#666666",
       backgroundColor: "#F4F4F4",
       boxShadow: isActive ? "3px 3px 7px rgba(128,128,128,0.3)" : "",
     };
@@ -47,8 +52,23 @@ export default function SidebarProfile() {
     },
   ];
 
+  const toggleDropDown = () => {
+    setDropdownShow(!dropdownShow);
+    if (dropdownShow) {
+      setToggle(true);
+    } else {
+      setToggle(false);
+    }
+  };
+
+  const statusOption = menuItems.filter((items) =>
+    parentPath === items.url ? items.title : ""
+  );
+  // console.log(parentPath);
+  // console.log(statusOption[0].title);
+
   return (
-    <div className="flex flex-row justify-center lg:justify-start max-w-screen-2xl lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
+    <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-start lg:items-start max-w-screen-2xl mt-[12px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 mb-[50px]">
       {/* Left Side - Menu Box */}
       <div
         className="hidden lg:flex flex-col items-center w-[395px] min-h-[1000px] bg-white-200 border border-grey"
@@ -73,7 +93,7 @@ export default function SidebarProfile() {
               key={index}
               to={url}
               style={NavlinkStyles}
-              className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
+              className="flex items-center w-[307px] h-[57px] ml-2 rounded-[5px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
             >
               {/* <img src={location.pathname === url ? activeIcon : icon} alt={title} className="mr-5 ml-5" /> */}
               {({ isActive }) => {
@@ -91,6 +111,71 @@ export default function SidebarProfile() {
             </NavLink>
           ))}
         </div>
+      </div>
+
+      {/* Dropdown Menu - Mobile */}
+      <div className="relative inline-block lg:hidden text-left w-full h-[40px] sm:w-[500px] mb-[5px]">
+        <div>
+          <button
+            type="button"
+            className="inline-flex justify-between items-center w-full h-[40px] sm:w-[500px] gap-x-1.5 bg-[#CCCCCC33] px-3 py-2 text-[14px] font-normal text-black500 leading-[30px] hover:bg-[#CCCCCC33]"
+            onClick={toggleDropDown}
+          >
+            {parentPath === "/profile/" || parentPath === "/profile" ? (
+              <div className="flex items-center">
+                <img
+                  src={menuItems[0].activeIcon}
+                  alt={menuItems[0].title}
+                  className="mr-5 ml-2 w-[18px] h-[18px]"
+                />
+                <p>{menuItems[0].title}</p>
+              </div>
+            ) : (
+              <div className="flex items-center">
+                <img
+                  src={statusOption[0].activeIcon}
+                  alt={statusOption[0].title}
+                  className="mr-5 ml-2 w-[18px] h-[18px]"
+                />
+                <p>{statusOption[0].title}</p>
+              </div>
+            )}
+            <div className="flex items-center">
+              <hr className="rotate-90 w-[16px] bg-[rgba(102,102,102,0.5)] border-1" />
+              <FontAwesomeIcon
+                icon={toggle === true ? faChevronDown : faChevronUp}
+                className="w-[18px] h-[18px] text-slate-600"
+              />
+            </div>
+          </button>
+        </div>
+
+        {dropdownShow ? (
+          <div className="absolute z-20 w-full sm:w-[500px] h-[200px] flex flex-col justify-between lg:mt-[35px] font-bold gap-2 bg-whiteSmoke500 origin-top-right rounded-[5px] ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
+            {menuItems.map(({ title, icon, activeIcon, url }, index) => (
+              <NavLink
+                key={index}
+                to={url}
+                style={NavlinkStyles}
+                className="flex items-center w-full h-[40px] my-0 rounded-[5px] text-[#666666] text-[14px]"
+                onClick={toggleDropDown}
+              >
+                {({ isActive }) => {
+                  return (
+                    <>
+                      <img
+                        src={isActive ? activeIcon : icon}
+                        alt={title}
+                        className="mr-5 ml-5 w-[18px] h-[18px]"
+                      />
+                      {title}
+                    </>
+                  );
+                }}
+              </NavLink>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <Outlet />

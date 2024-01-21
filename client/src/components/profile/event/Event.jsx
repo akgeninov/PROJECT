@@ -1,5 +1,5 @@
 export default function Event() {
     return(
-        <h1>Halaman Event</h1>
+        <div className="min-h-[300px]"><h1>Halaman Event</h1></div>
     );
 }
