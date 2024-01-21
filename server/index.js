@@ -36,10 +36,6 @@ app.use("/api/kelasTransaksi", kelasTransaksiRouters);
 app.use("/images", express.static("images"));
 
 app.listen(process.env.PORT, () => {
-<<<<<<< HEAD
   // db.sequelize.sync({ alter: true });
-=======
-  //db.sequelize.sync({ alter: true });
->>>>>>> 114aaa83abb668c489e3aab1140e96c032d2f8f8
   console.log(`server is running on port ${process.env.PORT}`);
 });

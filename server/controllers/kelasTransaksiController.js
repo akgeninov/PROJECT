@@ -22,9 +22,13 @@ module.exports = {
 
       const { id_kelas_bisnis, status_transaksi } = req.body;
 
-      if (status_transaksi && !['success', 'canceled', 'pending'].includes(status_transaksi)) {
+      if (
+        status_transaksi &&
+        !["success", "canceled", "pending"].includes(status_transaksi)
+      ) {
         return res.status(400).send({
-          error: "Invalid value for 'status_transaksi'. Please provide a valid value.",
+          error:
+            "Invalid value for 'status_transaksi'. Please provide a valid value.",
         });
       }
 
@@ -83,7 +87,7 @@ module.exports = {
         },
         attributes: ["id"],
       });
-      console.log({ userData });
+      // console.log({ userData });
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
@@ -114,7 +118,6 @@ module.exports = {
         },
         attributes: ["id"],
       });
-      // console.log({ userData });
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
@@ -122,12 +125,12 @@ module.exports = {
         where: {
           id_user: getuser.id,
           status_transaksi: ["success"],
-
         },
         include: [
           {
             model: kelasBisnisModel,
             attributes: ["nama", "image", "harga", "images_link"],
+            through: { attributes: [] },
           },
         ],
         attributes: [
@@ -220,32 +223,39 @@ module.exports = {
       //   },
       //   attributes: ["id"],
       // });
-      // console.log({ userData });
+      // // console.log({ userData });
       // if (!getuser) {
       //   throw new Error("USER TIDAK DITEMUKAN");
       // }
+      const { id } = req.body;
       const result = await kelasTransaksiModel.findAll({
         where: {
           ...(id ? { id: id } : {}),
         },
-        attributes: ["id", "nomor_invoice", "date_transaksi", "status_transaksi"],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
         include: [
-          { model: user, attributes: ["nama_lengkap", "email"] },
+          {
+            model: user,
+            attributes: ["nama_lengkap", "email"],
+            through: { attributes: [] },
+          },
           {
             model: kelasBisnisModel,
             attributes: ["nama", "image", "harga", "images_link"],
-          }
+            through: { attributes: [] },
+          },
         ],
       });
 
-      res.status(200).send({
-        message: "success",
-        data: result,
-      });
+      res.json(result);
     } catch (error) {
-      res.status(400).send({
-        error: error.message,
-      });
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
     }
   },
 };
