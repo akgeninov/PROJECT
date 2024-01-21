@@ -26,10 +26,16 @@ module.exports = (sequelize, DataTypes) => {
     status_transaksi: {
       type: DataTypes.ENUM('success', 'canceled', 'pending'),
       allowNull: false,
+      defaultValue: 'pending',
     },
     nomor_invoice: {
       type: DataTypes.UUID,
       defaultValue: sequelize.literal('UUID()'), // Menggunakan ekspresi SQL untuk UUID versi 4 secara otomatis
+    },
+    isPaid: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false,
+      defaultValue: false,
     },
     date_transaksi: DataTypes.DATE,
     date_expired: DataTypes.DATE,

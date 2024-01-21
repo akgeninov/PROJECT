@@ -59,6 +59,18 @@ module.exports = {
         createdAt: currentDate,
         updatedAt: currentDate,
       },
+      {
+        id_user: 4,
+        id_kelas_bisnis: 2,
+        harga: 350000,
+        persen_diskon: 5,
+        total : 332500,
+        status_transaksi: 'canceled',
+        date_transaksi: currentDate,
+        date_expired: expiredDate,
+        createdAt: currentDate,
+        updatedAt: currentDate,
+      },
     ]);
   },
 

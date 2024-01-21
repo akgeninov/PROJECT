@@ -30,6 +30,9 @@ module.exports = {
       date_wishlist: {
         type: Sequelize.DATE
       },
+      isRemove: {
+        type: Sequelize.BOOLEAN
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

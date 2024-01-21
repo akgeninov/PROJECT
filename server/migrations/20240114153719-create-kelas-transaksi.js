@@ -31,6 +31,9 @@ module.exports = {
       nomor_invoice: {
         type: Sequelize.UUID
       },
+      isPaid: {
+        type: Sequelize.BOOLEAN
+      },
       date_transaksi: {
         type: Sequelize.DATE
       },
