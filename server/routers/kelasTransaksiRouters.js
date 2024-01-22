@@ -5,5 +5,6 @@ const { verifyToken } = require("../middleware/verifyToken");
 router.post("/changeTransaksiBool", verifyToken, kelasTransaksiController.changeTransaksiBool);
 router.put("/updateStatusTransaksi", verifyToken, kelasTransaksiController.updateStatusTransaksi);
 router.get("/getTransaksiByIdUser", verifyToken, kelasTransaksiController.getTransaksiByIdUser);
+router.get("/:id_kelas_bisnis", verifyToken, kelasTransaksiController.getCheckout);
 
 module.exports = router;

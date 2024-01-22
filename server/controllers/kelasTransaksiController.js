@@ -29,12 +29,6 @@ module.exports = {
         },
       });
 
-      // if (status_transaksi && !['success', 'canceled', 'pending'].includes(status_transaksi)) {
-      //   return res.status(400).send({
-      //     error: "Invalid value for 'status_transaksi'. Please provide a valid value.",
-      //   });
-      // }
-
       const kelasBisnis = await kelasBisnisModel.findByPk(id_kelas_bisnis);
       if (!kelasBisnis) {
         throw new Error(`Kelas bisnis with id ${id_kelas_bisnis} not found.`);
@@ -166,4 +160,44 @@ module.exports = {
       });
     }
   },
+
+  getCheckout: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const getuser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+  
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+  
+      const id_kelas_bisnis = req.params.id_kelas_bisnis; 
+      
+      const result = await kelasTransaksiModel.findOne({
+        where: {
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
+        },
+        include: [user, kelasBisnisModel],
+      });
+  
+      if (!result) {
+        throw new Error("DATA CHECKOUT TIDAK DITEMUKAN");
+      }
+      
+      res.status(200).send({
+        message: "success",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+  
 };
