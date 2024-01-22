@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
-import 'moment/locale/id';
+import "moment/locale/id";
 
 export default function TransactionCard(transaksi) {
   const [dropdownShow, setDropdownShow] = useState(false);
@@ -108,9 +108,18 @@ export default function TransactionCard(transaksi) {
             />
           </div>
           <div className="flex flex-col lg:flex-row lg:h-[160px] lg:leading-[28px] justify-start">
-            <p className="text-[14px] lg:text-[24px] font-medium lg:w-[50%] w-[160px] mb-[15px]">
-              {transaksi.transaksi.kelas_bisni.nama}
-            </p>
+            <Link
+              to={
+                transaksi.transaksi.status_transaksi === "success"
+                  ? `/kelas-bisnis/${transaksi.transaksi.id_kelas_bisnis}`
+                  : transaksi.transaksi.status_transaksi === "pending"
+                  ? `/checkout/`
+                  : ""
+              }
+              className="text-[14px] lg:text-[24px] font-medium lg:w-[50%] w-[160px] mb-[15px] hover:underline"
+            >
+              <p>{transaksi.transaksi.kelas_bisni.nama}</p>
+            </Link>
             <div className="lg:block hidden h-[150px] w-[2px] font-medium border-l-2 border-[#666666)] border-opacity-50"></div>
             <div className=" lg:h-[160px] lg:pl-[25px] text-[12px] lg:text-[24px] font-medium">
               <p className="text-[#666666] mb-[5px] lg:mb-[72px]">
