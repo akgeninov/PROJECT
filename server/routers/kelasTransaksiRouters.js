@@ -8,6 +8,6 @@ router.get("/getTransaksiByIdUser", verifyToken, kelasTransaksiController.getTra
 router.get("/transaksi-saya/success", verifyToken, kelasTransaksiController.getTransaksiByIdUserSuccess);
 router.get("/transaksi-saya/pending", verifyToken, kelasTransaksiController.getTransaksiByIdUserPending);
 router.get("/transaksi-saya/canceled", verifyToken, kelasTransaksiController.getTransaksiByIdUserCanceled);
-router.get("/transaksi-saya/invoice", verifyToken, kelasTransaksiController.getTransaksiInvoice);
+router.post("/transaksi-saya/invoice", verifyToken, kelasTransaksiController.getTransaksiInvoice);
 
 module.exports = router;

@@ -151,7 +151,7 @@ export default function SidebarProfile() {
         </div>
 
         {dropdownShow ? (
-          <div className="absolute z-20 w-full sm:w-[500px] h-[200px] flex flex-col justify-between lg:mt-[35px] font-bold gap-2 bg-whiteSmoke500 origin-top-right rounded-[5px] ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
+          <div className="absolute z-20 mt-2 w-full sm:w-[500px] h-[200px] flex flex-col justify-between lg:mt-[35px] font-bold gap-2 bg-whiteSmoke500 origin-top-right rounded-[5px] ring-1 ring-black ring-opacity-5 focus:outline-none shadow-lg shadow-gray-300">
             {menuItems.map(({ title, icon, activeIcon, url }, index) => (
               <NavLink
                 key={index}

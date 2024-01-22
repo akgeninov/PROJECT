@@ -29,13 +29,9 @@ module.exports = {
         },
       });
 
-      // if (
-        status_transaksi &&
-        !["success", "canceled", "pending"].includes(status_transaksi)
-      ) {
+      // if (status_transaksi && !['success', 'canceled', 'pending'].includes(status_transaksi)) {
       //   return res.status(400).send({
-      //     error:
-            "Invalid value for 'status_transaksi'. Please provide a valid value.",
+      //     error: "Invalid value for 'status_transaksi'. Please provide a valid value.",
       //   });
       // }
 
@@ -61,16 +57,15 @@ module.exports = {
       const expiredDate = new Date(currentDate);
       expiredDate.setHours(expiredDate.getHours() + 24);
 
-      if(existingTransaksi){
+      if (existingTransaksi) {
         const updatedValue = !existingTransaksi.isPaid;
-        await existingTransaksi.update({isPaid: updatedValue});
+        await existingTransaksi.update({ isPaid: updatedValue });
 
         res.status(200).send({
           message: `Transaksi isPaid bool updated to ${updatedValue}`,
           data: existingTransaksi,
         });
-      }
-      else {
+      } else {
         const result = await kelasTransaksiModel.create({
           id_user: getuser.id,
           id_kelas_bisnis: id_kelas_bisnis,
@@ -80,7 +75,7 @@ module.exports = {
           date_transaksi: currentDate,
           date_expired: expiredDate,
         });
-  
+
         res.status(200).send({
           message: "Transaksi created",
           data: result,
@@ -102,34 +97,40 @@ module.exports = {
         },
         attributes: ["id"],
       });
-  
+
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
-  
+
       const { id, status_transaksi } = req.body;
-  
+
       const transaction = await kelasTransaksiModel.findOne({
         where: {
           id: id,
           id_user: getuser.id,
         },
       });
-  
+
       if (!transaction) {
-        throw new Error(`Transaction with id ${id} not found for the current user.`);
+        throw new Error(
+          `Transaction with id ${id} not found for the current user.`
+        );
       }
-  
-      if (status_transaksi && ['success', 'canceled', 'pending'].includes(status_transaksi)) {
+
+      if (
+        status_transaksi &&
+        ["success", "canceled", "pending"].includes(status_transaksi)
+      ) {
         await transaction.update({ status_transaksi: status_transaksi });
-  
+
         res.status(200).send({
           message: "Transaction status updated",
           data: transaction,
         });
       } else {
         res.status(400).send({
-          error: "Invalid value for 'status_transaksi'. Please provide a valid value.",
+          error:
+            "Invalid value for 'status_transaksi'. Please provide a valid value.",
         });
       }
     } catch (error) {
@@ -138,7 +139,7 @@ module.exports = {
       });
     }
   },
-  
+
   getTransaksiByIdUser: async (req, res) => {
     try {
       const userData = req.dataToken;
@@ -191,7 +192,6 @@ module.exports = {
           {
             model: kelasBisnisModel,
             attributes: ["nama", "image", "harga", "images_link"],
-            through: { attributes: [] },
           },
         ],
         attributes: [
@@ -221,7 +221,6 @@ module.exports = {
         },
         attributes: ["id"],
       });
-      // console.log({ userData });
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
@@ -230,7 +229,18 @@ module.exports = {
           id_user: getuser.id,
           status_transaksi: ["pending"],
         },
-        include: [user, kelasBisnisModel],
+        include: [
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          },
+        ],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
       });
 
       res.status(200).send({
@@ -252,7 +262,6 @@ module.exports = {
         },
         attributes: ["id"],
       });
-      // console.log({ userData });
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
@@ -261,7 +270,18 @@ module.exports = {
           id_user: getuser.id,
           status_transaksi: ["canceled"],
         },
-        include: [user, kelasBisnisModel],
+        include: [
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          },
+        ],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
       });
 
       res.status(200).send({
@@ -277,21 +297,22 @@ module.exports = {
 
   getTransaksiInvoice: async (req, res) => {
     try {
-      // const userData = req.dataToken;
-      // const getuser = await user.findOne({
-      //   where: {
-      //     email: userData.email,
-      //   },
-      //   attributes: ["id"],
-      // });
-      // // console.log({ userData });
-      // if (!getuser) {
-      //   throw new Error("USER TIDAK DITEMUKAN");
-      // }
-      const { id } = req.body;
-      const result = await kelasTransaksiModel.findAll({
+      const userData = req.dataToken;
+      const { id_kelas_bisnis } = req.body;
+      const getuser = await user.findOne({
         where: {
-          ...(id ? { id: id } : {}),
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+      const result = await kelasTransaksiModel.findOne({
+        where: {
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
         },
         attributes: [
           "id",
@@ -302,13 +323,11 @@ module.exports = {
         include: [
           {
             model: user,
-            attributes: ["nama_lengkap", "email"],
-            through: { attributes: [] },
+            attributes: ["id", "nama_lengkap", "email"],
           },
           {
             model: kelasBisnisModel,
-            attributes: ["nama", "image", "harga", "images_link"],
-            through: { attributes: [] },
+            attributes: ["id", "nama", "image", "harga", "images_link"],
           },
         ],
       });

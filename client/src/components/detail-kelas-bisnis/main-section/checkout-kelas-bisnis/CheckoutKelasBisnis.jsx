@@ -3,34 +3,65 @@ import { useParams } from "react-router-dom";
 import { icon } from "../../../../constants";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
-// import { api } from "../../../../api/api";
+import { api } from "../../../../api/api";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
 function CheckoutKelasBisnis({ dataDetail }) {
   const [star, setStar] = useState(0);
+  const [wishlist, setWishlist] = useState([]);
+  const [check, setCheck] = useState([]);
+  const [status, setStatus] = useState();
   const { user } = useSelector((state) => state.userSlice);
   const navigate = useNavigate();
 
-  // const addWishlist = async (data) => {
-  //   console.log({ data });
+  const token = JSON.parse(localStorage.getItem("auth"));
+  const addWishlist = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/changeWishlistBool`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setWishlist(response.data.data);
+      setStatus(response.data.data.isRemove);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
-  //   try {
-  //     const response = await api.post(
-  //       `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/addToWishlist`,
-  //       {
-  //         id_kelas_bisnis: data.id,
-  //       }
-  //     );
-  //     console.log(response);
-  //     localStorage.setItem("auth", JSON.stringify(response.data.token));
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
+  const checkStatusWishlist = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/wishlist-status`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setCheck(response.data.data);
+      setStatus(response.data.data.isRemove);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // console.log("wishlist", wishlist.isRemove);
+  // console.log(check.isRemove);
+  // console.log(status);
 
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
+    checkStatusWishlist();
   }, [dataDetail]);
   // const { title } = useParams();
   return (
@@ -232,10 +263,19 @@ function CheckoutKelasBisnis({ dataDetail }) {
         </div>
       </div>
       <div className="mt-[40px] gap-[16px] flex ">
-        <button className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-black500 rounded-[10px]">
-          <HiOutlineHeart className="text-[32px] text-black500" />
+        <button
+          onClick={() => addWishlist()}
+          className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-black500 hover:bg-whiteSmoke600 rounded-[10px]"
+        >
+          {status === true ? (
+            <HiOutlineHeart className="text-[32px] text-black500" />
+          ) : (
+            <HiHeart className="text-[32px] text-black500" />
+          )}
         </button>
-        <div onClick={() => user ? navigate("/checkout") : navigate("/login")}>
+        <div
+          onClick={() => (user ? navigate("/checkout") : navigate("/login"))}
+        >
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>
       </div>

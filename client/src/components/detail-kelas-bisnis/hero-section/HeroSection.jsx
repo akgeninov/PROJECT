@@ -6,9 +6,12 @@ import { HiHeart, HiOutlineHeart } from "react-icons/hi";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import { api } from "../../../api/api";
 import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 function HeroSection({ dataDetail, star }) {
   const { value } = useSelector((state) => state.detailKelasSlice);
+  const { user } = useSelector((state) => state.userSlice);
+  const navigate = useNavigate();
   // const [star, setStar] = useState(null);
 
   const renderStarRating = useCallback(() => {
@@ -415,10 +418,15 @@ function HeroSection({ dataDetail, star }) {
           <button className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-whiteSmoke500 rounded-[10px]">
             <HiOutlineHeart className="text-[32px] text-whiteSmoke500" />
           </button>
-          <ButtonWhiteSmoke500
-            TEXT_BUTTON={"Daftar Sekarang"}
-            WIDTH={"w-[216px]"}
-          />
+
+          <div
+            onClick={() => (user ? navigate("/checkout") : navigate("/login"))}
+          >
+            <ButtonWhiteSmoke500
+              TEXT_BUTTON={"Daftar Sekarang"}
+              WIDTH={"w-[216px]"}
+            />
+          </div>
         </div>
       </div>
       <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] xl:w-[432px] h-[188px] xl:h-[468px] bottom-[32px] lg:bottom-auto lg:top-[300px] xl:top-[112px] lg:right-[100px]">
