@@ -65,7 +65,7 @@ function CheckoutKelasBisnis({ dataDetail }) {
   }, [dataDetail]);
   // const { title } = useParams();
   return (
-    <div className="p-[20px] flex flex-col items-start   rounded-[10px] shadow-customSm">
+    <div className="p-[20px] flex flex-col items-start rounded-[10px] shadow-customSm">
       <h1 className="text-[22px] font-bold leading-[32px] w-[288px]">
         {dataDetail?.kelas_bisni?.nama
           .split(" ")
@@ -264,13 +264,13 @@ function CheckoutKelasBisnis({ dataDetail }) {
       </div>
       <div className="mt-[40px] gap-[16px] flex ">
         <button
-          onClick={() => addWishlist()}
+          onClick={() => (user ? addWishlist() : navigate("/login"))}
           className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-black500 hover:bg-whiteSmoke600 rounded-[10px]"
         >
-          {status === true ? (
-            <HiOutlineHeart className="text-[32px] text-black500" />
-          ) : (
+          {status === false ? (
             <HiHeart className="text-[32px] text-black500" />
+          ) : (
+            <HiOutlineHeart className="text-[32px] text-black500" />
           )}
         </button>
         <div

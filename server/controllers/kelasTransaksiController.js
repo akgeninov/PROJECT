@@ -332,7 +332,10 @@ module.exports = {
         ],
       });
 
-      res.json(result);
+      res.status(200).send({
+        message: "successs",
+        data: result,
+      });
     } catch (error) {
       console.error(error);
       res.status(500).json({ message: "Internal Server Error" });

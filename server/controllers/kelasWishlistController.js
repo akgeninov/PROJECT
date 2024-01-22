@@ -17,13 +17,14 @@ module.exports = {
         },
         attributes: ["id"],
       });
-      console.log({ userData });
+      // console.log({ userData });
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
       const result = await kelasWishlistModel.findAll({
         where: {
           id_user: getuser.id,
+          isRemove: false,
         },
         include: [
           user,
