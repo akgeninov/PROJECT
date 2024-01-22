@@ -29,6 +29,7 @@ import UbahProfile from "../pages/ubah-profile/UbahProfile";
 import Checkout from "../pages/checkout/Checkout";
 import Approval from "../pages/checkout-approval/Approval";
 import Success from "../pages/success-checkout/Success";
+import FreeCheckout from "../pages/checkout-free/FreeCheckout";
 
 
 const routes = [
@@ -230,7 +231,7 @@ const routes = [
 
    <Route
     key="checkout"
-    path="/checkout"
+    path="/checkout/:id_kelas_bisnis"
     element={
       <Protection userOnly={true}>
         <Checkout />
@@ -253,6 +254,16 @@ const routes = [
     element={
       <Protection userOnly={true}>
         <Success />
+      </Protection>
+    }
+  />,
+
+  <Route
+    key="free"
+    path="/checkout/free"
+    element={
+      <Protection userOnly={true}>
+        <FreeCheckout />
       </Protection>
     }
   />,

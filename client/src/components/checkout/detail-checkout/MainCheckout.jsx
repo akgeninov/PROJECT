@@ -13,7 +13,7 @@ function MainCheckout({ dataCheckout }) {
            try {
             const token = JSON.parse(localStorage.getItem("auth"));
             const response = await api.get(
-              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/getTransaksiByIdUser`,
+              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/:id_kelas_bisnis`,
               {
                 headers: {
                   Accept: "application/json", "Content-Type": "application/Json",
@@ -38,6 +38,8 @@ function MainCheckout({ dataCheckout }) {
           console.log(checkout)
         },[checkout]);
 
+        // console.log("kelas_bisnis =",id_kelas_bisnis)
+
 
     return (
         <div className="w-full lg:w-full lg:h-[1000px] h-[1000px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>
@@ -45,8 +47,8 @@ function MainCheckout({ dataCheckout }) {
                 Checkout Kelas
             </h1>
 
-            {checkout.map((checkout, index) => (
-            <div key={index} checkout={checkout}>
+            {/* {checkout.map((checkout, index) => ( */}
+            <div key={checkout.id_kelas_bisnis} checkout={checkout}>
             
                     <div className="w-[544px] lg:w-[544px] lg:h-[128px] h-[128px]" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px', border: '2px solid #DEDEDE'  }}>
                         <div className="w-full lg:w-full lg:h-full h-full lg:flex flex ml-[20px] lg:ml-[20px] mr-[20px] lg:mr-[20px]" >
@@ -128,7 +130,7 @@ function MainCheckout({ dataCheckout }) {
                                 <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">Detail Pembayaran</p>
                                     <div className="w-[148px] lg:w-[148px] lg:h-[36px] lg:ml-auto lg:mr-[20px] h-[36px] rounded-[6px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
                                         <p className="mt-[4px] lg:mt-[4px] lg:ml-[13px] ml-[13px] font-medium">
-                                        {`ID#${checkout?.nomor_invoice.slice(0, 10)}...`}
+                                        {`ID#${checkout?.nomor_invoice?.slice(0, 10)}...`}
                                         </p>      
                                     </div>
                             </div>
@@ -169,7 +171,7 @@ function MainCheckout({ dataCheckout }) {
                     </Link>
                 </div>
             </div>
-            ))}
+            {/* ))} */}
             
 
             <div className="w-[540px] lg:w-full lg:h-[96px] lg:mt-auto h-[96px] border mt-auto" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', border: '2px solid #DEDEDE'  }}>
