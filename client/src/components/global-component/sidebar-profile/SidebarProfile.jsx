@@ -62,10 +62,8 @@ export default function SidebarProfile() {
   };
 
   const statusOption = menuItems.filter((items) =>
-    parentPath === items.url ? items.title : ""
+    parentPath.split("/")[2] === items.url.split("/")[2] ? items.title : ""
   );
-  // console.log(parentPath);
-  // console.log(statusOption[0].title);
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-start lg:items-start max-w-screen-2xl mt-[12px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 mb-[50px]">
