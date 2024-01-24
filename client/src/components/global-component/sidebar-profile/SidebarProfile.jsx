@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { NavLink, Outlet, useLocation, useNavigate } from "react-router-dom";
 import { icon } from "../../../constants";
 
@@ -16,12 +16,41 @@ export default function SidebarProfile() {
   };
 
   const menuItems = [
-    { title: "Dashboard", icon: icon.iconHome, activeIcon: icon.iconHome1, url: "/profile/dashboard" },
-    { title: "Kelas Saya", icon: icon.iconCourse, activeIcon: icon.iconCourse1, url: "/profile/kelas-saya/semua-kelas" },
-    { title: "Wishlist", icon: icon.iconWishlist, activeIcon: icon.iconWishlist1, url: "/profile/wishlist" },
-    { title: "Event", icon: icon.iconEvent, activeIcon: icon.iconEvent1, url: "/profile/event" },
-    { title: "Transaksi", icon: icon.iconTransaksi, activeIcon: icon.iconTransaksi1, url: "/profile/transaksi" },
+    {
+      title: "Dashboard",
+      icon: icon.iconHome,
+      activeIcon: icon.iconHome1,
+      url: "/profile/dashboard",
+    },
+    {
+      title: "Kelas Saya",
+      icon: icon.iconCourse,
+      activeIcon: icon.iconCourse1,
+      url: "/profile/kelas-saya/semua-kelas",
+    },
+    {
+      title: "Wishlist",
+      icon: icon.iconWishlist,
+      activeIcon: icon.iconWishlist1,
+      url: "/profile/wishlist",
+    },
+    {
+      title: "Event",
+      icon: icon.iconEvent,
+      activeIcon: icon.iconEvent1,
+      url: "/profile/event",
+    },
+    {
+      title: "Transaksi",
+      icon: icon.iconTransaksi,
+      activeIcon: icon.iconTransaksi1,
+      url: "/profile/transaksi",
+    },
   ];
+
+  useEffect(() => {
+    console.log(location.pathname);
+  }, [location.pathname]);
 
   return (
     <div className="flex flex-row justify-center lg:justify-start max-w-screen-2xl lg:mt-[12px] px-[10px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 my-[50px]">
@@ -51,7 +80,11 @@ export default function SidebarProfile() {
               style={NavlinkStyles({ isActive: location.pathname === url })}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
             >
-              <img src={location.pathname === url ? activeIcon : icon} alt={title} className="mr-5 ml-5" />
+              <img
+                src={location.pathname === url ? activeIcon : icon}
+                alt={title}
+                className="mr-5 ml-5"
+              />
               {title}
             </NavLink>
           ))}

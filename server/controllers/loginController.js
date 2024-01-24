@@ -7,6 +7,8 @@ const utility = require("./utility");
 const webToken = require("jsonwebtoken");
 const nodemailer = require("../lib/nodemailer/nodemailer");
 const dotenv = require("dotenv");
+const fs = require("fs");
+const handlebars = require("handlebars");
 dotenv.config();
 
 module.exports = {
@@ -178,12 +180,19 @@ module.exports = {
       });
       // const jwt = utility.makeJWT(getUser);
 
-      const resetLink = `${process.env.CLIENT_BASE_URL}/verifikasi/${result}`;
+      const verificationLink = `${process.env.CLIENT_BASE_URL}/verifikasi/${result}`;
+      const tempEmail = fs.readFileSync(
+        require.resolve("../template/verifikasi.html"),
+        { encoding: "utf8" }
+      );
+      const tempCompile = handlebars.compile(tempEmail);
+      const tempResult = tempCompile({ verificationLink });
       let mail = {
         from: `Admin <zainurrouf4@gmail.com>`,
         to: `${email}`,
-        subject: `verifikasi akun growlab`,
-        html: `<a target="_blank" rel="noopener noreferrer" href="${resetLink}">${resetLink}</a>`,
+        subject: ` verifikasi akun growlab`,
+        // html: `<a href="${resetLink}">${resetLink}</a>`,
+        html: tempResult,
       };
       let response = nodemailer.sendMail(mail);
       const jwt = utility.makeJWT(newUser);

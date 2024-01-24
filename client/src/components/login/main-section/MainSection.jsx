@@ -34,10 +34,13 @@ function MainSection() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, dirtyFields },
     reset,
   } = useForm({
     resolver: zodResolver(signInSchema),
+    defaultValues: {
+      PASSWORD: "",
+    },
   });
 
   const [isHide, setIsHide] = useState(true);
@@ -140,23 +143,30 @@ function MainSection() {
           </div>
           <div className="gap-[20px] flex flex-col ">
             <div className="relative w-full  flex items-center">
-              <button
+              <div
                 type="button"
                 onClick={() => setShowBaru((prev) => !prev)}
-                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+                className="cursor-pointer absolute right-0 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
               >
                 {showBaru ? (
-                  <FaRegEyeSlash className="text-[20px]" />
-                ) : (
                   <FaRegEye className="text-[20px]" />
+                ) : (
+                  <FaRegEyeSlash className="text-[20px]" />
                 )}
-              </button>
+              </div>
               <input
                 {...register("PASSWORD")}
                 id="passwordbaru"
                 type={showBaru ? "text" : "password"}
                 className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
+              {!dirtyFields.PASSWORD && (
+                <div className="absolute left-0 pointer-events-none flex justify-center items-start">
+                  <p className="text-whiteSmoke800 font-medium">
+                    Password baru <span className="text-red-600">*</span>{" "}
+                  </p>
+                </div>
+              )}
             </div>
 
             <div

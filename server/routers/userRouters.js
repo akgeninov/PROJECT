@@ -9,7 +9,7 @@ router.put("/update", verifyToken, uploadUser, userControllers.editUserData);
 router.put("/change-password", verifyToken, userControllers.changePassword);
 router.put("/change-sosmed", verifyToken, userControllers.editLinkSosmed);
 router.get("/send-verif", verifyToken, userControllers.requestVerifikasi);
-router.put("/verif/:token", userControllers.verifikasiUser);
+router.get("/verif/:token", userControllers.verifikasiUser);
 router.put("/reset-password", userControllers.resetPassword);
 router.post("/request-reset", userControllers.requestResetPassword);
 

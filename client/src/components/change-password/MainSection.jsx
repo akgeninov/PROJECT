@@ -86,17 +86,17 @@ function MainSection() {
             Password Lama <span className="text-red-600">*</span>
           </label>
           <div className="relative w-full lg:w-[324px] flex items-center">
-            <button
+            <div
               type="button"
               onClick={() => setShowLama((prev) => !prev)}
-              className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              className="cursor-pointer absolute right-1 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
             >
               {showLama ? (
-                <FaRegEyeSlash className="text-[20px]" />
-              ) : (
                 <FaRegEye className="text-[20px]" />
+              ) : (
+                <FaRegEyeSlash className="text-[20px]" />
               )}
-            </button>
+            </div>
             <input
               {...register("OLD_PASSWORD")}
               autoFocus
@@ -118,17 +118,17 @@ function MainSection() {
             Password Baru <span className="text-red-600">*</span>
           </label>
           <div className="relative w-full lg:w-[324px] flex items-center">
-            <button
+            <div
               type="button"
               onClick={() => setShowBaru((prev) => !prev)}
-              className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              className="cursor-pointer absolute right-1 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
             >
               {showBaru ? (
-                <FaRegEyeSlash className="text-[20px]" />
-              ) : (
                 <FaRegEye className="text-[20px]" />
+              ) : (
+                <FaRegEyeSlash className="text-[20px]" />
               )}
-            </button>
+            </div>
             <input
               {...register("PASSWORD")}
               id="passwordbaru"
@@ -149,17 +149,17 @@ function MainSection() {
             Confirm Password <span className="text-red-600">*</span>
           </label>
           <div className="relative w-full lg:w-[324px] flex items-center">
-            <button
+            <div
               type="button"
               onClick={() => setShowConfirm((prev) => !prev)}
-              className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              className="cursor-pointer absolute right-1 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
             >
               {showConfirm ? (
-                <FaRegEyeSlash className="text-[20px]" />
-              ) : (
                 <FaRegEye className="text-[20px]" />
+              ) : (
+                <FaRegEyeSlash className="text-[20px]" />
               )}
-            </button>
+            </div>
             <input
               {...register("CONFIRM_PASSWORD")}
               id="confrimpassword"

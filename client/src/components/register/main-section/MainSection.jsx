@@ -33,10 +33,14 @@ function MainSection() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, dirtyFields },
     reset,
   } = useForm({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      PASSWORD: "",
+      CONFIRM_PASSWORD: "",
+    },
   });
   // const password = watch("PASSWORD");
   // const confirmPassword = watch("CONFIRM_PASSWORD");
@@ -108,10 +112,10 @@ function MainSection() {
 
       // reset();
     } catch (error) {
+      console.log(error);
       Swal.fire({
         title: "Register failed!",
         text: "Mungkin email anda telah terdaftar! atau Ada yang salah, coba lagi!",
-        // footer: "Coba lagi atau lupa password!",
         icon: "error",
         confirmButtonColor: "#0F1011",
       });
@@ -178,39 +182,33 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
-          {/* <div className="w-full">
-            <div className="relative">
-              <input
-                {...register("PASSWORD")}
-                type="password"
-                placeholder="Password"
-                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
-              />
-            </div>
-            {errors.PASSWORD && (
-              <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
-            )}
-          </div> */}
+
           <div className="gap-[20px] flex flex-col mb-[26px]">
             <div className="relative w-full  flex items-center">
-              <button
+              <div
                 type="button"
                 onClick={() => setShowBaru((prev) => !prev)}
-                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+                className="cursor-pointer absolute right-0 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
               >
                 {showBaru ? (
-                  <FaRegEyeSlash className="text-[20px]" />
-                ) : (
                   <FaRegEye className="text-[20px]" />
+                ) : (
+                  <FaRegEyeSlash className="text-[20px]" />
                 )}
-              </button>
+              </div>
               <input
-                placeholder="Password"
                 {...register("PASSWORD")}
                 id="password"
                 type={showBaru ? "text" : "password"}
-                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+                className=" outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
+              {!dirtyFields.PASSWORD && (
+                <div className="absolute left-0 pointer-events-none flex justify-center items-start">
+                  <p className="text-whiteSmoke800 font-medium">
+                    Password <span className="text-red-600">*</span>{" "}
+                  </p>
+                </div>
+              )}
             </div>
 
             {errors.PASSWORD && (
@@ -220,24 +218,30 @@ function MainSection() {
 
           <div className="gap-[20px] flex flex-col mb-[26px]">
             <div className="relative w-full  flex items-center">
-              <button
+              <div
                 type="button"
                 onClick={() => setShowConfirm((prev) => !prev)}
-                className="absolute right-2 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+                className="cursor-pointer absolute right-0 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
               >
                 {showConfirm ? (
-                  <FaRegEyeSlash className="text-[20px]" />
-                ) : (
                   <FaRegEye className="text-[20px]" />
+                ) : (
+                  <FaRegEyeSlash className="text-[20px]" />
                 )}
-              </button>
+              </div>
               <input
-                placeholder="Confirm password"
                 {...register("CONFIRM_PASSWORD")}
                 id="confirmPassword"
                 type={showConfirm ? "text" : "password"}
                 className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
+              {!dirtyFields.CONFIRM_PASSWORD && (
+                <div className="absolute left-0 pointer-events-none flex justify-center items-start">
+                  <p className="text-whiteSmoke800 font-medium">
+                    Confirm password <span className="text-red-600">*</span>{" "}
+                  </p>
+                </div>
+              )}
             </div>
 
             {errors.CONFIRM_PASSWORD && (
