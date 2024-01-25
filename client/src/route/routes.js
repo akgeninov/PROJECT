@@ -260,7 +260,7 @@ const routes = [
 
   <Route
     key="free"
-    path="/checkout/free"
+    path="/checkout-free/:id_kelas_bisnis"
     element={
       <Protection userOnly={true}>
         <FreeCheckout />

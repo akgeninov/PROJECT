@@ -6,12 +6,16 @@ import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
 import moment from "moment";
 import 'moment/locale/id';
 import { api } from "../../../api/api";
+import Swal from "sweetalert2";
 
 function MainCheckout({ dataCheckout }) {
         const [checkout, setCheckout] = useState([]);
+        const [isSubmitting, setIsSubmiting] = useState(false);
         //const [count, setCount] = useState(0);
         const {id_kelas_bisnis} = useParams()
         console.log(id_kelas_bisnis);
+        const id = checkout.id; 
+        useEffect(()=>{console.log(checkout)},[checkout])
 
         // function formatDate(dateString) {
         //     const options = { year: "numeric", month: "long", day: "numeric", hour:"2-digit" };
@@ -19,6 +23,59 @@ function MainCheckout({ dataCheckout }) {
         //     return formattedDate;
         //   }
     
+        const onSubmit = async (word) => {
+            console.log(word)
+            Swal.fire({
+              title: "Apakah anda yakin?",
+              text: "Data anda akan diubah secara permanent!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#0F1011",
+              cancelButtonColor: "#d33",
+              cancelButtonText: "Batal!",
+              confirmButtonText: "Ya!",
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                try {
+                  setIsSubmiting(true);
+        
+                  const token = JSON.parse(localStorage.getItem("auth"));
+                  const response = await api.put(
+                    `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/updateStatusTransaksi`,
+                    {
+                        id: id, 
+                        status_transaksi: "canceled",
+                    },
+                    {
+                        headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                      },
+                    }
+                  );
+                  console.log(response);
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Data anda berhasil di ubah",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                } catch (error) {
+                  Swal.fire({
+                    title: "Error",
+                    text: error.response.data.error || "something when wrong!",
+                    icon: "error",
+                    confirmButtonColor: "#0F1011",
+                  });
+                  console.log(error);
+                } finally {
+                  setIsSubmiting(false);
+                }
+              }
+            });
+          };
+
         const fetchCheckout = async () => {
            try {
             const token = JSON.parse(localStorage.getItem("auth"));
@@ -178,10 +235,10 @@ function MainCheckout({ dataCheckout }) {
                         </div>
                     </div>
                     
-                    <Link>
-                    <h1 className="text-[22px]  lg:text-[16px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px] underline">
-                        Batalkan Pembelian
-                    </h1>
+                    <Link onClick={ () => onSubmit("apa")}>
+                        <h1 className="text-[22px]  lg:text-[16px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px] underline">
+                            Batalkan Pembelian
+                        </h1>
                     </Link>
 
                     

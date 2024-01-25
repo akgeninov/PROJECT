@@ -4,9 +4,10 @@ const kelasBisnisModel = db.kelas_bisnis;
 const kelasBisnisDiskonModel = db.kelas_bisnis_diskon;
 const kelasDiskonModel = db.kelas_diskon;
 const kelasTransaksiModel = db.kelas_transaksi;
+const kelasRegistModel = db.kelas_regist;
 
 module.exports = {
-  changeTransaksiBool: async (req, res) => {
+  createTransaksi: async (req,res) => {
     try {
       const userData = req.dataToken;
       const getuser = await user.findOne({
@@ -15,20 +16,36 @@ module.exports = {
         },
         attributes: ["id"],
       });
-
+  
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
 
       const { id_kelas_bisnis } = req.body;
 
-      const existingTransaksi = await kelasTransaksiModel.findOne({
+      const getTransaksi = await kelasTransaksiModel.findOne({
         where: {
           id_user: getuser.id,
           id_kelas_bisnis: id_kelas_bisnis,
         },
+        include: [user, kelasBisnisModel],
       });
 
+      if (getTransaksi) {
+        throw new Error("DATA TRANSAKSI SUDAH ADA");
+      };
+      const getRegist = await kelasRegistModel.findOne({
+        where: {
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
+        },
+        include: [user],
+      });
+      console.log("tes111");
+
+      if (getRegist) {
+        throw new Error("DATA REGIST SUDAH ADA");
+      };
       const kelasBisnis = await kelasBisnisModel.findByPk(id_kelas_bisnis);
       if (!kelasBisnis) {
         throw new Error(`Kelas bisnis with id ${id_kelas_bisnis} not found.`);
@@ -51,16 +68,31 @@ module.exports = {
       const expiredDate = new Date(currentDate);
       expiredDate.setHours(expiredDate.getHours() + 24);
 
-      if(existingTransaksi){
-        const updatedValue = !existingTransaksi.isPaid;
-        await existingTransaksi.update({isPaid: updatedValue});
-
-        res.status(200).send({
-          message: `Transaksi isPaid bool updated to ${updatedValue}`,
-          data: existingTransaksi,
+      if(total===0){
+        const result = await kelasTransaksiModel.create({
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
+          harga: harga,
+          status_transaksi: "success",
+          isPaid: true,
+          persen_diskon: persenDiskon,
+          total: total,
+          date_transaksi: currentDate,
+          date_expired: expiredDate,
         });
-      }
-      else {
+        
+        const data = await kelasRegistModel.create({
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
+          tgl_daftar: currentDate,
+          progress: 0,
+        })
+        res.status(200).send({
+          message: "Transaksi created",
+          data: result, 
+          regist: data,
+        });
+      }else{
         const result = await kelasTransaksiModel.create({
           id_user: getuser.id,
           id_kelas_bisnis: id_kelas_bisnis,
@@ -70,12 +102,47 @@ module.exports = {
           date_transaksi: currentDate,
           date_expired: expiredDate,
         });
-  
         res.status(200).send({
           message: "Transaksi created",
-          data: result,
+          data: result, 
         });
       }
+      
+      
+      }catch (error) {
+        res.status(400).send({
+          error: error.message,
+        });
+      }
+  },
+
+  changeTransaksiBool: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const getuser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+
+      const { id_kelas_bisnis } = req.body;
+      const result = await kelasTransaksiModel.update({
+        isPaid: true,
+      },{where:
+        {
+          id_user:getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis
+        }
+      });
+      res.status(200).send({
+        message: "Transaksi Bool Updated",
+        data: result, 
+      });
     } catch (error) {
       res.status(400).send({
         error: error.message,
@@ -99,6 +166,7 @@ module.exports = {
   
       const { id, status_transaksi } = req.body;
   
+      console.log("id:", id)
       const transaction = await kelasTransaksiModel.findOne({
         where: {
           id: id,

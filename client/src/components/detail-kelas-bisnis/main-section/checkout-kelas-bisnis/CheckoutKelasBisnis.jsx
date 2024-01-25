@@ -22,7 +22,6 @@ function CheckoutKelasBisnis({ dataDetail }) {
         `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
         {
           id_kelas_bisnis: dataDetail.id_kelas_bisnis,
-          
         },
         {
           headers: {
@@ -256,7 +255,15 @@ function CheckoutKelasBisnis({ dataDetail }) {
         <button className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-black500 rounded-[10px]">
           <HiOutlineHeart className="text-[32px] text-black500" />
         </button>
-        <div onClick={() => addCheckout(user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login"))}>
+        <div onClick={() => {
+          if (dataDetail?.kelas_bisni?.harga > 0 ){
+            addCheckout(user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login"))
+          }else{
+            
+            navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
+          }
+        }
+          }>
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>
       </div>

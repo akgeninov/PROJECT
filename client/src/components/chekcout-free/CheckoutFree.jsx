@@ -1,10 +1,36 @@
-import React from "react";
+import React ,{useState} from "react";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
 import { images } from "../../constants";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ButtonBlack500 from "../global-component/button/button-black500/ButtonBlack500";
+import { api } from "../../api/api";
 
 function CheckoutFree () {
+  const [ setCheckout] = useState([]);
+  const token = JSON.parse(localStorage.getItem("auth"));
+
+  const {id_kelas_bisnis} = useParams()
+
+    const addCheckout = async () => {
+        try {
+          const response = await api.post(
+            `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
+            {
+              id_kelas_bisnis: id_kelas_bisnis,
+            },
+            {
+              headers: {
+                Authorization: token,
+              },
+            }
+          );
+          setCheckout(response.data.data);
+                  console.log(response);
+             } catch (error) {
+                console.log(error);
+              }
+             };
+
     return (
         <div className="w-full lg:w-full lg:h-[900px] h-[900px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>
             <h1 className="text-[22px] lg:text-[24px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px]">
@@ -64,8 +90,8 @@ function CheckoutFree () {
                     <div className="w-[350px] lg:w[350px] lg:mt-[20px]  mt-[20px]">
                         <p className="lg:text-[14px] text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link to="/checkout/approval-checkout"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
-                        <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Saya Sudah Bayar"}/>
+                    <Link onClick={() => addCheckout()} to="/"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
+                        <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Dapatkan Kelas"}/>
                     </Link>
                 </div>
             </div>
