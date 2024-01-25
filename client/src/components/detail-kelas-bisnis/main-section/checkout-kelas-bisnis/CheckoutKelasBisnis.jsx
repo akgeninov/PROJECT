@@ -22,6 +22,7 @@ function CheckoutKelasBisnis({ dataDetail }) {
         `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
         {
           id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+          
         },
         {
           headers: {

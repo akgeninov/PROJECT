@@ -1,19 +1,29 @@
 import React, { useEffect, useState } from "react";
 import { images } from "../../../constants";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
+import moment from "moment";
+import 'moment/locale/id';
 import { api } from "../../../api/api";
 
 function MainCheckout({ dataCheckout }) {
         const [checkout, setCheckout] = useState([]);
         //const [count, setCount] = useState(0);
+        const {id_kelas_bisnis} = useParams()
+        console.log(id_kelas_bisnis);
+
+        // function formatDate(dateString) {
+        //     const options = { year: "numeric", month: "long", day: "numeric", hour:"2-digit" };
+        //     const formattedDate = new Date(dateString).toLocaleDateString("id-ID", options);
+        //     return formattedDate;
+        //   }
     
         const fetchCheckout = async () => {
            try {
             const token = JSON.parse(localStorage.getItem("auth"));
             const response = await api.get(
-              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/:id_kelas_bisnis`,
+              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/${id_kelas_bisnis}`,
               {
                 headers: {
                   Accept: "application/json", "Content-Type": "application/Json",
@@ -76,7 +86,11 @@ function MainCheckout({ dataCheckout }) {
                         <div className="w-full lg:w-full lg:h-[70px] lg:mt-[20px] lg:flex h-[70px] flex mt-[20px]" style={{borderBottom: '2px solid #DEDEDE'}}>
                             <div className="lg:ml-[20px] ml-[20px]">
                                 <p className="lg:text-[14px] text-[14px]" style={{color: "#3F4041"}}>Bayar Sebelum</p>
-                                <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">Rabu, 27 Desember 2023, 10:40 WIB</p>
+                                <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">
+                                {moment(checkout.date_expired).format(
+              "DD MMMM YYYY, hh:mm"
+            )} WIB
+                                </p>
                             </div>
                             {/* <div className="w-[134px] lg:w-[134px] lg:h-[32px] lg:ml-auto lg:mr-[20px] lg:flex h-[32px] ml-auto mr-[20px] rounded-[6px] flex" style={{border: '2px solid #BA0000', backgroundColor:"#F8E6E6"}}>
                                 <FaClock className="h-[14px] lg:h-[14px] lg:w-[14px] mt-[8px] ml-[8px] w-[14px] lg:mt-[8px] lg:ml-[8px]" style={{color:"#BA0000"}} />
@@ -169,6 +183,8 @@ function MainCheckout({ dataCheckout }) {
                         Batalkan Pembelian
                     </h1>
                     </Link>
+
+                    
                 </div>
             </div>
             {/* ))} */}
