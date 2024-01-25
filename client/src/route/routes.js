@@ -26,6 +26,12 @@ import CareerLowongan from "../pages/career-lowongan/CareerLowongan";
 import OneCareerLowongan from "../pages/career-lowongan/one-career-lowongan/OneCareerLowongan";
 import DetailProfile from "../pages/detail-profile/DetailProfile";
 import UbahProfile from "../pages/ubah-profile/UbahProfile";
+import SemuaTransaksi from "../components/profile/transaksi/semua-transaksi/SemuaTransaksi";
+import TransaksiBerhasil from "./../components/profile/transaksi/transaksi-berhasil/TransaksiBerhasil";
+import TransaksiMenunggu from "../components/profile/transaksi/transaksi-menunggu/TransaksiMenunggu";
+import TransaksiDibatalkan from "./../components/profile/transaksi/transaksi-dibatalkan/TransaksiDibatalkan";
+// import LihatInvoice from "../components/profile/transaksi/lihat-invoice/LihatInvoice";
+import Invoice from "./../pages/invoice/Invoice";
 import Checkout from "../pages/checkout/Checkout";
 import Approval from "../pages/checkout-approval/Approval";
 import Success from "../pages/success-checkout/Success";
@@ -125,9 +131,9 @@ const routes = [
         <Career />
       </Protection>
     }
-    />,
+  />,
 
-    <Route
+  <Route
     key="kelas-bisnis"
     path="/kelas-bisnis"
     element={
@@ -136,7 +142,7 @@ const routes = [
       </Protection>
     }
   />,
-  
+
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -145,9 +151,9 @@ const routes = [
         <CareerLowongan />
       </Protection>
     }
-    />,
+  />,
 
-    <Route
+  <Route
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
     element={
@@ -169,7 +175,7 @@ const routes = [
 
   <Route
     key="profile"
-    path="/profile"
+    path="/profile/"
     element={
       <Protection userOnly={true}>
         <Profile />
@@ -177,27 +183,33 @@ const routes = [
     }
   >
     <Route index element={<DashboardProfile />} />
-    <Route path="/profile/dashboard/" element={<DashboardProfile />} />
-    <Route path="/profile/kelas-saya/" element={<KelasSaya />}>
+    <Route path="dashboard/" element={<DashboardProfile />} />
+    <Route path="kelas-saya/" element={<KelasSaya />}>
       <Route index element={<SemuaKelasSection />} />
-      <Route
-        path="/profile/kelas-saya/semua-kelas"
-        element={<SemuaKelasSection />}
-      />
-      <Route
-        path="/profile/kelas-saya/belum-dimulai"
-        element={<BelumDimulaiSection />}
-      />
-      <Route
-        path="/profile/kelas-saya/sedang-dipelajari"
-        element={<SedangDipelajariSection />}
-      />
-      <Route path="/profile/kelas-saya/selesai" element={<SelesaiSection />} />
+      <Route path="semua-kelas" element={<SemuaKelasSection />} />
+      <Route path="belum-dimulai" element={<BelumDimulaiSection />} />
+      <Route path="sedang-dipelajari" element={<SedangDipelajariSection />} />
+      <Route path="selesai" element={<SelesaiSection />} />
     </Route>
-    <Route path="/profile/wishlist/" element={<Wishlist />} />
-    <Route path="/profile/event/" element={<Event />} />
-    <Route path="/profile/transaksi/" element={<Transaksi />} />
+    <Route path="wishlist/" element={<Wishlist />} />
+    <Route path="event/" element={<Event />} />
+    <Route path="transaksi/" element={<Transaksi />}>
+      <Route index element={<SemuaTransaksi />} />
+      <Route path="semua-transaksi" element={<SemuaTransaksi />} />
+      <Route path="transaksi-berhasil" element={<TransaksiBerhasil />} />
+      <Route path="transaksi-menunggu" element={<TransaksiMenunggu />} />
+      <Route path="transaksi-dibatalkan" element={<TransaksiDibatalkan />} />
+    </Route>
   </Route>,
+  <Route
+    key="invoice"
+    path="/profile/transaksi/:transaction_id/lihat-invoice"
+    element={
+      <Protection userOnly={true}>
+        <Invoice />
+      </Protection>
+    }
+  />,
   <Route
     key="about-us"
     path="/about-us"

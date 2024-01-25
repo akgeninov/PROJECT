@@ -159,11 +159,11 @@ module.exports = {
         },
         attributes: ["id"],
       });
-  
+
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
-  
+
       const { id, status_transaksi } = req.body;
   
       console.log("id:", id)
@@ -173,21 +173,27 @@ module.exports = {
           id_user: getuser.id,
         },
       });
-  
+
       if (!transaction) {
-        throw new Error(`Transaction with id ${id} not found for the current user.`);
+        throw new Error(
+          `Transaction with id ${id} not found for the current user.`
+        );
       }
-  
-      if (status_transaksi && ['success', 'canceled', 'pending'].includes(status_transaksi)) {
+
+      if (
+        status_transaksi &&
+        ["success", "canceled", "pending"].includes(status_transaksi)
+      ) {
         await transaction.update({ status_transaksi: status_transaksi });
-  
+
         res.status(200).send({
           message: "Transaction status updated",
           data: transaction,
         });
       } else {
         res.status(400).send({
-          error: "Invalid value for 'status_transaksi'. Please provide a valid value.",
+          error:
+            "Invalid value for 'status_transaksi'. Please provide a valid value.",
         });
       }
     } catch (error) {
@@ -196,7 +202,7 @@ module.exports = {
       });
     }
   },
-  
+
   getTransaksiByIdUser: async (req, res) => {
     try {
       const userData = req.dataToken;
@@ -206,11 +212,10 @@ module.exports = {
         },
         attributes: ["id"],
       });
-
+      // console.log({ userData });
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
-
       const result = await kelasTransaksiModel.findAll({
         where: {
           id_user: getuser.id,
@@ -268,4 +273,172 @@ module.exports = {
     }
   },
   
+
+  getTransaksiByIdUserSuccess: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const getuser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+      const result = await kelasTransaksiModel.findAll({
+        where: {
+          id_user: getuser.id,
+          status_transaksi: ["success"],
+        },
+        include: [
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          },
+        ],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
+      });
+
+      res.status(200).send({
+        message: "success",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+  getTransaksiByIdUserPending: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const getuser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+      const result = await kelasTransaksiModel.findAll({
+        where: {
+          id_user: getuser.id,
+          status_transaksi: ["pending"],
+        },
+        include: [
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          },
+        ],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
+      });
+
+      res.status(200).send({
+        message: "success",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+  getTransaksiByIdUserCanceled: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const getuser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+      const result = await kelasTransaksiModel.findAll({
+        where: {
+          id_user: getuser.id,
+          status_transaksi: ["canceled"],
+        },
+        include: [
+          {
+            model: kelasBisnisModel,
+            attributes: ["nama", "image", "harga", "images_link"],
+          },
+        ],
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
+      });
+
+      res.status(200).send({
+        message: "success",
+        data: result,
+      });
+    } catch (error) {
+      res.status(400).send({
+        error: error.message,
+      });
+    }
+  },
+
+  getTransaksiInvoice: async (req, res) => {
+    try {
+      const userData = req.dataToken;
+      const { id_kelas_bisnis } = req.body;
+      const getuser = await user.findOne({
+        where: {
+          email: userData.email,
+        },
+        attributes: ["id"],
+      });
+
+      if (!getuser) {
+        throw new Error("USER TIDAK DITEMUKAN");
+      }
+      const result = await kelasTransaksiModel.findOne({
+        where: {
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
+        },
+        attributes: [
+          "id",
+          "nomor_invoice",
+          "date_transaksi",
+          "status_transaksi",
+        ],
+        include: [
+          {
+            model: user,
+            attributes: ["id", "nama_lengkap", "email"],
+          },
+          {
+            model: kelasBisnisModel,
+            attributes: ["id", "nama", "image", "harga", "images_link"],
+          },
+        ],
+      });
+
+      res.json(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Internal Server Error" });
+    }
+  },
 };

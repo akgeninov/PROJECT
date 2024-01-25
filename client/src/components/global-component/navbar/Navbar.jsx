@@ -274,7 +274,12 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="px-[24px] py-[12px] flex flex-col justify-center items-start cursor-pointer">
-                    Transaksi
+                  <Link
+                      to={"/profile/transaksi"}
+                      onClick={() => setTOggleProfile(false)}
+                    >
+                      Transaksi
+                    </Link>
                   </li>
                   <li
                     onClick={logOut}

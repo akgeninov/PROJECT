@@ -5,6 +5,7 @@ const {
   kelas_mentor,
   kelas_rating,
   kelas_regist,
+  kelas_wishlist,
 } = require("../models");
 const {
   kelas_bisnis,
@@ -237,7 +238,20 @@ module.exports = {
         where: {
           ...(id ? { id: id } : {}),
         },
-        attributes: ["id", "deskripsi", "id_kelas_bisnis"],
+        attributes: [
+          "id",
+          "deskripsi",
+          "id_kelas_bisnis",
+          // [
+          //   sequelize.literal(
+          //     `(SELECT kelas_wishlist.isRemove, kelas_wishlist.id_kelas_bisnis 
+          //     FROM kelas_wishlist 
+          //     INNER JOIN User
+          //     ON kelas_wishlist.id_user = User.id;)`
+          //   ),
+          //   "isRemove",
+          // ],
+        ],
         include: [
           {
             model: kelas_materi,
