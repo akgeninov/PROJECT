@@ -10,26 +10,25 @@ function CheckoutFree () {
   const token = JSON.parse(localStorage.getItem("auth"));
 
   const {id_kelas_bisnis} = useParams()
-
-    const addCheckout = async () => {
-        try {
-          const response = await api.post(
-            `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
-            {
-              id_kelas_bisnis: id_kelas_bisnis,
-            },
-            {
-              headers: {
-                Authorization: token,
-              },
-            }
-          );
-          setCheckout(response.data.data);
-                  console.log(response);
-             } catch (error) {
-                console.log(error);
-              }
-             };
+  const addCheckout = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
+        {
+          id_kelas_bisnis: id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setCheckout(response.data.data);
+              console.log(response);
+         } catch (error) {
+            console.log(error);
+          }
+         };
 
     return (
         <div className="w-full lg:w-full lg:h-[900px] h-[900px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>

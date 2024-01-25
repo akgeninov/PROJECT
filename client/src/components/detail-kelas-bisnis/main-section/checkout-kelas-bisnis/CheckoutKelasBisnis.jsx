@@ -15,11 +15,11 @@ function CheckoutKelasBisnis({ dataDetail }) {
   // const [status, setStatus] = useState();
   const navigate = useNavigate();
 
-  const token = JSON.parse(localStorage.getItem("auth"));
   const addCheckout = async () => {
     try {
+      const token = JSON.parse(localStorage.getItem("auth"));
       const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
         {
           id_kelas_bisnis: dataDetail.id_kelas_bisnis,
         },

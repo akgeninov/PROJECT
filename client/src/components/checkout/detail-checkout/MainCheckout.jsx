@@ -76,6 +76,28 @@ function MainCheckout({ dataCheckout }) {
             });
           };
 
+        const paidCheckout = async () => {
+            try {
+                const token = JSON.parse(localStorage.getItem("auth"));
+                const response = await api.put(
+                    `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
+                    {
+                        id_kelas_bisnis: id_kelas_bisnis, 
+                    },
+                    {
+                        headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    }
+                );
+                setCheckout(response.data.data);
+                console.log(response);
+            }catch (error) {
+                console.log(error);
+              }
+        };
+        
         const fetchCheckout = async () => {
            try {
             const token = JSON.parse(localStorage.getItem("auth"));
@@ -105,6 +127,7 @@ function MainCheckout({ dataCheckout }) {
           console.log(checkout)
         },[checkout]);
 
+        
         // console.log("kelas_bisnis =",id_kelas_bisnis)
 
 
@@ -252,7 +275,7 @@ function MainCheckout({ dataCheckout }) {
                     <div className="w-[350px] lg:w[350px] lg:mt-[20px]  mt-[20px]">
                         <p className="lg:text-[14px] text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link to="/checkout/approval-checkout"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
+                    <Link onClick={() => paidCheckout()} to="/checkout/approval-checkout"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
                         <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Saya Sudah Bayar"}/>
                     </Link>
                 </div>
