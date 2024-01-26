@@ -6,6 +6,7 @@ import ButtonBlack500 from "../../../global-component/button/button-black500/But
 import { api } from "../../../../api/api";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function CheckoutKelasBisnis({ dataDetail }) {
   const [star, setStar] = useState(0);
@@ -60,7 +61,24 @@ function CheckoutKelasBisnis({ dataDetail }) {
   // console.log(check.isRemove);
   // console.log(status);
 
-  const addCheckout = async () => {
+  const copyToClipboard = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada",
+        showConfirmButton: false,
+        timer: 3000,
+    });
+  };
+
+  const addCheckout = async (text) => {
     try {
       const token = JSON.parse(localStorage.getItem("auth"));
       const response = await api.post(
@@ -77,9 +95,17 @@ function CheckoutKelasBisnis({ dataDetail }) {
       setCheckout(response.data.data);
               console.log(response);
          } catch (error) {
-            console.log(error);
+            if (error.response && error.response.status === 400) {
+              copyToClipboard();
+              console.log(error);
+            }else{
+              user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+            }
+            
           }
          };
+
+  
 
         //  useEffect(() => {
         //   addCheckout();
@@ -308,9 +334,8 @@ function CheckoutKelasBisnis({ dataDetail }) {
         </button>
         <div onClick={() => {
           if (dataDetail?.kelas_bisni?.harga > 0 ){
-            addCheckout(user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login"))
+            addCheckout();
           }else{
-            
             navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
           }
         }

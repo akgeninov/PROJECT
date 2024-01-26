@@ -7,6 +7,7 @@ import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke
 import { api } from "../../../api/api";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function HeroSection({ dataDetail, star }) {
   const { value } = useSelector((state) => state.detailKelasSlice);
@@ -14,6 +15,23 @@ function HeroSection({ dataDetail, star }) {
   const [ setCheckout] = useState([]);
   const navigate = useNavigate();
   // const [star, setStar] = useState(null);
+
+  const copyToClipboard = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada",
+        showConfirmButton: false,
+        timer: 3000,
+    });
+  };
 
   const addCheckout = async () => {
     try {
@@ -30,9 +48,14 @@ function HeroSection({ dataDetail, star }) {
         }
       );
       setCheckout(response.data.data);
-              console.log(response);
+      console.log(response);
     } catch (error) {
-        console.log(error);
+        if (error.response && error.response.status === 400) {
+          copyToClipboard();
+          console.log(error);
+        }else{
+          user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+        }
       }
   };
 
@@ -444,7 +467,7 @@ function HeroSection({ dataDetail, star }) {
           <div
             onClick={() => {
               if (dataDetail?.kelas_bisni?.harga > 0 ){
-                addCheckout(user ? navigate("/checkout/${dataDetail.id_kelas_bisnis}") : navigate("/login"))
+                addCheckout();
               }else{
                 navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
               }

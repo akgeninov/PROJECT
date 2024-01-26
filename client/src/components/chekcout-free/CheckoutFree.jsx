@@ -1,15 +1,34 @@
 import React ,{useState} from "react";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
 import { images } from "../../constants";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import ButtonBlack500 from "../global-component/button/button-black500/ButtonBlack500";
 import { api } from "../../api/api";
+import Swal from "sweetalert2";
 
 function CheckoutFree () {
   const [ setCheckout] = useState([]);
   const token = JSON.parse(localStorage.getItem("auth"));
-
+  const navigate = useNavigate()
   const {id_kelas_bisnis} = useParams()
+
+  const copyToClipboard = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada",
+        showConfirmButton: false,
+        timer: 3000,
+    });
+  };
+
   const addCheckout = async () => {
     try {
       const response = await api.post(
@@ -24,9 +43,14 @@ function CheckoutFree () {
         }
       );
       setCheckout(response.data.data);
-              console.log(response);
+        console.log(response);
          } catch (error) {
-            console.log(error);
+            if (error.response && error.response.status === 400) {
+                copyToClipboard();
+                console.log(error);
+              }else{
+                navigate("/");
+              }
           }
          };
 
@@ -89,7 +113,7 @@ function CheckoutFree () {
                     <div className="w-[350px] lg:w[350px] lg:mt-[20px]  mt-[20px]">
                         <p className="lg:text-[14px] text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link onClick={() => addCheckout()} to="/"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
+                    <Link onClick={() => addCheckout()} className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
                         <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Dapatkan Kelas"}/>
                     </Link>
                 </div>
