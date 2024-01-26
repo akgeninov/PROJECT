@@ -29,6 +29,7 @@ function DetailKelasBisnis() {
       setStar(Number(response.data[0].kelas_bisni.total_nilai));
       dispatch(detailKelas(response.data));
       console.log(Number(response.data[0].kelas_bisni.total_nilai));
+      checkStatusWishlist(response.data[0]);
     } catch (error) {
       console.log(error);
     }
@@ -56,12 +57,14 @@ function DetailKelasBisnis() {
       console.log(error);
     }
   };
-  const checkStatusWishlist = async () => {
+
+  const checkStatusWishlist = async (data) => {
+    console.log(data);
     try {
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/wishlist-status`,
         {
-          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+          id_kelas_bisnis: data.id,
         },
         {
           headers: {
@@ -70,7 +73,8 @@ function DetailKelasBisnis() {
         }
       );
       setCheck(response.data.data);
-      setStatus(response.data.data.isRemove);
+      setStatus(response.data.data?.isRemove);
+      console.log(response);
     } catch (error) {
       console.log(error);
     }
@@ -78,7 +82,6 @@ function DetailKelasBisnis() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-    checkStatusWishlist();
   }, []);
 
   return (
@@ -87,13 +90,13 @@ function DetailKelasBisnis() {
         dataDetail={dataDetail}
         star={star}
         addWishlist={addWishlist}
-        checkStatusWishlist={checkStatusWishlist}
+        // checkStatusWishlist={checkStatusWishlist}
         status={status}
       />
       <MainSection
         dataDetail={dataDetail}
         addWishlist={addWishlist}
-        checkStatusWishlist={checkStatusWishlist}
+        // checkStatusWishlist={checkStatusWishlist}
         status={status}
       />
     </div>

@@ -6,7 +6,7 @@ import ProfilePengajar from "./profile-pengajar/ProfilePengajar";
 import ListMateriKelasBisnis from "./list-materi-kelas-bisnis/ListMateriKelasBisnis";
 import ReviewPeserta from "./review-peserta/ReviewPeserta";
 
-function MainSection({ dataDetail, addWishlist, checkStatusWishlist, status }) {
+function MainSection({ dataDetail, addWishlist,  status }) {
   return (
     <div className="mt-[160px] mb-[60px] md:mb-[160px] w-full px-[5px] md:px-[100px] 2xl:px-0 gap-[52px]  2xl:max-w-[1080px] h-full  flex justify-between items-start  ">
       <div className="flex flex-col items-center  md:items-start gap-[48px] md:gap-[80px] ">
@@ -20,7 +20,7 @@ function MainSection({ dataDetail, addWishlist, checkStatusWishlist, status }) {
         <CheckoutKelasBisnis
           dataDetail={dataDetail}
           addWishlist={addWishlist}
-          checkStatusWishlist={checkStatusWishlist}
+          // checkStatusWishlist={checkStatusWishlist}
           status={status}
         />
       </div>

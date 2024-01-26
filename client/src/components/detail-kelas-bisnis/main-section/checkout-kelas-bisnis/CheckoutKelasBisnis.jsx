@@ -9,7 +9,7 @@ import { api } from './../../../../api/api';
 function CheckoutKelasBisnis({
   dataDetail,
   addWishlist,
-  checkStatusWishlist,
+  // checkStatusWishlist,
   status,
 }) {
   const [star, setStar] = useState(0);
@@ -50,7 +50,6 @@ function CheckoutKelasBisnis({
 
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
-    checkStatusWishlist();
   }, [dataDetail]);
 
   return (
