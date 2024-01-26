@@ -5,6 +5,7 @@ const lowonganRouters = require("./lowonganRouters");
 const kelasBisnisRouters = require("./kelasBisnisRouters");
 const userKelasRouters = require("./userKelasRouters");
 const kelasWishlistRouters = require("./kelasWishlistRouters");
+const testingRouter = require("./testingRouters");
 
 module.exports = {
   loginRouters,
@@ -14,4 +15,5 @@ module.exports = {
   kelasBisnisRouters,
   userKelasRouters,
   kelasWishlistRouters,
+  testingRouter,
 };

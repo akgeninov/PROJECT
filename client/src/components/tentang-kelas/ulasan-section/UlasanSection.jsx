@@ -54,7 +54,7 @@ function UlasanSection({ ulasan }) {
           Ulasan
         </h1>
 
-        <div className="w-full  max-w-[695px] flex flex-col p-[28px]  border-[1px] rounded-[10px] border-black100">
+        <div className="w-full max-w-none lg:max-w-[695px] flex flex-col p-[28px]  border-[1px] rounded-[10px] border-black100">
           <div className="h-full max-h-[606px] overflow-y-scroll  w-full pr-[17px] space-y-[12px] lg:space-y-[22px]">
             {ulasan.map((el, index) => {
               const tanggalHariIni = new Date();

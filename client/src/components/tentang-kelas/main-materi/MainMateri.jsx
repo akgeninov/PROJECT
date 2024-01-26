@@ -33,10 +33,7 @@ function MainMateri({ kelas, progress }) {
             <div className=" p-[15px] lg:p-[32px] flex w-full lg:w-auto lg:flex-1 flex-col justify-center items-center border-[1px] border-whiteSmoke700 gap-[22px] rounded-[10px]">
               {kelas?.map((el, index) => {
                 return (
-                  <div
-                    onClick={() => navigate(`/lms?materi=${el.id}&kelas=${id}`)}
-                    className="bg-black50 rounded-[10px] cursor-pointer px-[10px] py-[10px] lg:py-[23px] flex justify-start items-center w-full"
-                  >
+                  <div className="bg-black50 rounded-[10px] cursor-pointer px-[10px] py-[10px] lg:py-[23px] flex justify-start items-center w-full">
                     <p className="text-[12px] lg:text-[18px] leading-[24px]">
                       {index + 1}. {el.materi}
                     </p>

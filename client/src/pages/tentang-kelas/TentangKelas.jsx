@@ -55,7 +55,11 @@ function TentangKelas() {
 
   return (
     <div className="flex flex-col justify-center items-center shrink-0">
-      <HeadSection imageKelas={imageKelas} deskripsi={deskripsi} />
+      <HeadSection
+        imageKelas={imageKelas}
+        kelas={kelas}
+        deskripsi={deskripsi}
+      />
       <MainMateri kelas={kelas} progress={progress} />
       <UlasanSection ulasan={ulasan} />
     </div>

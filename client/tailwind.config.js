@@ -5,6 +5,7 @@ module.exports = {
     extend: {
       colors: {
         whiteSmoke500: "#F4F4F4",
+        whiteSmoke550: "#F0F0F0;",
         whiteSmoke600: "#DEDEDE",
         whiteSmoke700: "#ADADAD",
         whiteSmoke800: "#868686",

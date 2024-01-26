@@ -7,6 +7,8 @@ const utility = require("./utility");
 const nodemailer = require("../lib/nodemailer/nodemailer");
 const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
+const fs = require("fs");
+const handlebars = require("handlebars");
 dotenv.config();
 
 module.exports = {
@@ -243,12 +245,19 @@ module.exports = {
       if (!result) throw new Error("failed to create token");
       // const jwt = utility.makeJWT(getUser);
 
-      const resetLink = `${process.env.CLIENT_BASE_URL}/verifikasi/${result}`;
+      const verificationLink = `${process.env.CLIENT_BASE_URL}/verifikasi/${result}`;
+      const tempEmail = fs.readFileSync(
+        require.resolve("../template/verifikasi.html"),
+        { encoding: "utf8" }
+      );
+      const tempCompile = handlebars.compile(tempEmail);
+      const tempResult = tempCompile({ verificationLink });
       let mail = {
         from: `Admin <zainurrouf4@gmail.com>`,
         to: `${dataToken.email}`,
         subject: ` verifikasi akun growlab`,
-        html: `<a href="${resetLink}">${resetLink}</a>`,
+        // html: `<a href="${resetLink}">${resetLink}</a>`,
+        html: tempResult,
       };
       let response = nodemailer.sendMail(mail);
       res.status(200).send({
@@ -260,13 +269,17 @@ module.exports = {
   },
   verifikasiUser: async (req, res) => {
     const t = await db.sequelize.transaction();
+    console.log("wait");
+
     try {
       const { token } = req.params;
 
       if (!token) throw new Error("Token not found!");
-
       const validateTokenResult = jwt.verify(token, process.env.SECRET_JWT);
 
+      if (!validateTokenResult) {
+        throw new Error("Token expired");
+      }
       const result = await user.update(
         {
           verified: true,
@@ -281,6 +294,8 @@ module.exports = {
         }
       );
 
+      // Proses result jika diperlukan
+      // Gantilah dengan tindakan yang sesuai
       await t.commit();
       res.status(200).send({
         message: "success",
@@ -325,7 +340,6 @@ module.exports = {
   requestResetPassword: async (req, res) => {
     try {
       const { email } = req.body;
-
       const getUser = await user.findOne({
         where: {
           email: email,
@@ -335,6 +349,7 @@ module.exports = {
         email: getUser.email,
         id_role: getUser.id_role,
       };
+
       const result = jwt.sign(payload, process.env.SECRET_JWT, {
         algorithm: "HS256",
         expiresIn: "1m",
@@ -344,13 +359,21 @@ module.exports = {
       if (!result) throw new Error("failed to create token");
       // const jwt = utility.makeJWT(getUser);
 
-      const resetLink = `${process.env.CLIENT_BASE_URL}/reset-password/${result}`;
+      const verificationLink = `${process.env.CLIENT_BASE_URL}/reset-password/${result}`;
+      const tempEmail = fs.readFileSync(
+        require.resolve("../template/reset-password.html"),
+        { encoding: "utf8" }
+      );
+      const tempCompile = handlebars.compile(tempEmail);
+      const tempResult = tempCompile({ verificationLink });
       let mail = {
         from: `Admin <zainurrouf4@gmail.com>`,
         to: `${email}`,
-        subject: ` Reset password growlab`,
-        html: `<a href="${resetLink}">${resetLink}</a>`,
+        subject: ` verifikasi akun growlab`,
+        // html: `<a href="${resetLink}">${resetLink}</a>`,
+        html: tempResult,
       };
+
       let response = nodemailer.sendMail(mail);
       res.status(200).send({
         message: "success",

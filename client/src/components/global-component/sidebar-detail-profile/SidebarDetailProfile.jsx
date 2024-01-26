@@ -22,10 +22,19 @@ export default function SidebarDetailprofile() {
       boxShadow: isActive ? "3px 3px 7px rgba(128,128,128,0.3)" : "",
     };
   };
+  const NavlinkStylesDisable = ({ isActive }) => {
+    return {
+      fontWeight: "normal",
+      color: "#DEDEDE",
+      backgroundColor: "#F4F4F4",
+      boxShadow: "",
+      opacity: 10,
+    };
+  };
 
   const menuEdit = [
     ["Detail Profil", `/profile/${user?.username || ""}`],
-    ["Data Pribadi", "/profile/dashboard"],
+    ["Data Pribadi", null],
     ["Informasi Lainnya", "/profile/info-lain"],
     ["Ubah Password", "/profile/password"],
   ];
@@ -48,7 +57,7 @@ export default function SidebarDetailprofile() {
             {menuEdit.map(([title, url]) => (
               <NavLink
                 to={url}
-                style={NavlinkStyles}
+                style={url ? NavlinkStyles : NavlinkStylesDisable}
                 className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
               >
                 {title}

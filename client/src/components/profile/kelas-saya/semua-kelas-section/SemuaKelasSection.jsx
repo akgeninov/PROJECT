@@ -18,6 +18,7 @@ export default function SemuaKelasSection() {
           },
         }
       );
+      console.log(response);
       setKelas(response.data.data);
     } catch (error) {
       console.log(error);

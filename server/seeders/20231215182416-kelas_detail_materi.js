@@ -72,6 +72,12 @@ module.exports = {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id_kelas_detail: 3,
+        id_kelas_materi: 4,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
 
       {
         id_kelas_detail: 4,
