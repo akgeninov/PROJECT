@@ -69,8 +69,7 @@ function Navbar() {
         (el) =>
           firstPath.toLowerCase() === el.navi?.split("/")[1]?.toLowerCase()
       );
-
-      if (getSameData.length > 0) setIsActive(getSameData[0].BUTTON_TEXT);
+      if (getSameData.length > 0) setIsActive(getSameData[0]?.BUTTON_TEXT);
       else {
         const getSameDropData = data.navigationData
           .filter((el) => {
@@ -123,7 +122,6 @@ function Navbar() {
     const getSameData = data.navigationData.filter(
       (el) => firstPath.toLowerCase() === el.navi?.split("/")[1]?.toLowerCase()
     );
-
     if (getSameData.length > 0) {
       setIsActive(getSameData[0].BUTTON_TEXT);
       setDropMenu("");
@@ -232,18 +230,19 @@ function Navbar() {
         const getDataPath = data.navigationData.filter(
           (el) => `${el.navi && el.navi.split("/")[1]}` === firstPath[1]
         );
+        if (getDataPath.length > 0) {
+          setIsActive(getDataPath[0].BUTTON_TEXT);
+          sessionStorage.setItem(
+            "active",
+            JSON.stringify(getDataPath[0].BUTTON_TEXT)
+          );
 
-        setIsActive(getDataPath[0].BUTTON_TEXT);
-        sessionStorage.setItem(
-          "active",
-          JSON.stringify(getDataPath[0].BUTTON_TEXT)
-        );
-
-        console.log({
-          firstPath: firstPath[1],
-          data: data.dataService,
-          getDataPath,
-        });
+          console.log({
+            firstPath: firstPath[1],
+            data: data.dataService,
+            getDataPath,
+          });
+        }
       } else {
         sessionStorage.setItem("active", JSON.stringify("home"));
       }

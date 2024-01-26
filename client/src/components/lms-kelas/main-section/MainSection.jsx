@@ -20,13 +20,15 @@ import { useNavigate, useParams } from "react-router-dom";
 import { api } from "../../../api/api";
 import { HiChevronRight } from "react-icons/hi";
 import Swal from "sweetalert2";
+import YouTube from "react-youtube";
+import VideoPlayer from "./video-player/VideoPlayer";
 const steps = [
   { title: "First", description: "Contact Info" },
   { title: "Second", description: "Date & Time" },
   { title: "Third", description: "Select Rooms" },
 ];
 
-function MainSection() {
+function MainSection({ fullscreen, setFullscreen }) {
   // console.log({ coba });
   // const { id } = useParams();
   const [materiId, setMateriId] = useState(1);
@@ -43,6 +45,7 @@ function MainSection() {
   const [isLoading, setIsLoading] = useState(false);
   const timeoutRef = useRef(null);
   const timeoutFetchRef = useRef(null);
+  const playerRef = useRef();
 
   const coba = [
     {
@@ -168,15 +171,27 @@ function MainSection() {
       }, 10000);
     }
   }, [toggle]);
+  const iframeRef = useRef(null);
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
 
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  //   const iframeElement = document.getElementById("iframeid");
+  //   console.log(iframeElement);
+  //   if (iframeElement) {
+  //     iframeElement.contentDocument.oncontextmenu = function () {
+  //       return false;
+  //     };
+  //   }
+  // }, [subModul]);
+
   return (
     <div
-      className={`bg-whiteSmoke500  bg-opacity-50  relative flex  h-full  w-screen justify-center lg:justify-between items-start  `}
+      className={`bg-whiteSmoke500  bg-opacity-50  relative flex  h-full overflow-x-hidden  w-screen justify-center lg:justify-between items-start  `}
     >
-      <div className="relative w-full max-w-[373px] overflow-x-clip  overflow-y-scroll  bg-whiteSmoke600   py-[24px] hidden xl:flex  flex-col flex-grow h-full max-h-[1400px]    items-center">
+      <div className="relative w-full max-w-[373px] overflow-x-clip  overflow-y-scroll bg-whiteSmoke550 scrollbar-hide  py-[24px] hidden xl:flex  flex-col flex-grow h-full max-h-[1400px]    items-center">
         <div className="w-full flex flex-col h-full min-h-[1352px] overflow-x-clip">
           <div className="w-full px-[24px]">
             <Skeleton
@@ -380,14 +395,14 @@ function MainSection() {
       <div
         className={` ${
           toggle ? "translate-x-0" : "-translate-x-[373px]"
-        } duration-300 absolute left-[373px]  h-full `}
+        } duration-300 absolute left-[373px] z-[40] h-full  `}
       >
         <div
           onClick={() => setToggle((prev) => !prev)}
-          className={` sticky  bg-whiteSmoke600   rounded-r-[10px] top-[232px] flex xl:hidden justify-center items-center`}
+          className={` sticky  bg-whiteSmoke550     rounded-r-[10px] top-[232px] flex xl:hidden justify-center items-center`}
         >
           <div
-            className={` cursor-pointer  rounded-r-[10px]  bg-opacity-50 w-[25px] h-[64px]  flex justify-center items-center bg-whiteSmoke600 `}
+            className={` cursor-pointer  rounded-r-[10px]   w-[25px] h-[64px]  flex justify-center items-center bg-whiteSmoke550 `}
           >
             <HiChevronRight
               className={`${toggle ? "rotate-0" : "rotate-180"} duration-300`}
@@ -399,7 +414,7 @@ function MainSection() {
       <div
         className={`${
           toggle ? "translate-x-0" : "-translate-x-full"
-        } duration-300 absolute left-0 top-0 bg-whiteSmoke600 w-full max-w-[373px] h-[1400px]  overflow-x-clip overflow-y-scroll    flex xl:hidden flex-col justify-start items-center`}
+        } duration-300 absolute left-0 top-0 bg-whiteSmoke550 z-[40] w-full max-w-[373px] h-[1400px]   overflow-x-clip overflow-y-scroll    flex xl:hidden flex-col justify-start items-center`}
       >
         <div className="w-full h-full flex flex-col justify-start items-center py-[24px]">
           <div className="w-full  h-full">
@@ -550,7 +565,7 @@ function MainSection() {
         </div>
       </div>
 
-      <div className="w-full  px-5 lg:px-[100px] flex flex-1 flex-col h-[1400px] overflow-y-scroll   scrollbar-hide items-center pt-[32px]  gap-[32px] lg:gap-[52px]">
+      <div className="w-full  px-5 lg:px-[100px] flex flex-1 flex-col h-[1400px] overflow-y-scroll overflow-x-hidden  scrollbar-hide items-center pt-[32px]  gap-[32px] lg:gap-[52px]">
         <Skeleton
           isLoaded={!isLoading}
           fadeDuration={1}
@@ -563,7 +578,6 @@ function MainSection() {
             {moduleTitle}
           </p>
         </Skeleton>
-
         <div className="w-full lg:w-[752px] h-max  px-5  lg:px-[100px] flex flex-col flex-grow items-center justify-start ">
           {/* {isLoading ? (
             <Spinner size={"xl"} />
@@ -577,35 +591,30 @@ function MainSection() {
             }   flex flex-col gap-[52px] justify-start items-center`}
           >
             {subModul?.map((el, index) => {
+              let videoCode;
+              if (el.link.includes("youtu.be")) {
+                videoCode = el.link.split("/").pop().split("?")[0];
+              } else if (el.link.includes("youtube.com")) {
+                videoCode = el.link.split("v=")[1].split("&")[0];
+              }
               return (
                 <div
                   key={index}
-                  className="w-full flex flex-col justify-center items-center"
+                  className="w-full flex flex-col justify-center items-center   "
                 >
-                  <iframe
-                    loading="lazy"
-                    width="560"
-                    height="315"
-                    src={`${
-                      el?.link &&
-                      "https://youtu.be/j2OcWXgpzxc?si=-fT9YuyBzPdXLGgm".replace(
-                        "youtu.be",
-                        "www.youtube-nocookie.com/embed"
-                      )
-                    }`}
-                    title="YouTube video player"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowFullScreen
-                    className="w-[358px] h-[204px] md:w-[552px] md:h-[324px] lg:w-[752px] lg:h-[424px]  rounded-[10px] "
-                  ></iframe>
+                  <VideoPlayer
+                    fullscreen={fullscreen}
+                    setFullscreen={setFullscreen}
+                    videoCode={videoCode}
+                    index={index}
+                    ori={el.link}
+                  />
                 </div>
               );
             })}
           </Skeleton>
           {/* )} */}
         </div>
-
         <div className="w-full  flex items-center justify-center">
           <button
             onClick={() => {
@@ -616,6 +625,15 @@ function MainSection() {
                 navigate(
                   `/lms?kelas=${kelasSite}&materi=${Number(materiSite) + 1}`
                 );
+              } else {
+                Swal.fire({
+                  title: "Selamat",
+                  text: "Anda telah menyelesaikan semua materi kelas!",
+                  icon: "success",
+                  confirmButtonColor: "#0F1011",
+                }).then(() => {
+                  navigate("/profile/kelas-saya/semua-kelas");
+                });
               }
             }}
             className="px-[48px] py-[16px] gap-5 flex items-center justify-center bg-black500 rounded-[10px] mb-[52px]"

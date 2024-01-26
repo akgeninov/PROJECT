@@ -79,14 +79,20 @@ function NavigationComponent({
                   {DATA.map((el, index) => (
                     <div
                       onClick={() => {
-                        if (el.navi !== "#") navigate(el.navi);
-                        setToggle(() => ({
-                          layanan: false,
-                          komunitas: false,
-                        }));
+                        if (el.navi !== "#") {
+                          navigate(el.navi);
+                          setToggle(() => ({
+                            layanan: false,
+                            komunitas: false,
+                          }));
+                        }
                       }}
                       key={index}
-                      className={`cursor-pointer px-[24px] py-[12px] items-center hover:bg-black50`}
+                      className={`${
+                        el.navi === "#"
+                          ? "text-whiteSmoke600 "
+                          : "cursor-pointer hover:bg-black50"
+                      }  px-[24px] py-[12px] items-center `}
                     >
                       <p className="shrink-0  ">{el.title}</p>
                     </div>
