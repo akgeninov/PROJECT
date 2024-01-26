@@ -3,7 +3,8 @@ import { icon } from "../../../../constants";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
 import { useSelector } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { api } from './../../../../api/api';
 
 function CheckoutKelasBisnis({
   dataDetail,
@@ -11,10 +12,41 @@ function CheckoutKelasBisnis({
   checkStatusWishlist,
   status,
 }) {
-
   const [star, setStar] = useState(0);
   const { user } = useSelector((state) => state.userSlice);
+  const [setCheckout] = useState([]);
   const navigate = useNavigate();
+
+  const addCheckout = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("auth"));
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setCheckout(response.data.data);
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  //  useEffect(() => {
+  //   addCheckout();
+
+  // }, [addCheckout]);
+  // console.log(checkout.checkout)
+
+  // useEffect(() => {
+  //   console.log(checkout)
+  // },[checkout]);
 
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
@@ -231,7 +263,17 @@ function CheckoutKelasBisnis({
           )}
         </button>
         <div
-          onClick={() => (user ? navigate("/checkout") : navigate("/login"))}
+          onClick={() => {
+            if (dataDetail?.kelas_bisni?.harga > 0) {
+              addCheckout(
+                user
+                  ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`)
+                  : navigate("/login")
+              );
+            } else {
+              navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`);
+            }
+          }}
         >
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>

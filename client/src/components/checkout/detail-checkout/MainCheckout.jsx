@@ -1,19 +1,108 @@
 import React, { useEffect, useState } from "react";
 import { images } from "../../../constants";
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
+import moment from "moment";
+import 'moment/locale/id';
 import { api } from "../../../api/api";
+import Swal from "sweetalert2";
 
 function MainCheckout({ dataCheckout }) {
         const [checkout, setCheckout] = useState([]);
+        const [isSubmitting, setIsSubmiting] = useState(false);
         //const [count, setCount] = useState(0);
+        const {id_kelas_bisnis} = useParams()
+        console.log(id_kelas_bisnis);
+        const id = checkout.id; 
+        useEffect(()=>{console.log(checkout)},[checkout])
+
+        // function formatDate(dateString) {
+        //     const options = { year: "numeric", month: "long", day: "numeric", hour:"2-digit" };
+        //     const formattedDate = new Date(dateString).toLocaleDateString("id-ID", options);
+        //     return formattedDate;
+        //   }
     
+        const onSubmit = async (word) => {
+            console.log(word)
+            Swal.fire({
+              title: "Apakah anda yakin?",
+              text: "Data anda akan diubah secara permanent!",
+              icon: "warning",
+              showCancelButton: true,
+              confirmButtonColor: "#0F1011",
+              cancelButtonColor: "#d33",
+              cancelButtonText: "Batal!",
+              confirmButtonText: "Ya!",
+            }).then(async (result) => {
+              if (result.isConfirmed) {
+                try {
+                  setIsSubmiting(true);
+        
+                  const token = JSON.parse(localStorage.getItem("auth"));
+                  const response = await api.put(
+                    `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/updateStatusTransaksi`,
+                    {
+                        id: id, 
+                        status_transaksi: "canceled",
+                    },
+                    {
+                        headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                      },
+                    }
+                  );
+                  console.log(response);
+                  Swal.fire({
+                    position: "center",
+                    icon: "success",
+                    title: "Data anda berhasil di ubah",
+                    showConfirmButton: false,
+                    timer: 1500,
+                  });
+                } catch (error) {
+                  Swal.fire({
+                    title: "Error",
+                    text: error.response.data.error || "something when wrong!",
+                    icon: "error",
+                    confirmButtonColor: "#0F1011",
+                  });
+                  console.log(error);
+                } finally {
+                  setIsSubmiting(false);
+                }
+              }
+            });
+          };
+
+        const paidCheckout = async () => {
+            try {
+                const token = JSON.parse(localStorage.getItem("auth"));
+                const response = await api.put(
+                    `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/changeTransaksiBool`,
+                    {
+                        id_kelas_bisnis: id_kelas_bisnis, 
+                    },
+                    {
+                        headers: {
+                        "Content-Type": "application/json",
+                        Authorization: token,
+                    },
+                    }
+                );
+                setCheckout(response.data.data);
+                console.log(response);
+            }catch (error) {
+                console.log(error);
+              }
+        };
+        
         const fetchCheckout = async () => {
            try {
             const token = JSON.parse(localStorage.getItem("auth"));
             const response = await api.get(
-              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/getTransaksiByIdUser`,
+              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/${id_kelas_bisnis}`,
               {
                 headers: {
                   Accept: "application/json", "Content-Type": "application/Json",
@@ -38,6 +127,9 @@ function MainCheckout({ dataCheckout }) {
           console.log(checkout)
         },[checkout]);
 
+        
+        // console.log("kelas_bisnis =",id_kelas_bisnis)
+
 
     return (
         <div className="w-full lg:w-full lg:h-[1000px] h-[1000px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>
@@ -45,8 +137,8 @@ function MainCheckout({ dataCheckout }) {
                 Checkout Kelas
             </h1>
 
-            {checkout.map((checkout, index) => (
-            <div key={index} checkout={checkout}>
+            {/* {checkout.map((checkout, index) => ( */}
+            <div key={checkout.id_kelas_bisnis} checkout={checkout}>
             
                     <div className="w-[544px] lg:w-[544px] lg:h-[128px] h-[128px]" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px', border: '2px solid #DEDEDE'  }}>
                         <div className="w-full lg:w-full lg:h-full h-full lg:flex flex ml-[20px] lg:ml-[20px] mr-[20px] lg:mr-[20px]" >
@@ -74,7 +166,11 @@ function MainCheckout({ dataCheckout }) {
                         <div className="w-full lg:w-full lg:h-[70px] lg:mt-[20px] lg:flex h-[70px] flex mt-[20px]" style={{borderBottom: '2px solid #DEDEDE'}}>
                             <div className="lg:ml-[20px] ml-[20px]">
                                 <p className="lg:text-[14px] text-[14px]" style={{color: "#3F4041"}}>Bayar Sebelum</p>
-                                <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">Rabu, 27 Desember 2023, 10:40 WIB</p>
+                                <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">
+                                {moment(checkout.date_expired).format(
+              "DD MMMM YYYY, hh:mm"
+            )} WIB
+                                </p>
                             </div>
                             {/* <div className="w-[134px] lg:w-[134px] lg:h-[32px] lg:ml-auto lg:mr-[20px] lg:flex h-[32px] ml-auto mr-[20px] rounded-[6px] flex" style={{border: '2px solid #BA0000', backgroundColor:"#F8E6E6"}}>
                                 <FaClock className="h-[14px] lg:h-[14px] lg:w-[14px] mt-[8px] ml-[8px] w-[14px] lg:mt-[8px] lg:ml-[8px]" style={{color:"#BA0000"}} />
@@ -128,7 +224,7 @@ function MainCheckout({ dataCheckout }) {
                                 <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">Detail Pembayaran</p>
                                     <div className="w-[148px] lg:w-[148px] lg:h-[36px] lg:ml-auto lg:mr-[20px] h-[36px] rounded-[6px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
                                         <p className="mt-[4px] lg:mt-[4px] lg:ml-[13px] ml-[13px] font-medium">
-                                        {`ID#${checkout?.nomor_invoice.slice(0, 10)}...`}
+                                        {`ID#${checkout?.nomor_invoice?.slice(0, 10)}...`}
                                         </p>      
                                     </div>
                             </div>
@@ -162,14 +258,16 @@ function MainCheckout({ dataCheckout }) {
                         </div>
                     </div>
                     
-                    <Link>
-                    <h1 className="text-[22px]  lg:text-[16px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px] underline">
-                        Batalkan Pembelian
-                    </h1>
+                    <Link onClick={ () => onSubmit("apa")}>
+                        <h1 className="text-[22px]  lg:text-[16px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px] underline">
+                            Batalkan Pembelian
+                        </h1>
                     </Link>
+
+                    
                 </div>
             </div>
-            ))}
+            {/* ))} */}
             
 
             <div className="w-[540px] lg:w-full lg:h-[96px] lg:mt-auto h-[96px] border mt-auto" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', border: '2px solid #DEDEDE'  }}>
@@ -177,7 +275,7 @@ function MainCheckout({ dataCheckout }) {
                     <div className="w-[350px] lg:w[350px] lg:mt-[20px]  mt-[20px]">
                         <p className="lg:text-[14px] text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link to="/checkout/approval-checkout"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
+                    <Link onClick={() => paidCheckout()} to="/checkout/approval-checkout"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
                         <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Saya Sudah Bayar"}/>
                     </Link>
                 </div>
