@@ -16,6 +16,6 @@ module.exports = {
   kelasBisnisRouters,
   userKelasRouters,
   kelasWishlistRouters,
-  kelasTransaksiRouters
+  kelasTransaksiRouters,
   testingRouter,
 };

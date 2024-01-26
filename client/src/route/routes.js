@@ -139,9 +139,7 @@ const routes = [
       </Protection>
     }
   />,
-  />,
 
-  <Route
   <Route
     key="kelas-bisnis"
     path="/kelas-bisnis"
@@ -162,9 +160,7 @@ const routes = [
       </Protection>
     }
   />,
-  />,
-
-  <Route
+  
   <Route
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
