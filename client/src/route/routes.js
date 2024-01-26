@@ -252,7 +252,7 @@ const routes = [
 
     <Route
     key="approval"
-    path="/approval-checkout/:id_kelas_bisnis"
+    path="/checkout/approval-checkout"
     element={
       <Protection userOnly={true}>
         <Approval />

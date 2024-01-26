@@ -17,23 +17,6 @@ function CheckoutKelasBisnis({ dataDetail }) {
   const [ setCheckout] = useState([]);
   const navigate = useNavigate();
 
-  // const copyToClipboard = (text) => {
-  //   const el = document.createElement('textarea');
-  //   el.value = text;
-  //   document.body.appendChild(el);
-  //   el.select();
-  //   document.execCommand('copy');
-  //   document.body.removeChild(el);
-
-  //   Swal.fire({
-  //       position: "center",
-  //       icon: "success",
-  //       title: "Text copied to clipboard!",
-  //       showConfirmButton: false,
-  //       timer: 1500,
-  //   });
-  // };
-
   const token = JSON.parse(localStorage.getItem("auth"));
   const addWishlist = async () => {
     try {
@@ -114,7 +97,6 @@ function CheckoutKelasBisnis({ dataDetail }) {
          } catch (error) {
             if (error.response && error.response.status === 400) {
               copyToClipboard();
-              window.scrollTo(0,0)
               console.log(error);
             }else{
               user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
@@ -352,8 +334,7 @@ function CheckoutKelasBisnis({ dataDetail }) {
         </button>
         <div onClick={() => {
           if (dataDetail?.kelas_bisni?.harga > 0 ){
-            addCheckout(user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login"))
-
+            addCheckout();
           }else{
             navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
           }
