@@ -8,7 +8,13 @@ import { api } from "../../../api/api";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-function HeroSection({ dataDetail, star }) {
+function HeroSection({
+  dataDetail,
+  star,
+  addWishlist,
+  checkStatusWishlist,
+  status,
+}) {
   const { value } = useSelector((state) => state.detailKelasSlice);
   const { user } = useSelector((state) => state.userSlice);
   const navigate = useNavigate();
@@ -183,6 +189,7 @@ function HeroSection({ dataDetail, star }) {
       start9: Number(star) * 2 === 9,
       start10: Number(star) * 2 === 10,
     });
+    checkStatusWishlist();
   }, [star]);
 
   // useEffect(() => {
@@ -415,8 +422,15 @@ function HeroSection({ dataDetail, star }) {
         </div>
 
         <div className="mt-[52px] gap-[16px] hidden md:flex ">
-          <button className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-whiteSmoke500 rounded-[10px]">
-            <HiOutlineHeart className="text-[32px] text-whiteSmoke500" />
+          <button
+            onClick={() => (user ? addWishlist() : navigate("/login"))}
+            className="w-[56px] h-[56px] flex justify-center items-center border-[1px] border-whiteSmoke500 rounded-[10px]"
+          >
+            {status === false ? (
+              <HiHeart className="text-[32px] text-whiteSmoke500" />
+            ) : (
+              <HiOutlineHeart className="text-[32px] text-whiteSmoke500" />
+            )}
           </button>
 
           <div

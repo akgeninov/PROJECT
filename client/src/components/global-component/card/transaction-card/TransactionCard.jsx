@@ -44,7 +44,7 @@ export default function TransactionCard(transaksi) {
           <p className="lg:w-[335px] lg:mr-[10px]">
             <span className="lg:inline hidden">Waktu Pembayaran, </span>
             {moment(transaksi.transaksi.date_transaksi).format(
-              "DD MMMM YYYY, h:mm"
+              "DD MMMM YYYY, hh:mm"
             )}
           </p>
           <div className="border-l border-[#666666] border-opacity-30 h-[45px] w-[2px] lg:block hidden"></div>

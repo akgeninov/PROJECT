@@ -1,69 +1,26 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
 import { icon } from "../../../../constants";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
-import { api } from "../../../../api/api";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 
-function CheckoutKelasBisnis({ dataDetail }) {
+function CheckoutKelasBisnis({
+  dataDetail,
+  addWishlist,
+  checkStatusWishlist,
+  status,
+}) {
+
   const [star, setStar] = useState(0);
-  const [wishlist, setWishlist] = useState([]);
-  const [check, setCheck] = useState([]);
-  const [status, setStatus] = useState();
   const { user } = useSelector((state) => state.userSlice);
   const navigate = useNavigate();
-
-  const token = JSON.parse(localStorage.getItem("auth"));
-  const addWishlist = async () => {
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/changeWishlistBool`,
-        {
-          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setWishlist(response.data.data);
-      setStatus(response.data.data.isRemove);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const checkStatusWishlist = async () => {
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/wishlist-status`,
-        {
-          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setCheck(response.data.data);
-      setStatus(response.data.data.isRemove);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // console.log("wishlist", wishlist.isRemove);
-  // console.log(check.isRemove);
-  // console.log(status);
 
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
     checkStatusWishlist();
   }, [dataDetail]);
-  // const { title } = useParams();
+
   return (
     <div className="p-[20px] flex flex-col items-start rounded-[10px] shadow-customSm">
       <h1 className="text-[22px] font-bold leading-[32px] w-[288px]">

@@ -238,20 +238,7 @@ module.exports = {
         where: {
           ...(id ? { id: id } : {}),
         },
-        attributes: [
-          "id",
-          "deskripsi",
-          "id_kelas_bisnis",
-          // [
-          //   sequelize.literal(
-          //     `(SELECT kelas_wishlist.isRemove, kelas_wishlist.id_kelas_bisnis 
-          //     FROM kelas_wishlist 
-          //     INNER JOIN User
-          //     ON kelas_wishlist.id_user = User.id;)`
-          //   ),
-          //   "isRemove",
-          // ],
-        ],
+        attributes: ["id", "deskripsi", "id_kelas_bisnis"],
         include: [
           {
             model: kelas_materi,
