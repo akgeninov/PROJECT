@@ -58,8 +58,8 @@ module.exports = {
 
   getKelasBisnis: async (req, res) => {
     try {
-      const { kategori, level, harga, search } = req.body;
-      console.log({ harga: harga.length });
+      const { kategori, level, harga } = req.body;
+      const search = req.body.search || "";
       let dataHarga;
       if (harga && harga.length > 0) {
         dataHarga = await kelas_harga.findAll({
@@ -86,7 +86,6 @@ module.exports = {
             include: [kelas_kategori, kelas_level, kelas_regist, kelas_rating],
           });
         } else if (kategori.length === 0 && level.length > 0) {
-          console.log("sini");
           dataKelas = await kelas_bisnis.findAll({
             where: {
               nama: {
@@ -129,7 +128,6 @@ module.exports = {
         return new Promise(function (resolve, reject) {
           const hasilFilter = dataKelas.filter((kelas) => {
             const hargaKelas = kelas.harga;
-            console.log({ hargaKelas });
             const filter = dataHarga.find((filter) => {
               console.log({
                 1: harga.includes(filter.id),
@@ -148,7 +146,6 @@ module.exports = {
             return filter !== undefined;
           });
 
-          // Memberikan hasil filter melalui resolve
           resolve(hasilFilter);
         });
       };
@@ -256,7 +253,6 @@ module.exports = {
           {
             model: kelas_materi,
             attributes: ["materi", "link", "deskripsi"],
-            through: { attributes: [] },
           },
           {
             model: kelas_benefit,

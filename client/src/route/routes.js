@@ -37,6 +37,13 @@ import Approval from "../pages/checkout-approval/Approval";
 import Success from "../pages/success-checkout/Success";
 import FreeCheckout from "../pages/checkout-free/FreeCheckout";
 
+import ChangePassword from "../pages/change-password/ChangePassword";
+import InfoLain from "../pages/info-lain/InfoLain";
+import TentangKelas from "../pages/tentang-kelas/TentangKelas";
+import LmsKelas from "../pages/lms-kelas/LmsKelas";
+import Verifikasi from "../pages/verifikasi/Verifikasi";
+import ResetPassword from "../pages/reset-password/ResetPassword";
+import RequestReset from "../pages/request-reset/RequestReset";
 
 const routes = [
   <Route
@@ -57,7 +64,7 @@ const routes = [
       </Protection>
     }
   >
-    {/* <Route index element={<MainSection />} /> */}
+    <Route index element={<MainSection />} />
     <Route path=":kategori" element={<MainSection />} />
   </Route>,
   <Route
@@ -115,7 +122,7 @@ const routes = [
     }
   />,
   <Route
-    key="login"
+    key="register"
     path="/register"
     element={
       <Protection publicSide={true}>
@@ -132,7 +139,9 @@ const routes = [
       </Protection>
     }
   />,
+  />,
 
+  <Route
   <Route
     key="kelas-bisnis"
     path="/kelas-bisnis"
@@ -143,6 +152,7 @@ const routes = [
     }
   />,
 
+
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -152,7 +162,9 @@ const routes = [
       </Protection>
     }
   />,
+  />,
 
+  <Route
   <Route
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
@@ -214,7 +226,7 @@ const routes = [
     key="about-us"
     path="/about-us"
     element={
-      <Protection publicSide={true} userOnly={true}>
+      <Protection publicSide={true}>
         <TentangKami />
       </Protection>
     }
@@ -233,12 +245,14 @@ const routes = [
     key="profile"
     path="/profile"
     element={
-      <Protection publicSide={true} userOnly={true}>
+      <Protection userOnly={true}>
         <UbahProfile />
       </Protection>
     }
   >
     <Route path=":username" element={<DetailProfile />} />,
+    <Route path="password" element={<ChangePassword />} />,
+    <Route path="info-lain" element={<InfoLain />} />,
   </Route>,
 
    <Route
@@ -280,6 +294,51 @@ const routes = [
     }
   />,
 
+  <Route
+    key="tentang-kelas"
+    path="/tentang-kelas/:id"
+    element={
+      <Protection userOnly={true}>
+        <TentangKelas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="lms-kelas"
+    path="/lms"
+    element={
+      <Protection userOnly={true}>
+        <LmsKelas />
+      </Protection>
+    }
+  />,
+  <Route
+    key="verifikasi"
+    path="/verifikasi/:verif"
+    element={
+      <Protection>
+        <Verifikasi />
+      </Protection>
+    }
+  />,
+  <Route
+    key="reset-password"
+    path="/reset-password/:token"
+    element={
+      <Protection>
+        <ResetPassword />
+      </Protection>
+    }
+  />,
+  <Route
+    key="request-reset"
+    path="/request-reset"
+    element={
+      <Protection publicSide={true}>
+        <RequestReset />
+      </Protection>
+    }
+  />,
 ];
 
 export default routes;

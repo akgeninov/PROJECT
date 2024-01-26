@@ -24,6 +24,7 @@ function ClientCarousel() {
       >
         {dataImg?.map((pic, index) => (
           <img
+            loading="lazy"
             key={index}
             src={pic}
             className="object-cover  w-[120px] mx-[12px] sm:w-[240px] h-[90px] sm:h-[180px] rounded-[10px] "

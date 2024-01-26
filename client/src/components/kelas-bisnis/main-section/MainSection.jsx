@@ -165,7 +165,7 @@ function MainSection({ search, setSearch }) {
 
           const oldKategori = kategoriFilter?.map((kategori) => ({
             ...kategori,
-            bool: kategoriValue.includes(kategori.nama),
+            bool: kategoriValue?.includes(kategori.nama),
           }));
           console.log({ oldKategori });
           setKategoriFilter(oldKategori);
@@ -173,7 +173,7 @@ function MainSection({ search, setSearch }) {
 
           const oldLevel = levelFilter?.map((level) => ({
             ...level,
-            bool: levelValue.includes(level.nama),
+            bool: levelValue?.includes(level.nama),
           }));
           console.log({ oldLevel });
           setLevelFilter(oldLevel);
@@ -181,7 +181,7 @@ function MainSection({ search, setSearch }) {
 
           const oldHarga = hargaFilter?.map((harga) => ({
             ...harga,
-            bool: hargaValue.includes(harga.harga_max.toString()),
+            bool: hargaValue?.includes(harga.harga_max.toString()),
           }));
           console.log({ hargaValue });
           setHargaFilter(oldHarga);
@@ -203,7 +203,12 @@ function MainSection({ search, setSearch }) {
           if (searchValue && searchValue.length > 0) {
             setSearch(searchValue);
           }
-
+          console.log({
+            kategori: kategoriId,
+            level: levelId,
+            harga: hargaId,
+            search: searchValue,
+          });
           const response = await api.post(
             `${process.env.REACT_APP_API_BASE_URL}/kelasBisnis/data`,
             {

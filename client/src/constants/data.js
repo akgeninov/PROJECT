@@ -175,5 +175,5 @@ module.exports = {
   navigationData,
   dataNews,
   dataLogoShare,
-  dataKarir
+  dataKarir,
 };

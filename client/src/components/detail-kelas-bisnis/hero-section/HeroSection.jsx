@@ -241,12 +241,14 @@ function HeroSection({ dataDetail, star }) {
       <div className="flex w-[1280px] xl:w-full  h-[600px] md:h-[660px]  justify-center items-center">
         {value[0] && value[0]?.kelas_bisni?.image ? (
           <img
+            loading="lazy"
             src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${value[0]?.kelas_bisni?.image}`}
             alt="hero"
             className="object-cover w-full xl:w-full h-full"
           />
         ) : (
           <img
+            loading="lazy"
             src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${images.joinOri}`}
             alt="hero"
             className="object-cover w-full xl:w-full h-full"
@@ -267,6 +269,7 @@ function HeroSection({ dataDetail, star }) {
             <div className="w-full flex text-whiteSmoke600 justify-start gap-x-[16px]  ">
               <div className=" w-max flex items-center  gap-1">
                 <img
+                  loading="lazy"
                   src={icon.bookOpenSold}
                   alt="bok"
                   className="w-[16px] h-[16px]"
@@ -277,6 +280,7 @@ function HeroSection({ dataDetail, star }) {
               </div>
               <div className=" w-max flex items-center gap-1 ">
                 <img
+                  loading="lazy"
                   src={icon.signal}
                   alt="bok"
                   className="w-[16px] h-[16px]"
@@ -287,6 +291,7 @@ function HeroSection({ dataDetail, star }) {
               </div>
               <div className=" w-max flex items-center gap-1 ">
                 <img
+                  loading="lazy"
                   src={icon.userCircle}
                   alt="bok"
                   className="w-[16px] h-[16px]"
@@ -299,134 +304,8 @@ function HeroSection({ dataDetail, star }) {
             </div>
           </div>
           <div className="w-full flex justify-center md:justify-start items-center  gap-[8px]">
-            {/* <div className="rating rating-sm rating-half gap-0"> */}
-            {/* {star && {Number(star) === Number(0) || isNaN(star) ? (
-                <>
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="rating-hidden"
-                    defaultChecked
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                  />
-                </>
-              ) : (
-                <>
-                  <div className="text-white">{star * 2}</div>
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={Number(star) * 2 === 1}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={Number(star) * 2 === 2}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={Number(star) * 2 === 3}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={Number(star) * 2 === 4}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={Number(star) * 2 === 5}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={Number(star) * 2 === 6}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={Number(star) * 2 === 7}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={Number(star) * 2 === 8}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-1"
-                    defaultChecked={Number(star) * 2 === 9}
-                  />
-                  <input
-                    type="radio"
-                    name={`rating-1`}
-                    className="bg-yellow-500 mask mask-star-2 mask-half-2"
-                    defaultChecked={Number(star) * 2 === 10}
-                  />
-                </>
-              )}
-} */}
             {star && renderStarRating()}
-            {/* </div> */}
+
             <div className="flex items-center justify-center mt-1">
               <p className="text-[14px] text-whiteSmoke600 font-light leading-[20px]">
                 {dataDetail?.kelas_bisni?.total_nilai || "0"}
@@ -434,7 +313,6 @@ function HeroSection({ dataDetail, star }) {
             </div>
           </div>
           <div className="w-full flex flex-col items-center md:items-start gap-[4px]">
-            {/* {el.discount ? ( */}
             <div className="w-full flex text-whiteSmoke600 justify-center md:justify-start gap-[4px]">
               <p className="text-[14px] md:text-[18px] font-light leading-[20px] md:leading-[28px] line-through">
                 {new Intl.NumberFormat("id-ID", {
@@ -483,12 +361,14 @@ function HeroSection({ dataDetail, star }) {
       <div className="rounded-[10px] overflow-hidden absolute  z-20 w-[358px] xl:w-[432px] h-[188px] xl:h-[468px] bottom-[32px] lg:bottom-auto lg:top-[300px] xl:top-[112px] lg:right-[100px]">
         {dataDetail?.kelas_bisni?.image ? (
           <img
+            loading="lazy"
             src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${dataDetail?.kelas_bisni?.image}`}
             alt="hero"
             className="w-full h-full object-cover flex md:hidden lg:flex"
           />
         ) : (
           <img
+            loading="lazy"
             src={`${process.env.REACT_APP_SERVER_URL}images/kelas/${images.joinOri}`}
             alt="hero"
             className="w-full h-full object-cover flex md:hidden lg:flex"

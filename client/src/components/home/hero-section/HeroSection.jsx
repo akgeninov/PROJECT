@@ -16,22 +16,13 @@ function HeroSection() {
             untuk berkembang dan bertumbuh disini
           </p>
         </div>
-        {/* <button className="flex mx-[5px] sm:mx-0 w-[260px] px-[64px] py-[18px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]">
-          <p className="text-whiteSmoke500 font-medium text-[16px]">
-            Gabung Sekarang
-          </p>
-        </button> */}
+
         <ButtonBlack500 WIDTH={"w-[260px]"} TEXT_BUTTON={"Gabung Sekarang"} />
       </div>
       <div className=" w-[358px] h-[504px] z-20 xl:w-[400px] ">
-        {/* <img
-          className=" flex-initial absolute z-20 "
-          src={images.vector2}
-          alt="vector2"
-          style={{ filter: "brightness(0)" }}
-        /> */}
         <div className=" h-fit w-fit flex justify-center items-center hero-image">
           <img
+            loading="lazy"
             className="object-cover h-full w-full object-center  "
             src={images.oriVector2Webp}
             alt="vector2"

@@ -9,7 +9,8 @@ function JoinSection() {
       <div className=" relative hidden md:flex justify-end items-center mt-[160px]  w-full 2xl:max-w-[1280px] h-[484px] overflow-hidden">
         <div className="absolute overflow-hidden w-[684px] h-[684px] rounded-full -left-[100px] flex items-center justify-center">
           <img
-            src={images.kelasBisnis}
+            loading="lazy"
+            src={images.joinOri}
             alt="ellipse"
             className="object-cover w-full h-full absolute -left-[15px] "
           />
@@ -28,11 +29,6 @@ function JoinSection() {
                 </p>
               </div>
               <div className="flex w-full items-start gap-[24px] ">
-                {/* <button className="px-[64px] py-[16px] w-[200px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500 border-whiteSmoke500">
-                  <p className="shrink-0 text-[16px] font-medium leading-[24px] ">
-                    Hubungi Kami
-                  </p>
-                </button> */}
                 <ButtonBorderWhitesmoke500
                   TEXT_BUTTON={"Hubungi Kami"}
                   WIDTH={"max-w-[200px]"}
@@ -52,6 +48,7 @@ function JoinSection() {
         <div className="relative  w-full top-0  flex justify-center items-center h-[196px] bg-red-300">
           <div className="absolute h-full w-full bg-gradient-to-t from-black400 to-transparent"></div>
           <img
+            loading="lazy"
             src={images.joinOri}
             alt="ellipse"
             className=" object-cover w-full h-full"
@@ -70,21 +67,12 @@ function JoinSection() {
                 </p>
               </div>
               <div className="flex w-screen items-start justify-center overflow-y-scroll gap-[16px] ">
-                {/* <button className="px-[64px] py-[16px] max-w-[152px] flex justify-center items-center rounded-[10px] border-[1px] text-whiteSmoke500 border-whiteSmoke500 bg-black400 hover:bg-whiteSmoke600 hover:text-black500">
-                  <p className="shrink-0 text-[16px] font-medium leading-[24px] ">
-                    Hubungi Kami
-                  </p>
-                </button> */}
                 <ButtonBorderWhitesmoke500
                   TEXT_BUTTON={"Hubungi Kami"}
                   WIDTH={"max-w-[152px]"}
                   RESPONSIF={"flex"}
                 />
-                {/* <button className="px-[64px] py-[16px] max-w-[190px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
-                  <p className="shrink-0 text-[16px] font-medium leading-[24px] text-black500">
-                    Gabung Sekarang
-                  </p>
-                </button> */}
+
                 <ButtonWhiteSmoke500
                   TEXT_BUTTON={"Gabung Sekarang"}
                   WIDTH={"w-[190px]"}
