@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { images } from "../../../constants";
-import { Link, useParams, useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
 import moment from "moment";
 import 'moment/locale/id';
-import moment from "moment";
-import "moment/locale/id";
 import { api } from "../../../api/api";
-import Swal from "sweetalert2";
 import Swal from "sweetalert2";
 
 function MainCheckout({ dataCheckout }) {

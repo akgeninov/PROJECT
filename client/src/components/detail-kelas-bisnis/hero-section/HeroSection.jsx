@@ -13,12 +13,11 @@ function HeroSection({
   dataDetail,
   star,
   addWishlist,
-  // checkStatusWishlist,
+  checkStatusWishlist,
   status,
 }) {
   const { value } = useSelector((state) => state.detailKelasSlice);
   const { user } = useSelector((state) => state.userSlice);
-  const [ setCheckout] = useState([]);
   const [ setCheckout] = useState([]);
   const navigate = useNavigate();
   // const [star, setStar] = useState(null);
@@ -235,6 +234,7 @@ function HeroSection({
       start9: Number(star) * 2 === 9,
       start10: Number(star) * 2 === 10,
     });
+    checkStatusWishlist();
   }, [star]);
 
   // useEffect(() => {
