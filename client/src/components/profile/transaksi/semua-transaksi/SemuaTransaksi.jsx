@@ -31,7 +31,7 @@ export default function SemuaTransaksi() {
   return (
     <div>
       {transaksi.map((transaksi, index) => (
-        <TransactionCard transaksi={transaksi} key={index} />
+        <TransactionCard transaksi={transaksi} key={index} fetchTransaksi={fetchTransaksi} />
       ))}
     </div>
   );

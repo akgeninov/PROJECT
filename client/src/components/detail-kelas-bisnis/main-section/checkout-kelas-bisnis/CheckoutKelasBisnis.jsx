@@ -4,13 +4,11 @@ import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import Swal from "sweetalert2";
-import { api } from "../../../../api/api";
 
 function CheckoutKelasBisnis({
   dataDetail,
   addWishlist,
-  checkStatusWishlist,
+  // checkStatusWishlist,
   status,
 }) {
   const [star, setStar] = useState(0);
@@ -75,7 +73,6 @@ function CheckoutKelasBisnis({
 
   useEffect(() => {
     setStar(Number(dataDetail?.kelas_bisni?.total_nilai));
-    checkStatusWishlist();
   }, [dataDetail]);
 
   return (

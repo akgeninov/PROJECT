@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { images } from "../../../constants";
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useParams } from "react-router-dom";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
 import moment from "moment";
 import 'moment/locale/id';
+import moment from "moment";
+import "moment/locale/id";
 import { api } from "../../../api/api";
+import Swal from "sweetalert2";
 import Swal from "sweetalert2";
 
 function MainCheckout({ dataCheckout }) {
@@ -127,15 +130,19 @@ function MainCheckout({ dataCheckout }) {
           console.log(checkout)
         },[checkout]);
 
+  // console.log("kelas_bisnis =",id_kelas_bisnis)
         
         // console.log("kelas_bisnis =",id_kelas_bisnis)
 
 
-    return (
-        <div className="w-full lg:w-full lg:h-[1000px] h-[1000px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>
-            <h1 className="text-[22px] lg:text-[24px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px]">
-                Checkout Kelas
-            </h1>
+  return (
+    <div
+      className="w-full lg:w-full lg:h-[1000px] h-[1000px] lg:flex flex flex-col items-center"
+      style={{ backgroundColor: "#F0F0F0" }}
+    >
+      <h1 className="text-[22px] lg:text-[24px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px]">
+        Checkout Kelas
+      </h1>
 
             {/* {checkout.map((checkout, index) => ( */}
             <div key={checkout.id_kelas_bisnis} checkout={checkout}>
@@ -230,21 +237,39 @@ function MainCheckout({ dataCheckout }) {
                             </div>
                         </div>
 
-                        <div className="lg:ml-[20px] ml-[20px] mt-[20px] lg:mt-[20px]">
-                            <div className="flex lg:flex lg:mr-[20px] mr-[20px]">
-                                <p className="lg:text-[14px] text-[14px]" style={{color: "#5E5F60"}}>Subtotal</p>
-                                <p className="lg:text-[14px] text-[14px] lg:ml-auto font-medium ml-auto" style={{color: "#5E5F60"}}>
-                                {new Intl.NumberFormat("id-ID", {
-                                            style: "currency",
-                                            currency: "IDR",
-                                        }).format(checkout.kelas_bisni?.harga)}
-                                </p>
-                            </div>
+            <div className="lg:ml-[20px] ml-[20px] mt-[20px] lg:mt-[20px]">
+              <div className="flex lg:flex lg:mr-[20px] mr-[20px]">
+                <p
+                  className="lg:text-[14px] text-[14px]"
+                  style={{ color: "#5E5F60" }}
+                >
+                  Subtotal
+                </p>
+                <p
+                  className="lg:text-[14px] text-[14px] lg:ml-auto font-medium ml-auto"
+                  style={{ color: "#5E5F60" }}
+                >
+                  {new Intl.NumberFormat("id-ID", {
+                    style: "currency",
+                    currency: "IDR",
+                  }).format(checkout.kelas_bisni?.harga)}
+                </p>
+              </div>
 
-                            <div className="flex lg:flex lg:mr-[20px] lg:mt-[8px] mr-[20px] mt-[8px]">
-                                <p className="lg:text-[14px] text-[14px]" style={{color: "#5E5F60"}}>Diskon</p>
-                                <p className="lg:text-[14px] text-[14px]  font-medium ml-auto" style={{color: "#5E5F60"}}>-Rp</p>
-                            </div>
+              <div className="flex lg:flex lg:mr-[20px] lg:mt-[8px] mr-[20px] mt-[8px]">
+                <p
+                  className="lg:text-[14px] text-[14px]"
+                  style={{ color: "#5E5F60" }}
+                >
+                  Diskon
+                </p>
+                <p
+                  className="lg:text-[14px] text-[14px]  font-medium ml-auto"
+                  style={{ color: "#5E5F60" }}
+                >
+                  -Rp
+                </p>
+              </div>
 
                             <div className="flex mr-[20px] lg:mr-[20px] lg:mt-[8px] mt-[8px]">
                                 <p className="lg:text-[16px] text-[16px]  font-medium" style={{color: "#5E5F60"}}>Total Bayar</p>
