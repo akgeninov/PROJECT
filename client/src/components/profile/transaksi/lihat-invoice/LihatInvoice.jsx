@@ -96,7 +96,9 @@ export default function LihatInvoice() {
             <tr>
               <td>Waktu Pembayaran</td>
               <td className="px-[25px] py-[10px]">:</td>
-              <td className="font-medium">{invoice.date_transaksi}</td>
+              <td className="font-medium">
+                {moment(invoice.date_transaksi).format("DD MMMM YYYY, hh:mm")}
+              </td>
             </tr>
             <tr>
               <td>Status Transaksi</td>
@@ -106,7 +108,11 @@ export default function LihatInvoice() {
                   invoice.status_transaksi
                 )} text-[#278B03] font-medium`}
               >
-                {invoice.status_transaksi}
+                {invoice.status_transaksi === "success"
+                  ? "Berhasil"
+                  : invoice.status_transaksi === "canceled"
+                  ? "Dibatalkan"
+                  : "Menunggu"}
               </td>
             </tr>
           </tbody>

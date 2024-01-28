@@ -457,7 +457,7 @@ function HeroSection({
           <div
             onClick={() => {
               if (dataDetail?.kelas_bisni?.harga > 0 ){
-                addCheckout(user ? navigate("/checkout/${dataDetail.id_kelas_bisnis}") : navigate("/login"))
+                addCheckout(user ? navigate(`/checkout/${dataDetail.id_kelas_bisnis}`) : navigate(`/login`))
               }else{
                 navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
               }

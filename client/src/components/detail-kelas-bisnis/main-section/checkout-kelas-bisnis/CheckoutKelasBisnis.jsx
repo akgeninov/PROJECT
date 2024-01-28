@@ -37,7 +37,7 @@ function CheckoutKelasBisnis({
       console.log(error);
     }
   };
-
+  console.log(setCheckout);
   //  useEffect(() => {
   //   addCheckout();
 

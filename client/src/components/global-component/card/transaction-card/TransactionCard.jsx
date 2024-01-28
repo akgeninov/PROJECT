@@ -2,12 +2,17 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
+import { useNavigate } from "react-router-dom";
+import ButtonBlack500 from './../../button/button-black500/ButtonBlack500';
 import moment from "moment";
 import "moment/locale/id";
+import { api } from "./../../../../api/api";
+import Swal from "sweetalert2";
 
 export default function TransactionCard(transaksi) {
   const [dropdownShow, setDropdownShow] = useState(false);
-  // console.log(transaksi);
+  const navigate = useNavigate();
+
   const toggleDropDown = () => {
     setDropdownShow(!dropdownShow);
   };
@@ -37,9 +42,69 @@ export default function TransactionCard(transaksi) {
       return "Menunggu Konfirmasi";
     }
   };
+
+  const updateStatus = async (upStatus) => {
+    try {
+      const token = JSON.parse(localStorage.getItem("auth"));
+      const response = await api.put(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/updateStatusTransaksi`,
+        {
+          id: transaksi.transaksi.id,
+          status_transaksi: upStatus,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      console.log(response);
+      Swal.fire({
+        title: "Error",
+        text: "Transaksi Kadaluarsa",
+        icon: "error",
+        confirmButtonColor: "#0F1011",
+      }).then(() => {
+        transaksi.fetchTransaksi();
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
-      <div className="flex flex-col w-[358px] h-[204px] justify-between md:w-[500px] md:h-[280px] lg:w-[750px] lg:h-[346px] border-[1px] border-whiteSmoke700 mb-[30px] rounded-[10px] shadow-md shadow-gray-300">
+      <div
+        className="flex flex-col w-[358px] h-[204px] justify-between md:w-[500px] md:h-[280px] lg:w-[750px] lg:h-[346px] border-[1px] border-whiteSmoke700 mb-[30px] rounded-[10px] shadow-md shadow-gray-300 cursor-pointer"
+        onClick={() => {
+          if (transaksi.transaksi.status_transaksi === "success") {
+            navigate(`/kelas-bisnis/${transaksi.transaksi.id_kelas_bisnis}`);
+          } else if (transaksi.transaksi.status_transaksi === "pending") {
+            const date = new Date().toISOString();
+            if (date >= transaksi.transaksi.date_expired) {
+              if (transaksi.transaksi.isPaid === true) {
+                navigate(`/checkout/approval-checkout`);
+              } else {
+                updateStatus("canceled");
+                // navigate(`/checkout/${transaksi.transaksi.kelas_bisni.id}`);
+              }
+            } else {
+              if (transaksi.transaksi.isPaid === true) {
+                navigate(`/checkout/approval-checkout`);
+              } else {
+                // updateStatus("canceled");
+                navigate(`/checkout/${transaksi.transaksi.kelas_bisni.id}`);
+              }
+            }
+          } else {
+            Swal.fire({
+              title: "Info",
+              text: "Transaksi Ini Telah Batal",
+              icon: "info",
+              confirmButtonColor: "#0F1011",
+            });
+          }
+        }}
+      >
         <div className="h-[38px] lg:h-[74px] flex justify-between bg-[rgba(204,204,204,0.2)] p-[11px] items-center text-[12px] lg:text-[18px] font-medium leading-[30px] rounded-t-[10px]">
           <p className="lg:w-[335px] lg:mr-[10px]">
             <span className="lg:inline hidden">Waktu Pembayaran, </span>
@@ -108,18 +173,9 @@ export default function TransactionCard(transaksi) {
             />
           </div>
           <div className="flex flex-col lg:flex-row lg:h-[160px] lg:leading-[28px] justify-start">
-            <Link
-              to={
-                transaksi.transaksi.status_transaksi === "success"
-                  ? `/kelas-bisnis/${transaksi.transaksi.id_kelas_bisnis}`
-                  : transaksi.transaksi.status_transaksi === "pending"
-                  ? `/checkout/`
-                  : ""
-              }
-              className="text-[14px] lg:text-[24px] font-medium lg:w-[50%] w-[160px] mb-[15px] hover:underline"
-            >
-              <p>{transaksi.transaksi.kelas_bisni.nama}</p>
-            </Link>
+            <p className="text-[14px] lg:text-[24px] font-medium lg:w-[50%] w-[160px] mb-[15px]">
+              {transaksi.transaksi.kelas_bisni.nama}
+            </p>
             <div className="lg:block hidden h-[150px] w-[2px] font-medium border-l-2 border-[#666666)] border-opacity-50"></div>
             <div className=" lg:h-[160px] lg:pl-[25px] text-[12px] lg:text-[24px] font-medium">
               <p className="text-[#666666] mb-[5px] lg:mb-[72px]">
@@ -128,6 +184,15 @@ export default function TransactionCard(transaksi) {
               <p className="text-[#0F1011]">
                 {rupiah(transaksi.transaksi.kelas_bisni.harga)}
               </p>
+              
+              {
+              transaksi.transaksi.status_transaksi === "pending" ? 
+                <div>
+                  <ButtonBlack500 TEXT_BUTTON={"Batalkan"} WIDTH={"w-[216px]"} />
+                </div>
+                :
+                ""
+              }
             </div>
           </div>
         </div>

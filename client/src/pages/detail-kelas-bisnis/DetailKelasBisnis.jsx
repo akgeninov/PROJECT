@@ -74,7 +74,6 @@ function DetailKelasBisnis() {
       );
       setCheck(response.data.data);
       setStatus(response.data.data?.isRemove);
-      console.log(response);
     } catch (error) {
       console.log(error);
     }
