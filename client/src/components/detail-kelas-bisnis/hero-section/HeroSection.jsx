@@ -7,6 +7,7 @@ import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke
 import { api } from "../../../api/api";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 function HeroSection({
   dataDetail,
@@ -17,8 +18,52 @@ function HeroSection({
 }) {
   const { value } = useSelector((state) => state.detailKelasSlice);
   const { user } = useSelector((state) => state.userSlice);
+  const [ setCheckout] = useState([]);
   const navigate = useNavigate();
   // const [star, setStar] = useState(null);
+
+  const copyToClipboard = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada",
+        showConfirmButton: false,
+        timer: 3000,
+    });
+  };
+
+  const addCheckout = async () => {
+    try {
+      const token = JSON.parse(localStorage.getItem("auth"));
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setCheckout(response.data.data);
+      console.log(response);
+    } catch (error) {
+        if (error.response && error.response.status === 400) {
+          copyToClipboard();
+          console.log(error);
+        }else{
+          user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+        }
+      }
+  };
 
   const renderStarRating = useCallback(() => {
     const nilai = Number(star) * 2;
@@ -434,8 +479,14 @@ function HeroSection({
           </button>
 
           <div
-            onClick={() => (user ? navigate("/checkout") : navigate("/login"))}
-          >
+            onClick={() => {
+              if (dataDetail?.kelas_bisni?.harga > 0 ){
+                addCheckout();
+              }else{
+                navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
+              }
+            }
+          }>
             <ButtonWhiteSmoke500
               TEXT_BUTTON={"Daftar Sekarang"}
               WIDTH={"w-[216px]"}

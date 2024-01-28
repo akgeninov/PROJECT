@@ -7,7 +7,7 @@ module.exports = {
       {
         nama: "langkah sukses jadi young interpreneur",
         image: "bootcamp1.jpg",
-        harga: 200000,
+        harga: 0,
         id_kelas_kategori: 3,
         id_kelas_level: 1,
         createdAt: new Date(),
