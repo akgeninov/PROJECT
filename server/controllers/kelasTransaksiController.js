@@ -1,4 +1,5 @@
 const db = require("../models");
+const { Op } = require('sequelize');
 const user = db.User;
 const kelasBisnisModel = db.kelas_bisnis;
 const kelasBisnisDiskonModel = db.kelas_bisnis_diskon;
@@ -14,26 +15,21 @@ module.exports = {
         where: {
           email: userData.email,
         },
-        attributes: ["id"],
+        attributes: ["id", "verified"],
       });
   
+      const verified = getuser.verified;
+
       if (!getuser) {
         throw new Error("USER TIDAK DITEMUKAN");
       }
 
+      if (verified == false) {
+        throw new Error("AKUN ANDA BELUM VERIFIED");
+      }
+      
       const { id_kelas_bisnis } = req.body;
-
-      const getTransaksi = await kelasTransaksiModel.findOne({
-        where: {
-          id_user: getuser.id,
-          id_kelas_bisnis: id_kelas_bisnis,
-        },
-        include: [user, kelasBisnisModel],
-      });
-
-      if (getTransaksi) {
-        throw new Error("DATA TRANSAKSI SUDAH ADA");
-      };
+   
       const getRegist = await kelasRegistModel.findOne({
         where: {
           id_user: getuser.id,
@@ -41,11 +37,26 @@ module.exports = {
         },
         include: [user],
       });
-      console.log("tes111");
 
       if (getRegist) {
         throw new Error("DATA REGIST SUDAH ADA");
       };
+
+      const getTransaksi = await kelasTransaksiModel.findOne({
+        where: {
+          id_user: getuser.id,
+          id_kelas_bisnis: id_kelas_bisnis,
+          status_transaksi: {
+            [Op.or]: ['pending', 'success'],
+          },
+        },
+        include: [user, kelasBisnisModel],
+      });
+
+      if (getTransaksi) {
+        throw new Error("DATA TRANSAKSI SUDAH ADA");
+      };
+      
       const kelasBisnis = await kelasBisnisModel.findByPk(id_kelas_bisnis);
       if (!kelasBisnis) {
         throw new Error(`Kelas bisnis with id ${id_kelas_bisnis} not found.`);
@@ -173,6 +184,7 @@ module.exports = {
           id_user: getuser.id,
         },
       });
+      
 
       if (!transaction) {
         throw new Error(
@@ -180,15 +192,32 @@ module.exports = {
         );
       }
 
+      let id_kelas_bisnis;
+      const data = await kelasTransaksiModel.findByPk(id, {
+        attributes: ["id_kelas_bisnis"],
+      });
+      if(data) {
+        id_kelas_bisnis = data.id_kelas_bisnis;
+      } else {
+        throw new Error(`No data found for id ${id}`)
+      }
       if (
         status_transaksi &&
         ["success", "canceled", "pending"].includes(status_transaksi)
       ) {
         await transaction.update({ status_transaksi: status_transaksi });
 
+        if (status_transaksi === "success") {
+          await kelasRegistModel.create({
+            id_user: getuser.id,
+            id_kelas_bisnis: id_kelas_bisnis,
+            tgl_daftar: new Date,
+            progress: 0,
+          });
+        }
         res.status(200).send({
           message: "Transaction status updated",
-          data: transaction,
+          data: transaction
         });
       } else {
         res.status(400).send({

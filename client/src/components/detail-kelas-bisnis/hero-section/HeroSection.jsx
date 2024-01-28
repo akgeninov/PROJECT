@@ -51,10 +51,22 @@ function HeroSection({ dataDetail, star }) {
       console.log(response);
     } catch (error) {
         if (error.response && error.response.status === 400) {
-          copyToClipboard();
+          const responseData = error.response.data;
+          if (responseData.error === "AKUN ANDA BELUM VERIFIED") {
+            copyToClipboard("Akun anda belum verified");
+          }
+          if(responseData.error === "DATA REGIST SUDAH ADA"){
+            copyToClipboard("Kelas sudah terdaftar");
+            navigate(`/profile/kelas-saya/`)
+            window.scrollTo(0,0);
+          }
+          if(responseData.error === "DATA TRANSAKSI SUDAH ADA"){
+            copyToClipboard("Kelas sudah ada");
+          }
           console.log(error);
         }else{
           user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+          window.scrollTo(0,0);
         }
       }
   };
@@ -348,6 +360,7 @@ function HeroSection({ dataDetail, star }) {
                 addCheckout();
               }else{
                 navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
+                window.scrollTo(0,0);
               }
             }
           }>
