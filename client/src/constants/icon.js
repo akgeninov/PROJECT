@@ -25,7 +25,7 @@ import iconEvent from "../assets/icon/icon-zoom.png";
 import iconEvent1 from "../assets/icon/ic-event1.png";
 import iconTransaksi from "../assets/icon/icon-walet.png";
 import iconTransaksi1 from "../assets/icon/ic-transaksi1.png";
-import iconEdit from "../assets/icon/icon-edit.png"
+import iconEdit from "../assets/icon/icon-edit.png";
 import playOutLine from "../assets/icon/play_outline.svg";
 
 import searchIcon from "../assets/icon/search_icon.png";
@@ -37,6 +37,9 @@ import AWARD from "../assets/icon/iaward.png";
 import BOOK from "../assets/icon/book.png";
 import CHAT from "../assets/icon/chat.png";
 import COPY from "../assets/icon/Copy.png";
+import linkedinProfile from "../assets/icon/linkedin_icon_profile.png";
+import facebookProfile from "../assets/icon/facebook_icon_profile.png";
+import instaProfile from "../assets/icon/insta_icon_profile.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -75,8 +78,11 @@ const icon = {
   AWARD,
   BOOK,
   CHAT,
-  playOutLine,
   COPY,
+  playOutLine,
+  linkedinProfile,
+  facebookProfile,
+  instaProfile,
 };
 
 export default icon;

@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import React, { useEffect } from "react";
+import { NavLink, Outlet, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faHome,
@@ -9,8 +9,11 @@ import {
   faWallet,
 } from "@fortawesome/free-solid-svg-icons"; // Add other icons as needed
 import { icon } from "../../../constants";
+import { useSelector } from "react-redux";
 
 export default function SidebarDetailprofile() {
+  const { user } = useSelector((state) => state.userSlice);
+  const navigate = useNavigate();
   const NavlinkStyles = ({ isActive }) => {
     return {
       fontWeight: isActive ? "bold" : "normal",
@@ -19,17 +22,30 @@ export default function SidebarDetailprofile() {
       boxShadow: isActive ? "3px 3px 7px rgba(128,128,128,0.3)" : "",
     };
   };
+  const NavlinkStylesDisable = ({ isActive }) => {
+    return {
+      fontWeight: "normal",
+      color: "#DEDEDE",
+      backgroundColor: "#F4F4F4",
+      boxShadow: "",
+      opacity: 10,
+    };
+  };
 
   const menuEdit = [
-    ["Detail Profil", `/profile/coba`],
-    ["Data Pribadi", "/profile/dashboard"],
-    ["Informasi Lainnya", "/profile/dashboard"],
-    ["Ubah Password", "/profile/dashboard"],
+    ["Detail Profil", `/profile/${user?.username || ""}`],
+    ["Data Pribadi", null],
+    ["Informasi Lainnya", "/profile/info-lain"],
+    ["Ubah Password", "/profile/password"],
   ];
+
+  useEffect(() => {
+    if (!user || !user.username) navigate("/");
+  }, [user]);
 
   return (
     <div className="flex flex-row justify-start lg:mt-[12px]  px-[10px] lg:px-0  w-full  min-h-screen ">
-      <div className="w-[411px] flex flex-col items-start ">
+      <div className="w-[411px] lg:flex hidden  flex-col items-start ">
         <h1 className="pl-[66px] ml-2 mb-[18px] text-[32px] font-bold leading-[72px]">
           Ubah Profil
         </h1>
@@ -41,7 +57,7 @@ export default function SidebarDetailprofile() {
             {menuEdit.map(([title, url]) => (
               <NavLink
                 to={url}
-                style={NavlinkStyles}
+                style={url ? NavlinkStyles : NavlinkStylesDisable}
                 className="flex items-center w-[307px] h-[57px] ml-2 rounded-[10px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
               >
                 {title}

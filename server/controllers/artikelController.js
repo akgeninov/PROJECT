@@ -22,7 +22,6 @@ module.exports = {
     try {
       const { kategori } = req.body;
       let result = "";
-      console.log({ res: kategori });
       if (kategori.toUpperCase() === "SEMUA") {
         result = await artikelModel.findAll({
           include: [

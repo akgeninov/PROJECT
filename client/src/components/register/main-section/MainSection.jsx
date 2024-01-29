@@ -4,25 +4,43 @@ import ButtonBlack500 from "../../global-component/button/button-black500/Button
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { signUpSchema } from "./lib/signupSchema";
-import { signInWithPopup, signInWithRedirect } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  signInWithRedirect,
+  updatePassword,
+} from "firebase/auth";
 import { auth, googleAuthProvider } from "../../../lib/firebase/firebase";
 import { useDispatch } from "react-redux";
-import { setToken } from "../../../lib/redux-toolkit/feature/user/userSlice";
+import {
+  setToken,
+  setUser,
+} from "../../../lib/redux-toolkit/feature/user/userSlice";
 import { api } from "../../../api/api";
+import Swal from "sweetalert2";
+import { FaRegEye, FaRegEyeSlash } from "react-icons/fa";
+import { Spinner } from "@chakra-ui/react";
 
 function MainSection() {
   const dispatch = useDispatch();
   const timeoutRef = useRef();
+  const [showBaru, setShowBaru] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [googleButton, setGoogleButton] = useState(false);
 
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, dirtyFields },
     reset,
   } = useForm({
     resolver: zodResolver(signUpSchema),
+    defaultValues: {
+      PASSWORD: "",
+      CONFIRM_PASSWORD: "",
+    },
   });
   // const password = watch("PASSWORD");
   // const confirmPassword = watch("CONFIRM_PASSWORD");
@@ -38,6 +56,7 @@ function MainSection() {
     timeoutRef.current = setTimeout(async () => {
       try {
         const responsFirebase = await signInWithPopup(auth, googleAuthProvider);
+        const coba = await updatePassword();
         const response = await api.post(
           `${process.env.REACT_APP_API_BASE_URL}/auth/login`,
           {
@@ -49,6 +68,10 @@ function MainSection() {
         );
         dispatch(setToken(response.data.token));
         localStorage.setItem("auth", JSON.stringify(response.data.token));
+        localStorage.setItem(
+          "verified",
+          JSON.stringify(response.data.data.verified)
+        );
         console.log(response);
       } catch (error) {
         console.log(error);
@@ -61,7 +84,7 @@ function MainSection() {
   const onSubmit = async (data) => {
     setGoogleButton(true);
 
-    console.log({ isSubmitting });
+    // console.log({ responsFirebase });
     try {
       console.log({ data });
       const response = await api.post(
@@ -76,9 +99,26 @@ function MainSection() {
         }
       );
       console.log(response);
-      reset();
+
+      if (response) {
+        dispatch(setToken(response.data.data.jwt));
+        dispatch(setUser(response.data.data.newUser));
+        localStorage.setItem("auth", JSON.stringify(response.data.data.jwt));
+        localStorage.setItem(
+          "verified",
+          JSON.stringify(response.data.data.newUser.verified)
+        );
+      }
+
+      // reset();
     } catch (error) {
       console.log(error);
+      Swal.fire({
+        title: "Register failed!",
+        text: "Mungkin email anda telah terdaftar! atau Ada yang salah, coba lagi!",
+        icon: "error",
+        confirmButtonColor: "#0F1011",
+      });
     } finally {
       setGoogleButton(false);
     }
@@ -142,25 +182,73 @@ function MainSection() {
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.EMAIL.message}`}</p>
             )}
           </div>
-          <div className="w-full">
-            <div className="relative">
+
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <div
+                type="button"
+                onClick={() => setShowBaru((prev) => !prev)}
+                className="cursor-pointer absolute right-0 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showBaru ? (
+                  <FaRegEye className="text-[20px]" />
+                ) : (
+                  <FaRegEyeSlash className="text-[20px]" />
+                )}
+              </div>
               <input
                 {...register("PASSWORD")}
-                type="password"
-                placeholder="Password"
-                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+                id="password"
+                type={showBaru ? "text" : "password"}
+                className=" outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
-              {/* <button
-              onClick={() => setIsHide((prev) => !prev)}
-              type="button"
-              className="absolute right-2 h-[50px]  "
-            ></button> */}
+              {!dirtyFields.PASSWORD && (
+                <div className="absolute left-0 pointer-events-none flex justify-center items-start">
+                  <p className="text-whiteSmoke800 font-medium">
+                    Password <span className="text-red-600">*</span>{" "}
+                  </p>
+                </div>
+              )}
             </div>
+
             {errors.PASSWORD && (
-              <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
+              <p className="text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.PASSWORD.message}`}</p>
             )}
           </div>
-          <div className="w-full">
+
+          <div className="gap-[20px] flex flex-col mb-[26px]">
+            <div className="relative w-full  flex items-center">
+              <div
+                type="button"
+                onClick={() => setShowConfirm((prev) => !prev)}
+                className="cursor-pointer absolute right-0 bg-whiteSmoke500 w-[50px] py-1 flex justify-center items-center"
+              >
+                {showConfirm ? (
+                  <FaRegEye className="text-[20px]" />
+                ) : (
+                  <FaRegEyeSlash className="text-[20px]" />
+                )}
+              </div>
+              <input
+                {...register("CONFIRM_PASSWORD")}
+                id="confirmPassword"
+                type={showConfirm ? "text" : "password"}
+                className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
+              />
+              {!dirtyFields.CONFIRM_PASSWORD && (
+                <div className="absolute left-0 pointer-events-none flex justify-center items-start">
+                  <p className="text-whiteSmoke800 font-medium">
+                    Confirm password <span className="text-red-600">*</span>{" "}
+                  </p>
+                </div>
+              )}
+            </div>
+
+            {errors.CONFIRM_PASSWORD && (
+              <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
+            )}
+          </div>
+          {/* <div className="w-full">
             <div className="relative">
               <input
                 {...register("CONFIRM_PASSWORD")}
@@ -168,30 +256,25 @@ function MainSection() {
                 placeholder="Confirm Password"
                 className="outline-none w-full h-[50px] bg-transparent text-[12px] md:text-[18px] font-medium leading-[24px] border-b-[2px] border-black"
               />
-              {/* <button
-              onClick={() => setIsHide((prev) => !prev)}
-              type="button"
-              className="absolute right-2 h-[50px]  "
-            ></button> */}
             </div>
             {errors.CONFIRM_PASSWORD && (
               <p className="mt-[10px] text-red-500 text-[12px] md:text-[18px] font-medium leading-[24px]">{`${errors.CONFIRM_PASSWORD.message}`}</p>
             )}
-            {console.log(errors)}
-          </div>
-          {/* <div className="flex justify-center items-center mt-[36px]">
-            <button type="submit">Masuk</button>
-            <ButtonBlack500 TEXT_BUTTON={"Masuk"} WIDTH={"w-[160px]"} />
           </div> */}
-          <button
-            disabled={isSubmitting ? true : false}
-            type="submit"
-            className={` flex  mx-[5px] sm:mx-0 w-[160px] px-[64px] py-[16px] justify-center items-center bg-black500 disabled:bg-whiteSmoke600 hover:bg-whiteSmoke800 rounded-[10px]`}
-          >
-            <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
-              Masuk
-            </p>
-          </button>
+
+          <div className="w-full  flex justify-center items-center">
+            <button
+              disabled={isSubmitting ? true : false}
+              type="submit"
+              className={` flex gap-5  mx-[5px] sm:mx-0 w-full px-[64px] py-[16px] justify-center items-center bg-black500  hover:bg-whiteSmoke800 rounded-[10px]`}
+            >
+              {isSubmitting ? <Spinner size={"md"} color="white" /> : null}
+
+              <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
+                Masuk
+              </p>
+            </button>
+          </div>
         </form>
 
         <div className=" flex justify-center items-center gap-[8px] w-full mt-[48px]">
@@ -210,7 +293,7 @@ function MainSection() {
           />
         </div>
 
-        <div className="w-[208px] md:w-[538px] mb-[76px]">
+        <div className="w-[208px] md:w-[538px] mb-[271px]">
           <button
             disabled={googleButton}
             onClick={loginWithFirebse}

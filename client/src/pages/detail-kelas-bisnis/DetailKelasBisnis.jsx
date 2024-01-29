@@ -1,17 +1,22 @@
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import HeroSection from "../../components/detail-kelas-bisnis/hero-section/HeroSection";
 import MainSection from "../../components/detail-kelas-bisnis/main-section/MainSection";
 import { useParams } from "react-router";
 import { api } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { detailKelas } from "../../lib/redux-toolkit/feature/detail-kelas/detailKelasSlice";
+import CheckoutKelasBisnisMobile from "../../components/detail-kelas-bisnis/main-section/checkout-kelas-bisnis-mobile/CheckoutKelasBisnisMobile";
 import Swal from "sweetalert2";
 
 function DetailKelasBisnis() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const [dataDetail, setDataDetail] = useState([]);
+  const [scrollPosition, setScrollPosition] = useState(0);
+  const [isShowCheckOut, setIsShowCheckOut] = useState(false);
   const [star, setStar] = useState(0);
+  const timeoutRef = useRef();
+
 
   const [wishlist, setWishlist] = useState([]);
   const [check, setCheck] = useState([]);
@@ -99,8 +104,40 @@ function DetailKelasBisnis() {
     window.scrollTo(0, 0);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentPosition = window.scrollY;
+      setScrollPosition(currentPosition);
+    };
+
+    // Tambahkan event listener pada mount komponen
+    window.addEventListener("scroll", handleScroll);
+
+    // Hapus event listener pada unmount komponen
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
+  const showCheckOut = () => {
+    if (timeoutRef.current) {
+      clearTimeout(timeoutRef.current);
+    }
+    setIsShowCheckOut(true);
+    timeoutRef.current = setTimeout(() => {
+      setIsShowCheckOut(false);
+    }, 2000);
+  };
+
+  useEffect(() => {
+    showCheckOut();
+  }, [scrollPosition]);
+
   return (
-    <div className="flex flex-col justify-center items-center shrink-0 ">
+    <div
+      onScroll={() => alert("scroll")}
+      className="flex flex-col justify-center items-center shrink-0 "
+    >
       <HeroSection
         dataDetail={dataDetail}
         star={star}
@@ -114,6 +151,12 @@ function DetailKelasBisnis() {
         // checkStatusWishlist={checkStatusWishlist}
         status={status}
       />
+      <div className="flex xl:hidden absolute bg-transparant pointer-events-none z-[50] top-0  w-full h-full ">
+        <CheckoutKelasBisnisMobile
+          dataDetail={dataDetail}
+          isShowCheckOut={isShowCheckOut}
+        />
+      </div>
     </div>
   );
 }

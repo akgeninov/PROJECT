@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import HeroSection from "../../components/home/hero-section/HeroSection";
 import ClientSection from "../../components/home/client-section/ClientSection";
 import AboutSection from "../../components/home/about-section/AboutSection";
@@ -11,6 +11,9 @@ import OurPartner from "../../components/home/our-partner/OurPartner";
 import JoinSection from "../../components/home/join-section/JoinSection";
 
 function Home() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   return (
     <div className=" flex flex-col justify-center items-center shrink-0">
       <HeroSection />

@@ -23,7 +23,7 @@ function CheckoutFree () {
     Swal.fire({
         position: "center",
         icon: "error",
-        title: "Kelas Sudah Ada",
+        title: text,
         showConfirmButton: false,
         timer: 3000,
     });
@@ -43,16 +43,28 @@ function CheckoutFree () {
         }
       );
       setCheckout(response.data.data);
-        console.log(response);
-         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                copyToClipboard();
-                console.log(error);
-              }else{
-                navigate("/");
-              }
-          }
-         };
+      console.log(response);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        const responseData = error.response.data;
+        if (responseData.error === "AKUN ANDA BELUM VERIFIED") {
+          copyToClipboard("Akun anda belum verified");
+        }
+        if(responseData.error === "DATA REGIST SUDAH ADA"){
+          copyToClipboard("Kelas sudah terdaftar");
+          navigate(`/profile/kelas-saya/`);
+          window.scrollTo(0,0);
+        }
+        if(responseData.error === "DATA TRANSAKSI SUDAH ADA"){
+          copyToClipboard("Kelas sudah ada");
+        }
+        console.log(error);
+        }else{
+          navigate("/lms");
+          window.scrollTo(0,0);
+        }
+    }
+  };
 
     return (
         <div className="w-full lg:w-full lg:h-[900px] h-[900px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>

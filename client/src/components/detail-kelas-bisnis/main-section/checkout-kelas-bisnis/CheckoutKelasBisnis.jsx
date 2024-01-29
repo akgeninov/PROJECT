@@ -27,15 +27,15 @@ function CheckoutKelasBisnis({
     document.body.removeChild(el);
 
     Swal.fire({
-      position: "center",
-      icon: "error",
-      title: "Kelas Sudah Ada",
-      showConfirmButton: false,
-      timer: 3000,
+        position: "center",
+        icon: "error",
+        title: text,
+        showConfirmButton: false,
+        timer: 3000,
     });
   };
 
-  const addCheckout = async (text) => {
+  const addCheckout = async () => {
     try {
       const token = JSON.parse(localStorage.getItem("auth"));
       const response = await api.post(
@@ -53,12 +53,22 @@ function CheckoutKelasBisnis({
       console.log(response);
     } catch (error) {
       if (error.response && error.response.status === 400) {
-        copyToClipboard();
+        const responseData = error.response.data;
+        if (responseData.error === "AKUN ANDA BELUM VERIFIED") {
+          copyToClipboard("Akun anda belum verified");
+        }
+        if(responseData.error === "DATA REGIST SUDAH ADA"){
+          copyToClipboard("Kelas sudah terdaftar");
+          navigate(`/profile/kelas-saya/`)
+          window.scrollTo(0,0);
+        }
+        if(responseData.error === "DATA TRANSAKSI SUDAH ADA"){
+          copyToClipboard("Kelas sudah ada");
+        }
         console.log(error);
-      } else {
-        user
-          ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`)
-          : navigate("/login");
+      }else{
+        user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+        window.scrollTo(0,0);
       }
     }
   };
@@ -286,15 +296,15 @@ function CheckoutKelasBisnis({
             <HiOutlineHeart className="text-[32px] text-black500" />
           )}
         </button>
-        <div
-          onClick={() => {
-            if (dataDetail?.kelas_bisni?.harga > 0) {
-              addCheckout();
-            } else {
-              navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`);
-            }
-          }}
-        >
+        <div onClick={() => {
+          if (dataDetail?.kelas_bisni?.harga > 0 ){
+            addCheckout();
+          }else{
+            navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
+            window.scrollTo(0,0);
+          }
+        }
+          }>
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>
       </div>

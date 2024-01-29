@@ -4,11 +4,7 @@ require("dotenv").config();
 const makeJWT = (data) => {
   console.log({ data });
   const payload = {
-    // id: data.id,
-    // nama_user: data.nama_user,
-    // no_hp: data.no_hp,
     email: data.email,
-    // nama_bisnis: data.nama_bisnis,
     id_role: data.id_role,
   };
   const result = jwt.sign(payload, process.env.SECRET_JWT, {
@@ -19,45 +15,26 @@ const makeJWT = (data) => {
   return result;
 };
 
-const checkAvailableColumn = async (Model, column, value, res) => {
+const getEmailFromToken = (token) => {
   try {
-    const condition = {
-      [column]: value,
-    };
-
-    const result = await Model.findOne({
-      where: condition,
-    });
-
-    if (result) {
-      return res.status(500).json({
-        message: `${column} pada tabel ${Model.name} sudah digunakan.`,
-        result: false,
-      });
-    } else {
-      return true;
-    }
+    const decoded = jwt.verify(token, process.env.SECRET_JWT);
+    return decoded.email;
   } catch (error) {
-    console.error("Error executing query: " + error);
-    return res.status(401).json({ message: `Gagal Cek ${column} ! ` });
+    // Handle error, token tidak valid atau sudah kedaluwarsa
+    console.error('Error decoding JWT:', error.message);
+    return null;
   }
 };
 
 const checkAvailableColumn2 = async (Model, column, value) => {
   try {
-    const condition = {
-      [column]: value,
-    };
+    const condition = {[column]: value};
 
-    const result = await Model.findOne({
-      where: condition,
-    });
+    const result = await Model.findOne({where: condition});
 
-    if (result) {
-      return false;
-    } else {
-      return true;
-    }
+    if (result)return false;
+    else return true;
+
   } catch (error) {
     console.error("Error executing query: " + error);
     return false;
@@ -80,7 +57,6 @@ function createResponse(res, status, result, message, data = null) {
 
 module.exports = {
   makeJWT,
-  checkAvailableColumn,
   checkAvailableColumn2,
   validateEmail,
   createResponse,
