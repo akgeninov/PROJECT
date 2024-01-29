@@ -7,8 +7,8 @@ import { api } from "../../api/api";
 import Swal from "sweetalert2";
 
 function CheckoutFree () {
-  const [ checkout, setCheckout] = useState([]);
-  const [  freecheckout, getCheckout] = useState ([]);
+  const [ setCheckout ] = useState([]);
+  const [  checkout, getCheckout] = useState ([]);
 
   const token = JSON.parse(localStorage.getItem("auth"));
   const navigate = useNavigate()
@@ -80,14 +80,14 @@ function CheckoutFree () {
          fetchCheckout();
          
        }, []);
-       console.log(freecheckout.freecheckout)
+       console.log(checkout.checkout)
    
        useEffect(() => {
-         console.log(freecheckout)
-       },[freecheckout]);
+         console.log(checkout)
+       },[checkout]);
 
     return (
-        <div key={freecheckout.id_kelas_bisnis} freecheckout={freecheckout} 
+        <div key={checkout.id_kelas_bisnis} checkout={checkout} 
         className="w-full lg:w-full lg:h-[900px] h-[900px] lg:flex flex flex-col items-center" style={{ backgroundColor:"#F0F0F0"}}>
             <h1 className="text-[22px] lg:text-[24px] font-bold text-center leading-[32px] lg:leading-[60px] lg:mt-[20px] mt-[20px] mb-[20px] lg:mb-[20px]">
                 Checkout Kelas
@@ -96,13 +96,13 @@ function CheckoutFree () {
             <div className="w-[544px] lg:w-[544px] lg:h-[128px] h-[128px]" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', borderRadius: '10px', border: '2px solid #DEDEDE'  }}>
                     <div className="w-full lg:w-full lg:h-full h-full lg:flex flex ml-[20px] lg:ml-[20px] mr-[20px] lg:mr-[20px]" >
                         <img
-                            src= {`${process.env.REACT_APP_SERVER_URL}images/kelas/${freecheckout.kelas_bisni?.image}`|| images.Linkedin}
-                            alt= {freecheckout.kelas_bisni?.nama || "No Data"}
+                            src= {`${process.env.REACT_APP_SERVER_URL}images/kelas/${checkout.kelas_bisni?.image}`|| images.Linkedin}
+                            alt= {checkout.kelas_bisni?.nama || "No Data"}
                             className="w-[121px] lg:w-[121px] lg:h-[88px] lg:mt-[15px] lg:ml-[5px] h-[88px] object-cover rounded-[5px] mt-[15px] ml-[5px]"
                         />
                         <div className="lg:ml-[15px] ml-[15px] mt-[15px] lg:mt-[15px]">
                             <h1 className="lg:text-[16px] text-[16px] font-medium">
-                            {freecheckout.kelas_bisni?.nama || "No Data"}
+                            {checkout.kelas_bisni?.nama || "No Data"}
                             </h1>
                             <div className="flex lg:flex">
                                 <FaPlay className="h-[14px] lg:h-[14px] lg:w-[14px] mt-[16px] w-[14px] lg:mt-[16px]" style={{color:"#5E5F60"}} />
