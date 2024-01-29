@@ -16,7 +16,7 @@ export default function LihatInvoice() {
       const response = await api.post(
         `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/transaksi-saya/invoice`,
         {
-          id_kelas_bisnis: transaction_id,
+          id: transaction_id,
         },
         {
           headers: {
@@ -27,11 +27,11 @@ export default function LihatInvoice() {
       setInvoice(response.data.data);
       setUser(response.data.data.User);
       setKelasBisnis(response.data.data.kelas_bisni);
+      console.log(response.data.data);
     } catch (error) {
       console.log(error);
     }
   };
-
 
   const rupiah = (num) => {
     if (typeof num === "number") {
@@ -63,7 +63,7 @@ export default function LihatInvoice() {
 
   useEffect(() => {
     fetchInvoice();
-  }, []);
+  }, [fetchInvoice]);
 
   return (
     <div className="flex flex-col lg:w-[1080px] max-w-screen-xl justify-center">
@@ -101,7 +101,7 @@ export default function LihatInvoice() {
                   ? "Berhasil"
                   : invoice.status_transaksi === "canceled"
                   ? "Dibatalkan"
-                  : "Menunggu"}
+                  : "Menunggu Konfirmasi"}
               </td>
             </tr>
           </tbody>
@@ -128,7 +128,11 @@ export default function LihatInvoice() {
                 invoice.status_transaksi
               )} text-[#278B03] font-medium`}
             >
-              {invoice.status_transaksi}
+              {invoice.status_transaksi === "success"
+                  ? "Berhasil"
+                  : invoice.status_transaksi === "canceled"
+                  ? "Dibatalkan"
+                  : "Menunggu Konfirmasi"}
             </p>
           </div>
         </div>

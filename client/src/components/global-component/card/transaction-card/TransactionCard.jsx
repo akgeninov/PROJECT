@@ -78,7 +78,7 @@ export default function TransactionCard(transaksi) {
       },
       buttonsStyling: true,
       confirmButtonColor: "#0F1011",
-      cancelButtonColor: "#FFFFFF",
+      cancelButtonColor: "#3F4041",
     });
     swalWithBootstrapButtons
       .fire({
@@ -88,7 +88,8 @@ export default function TransactionCard(transaksi) {
         cancelButtonText: '<p className="text-black500">Tidak</p>',
         reverseButtons: true,
         width: "640px",
-        padding: "358px",
+        // padding: "358px",
+        padding: "80px",
         heightAuto: false,
       })
       .then((result) => {
@@ -112,10 +113,14 @@ export default function TransactionCard(transaksi) {
   return (
     <>
       <div
-        className="flex flex-col w-[358px] h-[204px] justify-between md:w-[500px] md:h-[280px] lg:w-[750px] lg:h-[346px] border-[1px] border-whiteSmoke700 mb-[30px] rounded-[10px] shadow-md shadow-gray-300 cursor-pointer"
+        className={
+          transaksi.transaksi.status_transaksi === "pending"
+            ? "flex flex-col w-[358px] h-[248px] justify-between md:w-[500px] md:h-[280px] lg:w-[750px] lg:h-[346px] border-[1px] border-whiteSmoke700 mb-[30px] rounded-[10px] shadow-md shadow-gray-300 cursor-pointer"
+            : "flex flex-col w-[358px] h-[204px] justify-between md:w-[500px] md:h-[280px] lg:w-[750px] lg:h-[346px] border-[1px] border-whiteSmoke700 mb-[30px] rounded-[10px] shadow-md shadow-gray-300 cursor-pointer"
+        }
         onClick={() => {
           if (transaksi.transaksi.status_transaksi === "success") {
-            navigate(`/kelas-bisnis/${transaksi.transaksi.id_kelas_bisnis}`);
+            navigate(`/lms`);
           } else if (transaksi.transaksi.status_transaksi === "pending") {
             const date = new Date().toISOString();
             console.log(date);
@@ -125,7 +130,6 @@ export default function TransactionCard(transaksi) {
                 navigate(`/checkout/approval-checkout`);
               } else {
                 updateStatus("canceled");
-                
               }
             } else {
               if (transaksi.transaksi.isPaid === true) {
@@ -174,10 +178,9 @@ export default function TransactionCard(transaksi) {
                 event.stopPropagation();
               }}
             >
-              <p className="w-[239px] items-center lg:inline-block hidden">
-                No. Invoice:
+              <p className="w-[239px] items-center lg:inline-block hidden">                
                 <span className="line-clamp-1 hover:underline hover:text-[#1C64F2]">
-                  {transaksi.transaksi.nomor_invoice}
+                No. Invoice: {transaksi.transaksi.nomor_invoice}
                 </span>
               </p>
             </Link>
@@ -197,8 +200,11 @@ export default function TransactionCard(transaksi) {
             <div className="relative flex items-center lg:hidden text-left w-fit pl-2">
               <button
                 type="button"
-                className="inline-flex justify-between items-center w-fit"
-                onClick={toggleDropDown}
+                className="inline-flex justify-between items-center w-fit min-w-[10px]"
+                onClick={(event) => {
+                  event.stopPropagation();
+                  toggleDropDown();
+                }}
               >
                 <FontAwesomeIcon
                   icon={faEllipsisVertical}
@@ -215,7 +221,10 @@ export default function TransactionCard(transaksi) {
                     //     : "text-whiteSmoke800 text-[12px] leading-[20px] font-bold"
                     // }
                     className="text-black500 text-[12px] leading-[20px] font-normal ml-2 active:font-bold"
-                    onClick={toggleDropDown}
+                    onClick={(event) => {
+                      event.stopPropagation();
+                      toggleDropDown();
+                    }}
                   >
                     Lihat Invoice
                   </Link>
@@ -247,24 +256,34 @@ export default function TransactionCard(transaksi) {
             </div>
           </div>
         </div>
-        <div className="h-[38px] lg:h-[74px] flex items-center rounded-b-[10px] bg-[rgba(204,204,204,0.2)] px-[11px] text-[12px] lg:text-[24px] leading-[72px] font-medium">
-          <p className="w-[55%] lg:w-[65%] text-[#666666]">Total Pembayaran</p>
-          <p className="w-[45%] lg:w-[35%]  text-[#0F1011] text-right lg:text-left">
-            {total(
-              transaksi.transaksi.status_transaksi,
-              rupiah(transaksi.transaksi.kelas_bisni.harga)
-            )}
-          </p>
+        <div
+          className={
+            transaksi.transaksi.status_transaksi === "pending"
+              ? "h-[72px] lg:h-[74px] flex flex-col lg:flex-row items-center rounded-b-[10px] bg-[rgba(204,204,204,0.2)] px-[11px] text-[12px] lg:text-[24px] lg:leading-[72px] font-medium"
+              : "h-[38px] lg:h-[74px] flex flex-col lg:flex-row items-center rounded-b-[10px] bg-[rgba(204,204,204,0.2)] px-[11px] text-[12px] lg:text-[24px] lg:leading-[72px] font-medium"
+          }
+        >
+          <div className={transaksi.transaksi.status_transaksi === "pending"?"flex w-full h-[50%] lg:h-[100%] justify-center items-center":"flex w-full h-[100%] justify-center items-center"}>
+            <p className="w-[55%] lg:w-[65%] h-fit text-[#666666]">
+              Total Pembayaran
+            </p>
+            <p className="w-[45%] lg:w-[35%] h-fit text-[#0F1011] text-right lg:text-left">
+              {total(
+                transaksi.transaksi.status_transaksi,
+                rupiah(transaksi.transaksi.kelas_bisni.harga)
+              )}
+            </p>
+          </div>
           {transaksi.transaksi.status_transaksi === "pending" ? (
-            <div className="flex gap-[10px]">
+            <div className="flex gap-[10px] w-fit">
               <button
                 onClick={(event) => {
                   event.stopPropagation();
                   transactionCanceled();
                 }}
-                className={`flex mx-[5px] sm:mx-0 w-[107px] h-[34px] px-[64px] py-[16px] justify-center items-center bg-[#8A8A8A33] hover:bg-black100 rounded-[10px]`}
+                className={`flex mx-[5px] sm:mx-0 w-[155px] h-[24px] lg:w-[107px] lg:h-[34px] justify-center items-center bg-[#8A8A8A33] hover:bg-black100 rounded-[5px]`}
               >
-                <p className="text-black500 shrink-0 font-medium text-[16px] leading-[24px]">
+                <p className="text-black500 shrink-0 font-medium text-[12px] lg:text-[16px] leading-[20px] lg:leading-[24px]">
                   Batalkan
                 </p>
               </button>
@@ -275,9 +294,9 @@ export default function TransactionCard(transaksi) {
                     `/checkout-free/${transaksi.transaksi.kelas_bisni.id}`
                   );
                 }}
-                className={`flex mx-[5px] sm:mx-0 w-[107px] h-[34px] px-[64px] py-[16px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]`}
+                className={`flex mx-[5px] sm:mx-0 w-[155px] h-[24px] lg:w-[107px] lg:h-[34px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[5px]`}
               >
-                <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
+                <p className="text-whiteSmoke500 shrink-0 font-medium text-[12px] lg:text-[16px] leading-[20px] lg:leading-[24px]">
                   Selesaikan
                 </p>
               </button>

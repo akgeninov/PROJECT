@@ -11,6 +11,7 @@ export default function SidebarProfile() {
   const [dropdownShow, setDropdownShow] = useState(false);
   const [toggle, setToggle] = useState(true);
   const { user } = useSelector((state) => state.userSlice);
+  const [useuser, setUser] = useState();
 
   const NavlinkStyles = ({ isActive }) => {
     return {
@@ -66,6 +67,20 @@ export default function SidebarProfile() {
   const statusOption = menuItems.filter((items) =>
     parentPath.split("/")[2] === items.url.split("/")[2] ? items.title : ""
   );
+  // console.log(user);
+  // useEffect(() => {
+  //   setUser(user.username);
+  // }, [user, useuser]);
+
+  // const [showNavBar, setShowNavBar] = useState(false);
+
+  // useEffect(() => {
+  //   const timer = setTimeout(() => {
+  //     setShowNavBar(true);
+  //     return user.username;
+  //   }, 5000);
+  //   return () => clearTimeout(timer);
+  // }, []);
 
   return (
     <div className="flex flex-col lg:flex-row justify-center items-center lg:justify-start lg:items-start max-w-screen-2xl mt-[12px] lg:px-0 w-full lg:w-[100%] h-full lg:max-h-fit gap-[22px] flex-shrink-0 mb-[50px]">
@@ -82,15 +97,16 @@ export default function SidebarProfile() {
           style={{ borderRadius: "10px" }}
         />
         <img
-          src={
-            `${process.env.REACT_APP_SERVER_URL}images/user/${user.profile_picture}` ||
-            "No Data"
-          }
+          // src={
+          //   `${process.env.REACT_APP_SERVER_URL}images/user/${user.profile_picture}` ||
+          //   "No Data"
+          // }
           alt="Career Momen 1"
           className="object-cover w-[178px] h-[178px] rounded-[100px]"
         />
         <h1 className="font-medium mt-3 text-[32px]">
-          {user.username || "No Data"}
+          {/* {useuser.username || "No Data"} */}
+          {/* {showNavBar} */}
         </h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
           {menuItems.map(({ title, icon, activeIcon, url }, index) => (

@@ -18,8 +18,8 @@ function DetailKelasBisnis() {
   const timeoutRef = useRef();
 
 
-  const [wishlist, setWishlist] = useState([]);
-  const [check, setCheck] = useState([]);
+  // const [wishlist, setWishlist] = useState([]);
+  // const [check, setCheck] = useState([]);
   const [status, setStatus] = useState();
 
   const fetchDetailKelas = useMemo(async () => {
@@ -56,7 +56,7 @@ function DetailKelasBisnis() {
           },
         }
       );
-      setWishlist(response.data.data);
+      // setWishlist(response.data.data);
       setStatus(response.data.data.isRemove);
       if(status === true){
         Swal.fire({
@@ -93,7 +93,7 @@ function DetailKelasBisnis() {
           },
         }
       );
-      setCheck(response.data.data);
+      // setCheck(response.data.data);
       setStatus(response.data.data?.isRemove);
     } catch (error) {
       console.log(error);

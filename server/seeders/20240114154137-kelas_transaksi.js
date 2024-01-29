@@ -1,7 +1,12 @@
-'use strict';
+"use strict";
 
 /** @type {import('sequelize-cli').Migration} */
-const { sequelize, kelas_bisnis, kelas_bisnis_diskon, kelas_diskon } = require('../models');
+const {
+  sequelize,
+  kelas_bisnis,
+  kelas_bisnis_diskon,
+  kelas_diskon,
+} = require("../models");
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -21,7 +26,7 @@ module.exports = {
 
     const harga = kelasBisnis.harga;
     const persenDiskon = kelasDiskon ? kelasDiskon.jumlah_persen : 0;
-    const total = kelasBisnis.harga * ((100 - kelasDiskon.jumlah_persen)/100);
+    const total = kelasBisnis.harga * ((100 - kelasDiskon.jumlah_persen) / 100);
 
     return queryInterface.bulkInsert("kelas_transaksis", [
       {
@@ -29,8 +34,8 @@ module.exports = {
         id_kelas_bisnis: 1,
         harga: harga,
         persen_diskon: persenDiskon,
-        total : total,
-        status_transaksi: 'canceled',
+        total: total,
+        status_transaksi: "canceled",
         date_transaksi: currentDate,
         date_expired: expiredDate,
         createdAt: currentDate,
@@ -41,31 +46,20 @@ module.exports = {
         id_kelas_bisnis: 2,
         harga: harga,
         persen_diskon: persenDiskon,
-        total : total,
-        status_transaksi: 'success',
+        total: total,
+        status_transaksi: "success",
         date_transaksi: currentDate,
         date_expired: expiredDate,
         createdAt: currentDate,
         updatedAt: currentDate,
-      },{
+      },
+      {
         id_user: 4,
         id_kelas_bisnis: 3,
         harga: harga,
         persen_diskon: persenDiskon,
-        total : total,
-        status_transaksi: 'pending',
-        date_transaksi: currentDate,
-        date_expired: expiredDate,
-        createdAt: currentDate,
-        updatedAt: currentDate,
-      },
-      {
-        id_user: 4,
-        id_kelas_bisnis: 2,
-        harga: 350000,
-        persen_diskon: 5,
-        total : 332500,
-        status_transaksi: 'canceled',
+        total: total,
+        status_transaksi: "pending",
         date_transaksi: currentDate,
         date_expired: expiredDate,
         createdAt: currentDate,
@@ -76,5 +70,5 @@ module.exports = {
 
   async down(queryInterface, Sequelize) {
     return queryInterface.bulkDelete("kelas_transaksis", null, {});
-  }
+  },
 };

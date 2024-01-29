@@ -430,7 +430,7 @@ module.exports = {
   getTransaksiInvoice: async (req, res) => {
     try {
       const userData = req.dataToken;
-      const { id_kelas_bisnis } = req.body;
+      const { id } = req.body;
       const getuser = await user.findOne({
         where: {
           email: userData.email,
@@ -444,7 +444,7 @@ module.exports = {
       const result = await kelasTransaksiModel.findOne({
         where: {
           id_user: getuser.id,
-          id_kelas_bisnis: id_kelas_bisnis,
+          id: id,
         },
         attributes: [
           "id",
