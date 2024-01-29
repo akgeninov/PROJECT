@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-// import dataTransaction from "./../constant";
 import { api } from "../../../../api/api";
-// import { useSelector } from "react-redux";
 import moment from "moment";
 import "moment/locale/id";
 
@@ -11,9 +9,6 @@ export default function LihatInvoice() {
   const [invoice, setInvoice] = useState([]);
   const [user, setUser] = useState([]);
   const [kelasbisnis, setKelasBisnis] = useState([]);
-
-  // const { user } = useSelector((state) => state.userSlice);
-  // console.log(user);
 
   const fetchInvoice = async () => {
     try {
@@ -32,19 +27,11 @@ export default function LihatInvoice() {
       setInvoice(response.data.data);
       setUser(response.data.data.User);
       setKelasBisnis(response.data.data.kelas_bisni);
-      // setKelasBisnis(response.data.data.kelas_bisni.image);
     } catch (error) {
       console.log(error);
     }
   };
-  // console.log(invoice);
 
-  // const getData =
-  //   dataTransaction[
-  //     dataTransaction.findIndex(
-  //       (transaction) => transaction.transaction_id === transaction_id
-  //     )
-  //   ];
 
   const rupiah = (num) => {
     if (typeof num === "number") {
@@ -55,9 +42,9 @@ export default function LihatInvoice() {
   };
 
   const labelColor = (status) => {
-    if (status === "Berhasil") {
+    if (status === "success") {
       return "text-[#278B03]";
-    } else if (status === "Dibatalkan") {
+    } else if (status === "canceled") {
       return "text-[#A12105]";
     } else {
       return "text-[#E49333]";
@@ -68,7 +55,7 @@ export default function LihatInvoice() {
     if (status === "success") {
       return price;
     } else if (status === "canceled") {
-      return "Berhasil";
+      return "Dibatalkan";
     } else {
       return "Menunggu Konfirmasi";
     }
@@ -97,7 +84,9 @@ export default function LihatInvoice() {
               <td>Waktu Pembayaran</td>
               <td className="px-[25px] py-[10px]">:</td>
               <td className="font-medium">
-                {moment(invoice.date_transaksi).format("DD MMMM YYYY, hh:mm")}
+                {invoice.status_transaksi === "success"
+                  ? moment(invoice.date_transaksi).format("DD MMMM YYYY, hh:mm")
+                  : "-"}
               </td>
             </tr>
             <tr>
@@ -127,7 +116,9 @@ export default function LihatInvoice() {
           <div className="my-[10px]">
             <p>Waktu Pembayaran:</p>
             <p className="font-medium">
-              {moment(invoice.date_transaksi).format("DD MMMM YYYY, h:mm")}
+              {invoice.status_transaksi === "success"
+                ? moment(invoice.date_transaksi).format("DD MMMM YYYY, hh:mm")
+                : "-"}
             </p>
           </div>
           <div className="mb-[10px]">

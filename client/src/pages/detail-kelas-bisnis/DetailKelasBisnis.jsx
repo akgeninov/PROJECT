@@ -5,6 +5,7 @@ import { useParams } from "react-router";
 import { api } from "../../api/api";
 import { useDispatch } from "react-redux";
 import { detailKelas } from "../../lib/redux-toolkit/feature/detail-kelas/detailKelasSlice";
+import Swal from "sweetalert2";
 
 function DetailKelasBisnis() {
   const dispatch = useDispatch();
@@ -52,7 +53,22 @@ function DetailKelasBisnis() {
       );
       setWishlist(response.data.data);
       setStatus(response.data.data.isRemove);
-      console.log(response);
+      if(status === true){
+        Swal.fire({
+          title: "Info",
+          text: "Berhasil Menambah Wishlist",
+          icon: "success",
+          confirmButtonColor: "#0F1011",
+        });
+      }else{
+        Swal.fire({
+          title: "Info",
+          text: "Berhasil Menghapus Wishlist",
+          icon: "success",
+          confirmButtonColor: "#0F1011",
+        });
+      }
+
     } catch (error) {
       console.log(error);
     }

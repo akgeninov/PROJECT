@@ -3,12 +3,14 @@ import { Outlet, NavLink, useLocation, useNavigate } from "react-router-dom";
 import { icon } from "../../../constants";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useSelector } from "react-redux";
 
 export default function SidebarProfile() {
   const navigate = useNavigate();
   const parentPath = useLocation().pathname;
   const [dropdownShow, setDropdownShow] = useState(false);
   const [toggle, setToggle] = useState(true);
+  const { user } = useSelector((state) => state.userSlice);
 
   const NavlinkStyles = ({ isActive }) => {
     return {
@@ -76,15 +78,20 @@ export default function SidebarProfile() {
           onClick={() => navigate("/profile/coba")}
           src={icon.iconEdit}
           alt="Career Momen 1"
-          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px]"
+          className="object-cover w-[40px] h-[40px] ml-[180px] mt-[60px] cursor-pointer"
           style={{ borderRadius: "10px" }}
         />
         <img
-          src={icon.profile}
+          src={
+            `${process.env.REACT_APP_SERVER_URL}images/user/${user.profile_picture}` ||
+            "No Data"
+          }
           alt="Career Momen 1"
-          className="object-cover w-[150px] h-[140px]"
+          className="object-cover w-[178px] h-[178px] rounded-[100px]"
         />
-        <h1 className="font-medium mt-3 text-[32px]">Anonymous</h1>
+        <h1 className="font-medium mt-3 text-[32px]">
+          {user.username || "No Data"}
+        </h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
           {menuItems.map(({ title, icon, activeIcon, url }, index) => (
             <NavLink

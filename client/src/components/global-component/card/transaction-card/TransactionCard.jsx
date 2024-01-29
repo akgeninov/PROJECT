@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { useNavigate } from "react-router-dom";
-import ButtonBlack500 from './../../button/button-black500/ButtonBlack500';
+import ButtonBlack500 from "./../../button/button-black500/ButtonBlack500";
 import moment from "moment";
 import "moment/locale/id";
 import { api } from "./../../../../api/api";
@@ -34,12 +34,10 @@ export default function TransactionCard(transaksi) {
     }
   };
   const total = (status, price) => {
-    if (status === "success") {
-      return price;
-    } else if (status === "canceled") {
+    if (status === "canceled") {
       return "Dibatalkan";
     } else {
-      return "Menunggu Konfirmasi";
+      return price;
     }
   };
 
@@ -58,7 +56,7 @@ export default function TransactionCard(transaksi) {
           },
         }
       );
-      console.log(response);
+      // console.log(response);
       Swal.fire({
         title: "Error",
         text: "Transaksi Kadaluarsa",
@@ -71,6 +69,46 @@ export default function TransactionCard(transaksi) {
       console.log(error);
     }
   };
+
+  const transactionCanceled = () => {
+    const swalWithBootstrapButtons = Swal.mixin({
+      customClass: {
+        confirmButton: "btn btn-success border border-dark",
+        cancelButton: "btn btn-danger",
+      },
+      buttonsStyling: true,
+      confirmButtonColor: "#0F1011",
+      cancelButtonColor: "#FFFFFF",
+    });
+    swalWithBootstrapButtons
+      .fire({
+        text: "Apakah kamu yakin ingin membatalkan transaksi ini?",
+        showCancelButton: true,
+        confirmButtonText: "Ya, batalkan transaksi ini",
+        cancelButtonText: '<p className="text-black500">Tidak</p>',
+        reverseButtons: true,
+        width: "640px",
+        padding: "358px",
+        heightAuto: false,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          swalWithBootstrapButtons.fire({
+            title: "Dibatalkan",
+            text: "Transaksi Telah Dibatalkan",
+            icon: "success",
+          });
+          updateStatus("canceled").then(() => {
+            transaksi.fetchTransaksi();
+          });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === Swal.DismissReason.cancel
+        ) {
+        }
+      });
+  };
+
   return (
     <>
       <div
@@ -80,18 +118,19 @@ export default function TransactionCard(transaksi) {
             navigate(`/kelas-bisnis/${transaksi.transaksi.id_kelas_bisnis}`);
           } else if (transaksi.transaksi.status_transaksi === "pending") {
             const date = new Date().toISOString();
+            console.log(date);
+            console.log(transaksi.transaksi.nomor_invoice);
             if (date >= transaksi.transaksi.date_expired) {
               if (transaksi.transaksi.isPaid === true) {
                 navigate(`/checkout/approval-checkout`);
               } else {
                 updateStatus("canceled");
-                // navigate(`/checkout/${transaksi.transaksi.kelas_bisni.id}`);
+                
               }
             } else {
               if (transaksi.transaksi.isPaid === true) {
                 navigate(`/checkout/approval-checkout`);
               } else {
-                // updateStatus("canceled");
                 navigate(`/checkout/${transaksi.transaksi.kelas_bisni.id}`);
               }
             }
@@ -106,33 +145,54 @@ export default function TransactionCard(transaksi) {
         }}
       >
         <div className="h-[38px] lg:h-[74px] flex justify-between bg-[rgba(204,204,204,0.2)] p-[11px] items-center text-[12px] lg:text-[18px] font-medium leading-[30px] rounded-t-[10px]">
-          <p className="lg:w-[335px] lg:mr-[10px]">
-            <span className="lg:inline hidden">Waktu Pembayaran, </span>
-            {moment(transaksi.transaksi.date_transaksi).format(
-              "DD MMMM YYYY, hh:mm"
-            )}
-          </p>
-          <div className="border-l border-[#666666] border-opacity-30 h-[45px] w-[2px] lg:block hidden"></div>
-          <Link
-            to={`/profile/transaksi/${transaksi.transaksi.id}/lihat-invoice`}
-          >
-            <p className="h-[60px] mx-[10px] lg:inline-block hidden hover:underline hover:text-[#1C64F2]">
-              <span className="line-clamp-1">
-                No. Invoice: {transaksi.transaksi.nomor_invoice}
-              </span>
-            </p>
-          </Link>
+          {transaksi.transaksi.status_transaksi === "success" ? (
+            <>
+              <p className="lg:w-[335px] lg:mr-[10px]">
+                <span className="lg:inline hidden">Waktu Pembayaran, </span>
+                {moment(transaksi.transaksi.date_transaksi).format(
+                  "DD MMMM YYYY, hh:mm"
+                )}
+              </p>
+              <div className="border-l border-[#666666] border-opacity-30 h-[45px] w-[2px] lg:block hidden"></div>
+              <Link
+                to={`/profile/transaksi/${transaksi.transaksi.id}/lihat-invoice`}
+                onClick={(event) => {
+                  event.stopPropagation();
+                }}
+              >
+                <p className="h-[60px] mx-[10px] lg:inline-block hidden hover:underline hover:text-[#1C64F2]">
+                  <span className="line-clamp-1">
+                    No. Invoice: {transaksi.transaksi.nomor_invoice}
+                  </span>
+                </p>
+              </Link>
+            </>
+          ) : (
+            <Link
+              to={`/profile/transaksi/${transaksi.transaksi.id}/lihat-invoice`}
+              onClick={(event) => {
+                event.stopPropagation();
+              }}
+            >
+              <p className="w-[239px] items-center lg:inline-block hidden">
+                No. Invoice:
+                <span className="line-clamp-1 hover:underline hover:text-[#1C64F2]">
+                  {transaksi.transaksi.nomor_invoice}
+                </span>
+              </p>
+            </Link>
+          )}
           <div className="flex flex-row items-center">
             <div
               className={`${labelColor(
                 transaksi.transaksi.status_transaksi
-              )} flex justify-center items-center w-[67px] h-[24px] lg:w-[109px] lg:h-[36px] text-center border-[1px] rounded-[5px] lg:rounded-[10px] text-whiteSmoke500`}
+              )} flex justify-center items-center min-w-[67px] w-fit h-[24px] lg:min-w-[109px] lg:w-fit lg:h-[36px] px-[10px] text-center border-[1px] rounded-[5px] lg:rounded-[10px] text-whiteSmoke500`}
             >
               {transaksi.transaksi.status_transaksi === "success"
                 ? "Berhasil"
                 : transaksi.transaksi.status_transaksi === "canceled"
                 ? "Dibatalkan"
-                : "Menunggu"}
+                : "Menunggu Konfirmasi"}
             </div>
             <div className="relative flex items-center lg:hidden text-left w-fit pl-2">
               <button
@@ -184,15 +244,6 @@ export default function TransactionCard(transaksi) {
               <p className="text-[#0F1011]">
                 {rupiah(transaksi.transaksi.kelas_bisni.harga)}
               </p>
-              
-              {
-              transaksi.transaksi.status_transaksi === "pending" ? 
-                <div>
-                  <ButtonBlack500 TEXT_BUTTON={"Batalkan"} WIDTH={"w-[216px]"} />
-                </div>
-                :
-                ""
-              }
             </div>
           </div>
         </div>
@@ -204,6 +255,36 @@ export default function TransactionCard(transaksi) {
               rupiah(transaksi.transaksi.kelas_bisni.harga)
             )}
           </p>
+          {transaksi.transaksi.status_transaksi === "pending" ? (
+            <div className="flex gap-[10px]">
+              <button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  transactionCanceled();
+                }}
+                className={`flex mx-[5px] sm:mx-0 w-[107px] h-[34px] px-[64px] py-[16px] justify-center items-center bg-[#8A8A8A33] hover:bg-black100 rounded-[10px]`}
+              >
+                <p className="text-black500 shrink-0 font-medium text-[16px] leading-[24px]">
+                  Batalkan
+                </p>
+              </button>
+              <button
+                onClick={(event) => {
+                  event.stopPropagation();
+                  navigate(
+                    `/checkout-free/${transaksi.transaksi.kelas_bisni.id}`
+                  );
+                }}
+                className={`flex mx-[5px] sm:mx-0 w-[107px] h-[34px] px-[64px] py-[16px] justify-center items-center bg-black500 hover:bg-whiteSmoke800 rounded-[10px]`}
+              >
+                <p className="text-whiteSmoke500 shrink-0 font-medium text-[16px] leading-[24px]">
+                  Selesaikan
+                </p>
+              </button>
+            </div>
+          ) : (
+            ""
+          )}
         </div>
       </div>
     </>
