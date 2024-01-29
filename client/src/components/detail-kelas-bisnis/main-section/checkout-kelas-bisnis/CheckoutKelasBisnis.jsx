@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-//import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { icon } from "../../../../constants";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
@@ -16,6 +16,8 @@ function CheckoutKelasBisnis({ dataDetail }) {
   const { user } = useSelector((state) => state.userSlice);
   const [ setCheckout] = useState([]);
   const navigate = useNavigate();
+  const [ setfreeCheckout ] = useState([]);
+  const {id_kelas_bisnis} = useParams()
 
   const token = JSON.parse(localStorage.getItem("auth"));
   const addWishlist = async () => {
@@ -78,6 +80,24 @@ function CheckoutKelasBisnis({ dataDetail }) {
     });
   };
 
+  const copyToClipboardfree = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada free",
+        showConfirmButton: false,
+        timer: 3000,
+    });
+  };
+
+
   const addCheckout = async (text) => {
     try {
       const token = JSON.parse(localStorage.getItem("auth"));
@@ -104,6 +124,31 @@ function CheckoutKelasBisnis({ dataDetail }) {
             
           }
          };
+
+         const addfreeCheckout = async (text) => {
+          try {
+            const response = await api.post(
+              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
+              {
+                id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+              },
+              {
+                headers: {
+                  Authorization: token,
+                },
+              }
+            );
+            setfreeCheckout(response.data.data);
+              console.log(response);
+               } catch (error) {
+                  if (error.response && error.response.status === 400) {
+                      copyToClipboardfree();
+                      console.log(error);
+                    }else{
+                      user ? navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+                    }
+                }
+               };
 
   
 
@@ -336,7 +381,7 @@ function CheckoutKelasBisnis({ dataDetail }) {
           if (dataDetail?.kelas_bisni?.harga > 0 ){
             addCheckout();
           }else{
-            navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
+            addfreeCheckout();
           }
         }
           }>

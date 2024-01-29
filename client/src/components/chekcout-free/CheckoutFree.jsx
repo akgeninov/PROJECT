@@ -7,7 +7,6 @@ import { api } from "../../api/api";
 import Swal from "sweetalert2";
 
 function CheckoutFree () {
-  const [ setCheckout ] = useState([]);
   const [  checkout, getCheckout] = useState ([]);
 
   const token = JSON.parse(localStorage.getItem("auth"));
@@ -31,32 +30,7 @@ function CheckoutFree () {
     });
   };
 
-  const addCheckout = async () => {
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
-        {
-          id_kelas_bisnis: id_kelas_bisnis,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setCheckout(response.data.data);
-        console.log(response);
-         } catch (error) {
-            if (error.response && error.response.status === 400) {
-                copyToClipboard();
-                console.log(error);
-              }else{
-                navigate("/");
-              }
-          }
-         };
-
-
+  
          const fetchCheckout = async () => {
           try {
            const token = JSON.parse(localStorage.getItem("auth"));
@@ -146,7 +120,7 @@ function CheckoutFree () {
                     <div className="w-[350px] lg:w[350px] lg:py-[20px]  py-[20px]">
                         <p className="lg:text-[14px] text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link onClick={() => addCheckout()} className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
+                    <Link to="/checkout/success-checkout" className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
                         <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Dapatkan Kelas"}/>
                     </Link>
                 </div>
