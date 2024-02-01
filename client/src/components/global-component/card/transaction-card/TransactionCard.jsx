@@ -57,14 +57,7 @@ export default function TransactionCard(transaksi) {
         }
       );
       // console.log(response);
-      Swal.fire({
-        title: "Error",
-        text: "Transaksi Kadaluarsa",
-        icon: "error",
-        confirmButtonColor: "#0F1011",
-      }).then(() => {
-        transaksi.fetchTransaksi();
-      });
+      
     } catch (error) {
       console.log(error);
     }
@@ -130,6 +123,14 @@ export default function TransactionCard(transaksi) {
                 navigate(`/checkout/approval-checkout`);
               } else {
                 updateStatus("canceled");
+                Swal.fire({
+                  title: "Error",
+                  text: "Transaksi Kadaluarsa",
+                  icon: "error",
+                  confirmButtonColor: "#0F1011",
+                }).then(() => {
+                  transaksi.fetchTransaksi();
+                });
               }
             } else {
               if (transaksi.transaksi.isPaid === true) {
