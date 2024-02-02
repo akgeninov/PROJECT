@@ -14,10 +14,6 @@ export default function NavbarKelasSaya() {
     ["Selesai", "/profile/kelas-saya/selesai"],
   ];
 
-  // if(parentPath === "/profile/kelas-saya" || parentPath === "/profile/kelas-saya/"){
-  //   parentPath = "/profile/kelas-saya/semua-kelas";
-  // }
-
   const toggleDropDown = () => {
     setDropdownShow(!dropdownShow);
     if (dropdownShow) {

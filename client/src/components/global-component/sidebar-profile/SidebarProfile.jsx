@@ -97,16 +97,15 @@ export default function SidebarProfile() {
           style={{ borderRadius: "10px" }}
         />
         <img
-          // src={
-          //   `${process.env.REACT_APP_SERVER_URL}images/user/${user.profile_picture}` ||
-          //   "No Data"
-          // }
+          src={
+            `${process.env.REACT_APP_SERVER_URL}images/user/${user?.profile_picture}` ||
+            "No Data"
+          }
           alt="Career Momen 1"
           className="object-cover w-[178px] h-[178px] rounded-[100px]"
         />
         <h1 className="font-medium mt-3 text-[32px]">
-          {/* {useuser.username || "No Data"} */}
-          {/* {showNavBar} */}
+          {user?.username || "No Data"}
         </h1>
         <div className="flex flex-col lg:mt-[35px] font-bold gap-2 ">
           {menuItems.map(({ title, icon, activeIcon, url }, index) => (
@@ -116,7 +115,6 @@ export default function SidebarProfile() {
               style={NavlinkStyles}
               className="flex items-center w-[307px] h-[57px] ml-2 rounded-[5px] text-[#666666] hover:text-black500 hover:font-bold text-[24px]"
             >
-              {/* <img src={location.pathname === url ? activeIcon : icon} alt={title} className="mr-5 ml-5" /> */}
               {({ isActive }) => {
                 return (
                   <>
