@@ -19,51 +19,9 @@ function CheckoutKelasBisnis({
   const [setCheckout] = useState([]);
   const navigate = useNavigate();
   const [ setfreeCheckout ] = useState([]);
-  const {id_kelas_bisnis} = useParams()
 
   const token = JSON.parse(localStorage.getItem("auth"));
-  const addWishlist = async () => {
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/changeWishlistBool`,
-        {
-          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setWishlist(response.data.data);
-      setStatus(response.data.data.isRemove);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const checkStatusWishlist = async () => {
-    try {
-      const response = await api.post(
-        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/wishlist-status`,
-        {
-          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        }
-      );
-      setCheck(response.data.data);
-      setStatus(response.data.data.isRemove);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-  // console.log("wishlist", wishlist.isRemove);
-  // console.log(check.isRemove);
-  // console.log(status);
+  
 
   const copyToClipboard = (text) => {
     const el = document.createElement('textarea');
