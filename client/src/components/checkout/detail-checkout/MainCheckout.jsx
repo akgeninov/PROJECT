@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { images } from "../../../constants";
+import { images, icon } from "../../../constants";
 import { Link, useParams } from "react-router-dom";
 import ButtonBlack500 from "../../global-component/button/button-black500/ButtonBlack500";
 import { FaPlay, FaClock, FaClipboardCheck } from "react-icons/fa";
@@ -11,6 +11,24 @@ import Swal from "sweetalert2";
 function MainCheckout({ dataCheckout }) {
         const [checkout, setCheckout] = useState([]);
         const [isSubmitting, setIsSubmiting] = useState(false);
+
+        const copyToClipboard = (text) => {
+            const el = document.createElement('textarea');
+            el.value = text;
+            document.body.appendChild(el);
+            el.select();
+            document.execCommand('copy');
+            document.body.removeChild(el);
+
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Text copied to clipboard!",
+                showConfirmButton: false,
+                timer: 1500,
+            });
+          };
+
         //const [count, setCount] = useState(0);
         const {id_kelas_bisnis} = useParams()
         console.log(id_kelas_bisnis);
@@ -196,8 +214,13 @@ function MainCheckout({ dataCheckout }) {
                             <div className="w-[504px] lg:w-[504px] lg:h-[56px] lg:mt-[20px] lg:rounded-[10px] h-[56px] mt-[20px] rounded-[10px]" style={{backgroundColor:"#EDEDEE"}}>
                                 <div className="flex lg:ml-[20px] lg:flex ml-[20px] ">
                                     <p className="lg:text-[22px] text-[22px] lg:mt-[12px] mt-[12px] font-bold">5623896490</p>
-                                    <div className="w-[64px] lg:w-[64px] lg:h-[32px] lg:mt-[12px] lg:mr-[20px] lg:ml-auto lg:rounded-[6px] h-[32px] rounded-[6px] mt-[12px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
-                                        <p className="mt-[2px] lg:mt-[2px] lg:ml-[13px] ml-[13px] font-medium">Salin</p>      
+                                    <div onClick={() =>
+                                            copyToClipboard("5623896490")
+                                            } 
+                                            className="w-[64px] lg:w-[64px] lg:h-[32px] lg:rounded-[6px] lg:mt-[12px] lg:ml-auto lg:mr-[20px] h-[32px] rounded-[6px] mt-[12px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
+                                                <Link>
+                                                <p className="mt-[2px] lg:mt-[2px] lg:ml-[13px] ml-[13px] font-medium">Salin</p> 
+                                                </Link>         
                                     </div>
                                 </div>
                                 <div className="mt-[20px] lg:mt-[20px]">
@@ -210,9 +233,14 @@ function MainCheckout({ dataCheckout }) {
                                             currency: "IDR",
                                         }).format(checkout.kelas_bisni?.harga)}
                                         </p>
-                                            <div className="w-[64px] lg:w-[64px] lg:h-[32px] lg:rounded-[6px] lg:mt-[12px] lg:ml-auto lg:mr-[20px] h-[32px] rounded-[6px] mt-[12px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
-                                                <p className="mt-[2px] lg:mt-[2px] lg:ml-[13px] ml-[13px] font-medium">Salin</p>      
-                                            </div>
+                                        <div onClick={() =>
+                                            copyToClipboard(checkout.kelas_bisni?.harga.toString())
+                                            } 
+                                            className="w-[64px] lg:w-[64px] lg:h-[32px] lg:rounded-[6px] lg:mt-[12px] lg:ml-auto lg:mr-[20px] h-[32px] rounded-[6px] mt-[12px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
+                                                <Link>
+                                                <p className="mt-[2px] lg:mt-[2px] lg:ml-[13px] ml-[13px] font-medium">Salin</p> 
+                                                </Link>     
+                                        </div>
                                         </div>
                                     </div>
                                 </div>
@@ -226,11 +254,20 @@ function MainCheckout({ dataCheckout }) {
                         <div className="w-full lg:w-full lg:h-[60px] lg:flex lg:mt-[20px] h-[60px] flex mt-[20px]" style={{borderBottom: '2px solid #DEDEDE'}}>
                             <div className=" w-full lg:w-full lg:h-full ml-[20px] lg:flex h-full lg:ml-[20px] flex">
                                 <p className="lg:mt-[5px] mt-[5px] text-[16px] lg:text-[16px] font-medium">Detail Pembayaran</p>
-                                    <div className="w-[148px] lg:w-[148px] lg:h-[36px] lg:ml-auto lg:mr-[20px] h-[36px] rounded-[6px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
-                                        <p className="mt-[4px] lg:mt-[4px] lg:ml-[13px] ml-[13px] font-medium">
-                                        {`ID#${checkout?.nomor_invoice?.slice(0, 10)}...`}
-                                        </p>      
-                                    </div>
+                                <div onClick={() =>
+                                            copyToClipboard(checkout?.nomor_invoice?.toString())
+                                            } className="w-[148px] lg:w-[148px] flex lg:flex lg:h-[36px] lg:ml-auto lg:mr-[20px] h-[36px] rounded-[6px] ml-auto mr-[20px] " style={{border: '1px solid #0F1011'}}>
+                                                <Link className="flex lg:flex lg:px-[5px] px-[5px] ">
+                                                    <img 
+                                                        src={icon.COPY} 
+                                                        alt=""
+                                                        className="h-[15px] w-[15px] lg:h[15px] lg:w[15px] lg:mt-[8px] mt-[8px] "
+                                                    />
+                                                    <p className="mt-[4px] lg:mt-[4px] lg:ml-[5px] ml-[5px] font-medium">
+                                                    {`ID#${checkout?.nomor_invoice?.slice(0, 10)}.`}
+                                                    </p>
+                                                </Link>
+                                </div>
                             </div>
                         </div>
 
@@ -253,20 +290,10 @@ function MainCheckout({ dataCheckout }) {
                 </p>
               </div>
 
-              <div className="flex lg:flex lg:mr-[20px] lg:mt-[8px] mr-[20px] mt-[8px]">
-                <p
-                  className="lg:text-[14px] text-[14px]"
-                  style={{ color: "#5E5F60" }}
-                >
-                  Diskon
-                </p>
-                <p
-                  className="lg:text-[14px] text-[14px]  font-medium ml-auto"
-                  style={{ color: "#5E5F60" }}
-                >
-                  -Rp
-                </p>
-              </div>
+                            <div className="flex lg:flex lg:mr-[20px] lg:mt-[8px] mr-[20px] mt-[8px]">
+                                <p className="lg:text-[14px] text-[14px]" style={{color: "#5E5F60"}}>Diskon</p>
+                                <p className="lg:text-[14px] text-[14px]  font-medium ml-auto" style={{color: "#5E5F60"}}>-Rp 0,00</p>
+                            </div>
 
                             <div className="flex mr-[20px] lg:mr-[20px] lg:mt-[8px] mt-[8px]">
                                 <p className="lg:text-[16px] text-[16px]  font-medium" style={{color: "#5E5F60"}}>Total Bayar</p>
@@ -292,12 +319,12 @@ function MainCheckout({ dataCheckout }) {
             {/* ))} */}
             
 
-            <div className="w-[540px] lg:w-full lg:h-[96px] lg:mt-auto h-[96px] border mt-auto" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', border: '2px solid #DEDEDE'  }}>
+            <div className="fixed bottom-0 w-[540px] lg:w-full lg:h-[96px] lg:mt-auto h-[96px] border mt-auto" style={{ boxShadow: '4px 6px 8px rgba(0, 0, 0, 0.1)', border: '2px solid #DEDEDE', backgroundColor:"#EDEDEE"  }}>
                 <div className="flex lg:flex lg:ml-[300px]">
                     <div className="w-[350px] lg:w[350px] lg:mt-[20px]  mt-[20px]">
                         <p className="lg:text-[14px] text-[14px] font-light" style={{color:'#5E5F60'}}>Silakan klik tombol di samping ini agar pembayaranmu bisa segera kami konfirmasi</p>
                     </div>
-                    <Link onClick={() => paidCheckout()} to="/checkout/approval-checkout"  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
+                    <Link onClick={() => paidCheckout()} to={`/approval-checkout/${checkout?.id_kelas_bisnis}`}  className=" mt-[15px] lg:mt-[15px] lg:ml-[20px] ml-[20px]">
                         <ButtonBlack500 WIDTH={"w-[320px] lg:w-[320px]"} HEIGHT={"w-[56px] lg:w-[56px]"} TEXT_BUTTON={"Saya Sudah Bayar"}/>
                     </Link>
                 </div>

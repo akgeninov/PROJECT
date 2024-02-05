@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
 import { icon } from "../../../../constants";
 import { HiOutlineHeart, HiHeart } from "react-icons/hi";
 import ButtonBlack500 from "../../../global-component/button/button-black500/ButtonBlack500";
@@ -17,25 +18,89 @@ function CheckoutKelasBisnis({
   const { user } = useSelector((state) => state.userSlice);
   const [setCheckout] = useState([]);
   const navigate = useNavigate();
+  const [ setfreeCheckout ] = useState([]);
+  const {id_kelas_bisnis} = useParams()
+
+  const token = JSON.parse(localStorage.getItem("auth"));
+  const addWishlist = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/changeWishlistBool`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setWishlist(response.data.data);
+      setStatus(response.data.data.isRemove);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const checkStatusWishlist = async () => {
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasWishlist/wishlist-status`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setCheck(response.data.data);
+      setStatus(response.data.data.isRemove);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  // console.log("wishlist", wishlist.isRemove);
+  // console.log(check.isRemove);
+  // console.log(status);
 
   const copyToClipboard = (text) => {
-    const el = document.createElement("textarea");
+    const el = document.createElement('textarea');
     el.value = text;
     document.body.appendChild(el);
     el.select();
-    document.execCommand("copy");
+    document.execCommand('copy');
     document.body.removeChild(el);
 
     Swal.fire({
-      position: "center",
-      icon: "error",
-      title: text,
-      showConfirmButton: false,
-      timer: 3000,
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada",
+        showConfirmButton: false,
+        timer: 3000,
     });
   };
 
-  const addCheckout = async () => {
+  const copyToClipboardfree = (text) => {
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    el.select();
+    document.execCommand('copy');
+    document.body.removeChild(el);
+
+    Swal.fire({
+        position: "center",
+        icon: "error",
+        title: "Kelas Sudah Ada free",
+        showConfirmButton: false,
+        timer: 3000,
+    });
+  };
+
+
+  const addCheckout = async (text) => {
     try {
       const token = JSON.parse(localStorage.getItem("auth"));
       const response = await api.post(
@@ -50,30 +115,42 @@ function CheckoutKelasBisnis({
         }
       );
       setCheckout(response.data.data);
-      console.log(response);
-    } catch (error) {
-      if (error.response && error.response.status === 400) {
-        const responseData = error.response.data;
-        if (responseData.error === "AKUN ANDA BELUM VERIFIED") {
-          copyToClipboard("Akun anda belum verified");
-        }
-        if (responseData.error === "DATA REGIST SUDAH ADA") {
-          copyToClipboard("Kelas sudah terdaftar");
-          navigate(`/profile/kelas-saya/`);
-          window.scrollTo(0, 0);
-        }
-        if (responseData.error === "DATA TRANSAKSI SUDAH ADA") {
-          copyToClipboard("Kelas sudah ada");
-        }
-        console.log(error);
-      } else {
-        user
-          ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`)
-          : navigate("/login");
-        window.scrollTo(0, 0);
-      }
-    }
-  };
+              console.log(response);
+         } catch (error) {
+            if (error.response && error.response.status === 400) {
+              copyToClipboard();
+              console.log(error);
+            }else{
+              user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+            }
+            
+          }
+         };
+
+         const addfreeCheckout = async (text) => {
+          try {
+            const response = await api.post(
+              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
+              {
+                id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+              },
+              {
+                headers: {
+                  Authorization: token,
+                },
+              }
+            );
+            setfreeCheckout(response.data.data);
+              console.log(response);
+               } catch (error) {
+                  if (error.response && error.response.status === 400) {
+                      copyToClipboardfree();
+                      console.log(error);
+                    }else{
+                      user ? navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
+                    }
+                }
+               };
 
   //  useEffect(() => {
   //   addCheckout();
@@ -298,16 +375,14 @@ function CheckoutKelasBisnis({
             <HiOutlineHeart className="text-[32px] text-black500" />
           )}
         </button>
-        <div
-          onClick={() => {
-            if (dataDetail?.kelas_bisni?.harga > 0) {
-              addCheckout();
-            } else {
-              navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`);
-              window.scrollTo(0, 0);
-            }
-          }}
-        >
+        <div onClick={() => {
+          if (dataDetail?.kelas_bisni?.harga > 0 ){
+            addCheckout();
+          }else{
+            addfreeCheckout();
+          }
+        }
+          }>
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>
       </div>
