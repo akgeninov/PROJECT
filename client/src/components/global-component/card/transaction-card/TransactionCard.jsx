@@ -57,7 +57,6 @@ export default function TransactionCard(transaksi) {
         }
       );
       // console.log(response);
-      
     } catch (error) {
       console.log(error);
     }
@@ -67,23 +66,23 @@ export default function TransactionCard(transaksi) {
     const swalWithBootstrapButtons = Swal.mixin({
       customClass: {
         confirmButton: "btn btn-success border border-dark",
-        cancelButton: "btn btn-danger",
+        cancelButton: "btn btn-danger border border-dark",
       },
       buttonsStyling: true,
       confirmButtonColor: "#0F1011",
-      cancelButtonColor: "#3F4041",
+      cancelButtonColor: "#FFFFFF",
+
+      
     });
     swalWithBootstrapButtons
       .fire({
         text: "Apakah kamu yakin ingin membatalkan transaksi ini?",
         showCancelButton: true,
         confirmButtonText: "Ya, batalkan transaksi ini",
-        cancelButtonText: '<p className="text-black500">Tidak</p>',
+        cancelButtonText: "<p style='color:#0F1011'> Tidak </p>",
         reverseButtons: true,
-        width: "640px",
-        // padding: "358px",
-        padding: "80px",
         heightAuto: false,
+        customClass: "w-[389px] lg:w-[640px] text-[12px] lg:text-[18px] font-medium text-[#0F1011] py-[69.5px] lg:py-[110px]",
       })
       .then((result) => {
         if (result.isConfirmed) {
@@ -117,7 +116,8 @@ export default function TransactionCard(transaksi) {
           } else if (transaksi.transaksi.status_transaksi === "pending") {
             const date = new Date().toISOString();
             console.log(date);
-            console.log(transaksi.transaksi.nomor_invoice);
+            console.log(transaksi.transaksi.date_expired);
+            console.log(date >= transaksi.transaksi.date_expired === true);
             if (date >= transaksi.transaksi.date_expired) {
               if (transaksi.transaksi.isPaid === true) {
                 navigate(`/checkout/approval-checkout`);
@@ -179,9 +179,9 @@ export default function TransactionCard(transaksi) {
                 event.stopPropagation();
               }}
             >
-              <p className="w-[239px] items-center lg:inline-block hidden">                
+              <p className="w-[239px] items-center lg:inline-block hidden">
                 <span className="line-clamp-1 hover:underline hover:text-[#1C64F2]">
-                No. Invoice: {transaksi.transaksi.nomor_invoice}
+                  No. Invoice: {transaksi.transaksi.nomor_invoice}
                 </span>
               </p>
             </Link>
@@ -264,7 +264,13 @@ export default function TransactionCard(transaksi) {
               : "h-[38px] lg:h-[74px] flex flex-col lg:flex-row items-center rounded-b-[10px] bg-[rgba(204,204,204,0.2)] px-[11px] text-[12px] lg:text-[24px] lg:leading-[72px] font-medium"
           }
         >
-          <div className={transaksi.transaksi.status_transaksi === "pending"?"flex w-full h-[50%] lg:h-[100%] justify-center items-center":"flex w-full h-[100%] justify-center items-center"}>
+          <div
+            className={
+              transaksi.transaksi.status_transaksi === "pending"
+                ? "flex w-full h-[50%] lg:h-[100%] justify-center items-center"
+                : "flex w-full h-[100%] justify-center items-center"
+            }
+          >
             <p className="w-[55%] lg:w-[65%] h-fit text-[#666666]">
               Total Pembayaran
             </p>
