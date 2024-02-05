@@ -39,6 +39,6 @@ app.use("/api/testing", testingRouter);
 app.use("/images", express.static("images"));
 
 app.listen(process.env.PORT, () => {
-  // db.sequelize.sync({ alter: true });
+  db.sequelize.sync({ alter: true });
   console.log(`server is running on port ${process.env.PORT}`);
 });
