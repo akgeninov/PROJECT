@@ -40,6 +40,12 @@ import COPY from "../assets/icon/Copy.png";
 import linkedinProfile from "../assets/icon/linkedin_icon_profile.png";
 import facebookProfile from "../assets/icon/facebook_icon_profile.png";
 import instaProfile from "../assets/icon/insta_icon_profile.png";
+import circleCheck from "../assets/icon/circle-check-solid.svg";
+import crown from "../assets/icon/crown-svgrepo-com.svg";
+import crownWhiteSolid from "../assets/icon/crownWhiteSolid.png";
+import checkWhiteSolid from "../assets/icon/checklist-white-solid.png";
+import checkBlackSolid from "../assets/icon/checklist-black-solid.png";
+import crownsolid from "../assets/icon/crown-solid.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -83,6 +89,12 @@ const icon = {
   linkedinProfile,
   facebookProfile,
   instaProfile,
+  circleCheck,
+  crown,
+  crownWhiteSolid,
+  checkWhiteSolid,
+  checkBlackSolid,
+  crownsolid,
 };
 
 export default icon;

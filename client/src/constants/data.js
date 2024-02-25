@@ -168,6 +168,7 @@ const dataLogoShare = [
   },
 ];
 
+
 module.exports = {
   dataLayanan,
   dataService,
