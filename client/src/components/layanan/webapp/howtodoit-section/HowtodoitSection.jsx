@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import { icon } from "../../../../constants";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const HowtodoitSection = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const works = [
     {
       title: "Research",
@@ -35,7 +41,11 @@ const HowtodoitSection = () => {
     <div className="mt-[60px] lg:mt-[160px] flex flex-col items-center max-w-[1080px] px-4">
       <div className="flex flex-col gap-8 lg:gap-[52px]">
         <div className="flex justify-center max-w-[1080px]">
-          <h1 className="font-heebo font-bold text-[22px] leading-[32px] lg:text-[40px] lg:leading-[60px] text-center lg:w-[564px]">
+          <h1
+            className="font-heebo font-bold text-[22px] leading-[32px] lg:text-[40px] lg:leading-[60px] text-center lg:w-[564px]"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             Bagaimana Cara Kami Melakukannya?
           </h1>
         </div>

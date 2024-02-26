@@ -1,6 +1,12 @@
+import { useEffect } from "react";
 import layananPic from "../../../../constants/layananPic";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 const ServiceSection = () => {
+  useEffect(() => {
+    AOS.init();
+  }, []);
   const dataService = [
     {
       title: "UI/UX Design",
@@ -31,12 +37,20 @@ const ServiceSection = () => {
     <div className="mt-[60px] lg:mt-[160px] w-fit flex flex-col items-center px-4">
       <div className="flex flex-col gap-[32px] lg:gap-[52px]">
         <div className="flex justify-center max-w-[1080px]">
-          <h1 className=" font-heebo font-bold text-[22px] lg:text-[40px] leading-[32px] lg:leading-[60px] text-center max-w-[604px] lg:mb-[52px]">
+          <h1
+            className=" font-heebo font-bold text-[22px] lg:text-[40px] leading-[32px] lg:leading-[60px] text-center max-w-[604px] lg:mb-[52px]"
+            data-aos="fade-up"
+            data-aos-duration="1000"
+          >
             Kami Selalu Menciptakan Pengalaman Digital yang Terbaik
           </h1>
         </div>
 
-        <div className="max-w-[1080px] flex flex-wrap gap-8 lg:gap-[80px]">
+        <div
+          className="max-w-[1080px] flex flex-wrap gap-8 lg:gap-[80px]"
+          data-aos="fade-up"
+          data-aos-duration="1000"
+        >
           {dataService.map((item, id) => {
             return (
               <div

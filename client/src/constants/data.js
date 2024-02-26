@@ -15,7 +15,7 @@ const dataLayanan = [
   },
   {
     title: "Buat Website & Aplikasi",
-    navi: "/layanan",
+    navi: "/layanan/buat-website-dan-aplikasi",
     pic: layananPic.layananWebsiteAplikasi,
   },
   {

@@ -183,7 +183,7 @@ const routes = [
 
   <Route
     key="layanan"
-    path="/layanan/"
+    path="/layanan/:page"
     element={
       <Protection publicSide={true}>
         <WebApp />
