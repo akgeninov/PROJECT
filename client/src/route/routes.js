@@ -151,7 +151,6 @@ const routes = [
     }
   />,
 
-
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -161,7 +160,7 @@ const routes = [
       </Protection>
     }
   />,
-  
+
   <Route
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
@@ -191,7 +190,7 @@ const routes = [
       </Protection>
     }
   >
-    <Route path="webapp-services" element={<WebApp/>} />
+    <Route path="webapp-services" element={<WebApp />} />
   </Route>,
 
   <Route
@@ -264,16 +263,17 @@ const routes = [
     <Route path="info-lain" element={<InfoLain />} />,
   </Route>,
 
-   <Route
+  <Route
     key="checkout"
     path="/checkout/:id_kelas_bisnis"
     element={
       <Protection userOnly={true}>
         <Checkout />
       </Protection>
-    } />,
+    }
+  />,
 
-    <Route
+  <Route
     key="approval"
     path="/approval-checkout/:id_kelas_bisnis"
     element={

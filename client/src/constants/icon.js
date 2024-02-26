@@ -11,6 +11,10 @@ import whatsapp from "../assets/icon/whatsapp.png";
 import copyright from "../assets/icon/bx-copyright.png";
 import line3solid from "../assets/icon/line-3-solid.png";
 import handshake from "../assets/icon/handshake.png";
+import puzzle from "../assets/icon/puzzle.png";
+import design from "../assets/icon/design.png";
+import code from "../assets/icon/code.png";
+import gear from "../assets/icon/gear.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
@@ -95,6 +99,10 @@ const icon = {
   checkWhiteSolid,
   checkBlackSolid,
   crownsolid,
+  puzzle,
+  design,
+  code,
+  gear,
 };
 
 export default icon;
