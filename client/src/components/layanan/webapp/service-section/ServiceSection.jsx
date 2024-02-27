@@ -47,18 +47,13 @@ const ServiceSection = () => {
         </div>
 
         <div
-          className="max-w-[1080px] flex flex-wrap gap-8 lg:gap-[80px]"
+          className="max-w-[1080px] flex flex-wrap justify-center gap-8 lg:gap-[80px]"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
           {dataService.map((item, id) => {
             return (
-              <div
-                key={id}
-                className={`${
-                  id % 2 !== 0 ? "md:mt-[80px]" : ""
-                } even:ml-[44px] md:even:ml-0`}
-              >
+              <div key={id} className={`${id % 2 !== 0 ? "md:mt-[80px]" : ""}`}>
                 <img
                   src={item.pic}
                   alt={item.title}
