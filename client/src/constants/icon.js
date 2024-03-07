@@ -11,6 +11,10 @@ import whatsapp from "../assets/icon/whatsapp.png";
 import copyright from "../assets/icon/bx-copyright.png";
 import line3solid from "../assets/icon/line-3-solid.png";
 import handshake from "../assets/icon/handshake.png";
+import puzzle from "../assets/icon/puzzle.png";
+import design from "../assets/icon/design.png";
+import code from "../assets/icon/code.png";
+import gear from "../assets/icon/gear.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
@@ -40,6 +44,12 @@ import COPY from "../assets/icon/Copy.png";
 import linkedinProfile from "../assets/icon/linkedin_icon_profile.png";
 import facebookProfile from "../assets/icon/facebook_icon_profile.png";
 import instaProfile from "../assets/icon/insta_icon_profile.png";
+import circleCheck from "../assets/icon/circle-check-solid.svg";
+import crown from "../assets/icon/crown-svgrepo-com.svg";
+import crownWhiteSolid from "../assets/icon/crownWhiteSolid.png";
+import checkWhiteSolid from "../assets/icon/checklist-white-solid.png";
+import checkBlackSolid from "../assets/icon/checklist-black-solid.png";
+import crownsolid from "../assets/icon/crown-solid.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -83,6 +93,16 @@ const icon = {
   linkedinProfile,
   facebookProfile,
   instaProfile,
+  circleCheck,
+  crown,
+  crownWhiteSolid,
+  checkWhiteSolid,
+  checkBlackSolid,
+  crownsolid,
+  puzzle,
+  design,
+  code,
+  gear,
 };
 
 export default icon;

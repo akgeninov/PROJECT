@@ -25,6 +25,7 @@ code {
 } */
 .bg-gradient-radial {
   background: radial-gradient(circle at left, transparent 10%, #3f4041 35%);
+  /* background: radial-gradient(circle closest-side, #3f4041, transparent), linear-gradient(to left, #3f4041, transparent); */
 }
 
 .scrollbar-hide::-webkit-scrollbar {
@@ -44,6 +45,8 @@ code {
   height: 504px;
   width: auto;
 }
+
+
 
 /* @media (min-width: ); /* @media (max-width: 1280px) {
   .hero-image {

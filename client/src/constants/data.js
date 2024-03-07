@@ -1,5 +1,6 @@
 const { default: images } = require("./images");
 const { default: komunitasPic } = require("./komunitasPic");
+const { default: layananPic } = require("./layananPic");
 const { default: logo } = require("./logo");
 const { default: newsPic } = require("./newsPic");
 
@@ -14,7 +15,8 @@ const dataLayanan = [
   },
   {
     title: "Buat Website & Aplikasi",
-    navi: "#",
+    navi: "/layanan/buat-website-dan-aplikasi",
+    pic: layananPic.layananWebsiteAplikasi,
   },
   {
     title: "Social Media Management",

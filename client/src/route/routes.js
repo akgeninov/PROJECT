@@ -44,6 +44,7 @@ import LmsKelas from "../pages/lms-kelas/LmsKelas";
 import Verifikasi from "../pages/verifikasi/Verifikasi";
 import ResetPassword from "../pages/reset-password/ResetPassword";
 import RequestReset from "../pages/request-reset/RequestReset";
+import WebApp from "../pages/webapp-services/WebApp";
 
 const routes = [
   <Route
@@ -150,7 +151,6 @@ const routes = [
     }
   />,
 
-
   <Route
     key="careerLowongan"
     path="/career-lowongan"
@@ -160,7 +160,7 @@ const routes = [
       </Protection>
     }
   />,
-  
+
   <Route
     key="kelas-bisnis"
     path="/kelas-bisnis/:id"
@@ -180,6 +180,18 @@ const routes = [
       </Protection>
     }
   />,
+
+  <Route
+    key="layanan"
+    path="/layanan/:page"
+    element={
+      <Protection publicSide={true}>
+        <WebApp />
+      </Protection>
+    }
+  >
+    <Route path="webapp-services" element={<WebApp />} />
+  </Route>,
 
   <Route
     key="profile"
@@ -251,16 +263,17 @@ const routes = [
     <Route path="info-lain" element={<InfoLain />} />,
   </Route>,
 
-   <Route
+  <Route
     key="checkout"
     path="/checkout/:id_kelas_bisnis"
     element={
       <Protection userOnly={true}>
         <Checkout />
       </Protection>
-    } />,
+    }
+  />,
 
-    <Route
+  <Route
     key="approval"
     path="/approval-checkout/:id_kelas_bisnis"
     element={
