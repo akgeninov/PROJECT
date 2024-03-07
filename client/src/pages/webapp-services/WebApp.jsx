@@ -1,5 +1,8 @@
 import React from "react";
+<<<<<<< HEAD
 // import HowWeDo from "../../components/layanan/webapp/how-we-do/HowWeDo";
+=======
+>>>>>>> 7e0b7ed (fix gambar herosection)
 import JoinSection from "../../components/layanan/webapp/join-section/JoinSection";
 import Faq from "../../components/layanan/webapp/faq/Faq";
 // import LanggananSection from "../../components/layanan/webapp/langganan/LanggananSection";
@@ -13,8 +16,12 @@ const WebApp = () => {
       <HeroSection />
       <ServiceSection />
       <HowtodoitSection />
+<<<<<<< HEAD
       {/* <HowWeDo /> */}
       {/* <LanggananSection /> */}
+=======
+      <LanggananSection />
+>>>>>>> 7e0b7ed (fix gambar herosection)
       <Faq />
       <JoinSection />
     </div>

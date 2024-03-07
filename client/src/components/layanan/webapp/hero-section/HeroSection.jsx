@@ -37,15 +37,22 @@ const HeroSection = () => {
             </div>
           </div>
 
-          <div className="flex flex-col items-center lg:min-w-[432px] overflow-hidden rounded-[10px] bg-cover">
+          {/* <div className="flex flex-col items-center w-[358px] h-[358px] lg:w-[432px] lg:h-[472px] overflow-hidden rounded-[10px]">
             <img
               src={dataLayanan[2].pic}
               alt="layanan"
-              className={
-                "flex flex-col w-[358px] h-[358px] lg:w-[432px] lg:h-[472px] rounded-[10px]"
-              }
+              // className={
+              //   "flex flex-col w-[358px] h-[358px] lg:w-[432px] lg:h-[472px] rounded-[10px]"
+              // }
+              className="bg-fill"
             />
-          </div>
+          </div> */}
+
+          <img
+            src={dataLayanan[2].pic}
+            alt="layanan"
+            className="w-[358px] h-[358px] lg:w-[432px] lg:h-[472px] object-cover rounded-[10px]"
+          />
         </div>
       </div>
     </div>
