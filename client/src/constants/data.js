@@ -15,16 +15,21 @@ const dataLayanan = [
   },
   {
     title: "Buat Website & Aplikasi",
-    navi: "/layanan/buat-website-dan-aplikasi",
+    navi: "/buat-website-dan-aplikasi",
     pic: layananPic.layananWebsiteAplikasi,
+    deskripsi:
+      "Maksimalkan kehadiran online bisnismu! Tim ahli kami siap membangun website & aplikasi yang memikat, membantu kamu mencapai tujuan digital dengan desain yang responsif dan fungsional",
   },
   {
     title: "Social Media Management",
-    navi: "#",
+    navi: "/social-media-management",
+    pic: layananPic.socialMediaManagement,
+    deskripsi:
+      "Raih potensi optimal bisnis kamu dengan layanan Social Media Management kami. Tim ahli kami akan merancang strategi terbaik untuk menjangkau target audiens kamu",
   },
   {
     title: "Desain Logo",
-    navi: "#",
+    navi: "/desain-logo",
   },
   {
     title: "Live Streaming & Content",
@@ -71,14 +76,12 @@ const dataService = [
   },
   {
     title: "Buat Website & Aplikasi",
-    deskripsi:
-      "Kamu bakal belajar banyak hal yang bisa ningkatin omset bisnis kamu",
+    deskripsi: "Kami Selalu Menciptakan Pengalaman Digital yang Terbaik",
     pic: images.buatWebsiteDanAplikasi,
   },
   {
     title: "Social Media Management",
-    deskripsi:
-      "Kamu bakal belajar banyak hal yang bisa ningkatin omset bisnis kamu",
+    deskripsi: "Kami Selalu Menciptakan Strategi yang Terbaik",
     pic: images.socialMediaManagement,
   },
   {
