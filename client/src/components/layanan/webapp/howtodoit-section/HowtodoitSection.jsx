@@ -2,40 +2,95 @@ import { useEffect } from "react";
 import { icon } from "../../../../constants";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useParams } from "react-router-dom";
 
 const HowtodoitSection = () => {
+  const { title } = useParams();
+
+  let index = 1;
+  let titleService = 1;
+  switch (title) {
+    case "buat-website-dan-aplikasi":
+      titleService = 2;
+      index = 0;
+      break;
+    case "social-media-management":
+      index = 1;
+      titleService = 3;
+      break;
+    case "desain-logo":
+      index = 2;
+      titleService = 4;
+      break;
+    default:
+      index = 0;
+  }
+
   useEffect(() => {
     AOS.init();
   }, []);
+
   const works = [
-    {
-      title: "Research",
-      deskripsi:
-        "Kami memulai dengan mendengarkan kebutuhan unik Anda. Analisis mendalam terhadap target audiens dan tujuan bisnis memandu perencanaan kami. Rencana ini menjadi dasar strategi desain yang akan memberikan pengalaman pengguna yang luar biasa.",
-      pic: icon.puzzle,
-      num: 1,
-    },
-    {
-      title: "Designing",
-      deskripsi:
-        "Dengan perencanaan sebagai landasan, kami merancang antarmuka yang estetis dan intuitif. Setiap elemen dipertimbangkan dengan cermat untuk memastikan keindahan dan fungsionalitas optimal. Desain kami bukan hanya sekedar visual, tetapi juga menceritakan cerita yang kuat melalui penggunaan UX writing yang tepat.",
-      pic: icon.design,
-      num: 2,
-    },
-    {
-      title: "Development",
-      deskripsi:
-        "Tim pengembangan kami mengambil alih, menghidupkan desain menjadi kenyataan. Proses ini melibatkan pengodean yang presisi dan fokus pada kinerja. Kami memastikan setiap fitur berfungsi mulus dan memberikan pengalaman pengguna yang responsif dan efisien.",
-      pic: icon.code,
-      num: 3,
-    },
-    {
-      title: "Maintenance",
-      deskripsi:
-        "Kami berkomitmen untuk menjaga performa optimal. Pemeliharaan berkala dan pembaruan teknologi terbaru memastikan bahwa website atau aplikasi Anda selalu siap beradaptasi dengan perubahan. Tim kami tetap siaga untuk memastikan kesinambungan kesuksesan proyek Anda.",
-      pic: icon.gear,
-      num: 4,
-    },
+    [
+      {
+        title: "Research",
+        deskripsi:
+          "Kami memulai dengan mendengarkan kebutuhan unik Anda. Analisis mendalam terhadap target audiens dan tujuan bisnis memandu perencanaan kami. Rencana ini menjadi dasar strategi desain yang akan memberikan pengalaman pengguna yang luar biasa.",
+        pic: icon.puzzle,
+        num: 1,
+      },
+      {
+        title: "Designing",
+        deskripsi:
+          "Dengan perencanaan sebagai landasan, kami merancang antarmuka yang estetis dan intuitif. Setiap elemen dipertimbangkan dengan cermat untuk memastikan keindahan dan fungsionalitas optimal. Desain kami bukan hanya sekedar visual, tetapi juga menceritakan cerita yang kuat melalui penggunaan UX writing yang tepat.",
+        pic: icon.design,
+        num: 2,
+      },
+      {
+        title: "Development",
+        deskripsi:
+          "Tim pengembangan kami mengambil alih, menghidupkan desain menjadi kenyataan. Proses ini melibatkan pengodean yang presisi dan fokus pada kinerja. Kami memastikan setiap fitur berfungsi mulus dan memberikan pengalaman pengguna yang responsif dan efisien.",
+        pic: icon.code,
+        num: 3,
+      },
+      {
+        title: "Maintenance",
+        deskripsi:
+          "Kami berkomitmen untuk menjaga performa optimal. Pemeliharaan berkala dan pembaruan teknologi terbaru memastikan bahwa website atau aplikasi Anda selalu siap beradaptasi dengan perubahan. Tim kami tetap siaga untuk memastikan kesinambungan kesuksesan proyek Anda.",
+        pic: icon.gear,
+        num: 4,
+      },
+    ],
+    [
+      {
+        title: "Research",
+        deskripsi:
+          "Kami memulai dengan mendengarkan kebutuhan unik Anda. Analisis mendalam terhadap target audiens dan tujuan bisnis memandu perencanaan kami. Rencana ini menjadi dasar strategi desain yang akan memberikan pengalaman pengguna yang luar biasa.",
+        pic: icon.puzzle,
+        num: 1,
+      },
+      {
+        title: "Concepting",
+        deskripsi:
+          "Tim kami mengembangkan konsep konten yang relevan dan menarik. Dengan memahami brand identity, kami merancang kampanye visual dan naratif yang memikat, memastikan setiap postingan mencerminkan pesan yang ingin disampaikan",
+        pic: icon.design,
+        num: 2,
+      },
+      {
+        title: "Scheduling",
+        deskripsi:
+          "Efisiensi dan konsistensi adalah kunci kesuksesan. Kami menggunakan alat manajemen jadwal untuk menyusun konten secara terstruktur. Dengan penjadwalan yang tepat, kami memastikan bahwa konten dipublikasikan pada waktu yang optimal untuk mencapai audiens target dan memaksimalkan interaksi.",
+        pic: icon.schedule,
+        num: 3,
+      },
+      {
+        title: "Analyzing",
+        deskripsi:
+          "Setelah konten diunggah, kami terus memonitor kinerja kampanye. Melalui analisis data dan statistik, kami mengukur engagement, pertumbuhan pengikut, dan konversi. Hasil ini membantu kami menyesuaikan strategi, memaksimalkan efektivitas kampanye, dan memberikan laporan berkala kepada klien untuk transparansi dan evaluasi bersama",
+        pic: icon.analyze,
+        num: 4,
+      },
+    ],
   ];
   return (
     <div className="mt-[60px] lg:mt-[160px] flex flex-col items-center max-w-[1080px] px-4">
@@ -51,7 +106,7 @@ const HowtodoitSection = () => {
         </div>
 
         <div className="flex flex-col">
-          {works.map((work, id) => {
+          {works[index].map((work, id) => {
             return (
               <div className="flex group" tabIndex={"0"} key={id}>
                 <div className={`${id === 0 ? "mt-6" : ""} flex flex-col mr-6`}>

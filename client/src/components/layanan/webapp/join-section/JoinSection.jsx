@@ -1,16 +1,50 @@
 import React from "react";
 import ButtonWhiteSmoke500 from "../../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import ButtonBorderWhitesmoke500 from "../../../global-component/button/button-borderwhitesmoke500/ButtonBorderWhitesmoke500";
-import { images } from "../../../../constants";
+import { dataLayanan } from "../../../../constants/data";
+import { useParams } from "react-router-dom";
 
 function JoinSection() {
+  const { title } = useParams();
+
+  let index = 1;
+  let titleJoint = 1;
+  switch (title) {
+    case "buat-website-dan-aplikasi":
+      titleJoint = 0;
+      index = 2;
+      break;
+    case "social-media-management":
+      titleJoint = 1;
+      index = 3;
+      break;
+    case "desain-logo":
+      titleJoint = 2;
+      index = 4;
+      break;
+    default:
+      index = 0;
+  }
+
+  const dataJoint = [
+    {
+      title: "Mari Ciptakan Project Impianmu Bersama Kami",
+    },
+    {
+      title: "Raih Potensi Optimal Bisnismu Bersama Kami",
+    },
+    {
+      // title: "Mari Ciptakan Project Impianmu Bersama Kami",
+    },
+  ];
+
   return (
     <>
       <div className=" relative hidden md:flex justify-end items-center mt-[160px]  w-full   2xl:max-w-[1600px] h-[484px] overflow-hidden">
         <div className="absolute overflow-hidden w-[684px] h-[684px] rounded-full -left-[100px] flex items-center justify-center">
           <img
             loading="lazy"
-            src={images.buatWebsiteDanAplikasi}
+            src={dataLayanan[index].pic}
             alt="ellipse"
             className="object-cover w-full h-full absolute -left-[15px] "
           />
@@ -21,10 +55,13 @@ function JoinSection() {
             <div className="space-y-[52px]">
               <div className="flex flex-col items-start gap-[16px]">
                 <h1 className="text-[48px] font-bold leading-[72px] max-w-[632px] text-whiteSmoke500">
-                  Mari Ciptakan Project Impianmu Bersama Kami
+                  {dataJoint[titleJoint].title}
                 </h1>
                 <p className="text-[18px] font-light leading-[28px] text-whiteSmoke600 w-[640px]">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo facere dolorem accusantium nostrum suscipit neque nobis quae quo. Aperiam harum illum velit provident sunt corporis natus recusandae quos asperiores repellat.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                  facere dolorem accusantium nostrum suscipit neque nobis quae
+                  quo. Aperiam harum illum velit provident sunt corporis natus
+                  recusandae quos asperiores repellat.
                 </p>
               </div>
               <div className="flex w-full items-start gap-[24px] ">
@@ -48,7 +85,7 @@ function JoinSection() {
           <div className="absolute h-full w-full bg-gradient-to-t from-black400 to-transparent"></div>
           <img
             loading="lazy"
-            src={images.buatWebsiteDanAplikasi}
+            src={dataLayanan[index].pic}
             alt="ellipse"
             className=" object-cover w-full h-full"
           />
@@ -58,10 +95,13 @@ function JoinSection() {
             <div className="space-y-[52px]  flex flex-col items-center">
               <div className="flex flex-col items-start gap-[16px] px-[16px]">
                 <h1 className="text-[22px] text-start font-bold leading-[32px]   text-whiteSmoke500">
-                    Mari Ciptakan Project Impianmu Bersama Kami
+                  {dataJoint[titleJoint].title}
                 </h1>
                 <p className="text-[14px] md:text-center font-light leading-[20px] text-whiteSmoke600 max-w-[358px]">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo facere dolorem accusantium nostrum suscipit neque nobis quae quo. Aperiam harum illum velit provident sunt corporis natus recusandae quos asperiores repellat.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Nemo
+                  facere dolorem accusantium nostrum suscipit neque nobis quae
+                  quo. Aperiam harum illum velit provident sunt corporis natus
+                  recusandae quos asperiores repellat.
                 </p>
               </div>
               <div className="flex  w-screen items-start justify-center overflow-y-scroll gap-[16px]  ">

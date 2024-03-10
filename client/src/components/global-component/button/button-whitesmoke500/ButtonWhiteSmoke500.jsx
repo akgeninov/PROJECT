@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
-function ButtonWhiteSmoke500({ TEXT_BUTTON, WIDTH}) {
+function ButtonWhiteSmoke500({ TEXT_BUTTON, WIDTH, URL }) {
   return (
-    <>
+    <Link to={URL}>
       <button
         className={`px-[64px] py-[16px] ${WIDTH}  flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] `}
       >
@@ -10,7 +11,7 @@ function ButtonWhiteSmoke500({ TEXT_BUTTON, WIDTH}) {
           {TEXT_BUTTON}
         </p>
       </button>
-    </>
+    </Link>
   );
 }
 

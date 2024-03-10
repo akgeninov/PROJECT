@@ -12,7 +12,11 @@ const WebApp = () => {
       <HeroSection />
       <ServiceSection />
       <HowtodoitSection />
+<<<<<<< HEAD
       {/* <LanggananSection /> */}
+=======
+      <LanggananSection />
+>>>>>>> 7e0b7eda4c93c97961c6ae700c4bceb7db5ffe10
       <Faq />
       <JoinSection />
     </div>

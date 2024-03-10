@@ -15,6 +15,8 @@ import puzzle from "../assets/icon/puzzle.png";
 import design from "../assets/icon/design.png";
 import code from "../assets/icon/code.png";
 import gear from "../assets/icon/gear.png";
+import schedule from "../assets/icon/schedule.png";
+import analyze from "../assets/icon/analyze.png";
 import insight from "../assets/icon/insight.png";
 import koneksi from "../assets/icon/koneksi.png";
 import megaphone from "../assets/icon/megaphone.png";
@@ -103,6 +105,8 @@ const icon = {
   design,
   code,
   gear,
+  analyze,
+  schedule,
 };
 
 export default icon;

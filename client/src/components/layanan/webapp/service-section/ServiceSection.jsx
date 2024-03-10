@@ -2,37 +2,91 @@ import { useEffect } from "react";
 import layananPic from "../../../../constants/layananPic";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import { useParams } from "react-router-dom";
+import { dataService } from "../../../../constants/data";
 
 const ServiceSection = () => {
+  const { title } = useParams();
+  console.log(title);
+
+  let index = 1;
+  let titleService = 1;
+  switch (title) {
+    case "buat-website-dan-aplikasi":
+      titleService = 2;
+      index = 0;
+      break;
+    case "social-media-management":
+      index = 1;
+      titleService = 3;
+      break;
+    case "desain-logo":
+      index = 2;
+      titleService = 4;
+      break;
+    default:
+      index = 0;
+  }
+
   useEffect(() => {
     AOS.init();
   }, []);
-  const dataService = [ //data service
-    {
-      title: "UI/UX Design",
-      deskripsi:
-        "Kami menciptakan design yang sesuai dengan tujuan bisnismu, menarik secara visual, dan mudah untuk digunakan",
-      pic: layananPic.uiuxDesign,
-    },
-    {
-      title: "Website Development",
-      deskripsi:
-        "Kami menciptakan website yang memiliki performa terbaik dan tentunya menghadirkan solusi untuk bisnismu",
-      pic: layananPic.websiteDevelopment,
-    },
-    {
-      title: "Mobile Apps Development",
-      deskripsi:
-        "Kami menciptakan mobile apps yang memiliki performa terbaik dan tentunya menghadirkan solusi untuk bisnismu",
-      pic: layananPic.mobileAppDevelopment,
-    },
-    {
-      title: "CMS Website",
-      deskripsi:
-        "Layanan CMS Website memungkinkan kamu untuk mengelola dan membarui konten website dengan mudah",
-      pic: layananPic.cmsWebsite,
-    },
+  const dataServiceCard = [
+    [
+      //data service
+      {
+        title: "UI/UX Design",
+        deskripsi:
+          "Kami menciptakan design yang sesuai dengan tujuan bisnismu, menarik secara visual, dan mudah untuk digunakan",
+        pic: layananPic.uiuxDesign,
+      },
+      {
+        title: "Website Development",
+        deskripsi:
+          "Kami menciptakan website yang memiliki performa terbaik dan tentunya menghadirkan solusi untuk bisnismu",
+        pic: layananPic.websiteDevelopment,
+      },
+      {
+        title: "Mobile Apps Development",
+        deskripsi:
+          "Kami menciptakan mobile apps yang memiliki performa terbaik dan tentunya menghadirkan solusi untuk bisnismu",
+        pic: layananPic.mobileAppDevelopment,
+      },
+      {
+        title: "CMS Website",
+        deskripsi:
+          "Layanan CMS Website memungkinkan kamu untuk mengelola dan membarui konten website dengan mudah",
+        pic: layananPic.cmsWebsite,
+      },
+    ],
+    [
+      {
+        title: "Consumer Insight",
+        deskripsi:
+          "Kami merancang strategi berdasarkan wawasan yang paling sesuai dengan target audiens kamu",
+        pic: layananPic.consumerInsight,
+      },
+      {
+        title: "Creative Campaign",
+        deskripsi:
+          "Kami bukan hanya membuat konten yang menarik, namun juga memastikan seluruh pesan tersampaikan kepada audiens",
+        pic: layananPic.creativeCampaign,
+      },
+      {
+        title: "Calender Editorial",
+        deskripsi:
+          "Kami akan memastikan bahwa content social media diselesaikan tepat waktu serta diposting pada jam yang tepat",
+        pic: layananPic.calenderEditorial,
+      },
+      {
+        title: "Peformance Monitoring",
+        deskripsi:
+          "Melalui pemantauan kinerja real-time, kami menyesuaikan strategi terbaik untuk bisnis kamu",
+        pic: layananPic.peformanceMonitoring,
+      },
+    ],
   ];
+
   return (
     <div className="mt-[60px] lg:mt-[160px] w-fit flex flex-col items-center px-4">
       <div className="flex flex-col gap-[32px] lg:gap-[52px]">
@@ -42,16 +96,17 @@ const ServiceSection = () => {
             data-aos="fade-up"
             data-aos-duration="1000"
           >
-            Kami Selalu Menciptakan Pengalaman Digital yang Terbaik
+            {dataService[titleService].deskripsi}
           </h1>
         </div>
 
         <div
-          className="max-w-[1080px] flex flex-wrap justify-center gap-8 lg:gap-[80px]"
+          className="max-w-[1080px] flex flex-wrap justify-center lg:justify-normal gap-8 lg:gap-[80px]"
           data-aos="fade-up"
           data-aos-duration="1000"
         >
-          {dataService.map((item, id) => { //service card
+          {/* Service Card */}
+          {dataServiceCard[index].map((item, id) => {
             return (
               <div key={id} className={`${id % 2 !== 0 ? "md:mt-[80px]" : ""}`}>
                 <img

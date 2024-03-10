@@ -1,7 +1,7 @@
 import { icon } from "../../../../../constants";
 import { dataLayanan } from "../../../../../constants/data";
 
-const NavigasiLayanan = () => {
+const NavigasiLayanan = ({ index }) => {
   return (
     <div className=" flex max-w-[358px] md:max-w-[1080px] px-[5px] xl:px-0  w-full justify-start items-center mt-[24px]">
       <nav className="gap-[8px]   flex justify-start items-center list-none">
@@ -15,7 +15,7 @@ const NavigasiLayanan = () => {
         </li>
         <li>
           <p className="text-[14px] text-whiteSmoke500 font-[Heebo] font-medium leading-[20px] cursor-pointer">
-            {dataLayanan[2].title}
+            {dataLayanan[index].title}
           </p>
         </li>
       </nav>
