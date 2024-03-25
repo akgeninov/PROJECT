@@ -18,10 +18,8 @@ function CheckoutKelasBisnis({
   const { user } = useSelector((state) => state.userSlice);
   const [setCheckout] = useState([]);
   const navigate = useNavigate();
-  const [ setfreeCheckout ] = useState([]);
-
-  const token = JSON.parse(localStorage.getItem("auth"));
-  
+  const [setfreeCheckout] = useState([]);
+  const { id_kelas_bisnis } = useParams();
 
   const copyToClipboard = (text) => {
     const el = document.createElement('textarea');
@@ -41,22 +39,21 @@ function CheckoutKelasBisnis({
   };
 
   const copyToClipboardfree = (text) => {
-    const el = document.createElement('textarea');
+    const el = document.createElement("textarea");
     el.value = text;
     document.body.appendChild(el);
     el.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(el);
 
     Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Kelas Sudah Ada free",
-        showConfirmButton: false,
-        timer: 3000,
+      position: "center",
+      icon: "error",
+      title: "Kelas Sudah Ada free",
+      showConfirmButton: false,
+      timer: 3000,
     });
   };
-
 
   const addCheckout = async (text) => {
     try {
@@ -85,33 +82,34 @@ function CheckoutKelasBisnis({
           }
          };
 
-         const addfreeCheckout = async (text) => {
-          try {
-            const response = await api.post(
-              `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
-              {
-                id_kelas_bisnis: dataDetail.id_kelas_bisnis,
-              },
-              {
-                headers: {
-                  Authorization: token,
-                },
-              }
-            );
-            setfreeCheckout(response.data.data);
-              console.log(response);
-               } catch (error) {
-                  if (error.response && error.response.status === 400) {
-                      copyToClipboardfree();
-                      console.log(error);
-                    }else{
-                      user ? navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
-                    }
-                }
-               };
+  const addfreeCheckout = async (text) => {
+    const token = JSON.parse(localStorage.getItem("auth"));
 
-  //  useEffect(() => {
-  //   addCheckout();
+    try {
+      const response = await api.post(
+        `${process.env.REACT_APP_API_BASE_URL}/kelasTransaksi/createTransaksi`,
+        {
+          id_kelas_bisnis: dataDetail.id_kelas_bisnis,
+        },
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+      setfreeCheckout(response.data.data);
+      console.log(response);
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+        copyToClipboardfree();
+        console.log(error);
+      } else {
+        user
+          ? navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
+          : navigate("/login");
+      }
+    }
+  };
 
   // }, [addCheckout]);
   // console.log(checkout.checkout)
@@ -176,52 +174,52 @@ function CheckoutKelasBisnis({
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
               />
             </>
           ) : (
@@ -229,61 +227,61 @@ function CheckoutKelasBisnis({
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 defaultChecked={star * 2 === 1}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 defaultChecked={star * 2 === 2}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 defaultChecked={star * 2 === 3}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 defaultChecked={star * 2 === 4}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 defaultChecked={star * 2 === 5}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 defaultChecked={star * 2 === 6}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 defaultChecked={star * 2 === 7}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 defaultChecked={star * 2 === 8}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-1"
+                className="bg-yellow-500 mask mask-star-2 mask-half-1"
                 defaultChecked={star * 2 === 9}
               />
               <input
                 type="radio"
                 name={`rating-1`}
-                className="bg-green-500 mask mask-star-2 mask-half-2"
+                className="bg-yellow-500 mask mask-star-2 mask-half-2"
                 defaultChecked={star * 2 === 10}
               />
             </>
@@ -333,14 +331,15 @@ function CheckoutKelasBisnis({
             <HiOutlineHeart className="text-[32px] text-black500" />
           )}
         </button>
-        <div onClick={() => {
-          if (dataDetail?.kelas_bisni?.harga > 0 ){
-            addCheckout();
-          }else{
-            addfreeCheckout();
-          }
-        }
-          }>
+        <div
+          onClick={() => {
+            if (dataDetail?.kelas_bisni?.harga > 0) {
+              addCheckout();
+            } else {
+              addfreeCheckout();
+            }
+          }}
+        >
           <ButtonBlack500 TEXT_BUTTON={"Daftar Sekarang"} WIDTH={"w-[216px]"} />
         </div>
       </div>

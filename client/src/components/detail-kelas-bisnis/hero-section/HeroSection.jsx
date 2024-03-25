@@ -18,24 +18,24 @@ function HeroSection({
 }) {
   const { value } = useSelector((state) => state.detailKelasSlice);
   const { user } = useSelector((state) => state.userSlice);
-  const [ setCheckout] = useState([]);
+  const [setCheckout] = useState([]);
   const navigate = useNavigate();
   // const [star, setStar] = useState(null);
 
   const copyToClipboard = (text) => {
-    const el = document.createElement('textarea');
+    const el = document.createElement("textarea");
     el.value = text;
     document.body.appendChild(el);
     el.select();
-    document.execCommand('copy');
+    document.execCommand("copy");
     document.body.removeChild(el);
 
     Swal.fire({
-        position: "center",
-        icon: "error",
-        title: "Kelas Sudah Ada",
-        showConfirmButton: false,
-        timer: 3000,
+      position: "center",
+      icon: "error",
+      title: "Kelas Sudah Ada",
+      showConfirmButton: false,
+      timer: 3000,
     });
   };
 
@@ -56,25 +56,27 @@ function HeroSection({
       setCheckout(response.data.data);
       console.log(response);
     } catch (error) {
-        if (error.response && error.response.status === 400) {
-          const responseData = error.response.data;
-          if (responseData.error === "AKUN ANDA BELUM VERIFIED") {
-            copyToClipboard("Akun anda belum verified");
-          }
-          if(responseData.error === "DATA REGIST SUDAH ADA"){
-            copyToClipboard("Kelas sudah terdaftar");
-            navigate(`/profile/kelas-saya/`)
-            window.scrollTo(0,0);
-          }
-          if(responseData.error === "DATA TRANSAKSI SUDAH ADA"){
-            copyToClipboard("Kelas sudah ada");
-          }
-          console.log(error);
-        }else{
-          user ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`) : navigate("/login")
-          window.scrollTo(0,0);
+      if (error.response && error.response.status === 400) {
+        const responseData = error.response.data;
+        if (responseData.error === "AKUN ANDA BELUM VERIFIED") {
+          copyToClipboard("Akun anda belum verified");
         }
+        if (responseData.error === "DATA REGIST SUDAH ADA") {
+          copyToClipboard("Kelas sudah terdaftar");
+          navigate(`/profile/kelas-saya/`);
+          window.scrollTo(0, 0);
+        }
+        if (responseData.error === "DATA TRANSAKSI SUDAH ADA") {
+          copyToClipboard("Kelas sudah ada");
+        }
+        console.log(error);
+      } else {
+        user
+          ? navigate(`/checkout/${dataDetail?.id_kelas_bisnis}`)
+          : navigate("/login");
+        window.scrollTo(0, 0);
       }
+    }
   };
 
   const renderStarRating = useCallback(() => {
@@ -370,14 +372,14 @@ function HeroSection({
 
           <div
             onClick={() => {
-              if (dataDetail?.kelas_bisni?.harga > 0 ){
+              if (dataDetail?.kelas_bisni?.harga > 0) {
                 addCheckout();
-              }else{
-                navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`)
-                window.scrollTo(0,0);
+              } else {
+                navigate(`/checkout-free/${dataDetail?.id_kelas_bisnis}`);
+                window.scrollTo(0, 0);
               }
-            }
-          }>
+            }}
+          >
             <ButtonWhiteSmoke500
               TEXT_BUTTON={"Daftar Sekarang"}
               WIDTH={"w-[216px]"}

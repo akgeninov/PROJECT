@@ -6,7 +6,7 @@ function ServiceCard({ setOnHover, service, onHover }) {
       <div
         onMouseEnter={() => setOnHover(service.title)}
         onMouseLeave={() => setOnHover("")}
-        className="relative max-w-[358px] sm:w-[358px] lg:w-[344px] h-[268px] lg:h-[516px] shrink-0 rounded-[10px] bg-red-300 overflow-hidden cursor-pointer"
+        className="relative max-w-[358px] sm:w-[358px] lg:w-[344px] h-[268px] lg:h-[516px] shrink-0 rounded-[10px] overflow-hidden cursor-pointer"
       >
         <div
           className={`${

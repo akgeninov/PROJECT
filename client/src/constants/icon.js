@@ -33,6 +33,9 @@ import iconTransaksi from "../assets/icon/icon-walet.png";
 import iconTransaksi1 from "../assets/icon/ic-transaksi1.png";
 import iconEdit from "../assets/icon/icon-edit.png";
 import playOutLine from "../assets/icon/play_outline.svg";
+import iconArticle from "../assets/icon/icon-article.png";
+import iconUpload from "../assets/icon/icon-upload.png";
+import iconAdd from "../assets/icon/icon-add.png";
 
 import searchIcon from "../assets/icon/search_icon.png";
 import bookOpenSold from "../assets/icon/book_open_solid.png";
@@ -82,6 +85,9 @@ const icon = {
   iconTransaksi,
   iconTransaksi1,
   iconEdit,
+  iconArticle,
+  iconUpload,
+  iconAdd,
   searchIcon,
   bookOpenSold,
   signal,
