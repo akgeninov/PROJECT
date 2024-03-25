@@ -45,7 +45,7 @@ function JoinSection() {
         </div>
       </div>
       <div className=" relative flex flex-col md:hidden justify-center items-center mt-[160px] w-full 2xl:max-w-[1280px] min-h-[484px] ">
-        <div className="relative  w-full top-0  flex justify-center items-center h-[196px] bg-red-300">
+        <div className="relative  w-full top-0  flex justify-center items-center h-[196px] ">
           <div className="absolute h-full w-full bg-gradient-to-t from-black400 to-transparent"></div>
           <img
             loading="lazy"

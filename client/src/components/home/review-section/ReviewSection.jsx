@@ -69,7 +69,7 @@ function ReviewSection() {
       </h1>
       <div className="w-full gap-[24px] flex flex-col lg:flex-row justify-center ">
         <div className="w-full gap-[24px] p-[24px] flex flex-col lg:flex-row items-center shadow-customSm rounded-[10px]">
-          <div className="w-[326px] h-[260px] lg:min-w-[384px] lg:min-h-[288px] rounded-[10px] overflow-hidden bg-red-300 ">
+          <div className="w-[326px] h-[260px] lg:min-w-[384px] lg:min-h-[288px] rounded-[10px] overflow-hidden ">
             <img
               src={dataMessenger[currentIndex].bigPic}
               alt="mesengger"

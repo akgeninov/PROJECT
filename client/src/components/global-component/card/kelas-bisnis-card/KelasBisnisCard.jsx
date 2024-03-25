@@ -13,7 +13,7 @@ function KelasBisnisCard({ el, index, star }) {
         <div className="w-full h-[176px]">
           <img
             src={
-              `${process.env.REACT_APP_SERVER_URL}/kelas/${el.image}` ||
+              `${process.env.REACT_APP_SERVER_URL}kelas/${el.image}` ||
               kelasBisnisPic.pic1
             }
             alt="main"

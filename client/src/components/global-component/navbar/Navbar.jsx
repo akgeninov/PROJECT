@@ -358,7 +358,7 @@ function Navbar() {
                     <NavLink
                       to={`/profile/${user.username}`}
                       onClick={() => setTOggleProfile(false)}
-                      className={"w-full bg-red-300 px-[24px] py-[12px]"}
+                      className={"w-full  px-[24px] py-[12px]"}
                       style={NavlinkStyles}
                     >
                       Profil Saya
@@ -368,7 +368,7 @@ function Navbar() {
                     <NavLink
                       to={"/profile/dashboard"}
                       onClick={() => setTOggleProfile(false)}
-                      className={"w-full bg-red-300 px-[24px] py-[12px]"}
+                      className={"w-full px-[24px] py-[12px]"}
                       style={NavlinkStyles}
                     >
                       Dashboard
@@ -378,7 +378,7 @@ function Navbar() {
                     <NavLink
                       to={"/profile/transaksi"}
                       onClick={() => setTOggleProfile(false)}
-                      className={"w-full bg-red-300 px-[24px] py-[12px]"}
+                      className={"w-full px-[24px] py-[12px]"}
                       style={NavlinkStyles}
                     >
                       Transaksi

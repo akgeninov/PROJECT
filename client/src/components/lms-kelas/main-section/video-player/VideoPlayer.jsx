@@ -23,7 +23,14 @@ import YouTube from "react-youtube";
 
 import "./video-player.css";
 
-function VideoPlayer({ videoCode, index }) {
+function VideoPlayer({
+  videoCode,
+  index,
+  isFull,
+  setIsFull,
+  isPLay,
+  setIsPlay,
+}) {
   const playerRef = useRef();
   const [isDragging, setIsDragging] = useState(false);
   const [initialMouseX, setInitialMouseX] = useState(0);
@@ -40,7 +47,7 @@ function VideoPlayer({ videoCode, index }) {
     width: "100%",
     playerVars: {
       autoplay: 0,
-      controls: 1,
+      controls: 0,
       rel: 0,
       showinfo: 1,
       modestbranding: 1,
@@ -53,11 +60,13 @@ function VideoPlayer({ videoCode, index }) {
     const player = playerRef.current;
     if (currentTime >= 98 && player && player.playVideoAt) {
       player.seekTo(0);
+      setIsPlay(index + 1);
       setIsPlaying(true);
     } else if (player && player.playVideo && player.pauseVideo) {
       if (isPlaying) {
         player.pauseVideo();
       } else {
+        setIsPlay(index + 1);
         player.playVideo();
       }
       setIsPlaying(!isPlaying);
@@ -66,7 +75,7 @@ function VideoPlayer({ videoCode, index }) {
     }
   };
 
-  const handleForward = () => {
+  const handleForward = ({ isFull, setIsFull }) => {
     const player = playerRef.current;
     if (player && player.seekTo) {
       const currentTime = player.getCurrentTime();
@@ -171,6 +180,7 @@ function VideoPlayer({ videoCode, index }) {
     }
 
     setFullscreen(!fullscreen);
+    setIsFull(!isFull);
 
     // ... Logika lain yang mungkin diperlukan saat mode fullscreen diubah
   };
@@ -229,6 +239,7 @@ function VideoPlayer({ videoCode, index }) {
       if (event.key === "Escape" || event.key === "Esc") {
         console.log(event.key);
         setFullscreen(false);
+        setIsFull(false);
         // if (fullscreen) {
         //   setFullscreen(false);
         //   document.exitFullscreen();
@@ -245,28 +256,35 @@ function VideoPlayer({ videoCode, index }) {
     };
   }, [fullscreen]);
 
+  useEffect(() => {
+    if (isPLay && Number(isPLay - 1) !== Number(index) && isPlaying) {
+      const player = playerRef.current;
+      player.pauseVideo();
+    }
+  }, [isPLay]);
+
   return (
     <div
       key={index}
       className={`${
         fullscreen ? "fullscreen-container " : ""
-      }  w-full flex flex-col justify-center items-center `}
+      }  w-full flex  flex-col justify-center items-center `}
     >
       <div
         className={`${
           fullscreen
             ? "fullscreen-video"
-            : "w-[358px] md:w-[752px]  h-[204px] md:h-[424px]"
+            : "w-[358px] md:w-[752px] 2xl:w-[1100px]  h-[204px] md:h-[424px] 2xl:h-[600px]"
         } relative  z-[30]  `}
       >
-        {/* <div
+        <div
           onMouseEnter={() => setIsHover(true)}
           onMouseLeave={() => setIsHover(false)}
-          className="absolute w-full pointer-events-none h-full overflow-hidden  bg-transparant"
+          className="absolute w-full pointer-events-auto h-full overflow-hidden  bg-transparant"
         >
           <div
             onClick={() => handlePlayPause()}
-            className="absolute  bottom-[55px] cursor-pointer w-full h-full  bg-transparant"
+            className="absolute  bottom-[55px] cursor-pointer-auto w-full h-full  bg-transparant"
           ></div>
           <div
             className={`${
@@ -342,18 +360,18 @@ function VideoPlayer({ videoCode, index }) {
                       className="cursor-pointer text-[25px]"
                     />
                   </div>
-                  <div className="h-full ">
+                  {/* <div className="h-full ">
                     <button onClick={() => setQuality("small")}>
                       {" "}
                       resolution
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div className="w-[400px] flex justify-end px-[10px] pb-[5px] items-center"></div>
             </div>
           </div>
-        </div> */}
+        </div>
 
         <YouTube
           videoId={videoCode}

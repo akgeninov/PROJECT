@@ -17,7 +17,6 @@ function DetailKelasBisnis() {
   const [star, setStar] = useState(0);
   const timeoutRef = useRef();
 
-
   // const [wishlist, setWishlist] = useState([]);
   // const [check, setCheck] = useState([]);
   const [status, setStatus] = useState();
@@ -58,14 +57,14 @@ function DetailKelasBisnis() {
       );
       // setWishlist(response.data.data);
       setStatus(response.data.data.isRemove);
-      if(status === true){
+      if (status === true) {
         Swal.fire({
           title: "Info",
           text: "Berhasil Menambah Wishlist",
           icon: "success",
           confirmButtonColor: "#0F1011",
         });
-      }else{
+      } else {
         Swal.fire({
           title: "Info",
           text: "Berhasil Menghapus Wishlist",
@@ -73,7 +72,6 @@ function DetailKelasBisnis() {
           confirmButtonColor: "#0F1011",
         });
       }
-
     } catch (error) {
       console.log(error);
     }

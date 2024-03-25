@@ -28,7 +28,7 @@ const steps = [
   { title: "Third", description: "Select Rooms" },
 ];
 
-function MainSection({ fullscreen, setFullscreen }) {
+function MainSection({ isFull, setIsFull }) {
   // console.log({ coba });
   // const { id } = useParams();
   const [materiId, setMateriId] = useState(1);
@@ -46,6 +46,7 @@ function MainSection({ fullscreen, setFullscreen }) {
   const timeoutRef = useRef(null);
   const timeoutFetchRef = useRef(null);
   const playerRef = useRef();
+  const [isPLay, setIsPlay] = useState(0);
 
   const coba = [
     {
@@ -565,7 +566,7 @@ function MainSection({ fullscreen, setFullscreen }) {
         </div>
       </div>
 
-      <div className="w-full  px-5 lg:px-[100px] flex flex-1 flex-col h-[1400px] overflow-y-scroll overflow-x-hidden  scrollbar-hide items-center pt-[32px]  gap-[32px] lg:gap-[52px]">
+      <div className="w-full  px-5 lg:px-[100px] flex h-full max-h-[1400px] flex-1 flex-col overflow-y-scroll overflow-x-hidden  scrollbar-hide items-center pt-[32px]  gap-[32px] lg:gap-[52px]">
         <Skeleton
           isLoaded={!isLoading}
           fadeDuration={1}
@@ -578,7 +579,7 @@ function MainSection({ fullscreen, setFullscreen }) {
             {moduleTitle}
           </p>
         </Skeleton>
-        <div className="w-full lg:w-[752px] h-max  px-5  lg:px-[100px] flex flex-col flex-grow items-center justify-start ">
+        <div className="w-full lg:w-[752px] 2xl:w-[1100px]  h-max  px-5  lg:px-[100px] flex flex-col flex-grow items-center justify-start ">
           {/* {isLoading ? (
             <Spinner size={"xl"} />
           ) : ( */}
@@ -603,11 +604,13 @@ function MainSection({ fullscreen, setFullscreen }) {
                   className="w-full flex flex-col justify-center items-center   "
                 >
                   <VideoPlayer
-                    fullscreen={fullscreen}
-                    setFullscreen={setFullscreen}
                     videoCode={videoCode}
                     index={index}
                     ori={el.link}
+                    isFull={isFull}
+                    setIsFull={setIsFull}
+                    setIsPlay={setIsPlay}
+                    isPLay={isPLay}
                   />
                 </div>
               );
