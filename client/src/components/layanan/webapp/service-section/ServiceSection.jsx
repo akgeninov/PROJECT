@@ -85,6 +85,32 @@ const ServiceSection = () => {
         pic: layananPic.peformanceMonitoring,
       },
     ],
+    [
+      {
+        title: "Brand Personality",
+        deskripsi:
+          "Kami bukan hanya menciptakan desain yang menarik secara visual, namun juga sesuai dengan visi & misi bisnismu",
+        pic: layananPic.brandPersonality,
+      },
+      {
+        title: "Pixel Perfect",
+        deskripsi:
+          "Setiap design yang kami ciptakan memiliki kualitas dan resolusi terbaik, dan tentunya dapat disesuaikan ke berbagai ukuran",
+        pic: layananPic.pixelPerfect,
+      },
+      {
+        title: "Mockup Design",
+        deskripsi:
+          "Kamu bisa melihat hasil desain yang sudah diimplementasikan ke dalam berbagai jenis produk bisnismu",
+        pic: layananPic.mockupDesign,
+      },
+      {
+        title: "Hak Kekayaan Intelektual",
+        deskripsi:
+          "Setiap design yang kami ciptakan terjamin keasliannya, dan tentunya akan menjadi hak milik kamu sepenuhnya",
+        pic: layananPic.Haki,
+      },
+    ],
   ];
 
   return (

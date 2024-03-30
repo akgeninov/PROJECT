@@ -34,7 +34,7 @@ function JoinSection() {
       title: "Raih Potensi Optimal Bisnismu Bersama Kami",
     },
     {
-      // title: "Mari Ciptakan Project Impianmu Bersama Kami",
+      title: "Mari Ciptakan Identitas Brand kamu bersama Kami",
     },
   ];
 
@@ -70,11 +70,11 @@ function JoinSection() {
                   WIDTH={"max-w-[200px]"}
                   RESPONSIF={"flex"}
                 />
-                <button className="px-[64px] py-[16px] w-[232px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
+                {/* <button className="px-[64px] py-[16px] w-[232px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
                   <p className="shrink-0 text-[16px] font-medium leading-[24px] text-black500">
                     Lihat Paket
                   </p>
-                </button>
+                </button> */}
               </div>
             </div>
           </div>
@@ -111,10 +111,10 @@ function JoinSection() {
                   RESPONSIF={"flex"}
                 />
 
-                <ButtonWhiteSmoke500
+                {/* <ButtonWhiteSmoke500
                   TEXT_BUTTON={"Lihat Paket"}
                   WIDTH={"w-[190px]"}
-                />
+                /> */}
               </div>
             </div>
           </div>

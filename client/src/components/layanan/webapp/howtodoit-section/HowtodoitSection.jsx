@@ -24,6 +24,7 @@ const HowtodoitSection = () => {
       break;
     default:
       index = 0;
+      titleService = 1;
   }
 
   useEffect(() => {
@@ -91,7 +92,38 @@ const HowtodoitSection = () => {
         num: 4,
       },
     ],
+    [
+      {
+        title: "Research",
+        deskripsi:
+          "Kami memulai dengan melakukan explorasi terhadap  nilai, visi, dan kepribadian merek brand kamu melalui dengan riset mendalam. Dengan memahami basis merek, desain logo dapat memberikan refleksi yang akurat dan kuat terhadap identitas perusahaan",
+        pic: icon.puzzle,
+        num: 1,
+      },
+      {
+        title: "Designing",
+        deskripsi:
+          "Kami mengembangkan konsep logo berdasarkan hasil riset. Melalui iterasi yang cermat, kami selalu memastikan bahwa desain yang kami ciptakan dapat mencerminkan esensi merek dan memenuhi kebutuhan bisnismu. Proses ini memastikan logo yang dirancang sesuai dengan visi & misi bisnismu",
+        pic: icon.design,
+        num: 2,
+      },
+      {
+        title: "Simplify",
+        deskripsi:
+          "Kami menyederhanakan elemen-elemen desain untuk meningkatkan daya ingat dan identifikasi terhadap brand kamu. Berfokus pada elemen inti yang kuat dan jelas agar logo dapat dengan mudah berkomunikasi dengan audiens target, serta menciptakan kesan yang terbaik dari bisnismu",
+        pic: icon.drawerDone,
+        num: 3,
+      },
+      {
+        title: "Finishing",
+        deskripsi:
+          "Berdasarkan umpan balik, kami melakukan revisi dan penyempurnaan pada desain logo untuk memastikan desain akhir yang kami ciptakan mencapai kesempurnaan estetika dan efektivitas. Setelah itu, kami akan melakukan penyerahan logo beserta dokumen panduan penggunaan logo yang konsisten & efektif",
+        pic: icon.designIdeas,
+        num: 4,
+      },
+    ],
   ];
+
   return (
     <div className="mt-[60px] lg:mt-[160px] flex flex-col items-center max-w-[1080px] px-4">
       <div className="flex flex-col gap-8 lg:gap-[52px]">
@@ -108,6 +140,7 @@ const HowtodoitSection = () => {
         <div className="flex flex-col">
           {works[index].map((work, id) => {
             return (
+              // <img src={work.pic} alt="" />
               <div className="flex group" tabIndex={"0"} key={id}>
                 <div className={`${id === 0 ? "mt-6" : ""} flex flex-col mr-6`}>
                   <div key={id} className="flex flex-col items-center">

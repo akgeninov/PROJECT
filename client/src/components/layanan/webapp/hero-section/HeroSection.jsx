@@ -47,7 +47,7 @@ const HeroSection = () => {
             <div className="flex justify-center lg:justify-start">
               <ButtonWhiteSmoke500
                 WIDTH={"w-[260px]"}
-                TEXT_BUTTON={"Lihat Paket"}
+                TEXT_BUTTON={"Hubungi Kami"}
                 URL={"https://wa.me/085236455624"}
               />
             </div>
