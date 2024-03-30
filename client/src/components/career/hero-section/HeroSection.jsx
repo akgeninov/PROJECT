@@ -48,9 +48,11 @@ function HeroSection() {
           Mari kembangkan perjalanan karirmu bersama Growlab, karena kami 
           yakin kamu selalu memiliki inovasi yang menarik.
         </p>
-        <Link to="/career-lowongan">
-          <ButtonWhiteSmoke500 WIDTH={"w-500"} TEXT_BUTTON={"Lihat Semua Lowongan"}/>
-        </Link>
+          <ButtonWhiteSmoke500 
+            URL={"/career-lowongan"}
+            WIDTH={"w-500"} 
+            TEXT_BUTTON={"Lihat Semua Lowongan"}
+          />
       </div>
       <div className="w-[750px] mt-[px] lg:mt-[80px] flex justify-center"></div>
     </div>

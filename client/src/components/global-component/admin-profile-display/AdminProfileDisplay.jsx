@@ -2,7 +2,7 @@ import { reviewPic } from "../../../constants";
 
 function AdminProfileDisplay() {
   return (
-    <div className="flex border border-black items-center rounded-lg p-2 self-end cursor-pointer">
+    <div className="flex border border-black items-center rounded-lg p-2 self-end cursor-pointer max-md:hidden ">
       <img
         src={reviewPic.rectangle103}
         className="w-[36px] h-[36px] "

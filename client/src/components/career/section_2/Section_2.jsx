@@ -170,8 +170,3 @@ function Section_2() {
 }
 
 export default Section_2;
-
-
-
-
-

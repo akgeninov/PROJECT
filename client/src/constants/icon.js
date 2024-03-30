@@ -24,6 +24,7 @@ import profile from "../assets/icon/profile.png";
 import iconHome from "../assets/icon/icon-home.png";
 import iconHome1 from "../assets/icon/ic-home1.png";
 import iconCourse from "../assets/icon/icon-course.png";
+import iconKarir from "../assets/icon/icon-karir.png";
 import iconCourse1 from "../assets/icon/ic-course1.png";
 import iconWishlist from "../assets/icon/icon-wishlist.png";
 import iconWishlist1 from "../assets/icon/ic-wishlist1.png";
@@ -55,6 +56,12 @@ import crownWhiteSolid from "../assets/icon/crownWhiteSolid.png";
 import checkWhiteSolid from "../assets/icon/checklist-white-solid.png";
 import checkBlackSolid from "../assets/icon/checklist-black-solid.png";
 import crownsolid from "../assets/icon/crown-solid.png";
+import Briefcase from "../assets/icon/briefcase.png";
+import OfficeBuilding from "../assets/icon/OfficeBuilding.png";
+import UserCircle from "../assets/icon/UserCircle.png";
+import iconPlus from "../assets/icon/icon-plus.png";
+import iconEditSquare from "../assets/icon/tabler_edit.png";
+import iconDelete from "../assets/icon/trash-delete.png"; 
 
 const icon = {
   chevronSmallDownLight,
@@ -78,6 +85,7 @@ const icon = {
   iconHome1,
   iconCourse,
   iconCourse1,
+  iconKarir,
   iconWishlist,
   iconWishlist1,
   iconEvent,
@@ -113,6 +121,12 @@ const icon = {
   gear,
   analyze,
   schedule,
+  Briefcase,
+  OfficeBuilding,
+  UserCircle,
+  iconPlus,
+  iconEditSquare,
+  iconDelete,
 };
 
 export default icon;

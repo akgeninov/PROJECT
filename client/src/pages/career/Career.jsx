@@ -7,7 +7,7 @@ import JoinKerjaSection from "../../components/career/join-kerja-section/JoinKer
 
 
 function Career() {
-    return (
+  return (
     <div className=" flex flex-col justify-center items-center shrink-0">
       <HeroSection />
       <Section_2 />
@@ -15,7 +15,7 @@ function Career() {
       <KerjaSection /> 
       <JoinKerjaSection />
     </div>
-    );
+  );
 }
 
 export default Career;

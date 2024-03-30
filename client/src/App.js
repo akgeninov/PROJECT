@@ -1,4 +1,5 @@
 import "./App.css";
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { Routes } from "react-router-dom";
 import routes from "./route/routes";
 

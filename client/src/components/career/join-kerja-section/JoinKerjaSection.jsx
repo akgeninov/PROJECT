@@ -2,6 +2,7 @@ import React from "react";
 import { images } from "../../../constants";
 import ButtonWhiteSmoke500 from "../../global-component/button/button-whitesmoke500/ButtonWhiteSmoke500";
 import ButtonBorderWhitesmoke500 from "../../global-component/button/button-borderwhitesmoke500/ButtonBorderWhitesmoke500";
+import { Link } from "react-router-dom";
 
 function JoinKerjaSection() {
   return (
@@ -29,11 +30,13 @@ function JoinKerjaSection() {
                     Hubungi Kami
                   </p>
                 </button> */}
+                <Link to={"/career-lowongan"}>
                 <button className="px-[64px] py-[16px] w-[232px] flex justify-center items-center rounded-[10px] bg-whiteSmoke500 border-[1px] ">
                   <p className="shrink-0 text-[16px] font-medium leading-[24px] text-black500">
                     Lihat Semua Lowongan
                   </p>
                 </button>
+                </Link>
               </div>
             </div>
           </div>
@@ -68,8 +71,9 @@ function JoinKerjaSection() {
                   </p>
                 </button> */}
                 <ButtonWhiteSmoke500
-                  TEXT_BUTTON={"Lihat Semua Lowongan"}
+                  URL={"/career-lowongan"}
                   WIDTH={"w-[190px]"}
+                  TEXT_BUTTON={"Lihat Semua Lowongan"}
                 />
               </div>
             </div>

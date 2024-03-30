@@ -44,7 +44,23 @@ import LmsKelas from "../pages/lms-kelas/LmsKelas";
 import Verifikasi from "../pages/verifikasi/Verifikasi";
 import ResetPassword from "../pages/reset-password/ResetPassword";
 import RequestReset from "../pages/request-reset/RequestReset";
+import AdminKelasBisnis from "../pages/admin-kelas-bisnis/AdminKelasBisnis";
+import KelasBisnisForm from "../pages/admin-kelas-bisnis/KelasBisnisForm";
+import AdminArtikel from "../pages/admin-artikel/AdminArtikel";
+import ArtikelForm from "../pages/admin-artikel/ArtikelForm";
+import AdminDashboard from "../pages/admin-dashboard/AdminDashboard";
+import DashboardUMKM from "../pages/admin-dashboard/DashboardUMKM";
+import DashboardTestimoni from "../pages/admin-dashboard/DashboardTestimoni";
+import DashboardFAQ from "../pages/admin-dashboard/DashboardFAQ";
+import DashboardPartner from "../pages/admin-dashboard/DashboardPartner";
+import UMKMForm from "../pages/admin-dashboard/UMKMForm";
+import TestimoniForm from "../pages/admin-dashboard/TestimoniForm";
+import FAQForm from "../pages/admin-dashboard/FAQForm";
+import PartnerForm from "../pages/admin-dashboard/PartnerForm";
 import WebApp from "../pages/webapp-services/WebApp";
+import AdminKarir from "../pages/admin-karir/AdminKarir";
+import AdminKarirForm from "../pages/admin-karir/AdminKarirForm";
+import AdminKarirEdit from "../pages/admin-karir/AdminKarirEdit";
 
 const routes = [
   <Route
@@ -182,16 +198,16 @@ const routes = [
   />,
 
   <Route
-    key="layanan"
-    path="/:title"
-    element={
-      <Protection publicSide={true}>
-        <WebApp />
-      </Protection>
-    }
-  >
-    <Route path="webapp-services" element={<WebApp />} />
-  </Route>,
+  key="layanan"
+  path="/:title"
+  element={
+    <Protection publicSide={true}>
+      <WebApp />
+    </Protection>
+  }
+>
+  <Route path="webapp-services" element={<WebApp />} />
+</Route>,
 
   <Route
     key="profile"
@@ -348,6 +364,191 @@ const routes = [
       </Protection>
     }
   />,
+  <Route key="admin" path="/admin">
+    <Route
+      key="admin-dashboard"
+      path="dashboard"
+      element={
+        <Protection>
+          <AdminDashboard />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-umkm"
+      path="dashboard/umkm"
+      element={
+        <Protection>
+          <DashboardUMKM />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-umkm-create"
+      path="dashboard/umkm/create"
+      element={
+        <Protection>
+          <UMKMForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-testimoni"
+      path="dashboard/testimoni"
+      element={
+        <Protection>
+          <DashboardTestimoni />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-testimoni-create"
+      path="dashboard/testimoni/create"
+      element={
+        <Protection>
+          <TestimoniForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-faq"
+      path="dashboard/faq"
+      element={
+        <Protection>
+          <DashboardFAQ />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-faq-create"
+      path="dashboard/faq/create"
+      element={
+        <Protection>
+          <FAQForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-partner"
+      path="dashboard/partner"
+      element={
+        <Protection>
+          <DashboardPartner />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-dashboard-partner-create"
+      path="dashboard/partner/create"
+      element={
+        <Protection>
+          <PartnerForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-kelas-bisnis"
+      path="kelas-bisnis"
+      element={
+        <Protection>
+          <AdminKelasBisnis />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-kelas-bisnis-create"
+      path="kelas-bisnis/create"
+      element={
+        <Protection>
+          <KelasBisnisForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-kelas-bisnis-edit"
+      path="kelas-bisnis/edit/:id"
+      element={
+        <Protection>
+          <KelasBisnisForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-artikel"
+      path="artikel"
+      element={
+        <Protection>
+          <AdminArtikel />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-artikel-create"
+      path="artikel/create"
+      element={
+        <Protection>
+          <ArtikelForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-karir"
+      path="karir"
+      element={
+        <Protection>
+          <AdminKarir />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-karir-create"
+      path="karir/create"
+      element={
+        <Protection>
+          <AdminKarirForm />
+        </Protection>
+      }
+    />
+    <Route
+      key="admin-karir-edit"
+      path="karir/edit/:id"
+      element={
+        <Protection>
+          <AdminKarirEdit />
+        </Protection>
+      }
+    />
+  </Route>,
+
+  // <Route
+  //   key="checkout"
+  //   path="/checkout"
+  //   element={
+  //     <Protection userOnly={true}>
+  //       <Checkout />
+  //     </Protection>
+  //   }
+  // />,
+
+  // <Route
+  //   key="approval"
+  //   path="/checkout/approval-checkout"
+  //   element={
+  //     <Protection userOnly={true}>
+  //       <Approval />
+  //     </Protection>
+  //   }
+  // />,
+
+  // <Route
+  //   key="success"
+  //   path="/checkout/success-checkout"
+  //   element={
+  //     <Protection userOnly={true}>
+  //       <Success />
+  //     </Protection>
+  //   }
+  // />,
 ];
 
 export default routes;
