@@ -64,6 +64,7 @@ import UserCircle from "../assets/icon/UserCircle.png";
 import iconPlus from "../assets/icon/icon-plus.png";
 import iconEditSquare from "../assets/icon/tabler_edit.png";
 import iconDelete from "../assets/icon/trash-delete.png"; 
+import iconSave from "../assets/icon/save.png";
 
 const icon = {
   chevronSmallDownLight,
@@ -131,6 +132,7 @@ const icon = {
   iconDelete,
   drawerDone,
   designIdeas,
+  iconSave
 };
 
 export default icon;

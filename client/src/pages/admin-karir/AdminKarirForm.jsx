@@ -13,4 +13,4 @@ function AdminKarirForm() {
   )
 }
 
-export default AdminKarirForm
+export default AdminKarirForm;

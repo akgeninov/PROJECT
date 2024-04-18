@@ -23,6 +23,7 @@ function Career() {
       const filteredData = response.data.data.filter((el) =>
         isValidDeadline(el.batas_lamar)
       );
+      console.log("Data dari API:", response.data.data);
       setOriginalLowonganData(filteredData);
       setLowonganData(filteredData);
       console.log(response);
@@ -65,6 +66,8 @@ function Career() {
   const handlePrevClick = () => {
     setStartIndex(Math.max(0, startIndex - itemsPerPage));
   };
+
+  console.log("Display Data:", displayData);
 
   return (
     <div className="flex flex-col justify-center shrink-0 ">

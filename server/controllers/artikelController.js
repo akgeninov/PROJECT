@@ -1,6 +1,6 @@
 const db = require("../models");
-const artikelModel = db.Artikel;
-const kategoriModel = db.Kategori;
+const artikelModel = db.artikels;
+const kategoriModel = db.kategoris;
 
 module.exports = {
   getKategori: async (req, res) => {

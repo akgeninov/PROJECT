@@ -3,6 +3,38 @@ import { images } from "../../../constants";
 
 
 function DetailSection(props) {
+  const handleCopyLink = () => {
+    const url = window.location.href;
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        console.log('URL copied to clipboard:', url);
+        // Tambahkan logika atau tindakan lain setelah berhasil menyalin
+        alert('URL copied to clipboard!');
+      })
+      .catch((error) => {
+        console.error('Error copying URL to clipboard:', error);
+        // Handle error
+        alert('Failed to copy URL to clipboard.');
+      });
+  };
+  const handleShareLinkedIn = () => {
+    const url = window.location.href;
+    const linkedinUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
+    window.open(linkedinUrl, '_blank', 'width=600,height=600');
+  };
+  const handleShareWhatsApp = () => {
+    const url = window.location.href;
+    const message = encodeURIComponent('Check out this link: ' + url);
+    const whatsappUrl = `https://wa.me/?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  };
+  const handleShareTelegram = () => {
+    const url = window.location.href;
+    const message = encodeURIComponent('Check out this link: ' + url);
+    const telegramUrl = `https://t.me/share/url?url=${url}&text=${message}`;
+    window.open(telegramUrl, '_blank');
+  };
+
   return (
     <div className="xl:m-20 p-10 grid grid-cols-3 xl:gap-20 lg:gap-10 gap-5 font-heebo text-[#3F4041]">
       <div className="md:col-span-2 col-span-3">
@@ -30,28 +62,40 @@ function DetailSection(props) {
             <hr className="border-t border-gray-300 my-5" />
             <h1 className="font-semibold">Bagikan Lowongan </h1>
             <div className="flex justify-between items-center pt-2 gap-2">
-                <button className="rounded-md flex items-center justify-center w-full">
+                <button 
+                  className="rounded-md flex items-center justify-center w-full"
+                  onClick={handleCopyLink}
+                >
                     <img
                     src={images.copy_link}
                     alt="Career Momen 2"
                     className=" xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
-                <button className="rounded-md flex items-center justify-center w-full">
+                <button 
+                  className="rounded-md flex items-center justify-center w-full"
+                  onClick={handleShareLinkedIn}
+                >
                     <img
                     src={images.Linkedin}
                     alt="Career Momen 2"
                     className="xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
-                <button className="rounded-md flex items-center justify-center w-full">
+                <button 
+                  className="rounded-md flex items-center justify-center w-full"
+                  onClick={handleShareWhatsApp}
+                >
                     <img
                     src={images.Whatsapp}
                     alt="Career Momen 2"
                     className="xl:w-[55px] xl:h-[55px] lg:w-[50px] w-[40px]"
                     />
                 </button>
-                <button className="rounded-md flex items-center justify-center w-full">
+                <button 
+                  className="rounded-md flex items-center justify-center w-full"
+                  onClick={handleShareTelegram}
+                >
                     <img
                     src={images.Telegram}
                     alt="Career Momen 2"

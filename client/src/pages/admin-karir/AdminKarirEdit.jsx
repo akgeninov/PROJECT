@@ -13,4 +13,4 @@ function AdminKarirEdit() {
   )
 }
 
-export default AdminKarirEdit
+export default AdminKarirEdit;
